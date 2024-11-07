@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { gojuonData } from "@/data/gojuon";
 
 export function GojuonTable() {
-  const [_hoveredCell, setHoveredCell] = useState<string | null>(null);
+  const [, setHoveredCell] = useState<string | null>(null);
 
   const speak = (text: string) => {
     const utterance = new SpeechSynthesisUtterance(text);
