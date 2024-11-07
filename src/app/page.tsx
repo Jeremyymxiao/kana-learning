@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import NavBar from "@/components/japanese/nav-bar";
 import { GojuonTable } from "@/components/japanese/gojuon-table";
