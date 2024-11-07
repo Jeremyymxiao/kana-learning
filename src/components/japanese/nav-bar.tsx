@@ -1,56 +1,47 @@
-import React from "react";
+import React from 'react';
 
 interface NavBarProps {
-  currentTab: string;
-  onTabChange: (tab: string) => void;
+  currentTab?: string;
+  onTabChange?: (tab: string) => void;
 }
 
-export function NavBar({ currentTab, onTabChange }: NavBarProps) {
-  const navItems = [
-    { text: "KanaGo", key: "kanago", width: "w-20" },
-    { text: "Gojuon", key: "gojuon", width: "w-32" },
-    { text: "Test", key: "test", width: "w-32" },
-    { text: "Tips", key: "blog", width: "w-32" },
-    { text: "Me", key: "me", width: "w-32" },
-    { text: "About", key: "about", width: "w-20" }
-  ];
-
+const NavBar: React.FC<NavBarProps> = ({ currentTab, onTabChange }) => {
+  const tabs = ['KanaGo', 'Gojuon', 'Test', 'Tips', 'Me', 'About'];
+  
   return (
-    <nav className="fixed top-0 w-full bg-white border-b border-gray-100 z-50">
-      <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          {navItems.map((item) => (
-            <button
-              key={item.key}
-              className={`
-                ${item.width}
-                h-10
-                flex
-                items-center
-                justify-center
-                border
-                border-gray-200
-                rounded-lg
-                shadow-sm
-                transition-all
-                duration-200
-                ${
-                  currentTab === item.key
-                    ? 'bg-gray-50 border-gray-300'
-                    : 'hover:bg-gray-50 hover:border-gray-300'
-                }
-              `}
-              onClick={() => onTabChange(item.key)}
-            >
-              <span className="text-sm font-medium text-gray-700">
-                {item.text}
-              </span>
-            </button>
-          ))}
+    <nav className="w-full bg-white border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center space-x-2">
+            <div className="bg-indigo-600 text-white w-8 h-8 rounded-lg flex items-center justify-center">
+              <span className="font-semibold text-lg">あ</span>
+            </div>
+            <span className="text-lg font-semibold text-indigo-600">KanaGo</span>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="flex items-center">
+            {tabs.map((tab) => (
+              <a
+                key={tab}
+                href="#"
+                onClick={() => onTabChange?.(tab.toLowerCase())}
+                className={`
+                  px-4 py-2 text-sm font-medium transition-colors duration-200
+                  ${currentTab === tab.toLowerCase() 
+                    ? 'text-gray-900' 
+                    : 'text-gray-600 hover:text-gray-900'}
+                `}
+              >
+                {tab}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </nav>
   );
-}
+};
 
 export default NavBar;
