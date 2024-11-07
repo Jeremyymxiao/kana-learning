@@ -17,7 +17,7 @@ export function GojuonTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>五十音图</CardTitle>
+        <CardTitle>GojuonTable</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="seion" className="w-full">
@@ -26,19 +26,19 @@ export function GojuonTable() {
               value="seion" 
               className="data-[state=active]:bg-amber-600 data-[state=active]:text-white"
             >
-              清音
+              Clear Consonants
             </TabsTrigger>
             <TabsTrigger 
               value="dakuon" 
               className="data-[state=active]:bg-amber-600 data-[state=active]:text-white"
             >
-              浊音/半浊音
+              Voice/Semi-Voice Consonants
             </TabsTrigger>
             <TabsTrigger 
               value="youon" 
               className="data-[state=active]:bg-amber-600 data-[state=active]:text-white"
             >
-              拗音
+              Contracted Consonants
             </TabsTrigger>
           </TabsList>
 
@@ -47,7 +47,7 @@ export function GojuonTable() {
             <div className="grid grid-cols-2 gap-8">
               {/* 平假名部分 */}
               <div>
-                <h3 className="text-center mb-4 font-bold">平假名</h3>
+                <h3 className="text-center mb-4 font-bold">Hiragana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {/* 元音行 */}
@@ -92,7 +92,7 @@ export function GojuonTable() {
               
               {/* 片假名部分 */}
               <div>
-                <h3 className="text-center mb-4 font-bold">片假名</h3>
+                <h3 className="text-center mb-4 font-bold">Katakana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {/* 元音行 */}
@@ -141,7 +141,7 @@ export function GojuonTable() {
             <div className="grid grid-cols-2 gap-8">
               {/* 平假名部分 */}
               <div>
-                <h3 className="text-center mb-4 font-bold">平假名</h3>
+                <h3 className="text-center mb-4 font-bold">Hiragana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {gojuonData.dakuon.consonants.map((row, rowIndex) => (
@@ -168,7 +168,7 @@ export function GojuonTable() {
               
               {/* 片假名部分 */}
               <div>
-                <h3 className="text-center mb-4 font-bold">片假名</h3>
+                <h3 className="text-center mb-4 font-bold">Katakana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {gojuonData.dakuon.consonants.map((row, rowIndex) => (
@@ -200,7 +200,7 @@ export function GojuonTable() {
             <div className="grid grid-cols-2 gap-8">
               {/* 平假名部分 */}
               <div>
-                <h3 className="text-center mb-4 font-bold">平假名</h3>
+                <h3 className="text-center mb-4 font-bold">Hiragana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {gojuonData.youon.combinations.map((row, rowIndex) => (
@@ -227,7 +227,7 @@ export function GojuonTable() {
               
               {/* 片假名部分 */}
               <div>
-                <h3 className="text-center mb-4 font-bold">片假名</h3>
+                <h3 className="text-center mb-4 font-bold">Katakana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {gojuonData.youon.combinations.map((row, rowIndex) => (
