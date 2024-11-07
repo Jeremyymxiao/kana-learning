@@ -7,12 +7,12 @@ interface NavBarProps {
 
 export function NavBar({ currentTab, onTabChange }: NavBarProps) {
   const navItems = [
-    { text: "Logo", key: "logo", width: "w-20" },
-    { text: "五十音", key: "gojuon", width: "w-32" },
-    { text: "测试", key: "test", width: "w-32" },
-    { text: "Blog", key: "blog", width: "w-32" },
-    { text: "语言", key: "language", width: "w-32" },
-    { text: "我", key: "me", width: "w-20" }
+    { text: "KanaGo", key: "kanago", width: "w-20" },
+    { text: "Gojuon", key: "gojuon", width: "w-32" },
+    { text: "Test", key: "test", width: "w-32" },
+    { text: "Tips", key: "blog", width: "w-32" },
+    { text: "Me", key: "me", width: "w-32" },
+    { text: "About", key: "about", width: "w-20" }
   ];
 
   return (
