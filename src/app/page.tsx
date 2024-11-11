@@ -4,6 +4,7 @@ import { useState } from "react";
 import NavBar from "@/components/japanese/nav-bar";
 import { GojuonTable } from "@/components/japanese/gojuon-table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import TestPanel from "@/components/japanese/test-panel";
 
 export default function Home() {
   const [currentTab, setCurrentTab] = useState("gojuon");
@@ -15,17 +16,17 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           {currentTab === "gojuon" && <GojuonTable />}
           {currentTab === "test" && (
+          <div className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>测试模式 (开发中)</CardTitle>
+                <CardTitle>五十音测试</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-center text-gray-500">
-                  测试功能正在开发中...
-                </div>
+                <TestPanel />
               </CardContent>
             </Card>
-          )}
+          </div>
+        )}
         </div>
       </main>
     </div>
