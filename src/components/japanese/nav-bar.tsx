@@ -27,9 +27,9 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab, onTabChange }) => {
           {/* Logo */}
           <div className="flex items-center space-x-2 mr-8">
             <div className="bg-indigo-600 dark:bg-indigo-500 text-white w-8 h-8 rounded-lg flex items-center justify-center">
-              <span className="font-semibold text-lg">あ</span>
+              <span className="font-semibold text-lg">GO</span>
             </div>
-            <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">KanaGo</span>
+            <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">Gojuon</span>
           </div>
 
           {/* Navigation Links */}

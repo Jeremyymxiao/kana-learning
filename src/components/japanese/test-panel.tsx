@@ -17,7 +17,7 @@ export default function TestPanel() {
     score, 
     isComplete,
     wrongAnswers,
-    questions 
+    //questions 
   } = useTest();
 
   // 计算进度
