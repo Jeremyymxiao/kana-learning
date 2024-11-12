@@ -1,13 +1,27 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import { JWT } from "next-auth/jwt"
 import clientPromise from "@/lib/mongodb"
 import { compare } from "bcrypt"
-import { MongoClient } from "mongodb"
+//import { authOptions } from "@/lib/auth"
+//import type { Session } from "next-auth"
 
-export const authOptions: NextAuthOptions = {
-  adapter: MongoDBAdapter(clientPromise),
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id?: string
+      email?: string | null
+      name?: string | null
+      image?: string | null
+    }
+  }
+}
+
+const handler = NextAuth({
+    secret: process.env.NEXTAUTH_SECRET,
+  adapter: MongoDBAdapter(clientPromise) as any,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -54,14 +68,13 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   callbacks: {
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.sub
       }
       return session
     },
   },
-}
+})
 
-const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST }

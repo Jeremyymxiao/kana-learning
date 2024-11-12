@@ -1,3 +1,5 @@
+'use client'
+
 // src/app/components/auth/login-form.tsx
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
@@ -8,6 +10,7 @@ import { Button } from '@/components/ui/button'
 export function LoginForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [isRegister, setIsRegister] = useState(false)
   const [error, setError] = useState('')
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -36,14 +39,76 @@ export function LoginForm() {
     signIn('google', { callbackUrl: '/' })
   }
 
+  async function handleRegister(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setIsLoading(true)
+    setError('')
+  
+    const formData = new FormData(event.currentTarget)
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.get('email'),
+          password: formData.get('password'),
+          name: formData.get('name')
+        })
+      })
+  
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Registration failed')
+      }
+  
+      // 注册成功后自动登录
+      const result = await signIn('credentials', {
+        email: formData.get('email'),
+        password: formData.get('password'),
+        redirect: false,
+      })
+  
+      if (result?.error) {
+        setError(result.error)
+      } else {
+        router.push('/')
+        router.refresh()
+      }
+    } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message)
+        } else {
+          setError('An unexpected error occurred')
+        }
+      }
+    setIsLoading(false)
+  }
+
   return (
     <div className="w-full max-w-md space-y-6">
-      <form onSubmit={onSubmit} className="space-y-4">
+    <div className="text-center space-y-2">
+      <h1 className="text-2xl font-semibold">{isRegister ? 'Create an account' : 'Login to account'}</h1>
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        Welcome to Kana Learning
+      </p>
+    </div>
+
+    <form onSubmit={isRegister ? handleRegister : onSubmit} className="space-y-4">
+      {isRegister && (
+        <div className="space-y-2">
+          <Input
+            name="name"
+            type="text"
+            placeholder="Name"
+            required={isRegister}
+          />
+        </div>
+      )}
         <div className="space-y-2">
           <Input
             name="email"
             type="email"
-            placeholder="メールアドレス"
+            placeholder="Email Address"
             required
           />
         </div>
@@ -51,7 +116,7 @@ export function LoginForm() {
           <Input
             name="password"
             type="password"
-            placeholder="パスワード"
+            placeholder="Password"
             required
           />
         </div>
@@ -61,11 +126,13 @@ export function LoginForm() {
           </div>
         )}
         <Button
-          type="submit"
-          className="w-full"
-          disabled={isLoading}
+        type="submit"
+        className="w-full"
+        disabled={isLoading}
         >
-          {isLoading ? 'ログイン中...' : 'ログイン'}
+        {isLoading 
+            ? (isRegister ? 'Creating account...' : 'Logging in...') 
+            : (isRegister ? 'Create account' : 'Login')}
         </Button>
       </form>
 
@@ -75,7 +142,7 @@ export function LoginForm() {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-            または
+            or
           </span>
         </div>
       </div>
@@ -104,8 +171,23 @@ export function LoginForm() {
             fill="#EA4335"
           />
         </svg>
-        Googleでログイン
+        {isRegister ? 'Sign up with Google' : 'Login with Google'}
+        Login with Google
       </Button>
+
+      <div className="text-center text-sm">
+        <span className="text-gray-500 dark:text-gray-400">
+            {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
+        </span>
+        <button 
+            type="button"
+            onClick={() => setIsRegister(!isRegister)} 
+            className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400"
+        >
+            {isRegister ? 'Login' : 'Create account'}
+        </button>
+        </div>
+
     </div>
   )
 }
