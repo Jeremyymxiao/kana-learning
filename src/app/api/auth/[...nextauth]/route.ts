@@ -26,6 +26,16 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      httpOptions: {
+        timeout: 40000 // 增加到 10 秒
+      },
+      authorization: {
+        params: {
+          prompt: "select_account",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -61,13 +71,36 @@ const handler = NextAuth({
       }
     })
   ],
+
+  debug: true,  // 启用调试模式
+  logger: {
+    error: (code, ...message) => {
+      console.error(code, message)
+    },
+    warn: (code, ...message) => {
+      console.warn(code, message)
+    },
+    debug: (code, ...message) => {
+      console.debug(code, message)
+    },
+  },
+
   session: {
     strategy: "jwt",
   },
   pages: {
     signIn: "/login",
   },
+  
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log('Sign in attempt:', { user, account, profile });
+      return true;
+    },
+    async redirect({ url, baseUrl }) {
+      console.log('Redirect:', { url, baseUrl });
+      return url.startsWith(baseUrl) ? url : baseUrl;
+    },
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.sub

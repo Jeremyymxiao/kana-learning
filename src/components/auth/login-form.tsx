@@ -35,8 +35,17 @@ export function LoginForm() {
     }
   }
 
-  const handleGoogleLogin = () => {
-    signIn('google', { callbackUrl: '/' })
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signIn('google', { 
+        callbackUrl: '/',
+        redirect: true 
+      });
+      console.log('Google sign in result:', result);
+    } catch (error) {
+      console.error('Google sign in error:', error);
+      setError('Google登录失败,请稍后重试');
+    }
   }
 
   async function handleRegister(event: React.FormEvent<HTMLFormElement>) {
@@ -45,43 +54,45 @@ export function LoginForm() {
     setError('')
   
     const formData = new FormData(event.currentTarget)
+    const email = formData.get('email')
+    const password = formData.get('password')
+    const name = formData.get('name')
+  
     try {
       const res = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: formData.get('email'),
-          password: formData.get('password'),
-          name: formData.get('name')
-        })
+        body: JSON.stringify({ email, password, name })
       })
   
+      const data = await res.json()
+  
       if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error || 'Registration failed')
+        throw new Error(data.error || '注册失败')
       }
   
       // 注册成功后自动登录
-      const result = await signIn('credentials', {
-        email: formData.get('email'),
-        password: formData.get('password'),
+      const signInResult = await signIn('credentials', {
+        email,
+        password,
         redirect: false,
       })
   
-      if (result?.error) {
-        setError(result.error)
+      if (signInResult?.error) {
+        setError(signInResult.error)
       } else {
         router.push('/')
         router.refresh()
       }
     } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message)
-        } else {
-          setError('An unexpected error occurred')
-        }
+      if (error instanceof Error) {
+        setError(error.message)
+      } else {
+        setError('发生未知错误')
       }
-    setIsLoading(false)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -172,7 +183,6 @@ export function LoginForm() {
           />
         </svg>
         {isRegister ? 'Sign up with Google' : 'Login with Google'}
-        Login with Google
       </Button>
 
       <div className="text-center text-sm">

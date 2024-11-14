@@ -23,6 +23,7 @@ npm install
 npm run dev
 构建生产版本
 npm run build
+npm run build --verbose
 启动生产服务器
 npm start
 

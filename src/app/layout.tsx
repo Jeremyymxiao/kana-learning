@@ -47,15 +47,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
       >
-        {/* 移除 Providers 包装 */}
-        <ThemeProvider>
-          <div className="min-h-screen transition-colors duration-200">
-            <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              {children}
-            </main>
-            <ThemeToggle />
-          </div>
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider>
+            <div className="min-h-screen transition-colors duration-200">
+              <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {children}
+              </main>
+              <ThemeToggle />
+            </div>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

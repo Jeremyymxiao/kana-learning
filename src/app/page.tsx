@@ -13,24 +13,6 @@ export default function Home() {
   //const router = useRouter();
   const [currentTab, setCurrentTab] = useState("gojuon");
 
-  /*
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
-
-  // 添加加载状态
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  // 如果没有登录，不显示内容
-  if (!session) {
-    return null;
-  }
-    */
-
   return (
     <div>
       <NavBar currentTab={currentTab} onTabChange={setCurrentTab} />
