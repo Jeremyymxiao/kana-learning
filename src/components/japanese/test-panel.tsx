@@ -38,21 +38,21 @@ export default function TestPanel() {
   const renderConfig = () => (
     <div className="space-y-4 p-4">
       <div className="space-y-2">
-        <h3 className="text-lg font-medium">难度选择</h3>
+        <h3 className="text-lg font-medium">Level Option</h3>
         <Select value={selectedDifficulty} onValueChange={(value: Difficulty) => setSelectedDifficulty(value)}>
           <SelectTrigger>
             <SelectValue placeholder="选择难度" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="easy">Easy - 仅平假名</SelectItem>
-            <SelectItem value="middle">Middle - 平假名+片假名</SelectItem>
-            <SelectItem value="hard">Hard - 包含浊音/拗音</SelectItem>
+            <SelectItem value="easy">Easy - Hiragana Only</SelectItem>
+            <SelectItem value="middle">Middle - Hiragana+Katakana</SelectItem>
+            <SelectItem value="hard">Hard - Including Voice/Contacted Consonants</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       <Button className="w-full" onClick={handleStart}>
-        开始测试
+        Start Test
       </Button>
     </div>
   );
