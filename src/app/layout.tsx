@@ -19,6 +19,19 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Kana Learning",
   description: "Learn Japanese Kana",
+  keywords: "Japanese, Kana, Hiragana, Katakana, Learning, Education",
+  openGraph: {
+    title: "Kana Learning",
+    description: "Interactive Japanese Kana Learning Platform",
+    type: "website",
+    locale: "en_US",
+    url: "https://your-domain.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kana Learning",
+    description: "Interactive Japanese Kana Learning Platform",
+  }
 };
 
 export default function RootLayout({
@@ -42,6 +55,19 @@ export default function RootLayout({
             `,
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EducationalApplication",
+              "name": "Kana Learning",
+              "description": "Learn Japanese Kana characters interactively",
+              "applicationCategory": "EducationalApplication",
+              "operatingSystem": "Web"
+            })
+          }}
+        />
       </head>
       <body
         className={`
@@ -60,7 +86,19 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="min-h-screen transition-colors duration-200">
             <main className="max-w-6xl mx-auto px- sm:px-6 lg:px-8 py-8">
-              {children}
+              <article>
+                <section>
+                  <nav>
+                    <main>
+                      <header>
+                        <footer>
+                          {children}
+                        </footer>
+                      </header>
+                    </main>
+                  </nav>
+                </section>
+              </article>
             </main>
             <ThemeToggle />
           </div>

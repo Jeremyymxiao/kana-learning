@@ -11,13 +11,11 @@ interface TestQuestionProps {
 export default function TestQuestion({ question, onSubmit }: TestQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
-  const [_isCorrect, setIsCorrect] = useState(false);
 
   const handleAnswer = (answer: string) => {
     if (isAnswered) return;
     
     setSelectedAnswer(answer);
-    setIsCorrect(answer === question.correctAnswer);
     setIsAnswered(true);
 
     if (answer === question.correctAnswer) {
