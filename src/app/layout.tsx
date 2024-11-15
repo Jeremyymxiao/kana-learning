@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from '@/app/context/ThemeContext';
 import ThemeToggle from '@/components/ui/theme-toggle';
-import Providers from '@/components/auth/providers'
 import "./globals.css";
 
 const geistSans = localFont({
@@ -45,18 +44,27 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}
+        className={`
+          ${geistSans.variable} 
+          ${geistMono.variable} 
+          antialiased 
+          bg-gradient-to-br 
+          from-white 
+          to-pink-50 
+          dark:from-gray-900 
+          dark:to-gray-800 
+          text-gray-900 
+          dark:text-gray-100
+        `}
       >
-        <Providers>
-          <ThemeProvider>
-            <div className="min-h-screen transition-colors duration-200">
-              <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {children}
-              </main>
-              <ThemeToggle />
-            </div>
-          </ThemeProvider>
-        </Providers>
+        <ThemeProvider>
+          <div className="min-h-screen transition-colors duration-200">
+            <main className="max-w-6xl mx-auto px- sm:px-6 lg:px-8 py-8">
+              {children}
+            </main>
+            <ThemeToggle />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

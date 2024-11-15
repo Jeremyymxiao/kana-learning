@@ -44,7 +44,7 @@ export function GojuonTable() {
 
           {/* 清音内容 */}
           <TabsContent value="seion">
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-2 gap-12">
               {/* 平假名部分 */}
               <div>
                 <h3 className="text-center mb-4 font-bold">Hiragana</h3>
