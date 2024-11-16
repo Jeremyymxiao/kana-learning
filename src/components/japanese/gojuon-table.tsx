@@ -21,7 +21,7 @@ export function GojuonTable() {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="seion" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 gap-2">
             <TabsTrigger 
               value="seion" 
               className="data-[state=active]:bg-amber-600 data-[state=active]:text-white"
@@ -44,7 +44,7 @@ export function GojuonTable() {
 
           {/* 清音内容 */}
           <TabsContent value="seion">
-            <div className="grid grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               {/* 平假名部分 */}
               <div>
                 <h3 className="text-center mb-4 font-bold">Hiragana</h3>
