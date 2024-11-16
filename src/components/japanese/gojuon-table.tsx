@@ -46,23 +46,23 @@ export function GojuonTable() {
           <TabsContent value="seion">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               {/* 平假名部分 */}
-              <div>
+              <div className="overflow-x-auto">
                 <h3 className="text-center mb-4 font-bold">Hiragana</h3>
-                <table className="w-full text-center">
+                <table className="w-full text-center min-w-[300px]">
                   <tbody>
                     {/* 元音行 */}
                     <tr>
                       {gojuonData.seion.vowels.map((char) => (
                         <td 
                           key={char.hiragana}
-                          className="p-2 hover:bg-gray-100 cursor-pointer"
+                          className="p-2 md:p-3 hover:bg-gray-100 cursor-pointer"
                           onMouseEnter={() => setHoveredCell(char.hiragana)}
                           onMouseLeave={() => setHoveredCell(null)}
                           onClick={() => speak(char.hiragana)}
                         >
                           <div className="flex flex-col items-center">
-                            <span className="text-lg">{char.hiragana}</span>
-                            <span className="text-xs text-gray-500">{char.romaji}</span>
+                            <span className="text-base md:text-lg">{char.hiragana}</span>
+                            <span className="text-[10px] md:text-xs text-gray-500">{char.romaji}</span>
                           </div>
                         </td>
                       ))}
@@ -73,14 +73,14 @@ export function GojuonTable() {
                         {row.map((char) => (
                           <td 
                             key={char.hiragana}
-                            className="p-2 hover:bg-gray-100 cursor-pointer"
+                            className="p-2 md:p-3 hover:bg-gray-100 cursor-pointer"
                             onMouseEnter={() => setHoveredCell(char.hiragana)}
                             onMouseLeave={() => setHoveredCell(null)}
                             onClick={() => speak(char.hiragana)}
                           >
                             <div className="flex flex-col items-center">
-                              <span className="text-lg">{char.hiragana}</span>
-                              <span className="text-xs text-gray-500">{char.romaji}</span>
+                              <span className="text-base md:text-lg">{char.hiragana}</span>
+                              <span className="text-[10px] md:text-xs text-gray-500">{char.romaji}</span>
                             </div>
                           </td>
                         ))}
@@ -91,23 +91,23 @@ export function GojuonTable() {
               </div>
               
               {/* 片假名部分 */}
-              <div>
+              <div className="overflow-x-auto">
                 <h3 className="text-center mb-4 font-bold">Katakana</h3>
-                <table className="w-full text-center">
+                <table className="w-full text-center min-w-[300px]">
                   <tbody>
                     {/* 元音行 */}
                     <tr>
                       {gojuonData.seion.vowels.map((char) => (
                         <td 
                           key={char.katakana}
-                          className="p-2 hover:bg-gray-100 cursor-pointer"
+                          className="p-2 md:p-3 hover:bg-gray-100 cursor-pointer"
                           onMouseEnter={() => setHoveredCell(char.katakana)}
                           onMouseLeave={() => setHoveredCell(null)}
                           onClick={() => speak(char.katakana)}
                         >
                           <div className="flex flex-col items-center">
-                            <span className="text-lg">{char.katakana}</span>
-                            <span className="text-xs text-gray-500">{char.romaji}</span>
+                            <span className="text-base md:text-lg">{char.katakana}</span>
+                            <span className="text-[10px] md:text-xs text-gray-500">{char.romaji}</span>
                           </div>
                         </td>
                       ))}
@@ -118,14 +118,14 @@ export function GojuonTable() {
                         {row.map((char) => (
                           <td 
                             key={char.katakana}
-                            className="p-2 hover:bg-gray-100 cursor-pointer"
+                            className="p-2 md:p-3 hover:bg-gray-100 cursor-pointer"
                             onMouseEnter={() => setHoveredCell(char.katakana)}
                             onMouseLeave={() => setHoveredCell(null)}
                             onClick={() => speak(char.katakana)}
                           >
                             <div className="flex flex-col items-center">
-                              <span className="text-lg">{char.katakana}</span>
-                              <span className="text-xs text-gray-500">{char.romaji}</span>
+                              <span className="text-base md:text-lg">{char.katakana}</span>
+                              <span className="text-[10px] md:text-xs text-gray-500">{char.romaji}</span>
                             </div>
                           </td>
                         ))}
@@ -149,14 +149,14 @@ export function GojuonTable() {
                         {row.map((char) => (
                           <td 
                             key={char.hiragana}
-                            className="p-2 hover:bg-gray-100 cursor-pointer"
+                            className="p-2 md:p-3 hover:bg-gray-100 cursor-pointer"
                             onMouseEnter={() => setHoveredCell(char.hiragana)}
                             onMouseLeave={() => setHoveredCell(null)}
                             onClick={() => speak(char.hiragana)}
                           >
                             <div className="flex flex-col items-center">
-                              <span className="text-lg">{char.hiragana}</span>
-                              <span className="text-xs text-gray-500">{char.romaji}</span>
+                              <span className="text-base md:text-lg">{char.hiragana}</span>
+                              <span className="text-[10px] md:text-xs text-gray-500">{char.romaji}</span>
                              </div>
                           </td>
                         ))}
@@ -176,14 +176,14 @@ export function GojuonTable() {
                         {row.map((char) => (
                           <td 
                             key={char.katakana}
-                            className="p-2 hover:bg-gray-100 cursor-pointer"
+                            className="p-2 md:p-3 hover:bg-gray-100 cursor-pointer"
                             onMouseEnter={() => setHoveredCell(char.katakana)}
                             onMouseLeave={() => setHoveredCell(null)}
                             onClick={() => speak(char.katakana)}
                           >
                             <div className="flex flex-col items-center">
-                              <span className="text-lg">{char.katakana}</span>
-                              <span className="text-xs text-gray-500">{char.romaji}</span>
+                              <span className="text-base md:text-lg">{char.katakana}</span>
+                              <span className="text-[10px] md:text-xs text-gray-500">{char.romaji}</span>
                              </div>
                           </td>
                         ))}
@@ -208,14 +208,14 @@ export function GojuonTable() {
                         {row.map((char) => (
                           <td 
                             key={char.hiragana}
-                            className="p-2 hover:bg-gray-100 cursor-pointer"
+                            className="p-2 md:p-3 hover:bg-gray-100 cursor-pointer"
                             onMouseEnter={() => setHoveredCell(char.hiragana)}
                             onMouseLeave={() => setHoveredCell(null)}
                             onClick={() => speak(char.hiragana)}
                           >
                             <div className="flex flex-col items-center">
-                              <span className="text-lg">{char.hiragana}</span>
-                              <span className="text-xs text-gray-500">{char.romaji}</span>
+                              <span className="text-base md:text-lg">{char.hiragana}</span>
+                              <span className="text-[10px] md:text-xs text-gray-500">{char.romaji}</span>
                              </div>
                           </td>
                         ))}
@@ -235,14 +235,14 @@ export function GojuonTable() {
                         {row.map((char) => (
                           <td 
                             key={char.katakana}
-                            className="p-2 hover:bg-gray-100 cursor-pointer"
+                            className="p-2 md:p-3 hover:bg-gray-100 cursor-pointer"
                             onMouseEnter={() => setHoveredCell(char.katakana)}
                             onMouseLeave={() => setHoveredCell(null)}
                             onClick={() => speak(char.katakana)}
                           >
                             <div className="flex flex-col items-center">
-                              <span className="text-lg">{char.katakana}</span>
-                              <span className="text-xs text-gray-500">{char.romaji}</span>
+                              <span className="text-base md:text-lg">{char.katakana}</span>
+                              <span className="text-[10px] md:text-xs text-gray-500">{char.romaji}</span>
                              </div>
                           </td>
                         ))}

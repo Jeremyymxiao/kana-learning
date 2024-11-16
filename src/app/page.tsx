@@ -15,10 +15,10 @@ export default function Home() {
       <SakuraDecoration />
       <WavePattern />
       <NavBar currentTab={currentTab} onTabChange={setCurrentTab} />
-      <main className="pt-20 pb-8 px-4 relative z-10">
+      <main className="pt-16 pb-8 px-2 sm:px-4 relative z-10">
         <div className="max-w-9xl mx-auto">
           {currentTab === "gojuon" && (
-            <div className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-6">
+            <div className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-2 sm:p-6">
               <GojuonTable />
             </div>
           )}
