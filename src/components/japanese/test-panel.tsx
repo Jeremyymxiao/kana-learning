@@ -5,9 +5,12 @@ import { Progress } from '@/components/ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import TestQuestion from './test-question';
 import TestResult from './test-result';
+import MatchingGame from './matching/matching-game';
+import { DictationTest } from './dictation/dictation-test';
 
 export default function TestPanel() {
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>('easy');
+  const [testType, setTestType] = useState<'choice' | 'matching' | 'dictation'>('choice');
   const [showConfig, setShowConfig] = useState(true);
   const { 
     startTest, 
@@ -17,11 +20,7 @@ export default function TestPanel() {
     score, 
     isComplete,
     wrongAnswers,
-    //questions 
   } = useTest();
-
-  // 计算进度
-  const progress = (currentQuestionIndex / 10) * 100;
 
   // 开始测试
   const handleStart = () => {
@@ -38,17 +37,33 @@ export default function TestPanel() {
   const renderConfig = () => (
     <div className="space-y-4 p-4">
       <div className="space-y-2">
-        <h3 className="text-lg font-medium">Level Option</h3>
-        <Select value={selectedDifficulty} onValueChange={(value: Difficulty) => setSelectedDifficulty(value)}>
+        <h3 className="text-lg font-medium">Test Type</h3>
+        <Select value={testType} onValueChange={(value: 'choice' | 'matching' | 'dictation') => setTestType(value)}>
           <SelectTrigger>
-            <SelectValue placeholder="选择难度" />
+            <SelectValue placeholder="选择测试类型" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="easy">Easy - Hiragana Only</SelectItem>
-            <SelectItem value="middle">Middle - Hiragana+Katakana</SelectItem>
-            <SelectItem value="hard">Hard - Including Voice/Contacted Consonants</SelectItem>
+            <SelectItem value="choice">选择题测试</SelectItem>
+            <SelectItem value="matching">配对游戏</SelectItem>
+            <SelectItem value="dictation">听写测试</SelectItem>
           </SelectContent>
         </Select>
+
+        
+          <>
+            <h3 className="text-lg font-medium">Level Option</h3>
+            <Select value={selectedDifficulty} onValueChange={(value: Difficulty) => setSelectedDifficulty(value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="选择难度" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="easy">Easy - Hiragana Only</SelectItem>
+                <SelectItem value="middle">Middle - Hiragana+Katakana</SelectItem>
+                <SelectItem value="hard">Hard - Including Voice/Contacted Consonants</SelectItem>
+              </SelectContent>
+            </Select>
+          </>
+        
       </div>
 
       <Button className="w-full" onClick={handleStart}>
@@ -63,25 +78,41 @@ export default function TestPanel() {
         renderConfig()
       ) : (
         <div className="space-y-4 p-4">
-          {!isComplete ? (
-            <>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>进度: {currentQuestionIndex}/10</span>
-                  <span>得分: {score}</span>
+          {testType === 'choice' && (
+            !isComplete ? (
+              <>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>进度: {currentQuestionIndex}/10</span>
+                    <span>得分: {score}</span>
+                  </div>
+                  <Progress value={(currentQuestionIndex / 10) * 100} />
                 </div>
-                <Progress value={progress} />
-              </div>
-              <TestQuestion
-                question={getCurrentQuestion()}
-                onSubmit={submitAnswer}
+                <TestQuestion
+                  question={getCurrentQuestion()}
+                  onSubmit={submitAnswer}
+                />
+              </>
+            ) : (
+              <TestResult
+                score={score}
+                wrongAnswers={wrongAnswers}
+                onRetry={handleReset}
               />
-            </>
-          ) : (
-            <TestResult
-              score={score}
-              wrongAnswers={wrongAnswers}
-              onRetry={handleReset}
+            )
+          )}
+          
+          {testType === 'matching' && (
+            <MatchingGame
+              difficulty={selectedDifficulty}
+              onComplete={handleReset}
+            />
+          )}
+          
+          {testType === 'dictation' && (
+            <DictationTest
+              difficulty={selectedDifficulty}
+              onComplete={handleReset}
             />
           )}
         </div>

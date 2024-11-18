@@ -1,6 +1,6 @@
 export type Difficulty = 'easy' | 'middle' | 'hard';
 
-export type QuestionType = 'kanaToRomaji' | 'romajiToKana' | 'matching';
+export type QuestionType = 'kanaToRomaji' | 'romajiToKana' | 'matching' | 'dictation';
 
 export interface Question {
   id: string;
