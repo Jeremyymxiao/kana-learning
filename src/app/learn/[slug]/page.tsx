@@ -11,9 +11,10 @@ interface PageProps {
   params: {
     slug: string;
   };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default function Page({ params }: PageProps) {
+export default function Page({ params, searchParams }: PageProps) {
   const router = useRouter();
   const [article, setArticle] = useState<typeof articles[0] | null>(null);
 
