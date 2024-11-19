@@ -56,6 +56,11 @@ const nextConfig = {
       },
     ];
   },
+
+  // 启用实验性功能以支持 TypeScript
+  experimental: {
+    typedRoutes: true,
+  },
 };
 
 module.exports = nextConfig;

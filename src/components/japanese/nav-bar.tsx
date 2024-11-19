@@ -23,8 +23,14 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab, onTabChange }) => {
   const handleNavClick = (key: string) => {
     if (key === 'gojuon') {
       router.push('/');
-    } else {
-      router.push(`/${key}`);
+    } else if (key === 'test') {
+      router.push('/test');
+    } else if (key === 'learn') {
+      router.push('/learn');
+    } else if (key === 'converter') {
+      router.push('/converter');
+    } else if (key === 'about') {
+      router.push('/about');
     }
     setIsMenuOpen(false);
   };
