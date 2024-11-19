@@ -1,109 +1,24 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { ThemeProvider } from '@/app/context/ThemeContext';
-import ThemeToggle from '@/components/ui/theme-toggle';
-import "./globals.css";
+import { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Kana Learning",
-  description: "Learn Japanese Kana",
-  keywords: "Japanese, Kana, Hiragana, Katakana, Learning, Education",
-  openGraph: {
-    title: "Kana Learning",
-    description: "Interactive Japanese Kana Learning Platform",
-    type: "website",
-    locale: "en_US",
-    url: "https://your-domain.com",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kana Learning",
-    description: "Interactive Japanese Kana Learning Platform",
-  }
-};
+  title: 'Gojuon Learning',
+  description: 'Learn Japanese Gojuon',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.getItem('theme') === 'dark' ||
-                    (!localStorage.getItem('theme') &&
-                      window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                }
-              } catch (e) {}
-            `,
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "EducationalApplication",
-              "name": "Kana Learning",
-              "description": "Learn Japanese Kana characters interactively",
-              "applicationCategory": "EducationalApplication",
-              "operatingSystem": "Web"
-            })
-          }}
-        />
-      </head>
-      <body
-        className={`
-          ${geistSans.variable} 
-          ${geistMono.variable} 
-          antialiased 
-          bg-gradient-to-br 
-          from-white 
-          to-pink-50 
-          dark:from-gray-900 
-          dark:to-gray-800 
-          text-gray-900 
-          dark:text-gray-100
-        `}
-      >
-        <ThemeProvider>
-          <div className="min-h-screen transition-colors duration-200">
-            <main className="max-w-6xl mx-auto px- sm:px-6 lg:px-8 py-8">
-              <article>
-                <section>
-                  <nav>
-                    <main>
-                      <header>
-                        <footer>
-                          {children}
-                        </footer>
-                      </header>
-                    </main>
-                  </nav>
-                </section>
-              </article>
-            </main>
-            <ThemeToggle />
-          </div>
-        </ThemeProvider>
+    <html lang="en">
+      <body className={inter.className}>
+        {children}
       </body>
     </html>
-  );
+  )
 }

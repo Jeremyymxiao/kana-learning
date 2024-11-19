@@ -8,7 +8,7 @@ interface MatchingCardProps {
   onClick: () => void;
 }
 
-export default function MatchingCard({ content, type, matched, selected, onClick }: MatchingCardProps) {
+export default function MatchingCard({ content, matched, selected, onClick }: MatchingCardProps) {
   return (
     <Button
       onClick={onClick}

@@ -1,12 +1,25 @@
-import React from 'react';
-import NavBar from '@/components/japanese/nav-bar';
-import { Metadata } from 'next';
+'use client';
+
+import MainLayout from '@/components/layouts/main-layout';
+import { useRouter } from 'next/navigation';
 
 export default function AboutPage() {
+  const router = useRouter();
+
+  const handleTabChange = (tab: string) => {
+    if (tab === 'gojuon') {
+      router.push('/');
+    } else if (tab === 'test') {
+      router.push('/test');
+    }
+  };
+
   return (
-    <>
-      <NavBar />
-      <div className="container mx-auto px-2 sm:px-4 py-8 mt-12 sm:mt-16">
+    <MainLayout 
+      currentTab="about"
+      onTabChange={handleTabChange}
+    >
+      <div className="container mx-auto px-2 sm:px-4 py-8">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             About Gojuon
@@ -39,31 +52,6 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-    </>
+    </MainLayout>
   );
-}
-
-export const generateMetadata = async (): Promise<Metadata> => {
-  return {
-    title: "关于我们 | About Gojuon",
-    description: "了解Gojuon日语学习工具的特点和使用方法",
-    openGraph: {
-      title: "关于Gojuon日语学习工具",
-      description: "交互式日语学习平台，让学习更简单有趣",
-      type: "website",
-      locale: "zh_CN",
-    }
-  }
-}
-
-// 添加 JSON-LD
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "About Gojuon",
-  "description": "Learn about our Japanese learning platform",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Gojuon"
-  }
 }

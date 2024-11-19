@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Book, TestTube, Info, Menu, X } from 'lucide-react';
+import { Book, TestTube, Info, Menu, X, GraduationCap, FileText } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 
 interface NavBarProps {
@@ -21,11 +21,10 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab, onTabChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavClick = (key: string) => {
-    if (key === 'about') {
-      router.push('/about');
-    } else if (key === 'gojuon' || key === 'test') {
+    if (key === 'gojuon') {
       router.push('/');
-      onTabChange?.(key);
+    } else {
+      router.push(`/${key}`);
     }
     setIsMenuOpen(false);
   };
@@ -33,6 +32,8 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab, onTabChange }) => {
   const navItems: NavItem[] = [
     { name: 'Gojuon', icon: <Book className="w-7 h-4" />, key: 'gojuon' },
     { name: 'Test', icon: <TestTube className="w-7 h-4" />, key: 'test' },
+    { name: 'Learn', icon: <GraduationCap className="w-7 h-4" />, key: 'learn' },
+    { name: 'Converter', icon: <FileText className="w-7 h-4" />, key: 'converter' },
     { name: 'About', icon: <Info className="w-7 h-4" />, key: 'about' }
   ];
 

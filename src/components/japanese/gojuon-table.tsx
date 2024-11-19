@@ -17,7 +17,7 @@ export function GojuonTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>GojuonTable</CardTitle>
+        <CardTitle>Hiragana Katakana Chart</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="seion" className="w-full">
@@ -26,19 +26,19 @@ export function GojuonTable() {
               value="seion" 
               className="data-[state=active]:bg-amber-600 data-[state=active]:text-white"
             >
-              Clear Consonants
+              Seion
             </TabsTrigger>
             <TabsTrigger 
               value="dakuon" 
               className="data-[state=active]:bg-amber-600 data-[state=active]:text-white"
             >
-              Voice/Semi-Voice Consonants
+              Dakuten/Handakuten
             </TabsTrigger>
             <TabsTrigger 
               value="youon" 
               className="data-[state=active]:bg-amber-600 data-[state=active]:text-white"
             >
-              Contracted Consonants
+              Youon
             </TabsTrigger>
           </TabsList>
 

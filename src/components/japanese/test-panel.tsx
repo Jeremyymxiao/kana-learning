@@ -40,12 +40,12 @@ export default function TestPanel() {
         <h3 className="text-lg font-medium">Test Type</h3>
         <Select value={testType} onValueChange={(value: 'choice' | 'matching' | 'dictation') => setTestType(value)}>
           <SelectTrigger>
-            <SelectValue placeholder="选择测试类型" />
+            <SelectValue placeholder="Choose Exercise Type" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="choice">选择题测试</SelectItem>
-            <SelectItem value="matching">配对游戏</SelectItem>
-            <SelectItem value="dictation">听写测试</SelectItem>
+            <SelectItem value="choice">Single Choice Questions</SelectItem>
+            <SelectItem value="matching">Matching Exercises</SelectItem>
+            <SelectItem value="dictation">Dictation Exercises</SelectItem>
           </SelectContent>
         </Select>
 
