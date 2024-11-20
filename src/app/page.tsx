@@ -139,7 +139,7 @@ export default function LandingPage() {
                 How do I start?
               </summary>
               <p className="mt-3 text-gray-600 dark:text-gray-300">
-                Simply select your test mode and type, then click "Start the Quiz" to begin. Our intuitive interface will guide you through the process.
+                Simply select your test mode and type, then click &quot;Start the Quiz&quot; to begin. Our intuitive interface will guide you through the process.
               </p>
             </details>
 

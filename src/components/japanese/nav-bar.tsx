@@ -7,7 +7,6 @@ import type { Route } from 'next';
 
 interface NavBarProps {
   currentTab?: string;
-  onTabChange?: (tab: string) => void;
 }
 
 interface NavItem {
@@ -16,7 +15,7 @@ interface NavItem {
   key: string;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ currentTab, onTabChange }) => {
+const NavBar: React.FC<NavBarProps> = ({ currentTab }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

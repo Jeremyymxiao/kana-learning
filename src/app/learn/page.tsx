@@ -37,7 +37,9 @@ export default function LearnPage() {
                 id={`article-title-${article.id}`}
                 className="text-xl font-semibold mb-2"
               >
-                <Link href={`/learn/${article.slug}`}>{article.title}</Link>
+                <Link href={`/learn/${article.slug}`} className="hover:text-indigo-600">
+                  {article.title}
+                </Link>
               </h2>
               <p className="text-gray-600 mb-4">{article.description}</p>
               <div 
