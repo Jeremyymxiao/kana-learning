@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ result });
   } catch (error) {
     return NextResponse.json(
-      { error: '转换失败' },
+      { error: `转换失败: ${error instanceof Error ? error.message : String(error)}` },
       { status: 500 }
     );
   }

@@ -1,13 +1,10 @@
 import { Suspense } from 'react';
-import MainLayout from '@/components/layouts/main-layout';
 import { articles } from '@/data/articles';
 import { notFound } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
 import ClientPage from './client-page';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 async function getArticle(slug: string) {
@@ -17,7 +14,6 @@ async function getArticle(slug: string) {
 
 export default async function Page(props: PageProps) {
   const params = await props.params;
-  const searchParams = props.searchParams ? await props.searchParams : undefined;
   const article = await getArticle(params.slug);
   
   if (!article) {

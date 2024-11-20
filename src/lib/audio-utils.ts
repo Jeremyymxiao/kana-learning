@@ -1,5 +1,5 @@
 export const playCorrectSound = () => {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioContext = new (window.AudioContext || (window as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     
     // 创建振荡器
     const oscillator = audioContext.createOscillator();
@@ -23,7 +23,7 @@ export const playCorrectSound = () => {
   };
   
   export const playWrongSound = () => {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioContext = new (window.AudioContext || (window as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     
     // 创建振荡器
     const oscillator = audioContext.createOscillator();

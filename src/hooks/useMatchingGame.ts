@@ -191,9 +191,8 @@ export const useMatchingGame = (difficulty: Difficulty) => {
     const kanaCard = card1.type === 'kana' ? card1 : card2;
     const romajiCard = card1.type === 'romaji' ? card1 : card2;
     
-    // 这里需要根据实际的匹配规则来实现
-    // 目前简单实现：假设kanaCard.content和romajiCard.content是对应的
-    return true; // TODO: 实现实际的匹配逻辑
+    // Check if the kana and romaji content match
+    return kanaCard.content === romajiCard.content;
   };
 
   // Fisher-Yates 洗牌算法

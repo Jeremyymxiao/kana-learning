@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
     return (
       <footer className="bg-gray-900 text-white pt-16 pb-8">
@@ -30,10 +32,10 @@ export default function Footer() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="/" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About</a></li>
-                <li><a href="/chart" className="text-gray-400 hover:text-white transition-colors">Kana Chart</a></li>
-                <li><a href="/test" className="text-gray-400 hover:text-white transition-colors">Practice</a></li>
+                <li><Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
+                <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors">About</Link></li>
+                <li><Link href="/chart" className="text-gray-400 hover:text-white transition-colors">Kana Chart</Link></li>
+                <li><Link href="/test" className="text-gray-400 hover:text-white transition-colors">Practice</Link></li>
               </ul>
             </div>
   

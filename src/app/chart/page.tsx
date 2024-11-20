@@ -2,11 +2,8 @@
 
 import MainLayout from '@/components/layouts/main-layout';
 import { GojuonTable } from "@/components/japanese/gojuon-table";
-import { useRouter } from 'next/navigation';
 
 export default function ChartPage() {
-  const router = useRouter();
-
   return (
     <MainLayout currentTab="chart">
       <main 
