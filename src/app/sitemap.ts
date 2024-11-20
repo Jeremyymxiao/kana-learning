@@ -1,24 +1,51 @@
 import { MetadataRoute } from 'next'
+import { articles } from '@/data/articles'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const articleUrls = articles.map(article => ({
+    url: `https://learnkana.pro/learn/${article.slug}`,
+    lastModified: new Date(article.publishedAt),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
   return [
     {
-      url: 'https://your-domain.com',
+      url: 'https://learnkana.pro',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: 'https://your-domain.com/about',
+      url: 'https://learnkana.pro/about',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://your-domain.com/test',
+      url: 'https://learnkana.pro/test',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
-    }
+    },
+    {
+      url: 'https://learnkana.pro/chart',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://learnkana.pro/converter',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://learnkana.pro/learn',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    ...articleUrls
   ]
 }

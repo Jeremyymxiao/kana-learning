@@ -42,32 +42,72 @@ export default function ConverterPage() {
       currentTab="converter"
       onTabChange={handleTabChange}
     >
-      <div className="max-w-2xl mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-8">Kanji to Hiragana Converter</h1>
-        <div className="space-y-4">
-          <Textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="输入汉字..."
-            rows={4}
-          />
-          <Button 
-            onClick={handleConvert}
-            disabled={loading || !input}
-            className="w-full"
+      <main
+        className="container mx-auto px-4 py-8"
+        role="main"
+        aria-labelledby="converter-title"
+      >
+        <header className="mb-8">
+          <h1 
+            id="converter-title"
+            className="text-3xl font-bold text-center"
           >
-            {loading ? 'Converting...' : 'Convert'}
-          </Button>
-          {output && (
-            <Textarea
-              value={output}
-              readOnly
-              rows={4}
-              className="bg-gray-50"
-            />
-          )}
-        </div>
-      </div>
+            Japanese Text Converter
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300 text-center mt-2">
+            Convert Japanese text between different writing systems
+          </p>
+        </header>
+
+        <section 
+          aria-label="Conversion Tool"
+          className="max-w-2xl mx-auto"
+        >
+          <div className="space-y-4">
+            <div role="form" aria-label="Text conversion form">
+              <label htmlFor="input-text" className="sr-only">
+                Input Japanese text
+              </label>
+              <Textarea
+                id="input-text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Enter Japanese text..."
+                rows={4}
+                aria-label="Input text area"
+              />
+              <Button 
+                onClick={handleConvert}
+                disabled={loading || !input}
+                className="w-full mt-4"
+                aria-busy={loading}
+              >
+                {loading ? 'Converting...' : 'Convert Text'}
+              </Button>
+            </div>
+
+            {output && (
+              <div role="region" aria-label="Conversion result">
+                <label htmlFor="output-text" className="sr-only">
+                  Converted text
+                </label>
+                <Textarea
+                  id="output-text"
+                  value={output}
+                  readOnly
+                  rows={4}
+                  className="bg-gray-50"
+                  aria-label="Converted text output"
+                />
+              </div>
+            )}
+          </div>
+        </section>
+
+        <footer className="mt-8 text-center text-sm text-gray-600 dark:text-gray-300">
+          <p>Click the convert button to transform your text</p>
+        </footer>
+      </main>
     </MainLayout>
   );
 }

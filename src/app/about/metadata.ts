@@ -1,23 +1,61 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "关于我们 | About Gojuon",
-  description: "了解Gojuon日语学习工具的特点和使用方法",
+  title: "LearnKana | 日语假名学习 | Hiragana & Katakana Converter",
+  description: "免费的日语假名学习平台。包含平假名(ひらがな)、片假名(カタカナ)转换器,互动式五十音图,记忆游戏等功能。The best free Japanese kana learning platform with hiragana/katakana converter, interactive gojuon chart and memory games.",
+  keywords: [
+    "hiragana",
+    "katakana", 
+    "hiragana converter",
+    "katakana converter",
+    "japanese kana",
+    "gojuon chart",
+    "learn hiragana",
+    "learn katakana",
+    "japanese alphabet",
+    "japanese writing",
+    "平假名",
+    "片假名",
+    "五十音图",
+    "假名转换",
+    "日语学习"
+  ],
   openGraph: {
-    title: "关于Gojuon日语学习工具",
-    description: "交互式日语学习平台，让学习更简单有趣",
+    title: "LearnKana | Japanese Kana Learning & Converter",
+    description: "Learn Japanese Hiragana & Katakana with interactive tools. Free online converter, practice games and study materials.",
     type: "website",
     locale: "zh_CN",
+    alternateLocale: ["en_US", "ja_JP"],
+    siteName: "LearnKana"
   }
 };
 
 export const structuredData = {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "About Gojuon",
-  "description": "Learn about our Japanese learning platform",
+  "@type": "WebSite",
+  "name": "LearnKana",
+  "alternateName": ["Learn Kana", "かな学習", "假名学习"],
+  "description": "Interactive platform for learning Japanese Hiragana and Katakana",
+  "keywords": "hiragana, katakana, japanese learning, ひらがな, カタカナ, japanese alphabet",
   "publisher": {
     "@type": "Organization",
-    "name": "Gojuon"
+    "name": "LearnKana"
+  },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "educationalLevel": "Beginner",
+  "inLanguage": ["en", "ja", "zh-CN"],
+  "learningResourceType": "Interactive Resource",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Student",
+    "educationalField": "Japanese Language Learning",
+    "audienceType": "Child",
+    "audienceEducationLevel": "Elementary School",
+    "audienceGeographicArea": "Worldwide"
   }
 };

@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const webpack = require('webpack');
+
 const nextConfig = {
   reactStrictMode: true,
   
@@ -60,6 +62,15 @@ const nextConfig = {
   // 启用实验性功能以支持 TypeScript
   experimental: {
     typedRoutes: true,
+  },
+
+  // 确保正确处理静态资源
+  webpack: (config: any) => {
+    config.module.rules.push({
+      test: /\.(woffcss)$/,
+      type: 'asset/resource',
+    });
+    return config;
   },
 };
 

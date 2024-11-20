@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Book, TestTube, Info, Menu, X, GraduationCap, FileText } from 'lucide-react';
+import { Book, Info, Menu, X,FileText, Table } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
+import type { Route } from 'next';
 
 interface NavBarProps {
   currentTab?: string;
@@ -21,26 +22,23 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab, onTabChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavClick = (key: string) => {
-    if (key === 'gojuon') {
+    if (key === 'home') {
       router.push('/');
-    } else if (key === 'test') {
-      router.push('/test');
+    } else if (key === 'converter') {
+      router.push('/converter' as Route);
     } else if (key === 'learn') {
       router.push('/learn');
-    } else if (key === 'converter') {
-      router.push('/converter');
-    } else if (key === 'about') {
-      router.push('/about');
+    } else if (key === 'chart') {
+      router.push('/chart');
     }
     setIsMenuOpen(false);
   };
 
   const navItems: NavItem[] = [
-    { name: 'Gojuon', icon: <Book className="w-7 h-4" />, key: 'gojuon' },
-    { name: 'Test', icon: <TestTube className="w-7 h-4" />, key: 'test' },
-    { name: 'Learn', icon: <GraduationCap className="w-7 h-4" />, key: 'learn' },
-    { name: 'Converter', icon: <FileText className="w-7 h-4" />, key: 'converter' },
-    { name: 'About', icon: <Info className="w-7 h-4" />, key: 'about' }
+    { name: 'Home', icon: <Book className="w-7 h-4" />, key: 'home' },
+    { name: 'KanaChart', icon: <Table className="w-7 h-4" />, key: 'chart' },
+    { name: 'Kanji Converter', icon: <FileText className="w-7 h-4" />, key: 'converter' },
+    { name: 'Blog', icon: <Info className="w-7 h-4" />, key: 'learn' }
   ];
 
   return (
@@ -52,10 +50,15 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab, onTabChange }) => {
             className="flex items-center space-x-2 mr-8 cursor-pointer" 
             onClick={() => router.push('/')}
           >
-            <div className="bg-indigo-600 dark:bg-indigo-500 text-white w-8 h-8 rounded-lg flex items-center justify-center">
-              <span className="font-semibold text-lg">GO</span>
+            <div className="font-['Noto_Sans_JP','Poppins',sans-serif] text-lg font-bold">
+              <span className="text-gray-800 dark:text-gray-200">Learn</span>
+              <span className="text-indigo-600 dark:text-indigo-400 relative">
+                Kana
+                <span className="absolute -top-3 -right-2 text-[10px] opacity-60">
+                  かな
+                </span>
+              </span>
             </div>
-            <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400">Gojuon</span>
           </div>
 
           {/* Desktop Navigation */}

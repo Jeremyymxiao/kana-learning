@@ -17,7 +17,7 @@ export function GojuonTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Hiragana Katakana Chart</CardTitle>
+        <CardTitle></CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="seion" className="w-full">
