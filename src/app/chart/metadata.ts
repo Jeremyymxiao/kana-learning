@@ -1,28 +1,30 @@
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: "Japanese Kana Chart | Interactive Gojuon Table",
-  description: "Learn Japanese Hiragana and Katakana with our interactive Gojuon chart. Features clear visuals, audio pronunciation, and practice tools for mastering Japanese writing systems.",
-  keywords: [
-    "gojuon chart",
-    "japanese kana chart",
-    "hiragana chart",
-    "katakana chart",
-    "japanese alphabet chart",
-    "interactive kana table",
-    "japanese syllabary",
-    "learn japanese characters",
-    "japanese writing system",
-    "kana pronunciation"
-  ],
-  openGraph: {
-    title: "Interactive Japanese Kana Chart | LearnKana",
-    description: "Master Japanese Hiragana and Katakana with our interactive Gojuon chart. Clear visuals and audio pronunciation.",
-    type: "website",
-    locale: "en_US",
-    url: "https://learnkana.pro/chart"
-  }
-};
+export function generateMetadata(): Metadata {
+  return {
+    title: "Japanese Kana Chart | Interactive Gojuon Table",
+    description: "Learn Japanese Hiragana and Katakana with our interactive Gojuon chart. Features clear visuals, audio pronunciation, and practice tools for mastering Japanese writing systems.",
+    keywords: [
+      "gojuon chart",
+      "japanese kana chart",
+      "hiragana chart",
+      "katakana chart",
+      "japanese alphabet chart",
+      "interactive kana table",
+      "japanese syllabary",
+      "learn japanese characters",
+      "japanese writing system",
+      "kana pronunciation"
+    ],
+    openGraph: {
+      title: "Interactive Japanese Kana Chart | LearnKana",
+      description: "Master Japanese Hiragana and Katakana with our interactive Gojuon chart. Clear visuals and audio pronunciation.",
+      type: "website",
+      locale: "en_US",
+      url: "https://learnkana.pro/chart"
+    }
+  };
+}
 
 export const structuredData = {
   "@context": "https://schema.org",

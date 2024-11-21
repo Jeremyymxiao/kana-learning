@@ -1,6 +1,6 @@
 declare module 'kuroshiro' {
   export default class Kuroshiro {
-    init(analyzer: any): Promise<void>;
+    init(analyzer: KuromojiAnalyzer): Promise<void>;
     convert(text: string, options: {
       to: 'hiragana' | 'katakana' | 'romaji';
       mode: 'normal' | 'spaced' | 'okurigana' | 'furigana';
@@ -12,4 +12,4 @@ declare module 'kuroshiro-analyzer-kuromoji' {
   export default class KuromojiAnalyzer {
     constructor();
   }
-} 
+}

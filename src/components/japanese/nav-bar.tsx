@@ -7,6 +7,7 @@ import type { Route } from 'next';
 
 interface NavBarProps {
   currentTab?: string;
+  onTabChange?: (tab: string) => void;
 }
 
 interface NavItem {

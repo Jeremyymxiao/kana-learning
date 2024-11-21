@@ -2,11 +2,9 @@
 
 import MainLayout from '@/components/layouts/main-layout';
 import TestPanel from '@/components/japanese/test-panel';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function LandingPage() {
-  const router = useRouter();
   const [showQuizHeader, setShowQuizHeader] = useState(true);
 
   return (
