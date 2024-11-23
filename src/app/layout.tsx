@@ -1,13 +1,8 @@
 import { Metadata } from 'next'
-import { Inter, Noto_Sans_JP } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
-const notoSansJP = Noto_Sans_JP({ 
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-noto-sans-jp',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://learnkana.pro'),
@@ -54,8 +49,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.className} ${notoSansJP.variable}`}>
-        {children}
+      <body className={`${inter.className} min-h-screen antialiased bg-background text-foreground`}>
+        <main className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {children}
+        </main>
       </body>
     </html>
   )

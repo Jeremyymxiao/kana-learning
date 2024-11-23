@@ -26,7 +26,7 @@ export default function TermsOfServicePage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">1. Acceptance of Terms</h2>
             <p>
-              By accessing and using LearnKana ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service.
+              By accessing and using LearnKana (&ldquo;the Service&rdquo;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service.
             </p>
           </section>
 
@@ -49,7 +49,7 @@ export default function TermsOfServicePage() {
             <ul className="list-disc pl-6 mt-2">
               <li>Provide accurate information when required</li>
               <li>Use the Service for lawful purposes only</li>
-              <li>Not interfere with the Service's functionality</li>
+              <li>Not interfere with the Service&rsquo;s functionality</li>
               <li>Not attempt to access restricted areas of the Service</li>
             </ul>
           </section>
@@ -71,7 +71,7 @@ export default function TermsOfServicePage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">6. Disclaimer of Warranties</h2>
             <p>
-              The Service is provided "as is" without any warranties, expressed or implied. We do not guarantee that the Service will be error-free or uninterrupted.
+              The Service is provided &ldquo;as is&rdquo; without any warranties, expressed or implied. We do not guarantee that the Service will be error-free or uninterrupted.
             </p>
           </section>
 

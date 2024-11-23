@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from 'react';
 import { useTest, Difficulty } from '@/hooks/useTest';
 import { Button } from '@/components/ui/button';

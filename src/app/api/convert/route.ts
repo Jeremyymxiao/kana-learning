@@ -83,7 +83,7 @@ export async function POST(req: Request) {
     
     const conversionResults = await Promise.all(
       options.targetTypes.map(async (targetType: string) => {
-        let kuroshiroOptions: any = {
+        const kuroshiroOptions: any = {
           mode: 'normal'
         };
 
