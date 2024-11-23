@@ -4,109 +4,173 @@ import MainLayout from '@/components/layouts/main-layout';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { useRouter } from 'next/navigation';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Card, CardContent } from '@/components/ui/card';
+
+interface ConversionOptions {
+  sourceType: string;
+  targetTypes: string[];
+  romajiSystem: 'hepburn';
+}
 
 export default function ConverterPage() {
-  const router = useRouter();
   const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
+  const [outputs, setOutputs] = useState<{type: string; text: string}[]>([]);
   const [loading, setLoading] = useState(false);
+  const [options, setOptions] = useState<ConversionOptions>({
+    sourceType: 'kanji',
+    targetTypes: ['hiragana'],
+    romajiSystem: 'hepburn'
+  });
 
   const handleConvert = async () => {
     setLoading(true);
     try {
+      console.log('发送请求数据:', { text: input, options });
+      
       const response = await fetch('/api/convert', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: input })
+        body: JSON.stringify({ 
+          text: input,
+          options 
+        })
       });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
-      setOutput(data.result);
+      console.log('收到响应数据:', data);
+      
+      if (data.results && Array.isArray(data.results)) {
+        setOutputs(data.results);
+      } else if (data.error) {
+        throw new Error(data.error);
+      } else {
+        console.error('API 响应格式不正确:', data);
+        throw new Error('响应格式不正确');
+      }
     } catch (error) {
-      console.error('Conversion failed:', error);
+      console.error('转换失败:', error);
+      alert('转换失败，请稍后重试');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleTabChange = (tab: string) => {
-    if (tab === 'gojuon') {
-      router.push('/');
-    } else if (tab === 'test') {
-      router.push('/test');
-    }
-  };
-
   return (
-    <MainLayout 
-      currentTab="converter"
-      onTabChange={handleTabChange}
-    >
-      <main
-        className="container mx-auto px-4 py-8"
-        role="main"
-        aria-labelledby="converter-title"
-      >
-        <header className="mb-8">
-          <h1 
-            id="converter-title"
-            className="text-3xl font-bold text-center"
-          >
-            Japanese Text Converter
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300 text-center mt-2">
-            Convert Japanese text between different writing systems
+    <MainLayout currentTab="converter">
+      <main className="container mx-auto px-4 py-8">
+        <header className="mb-8 text-center">
+          <h1 className="text-3xl font-bold">Japanese Text Converter</h1>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">
+            Convert between different Japanese writing systems
           </p>
         </header>
 
-        <section 
-          aria-label="Conversion Tool"
-          className="max-w-2xl mx-auto"
-        >
-          <div className="space-y-4">
-            <div role="form" aria-label="Text conversion form">
-              <label htmlFor="input-text" className="sr-only">
-                Input Japanese text
-              </label>
-              <Textarea
-                id="input-text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Enter Japanese text..."
-                rows={4}
-                aria-label="Input text area"
-              />
-              <Button 
-                onClick={handleConvert}
-                disabled={loading || !input}
-                className="w-full mt-4"
-                aria-busy={loading}
-              >
-                {loading ? 'Converting...' : 'Convert Text'}
-              </Button>
-            </div>
-
-            {output && (
-              <div role="region" aria-label="Conversion result">
-                <label htmlFor="output-text" className="sr-only">
-                  Converted text
-                </label>
+        <div className="max-w-3xl mx-auto space-y-6">
+          {/* Input Section */}
+          <Card>
+            <CardContent className="p-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <Select
+                    value={options.sourceType}
+                    onValueChange={(value) => 
+                      setOptions({...options, sourceType: value})
+                    }
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="选择输入类型" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="hiragana">Hiragana</SelectItem>
+                      <SelectItem value="katakana">Katakana</SelectItem>
+                      <SelectItem value="kanji">Kanji</SelectItem>
+                      <SelectItem value="romaji">Romaji</SelectItem>
+                      <SelectItem value="english">English</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
                 <Textarea
-                  id="output-text"
-                  value={output}
-                  readOnly
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Enter text to convert..."
                   rows={4}
-                  className="bg-gray-50"
-                  aria-label="Converted text output"
                 />
               </div>
-            )}
-          </div>
-        </section>
+            </CardContent>
+          </Card>
 
-        <footer className="mt-8 text-center text-sm text-gray-600 dark:text-gray-300">
-          <p>Click the convert button to transform your text</p>
-        </footer>
+          {/* Options Section */}
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="font-semibold mb-4">Conversion Options</h3>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="kana"
+                      checked={options.targetTypes.includes('hiragana')}
+                      onCheckedChange={(checked) => {
+                        const newTypes = checked 
+                          ? ['hiragana', 'katakana']
+                          : options.targetTypes.filter(t => !['hiragana', 'katakana'].includes(t));
+                        setOptions({...options, targetTypes: newTypes});
+                      }}
+                    />
+                    <label htmlFor="kana">Hiragana & Katakana</label>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2">
+                    <Checkbox 
+                      id="romaji"
+                      checked={options.targetTypes.includes('romaji')}
+                      onCheckedChange={(checked) => {
+                        const newTypes = checked 
+                          ? [...options.targetTypes.filter(t => !['romaji'].includes(t)), 'romaji']
+                          : options.targetTypes.filter(t => t !== 'romaji');
+                        setOptions({...options, targetTypes: newTypes});
+                      }}
+                    />
+                    <label htmlFor="romaji">Romaji</label>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Button 
+            onClick={handleConvert}
+            disabled={loading || !input}
+            className="w-full"
+          >
+            {loading ? 'Converting...' : 'Convert Text'}
+          </Button>
+
+          {/* Results Section */}
+          {outputs?.length > 0 && (
+            <Card>
+              <CardContent className="p-6 space-y-4">
+                {outputs.map((output, index) => (
+                  <div key={index} className="space-y-2">
+                    <h4 className="font-medium">{output.type}</h4>
+                    <Textarea
+                      value={output.text}
+                      readOnly
+                      rows={2}
+                      className="bg-gray-50"
+                    />
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </main>
     </MainLayout>
   );

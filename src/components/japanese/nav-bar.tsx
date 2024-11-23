@@ -37,7 +37,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab }) => {
   const navItems: NavItem[] = [
     { name: 'Home', icon: <Book className="w-7 h-4" />, key: 'home' },
     { name: 'KanaChart', icon: <Table className="w-7 h-4" />, key: 'chart' },
-    { name: 'Kanji Converter', icon: <FileText className="w-7 h-4" />, key: 'converter' },
+    { name: 'Text Converter', icon: <FileText className="w-7 h-4" />, key: 'converter' },
     { name: 'Blog', icon: <Info className="w-7 h-4" />, key: 'learn' }
   ];
 

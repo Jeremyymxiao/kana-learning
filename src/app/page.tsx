@@ -28,9 +28,9 @@ export default function LandingPage() {
         {/* Quiz Section */}
         <section 
           aria-labelledby="quiz-heading"
-          className="container mx-auto px-4 min-h-[500px] py-8"
+          className="container mx-auto px-4 py-8"
         >
-          <div className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-4 md:p-6 h-full">
+          <div className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-4 md:p-6">
             {showQuizHeader && (
               <div className="mb-6">
                 <h2 id="quiz-heading" className="text-3xl font-bold mb-2 text-center">
@@ -41,7 +41,9 @@ export default function LandingPage() {
                 </p>
               </div>
             )}
-            <TestPanel onConfigChange={setShowQuizHeader} />
+            <div className="min-h-[600px]">
+              <TestPanel onConfigChange={setShowQuizHeader} />
+            </div>
           </div>
         </section>
 
@@ -162,6 +164,7 @@ export default function LandingPage() {
             </details>
           </div>
         </section>
+      
       </main>
     </MainLayout>
   );

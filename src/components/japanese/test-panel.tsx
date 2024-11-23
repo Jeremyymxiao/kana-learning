@@ -108,11 +108,11 @@ export default function TestPanel({ onConfigChange }: TestPanelProps) {
   );
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-2xl mx-auto min-h-[650px] flex flex-col">
       {showConfig ? (
         renderConfig()
       ) : (
-        <div className="relative space-y-4 p-4">
+        <div className="relative space-y-4 p-4 flex-1 flex flex-col">
           {/* Back Button */}
           <Button 
             variant="outline" 
@@ -129,39 +129,42 @@ export default function TestPanel({ onConfigChange }: TestPanelProps) {
             <span className="ml-4">Score: {score}</span>
           </div>
 
-          {testType === 'choice' && (
-            !isComplete ? (
-              <>
-                <div className="space-y-2">
-                  <Progress value={(currentQuestionIndex / 10) * 100} />
-                </div>
-                <TestQuestion
-                  question={getCurrentQuestion()}
-                  onSubmit={submitAnswer}
+          {/* 包装测试内容的容器 */}
+          <div className="flex-1 flex flex-col justify-center">
+            {testType === 'choice' && (
+              !isComplete ? (
+                <>
+                  <div className="space-y-2">
+                    <Progress value={(currentQuestionIndex / 10) * 100} />
+                  </div>
+                  <TestQuestion
+                    question={getCurrentQuestion()}
+                    onSubmit={submitAnswer}
+                  />
+                </>
+              ) : (
+                <TestResult
+                  score={score}
+                  wrongAnswers={wrongAnswers}
+                  onRetry={handleReset}
                 />
-              </>
-            ) : (
-              <TestResult
-                score={score}
-                wrongAnswers={wrongAnswers}
-                onRetry={handleReset}
+              )
+            )}
+            
+            {testType === 'matching' && (
+              <MatchingGame
+                difficulty={selectedDifficulty}
+                onComplete={handleReset}
               />
-            )
-          )}
-          
-          {testType === 'matching' && (
-            <MatchingGame
-              difficulty={selectedDifficulty}
-              onComplete={handleReset}
-            />
-          )}
-          
-          {testType === 'dictation' && (
-            <DictationTest
-              difficulty={selectedDifficulty}
-              onComplete={handleReset}
-            />
-          )}
+            )}
+            
+            {testType === 'dictation' && (
+              <DictationTest
+                difficulty={selectedDifficulty}
+                onComplete={handleReset}
+              />
+            )}
+          </div>
         </div>
       )}
     </div>

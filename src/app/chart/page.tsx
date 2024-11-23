@@ -7,37 +7,28 @@ export default function ChartPage() {
   return (
     <MainLayout currentTab="chart">
       <main 
-        className="container mx-auto px-4 py-8"
+        className="container mx-auto px-2 sm:px-4 py-6 sm:py-8"
         role="main"
         aria-labelledby="chart-title"
       >
-        <header className="mb-8">
+        <header className="mb-6 sm:mb-8">
           <h1 
             id="chart-title" 
-            className="text-3xl font-bold text-center"
+            className="text-2xl sm:text-3xl font-bold text-center"
           >
             Japanese Kana Chart
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 text-center mt-2">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 text-center mt-2">
             Interactive Hiragana and Katakana learning chart with audio pronunciation
-          </p>
-          <p className="text-gray-600 dark:text-gray-300 text-center mt-2">
-            Click on any character to hear its pronunciation
           </p>
         </header>
 
         <section 
           aria-label="Gojuon Table"
-          className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-2 sm:p-6"
+          className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg"
         >
           <GojuonTable />
         </section>
-
-        <nav 
-          className="mt-8 text-center"
-          aria-label="Chart navigation"
-        >
-        </nav>
       </main>
     </MainLayout>
   );

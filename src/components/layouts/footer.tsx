@@ -7,7 +7,7 @@ export default function Footer() {
           {/* Footer Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             {/* Company Info */}
-            <div className="md:col-span-4 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
+            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-xl font-bold mb-4">LearnKana</h3>
               <p className="text-gray-400 mb-4">
                 Making Japanese learning accessible and enjoyable for everyone.
@@ -15,24 +15,36 @@ export default function Footer() {
             </div>
   
             {/* Quick Links */}
-            <div className="md:col-span-4 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
+            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li><Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
                 <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors">About</Link></li>
                 <li><Link href="/chart" className="text-gray-400 hover:text-white transition-colors">Kana Chart</Link></li>
-                <li><Link href="/test" className="text-gray-400 hover:text-white transition-colors">Practice</Link></li>
               </ul>
             </div>
   
             {/* Legal */}
-            <div className="md:col-span-4 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
+            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4">Legal</h3>
               <ul className="space-y-2">
                 <li><Link href={{ pathname: '/terms-of-service' }} className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
                 <li><Link href={{ pathname: '/privacy-policy' }} className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link href={{ pathname: '/cookie-policy' }} className="text-gray-400 hover:text-white transition-colors">Cookie Policy</Link></li>
                 <li><Link href={{ pathname: '/contact-us' }} className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+              </ul>
+            </div>
+
+            {/* Support */}
+            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
+              <h3 className="text-lg font-semibold mb-4">Support</h3>
+              <ul className="space-y-2">
+                <li><a href="https://iuu.ai/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">iuu AI</a></li>
+                <li><a href="https://magicbox.tools/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">MagicBox.Tools</a></li>
+                <li><a href="https://aiwith.me/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="AI With Me: Discover thousands of AI Tools">AI With Me</a></li>
+                <li><a href="https://allinai.tools" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="The Best AI Tools">All in AI Tools</a></li>
+                <li><a href="https://SeekAIs.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="SeekAIs">SeekAIs - AI Tools Directory</a></li>
+                <li><a href="https://AIToolly.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="AIToolly AI Tools Directory">AIToolly</a></li>
+                <li><a href="https://www.dir2ai.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="Dir2AI Tools Directory">Dir2AI</a></li>
               </ul>
             </div>
           </div>

@@ -14,7 +14,15 @@ export function generateMetadata(): Metadata {
       "japanese learning tool",
       "kanji conversion",
       "japanese writing",
-      "online japanese tools"
+      "online japanese tools",
+      "english to japanese converter",
+      "english to kana converter",
+      "to hiragana",
+      "to katakana",
+      "english to katakana",
+      "romaji to hiragana",
+      "romaji to katakana",
+      "japanese writing converter"
     ],
     openGraph: {
       title: "Japanese Text Converter | LearnKana",

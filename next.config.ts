@@ -10,6 +10,8 @@ const nextConfig = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     GITHUB_ID: process.env.GITHUB_ID,
     GITHUB_SECRET: process.env.GITHUB_SECRET,
+    YOUDAO_APP_KEY: process.env.YOUDAO_APP_KEY,
+    YOUDAO_APP_SECRET: process.env.YOUDAO_APP_SECRET,
   },
 
   // 安全头配置
