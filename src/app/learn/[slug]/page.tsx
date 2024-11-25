@@ -8,7 +8,11 @@ type PageProps = {
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({ params }: {
+  params: {
+    slug: string;
+  };
+}) {
   try {
     const article = getArticleBySlug(params.slug);
     if (!article) {
