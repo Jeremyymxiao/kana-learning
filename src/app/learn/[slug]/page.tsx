@@ -4,13 +4,11 @@ import { notFound } from 'next/navigation';
 import ClientPage from './client-page';
 
 type PageProps = {
-  params: {
-    slug: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: { params: { slug: string } }) {
   try {
     const article = getArticleBySlug(params.slug);
     if (!article) {
