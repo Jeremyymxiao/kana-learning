@@ -3,9 +3,11 @@ import { getArticleBySlug, getArticleContent } from '@/data/articles';
 import { notFound } from 'next/navigation';
 import ClientPage from './client-page';
 
-interface PageProps {
-  params: { slug: string }
-  searchParams?: { [key: string]: string | string[] | undefined }
+type PageProps = {
+  params: {
+    slug: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export default async function Page({ params }: PageProps) {
