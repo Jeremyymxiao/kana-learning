@@ -100,10 +100,10 @@ export async function getArticleContent(slug: string): Promise<string> {
   }
 }
 
-export function getArticleBySlug(slug: string): Article | undefined {
+export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
   return articles.find(article => article.slug === slug);
 }
 
-export function getArticlesByTag(tag: string): Article[] {
+export async function getArticlesByTag(tag: string): Promise<Article[]> {
   return articles.filter(article => article.tags.includes(tag));
 }

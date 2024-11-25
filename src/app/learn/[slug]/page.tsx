@@ -3,18 +3,14 @@ import { getArticleBySlug, getArticleContent } from '@/data/articles';
 import { notFound } from 'next/navigation';
 import ClientPage from './client-page';
 
-type PageProps = {
+type Props = {
   params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default async function Page({ params }: {
-  params: {
-    slug: string;
-  };
-}) {
+export default async function Page({ params }: Props) {
   try {
-    const article = getArticleBySlug(params.slug);
+    const article = await getArticleBySlug(params.slug);
     if (!article) {
       notFound();
     }
