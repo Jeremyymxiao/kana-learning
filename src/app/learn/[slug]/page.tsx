@@ -4,11 +4,13 @@ import { notFound } from 'next/navigation';
 import ClientPage from './client-page';
 
 type Props = {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: {
+    slug: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props): Promise<JSX.Element> {
   try {
     const article = await getArticleBySlug(params.slug);
     if (!article) {
