@@ -2,6 +2,7 @@
 
 import MainLayout from '@/components/layouts/main-layout';
 import { useRouter } from 'next/navigation';
+import type { Route } from 'next';
 
 export default function PrivacyPolicyPage() {
   const router = useRouter();
@@ -9,8 +10,8 @@ export default function PrivacyPolicyPage() {
   const handleTabChange = (tab: string) => {
     if (tab === 'gojuon') {
       router.push('/');
-    } else if (tab === 'test') {
-      router.push('/test');
+    } else if (tab === 'KanaQuiz') {
+      router.push('/quiz' as Route);
     }
   };
 

@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const webpack = require('webpack');
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+});
 
 const nextConfig = {
   reactStrictMode: true,
@@ -13,6 +16,9 @@ const nextConfig = {
     YOUDAO_APP_KEY: process.env.YOUDAO_APP_KEY,
     YOUDAO_APP_SECRET: process.env.YOUDAO_APP_SECRET,
   },
+
+  // 页面扩展名配置
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 
   // 安全头配置
   headers: async () => {
@@ -66,14 +72,23 @@ const nextConfig = {
     typedRoutes: true,
   },
 
-  // 确保正确处理静态资源
+  // webpack 配置
   webpack: (config: any) => {
+    // 现有的静态资源处理
     config.module.rules.push({
       test: /\.(woffcss)$/,
       type: 'asset/resource',
     });
+
+    // 添加 Markdown 处理
+    config.module.rules.push({
+      test: /\.md$/,
+      use: 'raw-loader',
+    });
+
     return config;
   },
 };
 
-module.exports = nextConfig;
+// 使用 withMDX 包装配置
+module.exports = withMDX(nextConfig);

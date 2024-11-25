@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Book, Info, Menu, X,FileText, Table } from 'lucide-react';
+import { Book, Info, Menu, X, FileText, Table, PenTool, MessageSquare } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import type { Route } from 'next';
 
@@ -30,13 +30,19 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab }) => {
       router.push('/learn');
     } else if (key === 'chart') {
       router.push('/chart');
+    } else if (key === 'quiz') {
+      router.push('/quiz' as Route);
+    } else if (key === 'chat') {
+      router.push('/chat' as Route);
     }
     setIsMenuOpen(false);
   };
 
   const navItems: NavItem[] = [
     { name: 'Home', icon: <Book className="w-7 h-4" />, key: 'home' },
-    { name: 'KanaChart', icon: <Table className="w-7 h-4" />, key: 'chart' },
+    { name: 'AI Chat', icon: <MessageSquare className="w-7 h-4" />, key: 'chat' },
+    { name: 'Kana Quiz', icon: <PenTool className="w-7 h-4" />, key: 'quiz' },
+    { name: 'Kana Chart', icon: <Table className="w-7 h-4" />, key: 'chart' },
     { name: 'Text Converter', icon: <FileText className="w-7 h-4" />, key: 'converter' },
     { name: 'Blog', icon: <Info className="w-7 h-4" />, key: 'learn' }
   ];
