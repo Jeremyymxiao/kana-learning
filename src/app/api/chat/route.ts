@@ -18,13 +18,13 @@ export async function POST(request: Request) {
     });
 
     if (!response.ok) {
-      throw new Error('API 请求失败');
+      throw new Error('API request failed');
     }
 
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
-    console.error('API 错误:', error);
+    console.error('API error:', error);
     return NextResponse.json(
       { error: '处理请求时出错' },
       { status: 500 }
