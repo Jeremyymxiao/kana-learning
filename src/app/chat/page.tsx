@@ -52,83 +52,74 @@ export default function ChatPage() {
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setLoading(true);
 
-    // Add retry mechanism
-    const maxRetries = 3;
-    let currentTry = 0;
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a professional Japanese language learning assistant. Help users learn Japanese kana and improve their Japanese skills. Always respond in English unless specifically asked to use another language. When users ask about practicing kana or need guidance, please direct them to these features of our website:\n\n- Learning Materials: /learn\n- Practice Quizzes: /quiz\n- Kana Converter: /converter\n- Visual Charts: /chart\n\nPlease provide clear, well-organized responses in English to help users effectively learn Japanese.'
+            },
+            ...messages.map(msg => ({ role: msg.role, content: msg.content })),
+            { role: 'user', content: userMessage }
+          ],
+        }),
+      });
 
-    while (currentTry < maxRetries) {
-      try {
-        console.log(`Attempt ${currentTry + 1} of ${maxRetries}`);
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 60000); // Increase timeout to 60 seconds
-
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            messages: [
-              {
-                role: 'system',
-                content: 'You are a professional Japanese language learning assistant. Help users learn Japanese kana and improve their Japanese skills. Always respond in English unless specifically asked to use another language. When users ask about practicing kana or need guidance, please direct them to these features of our website:\n\n- Learning Materials: /learn\n- Practice Quizzes: /quiz\n- Kana Converter: /converter\n- Visual Charts: /chart\n\nPlease provide clear, well-organized responses in English to help users effectively learn Japanese.'
-              },
-              ...messages.map(msg => ({ role: msg.role, content: msg.content })),
-              { role: 'user', content: userMessage }
-            ],
-          }),
-          signal: controller.signal,
-        });
-
-        clearTimeout(timeoutId); // Clear timeout if request completes
-
-        if (!response.ok) {
-          if (response.status === 504) {
-            // If it's a timeout error, try again
-            currentTry++;
-            if (currentTry === maxRetries) {
-              throw new Error('Request timeout. Please try again later.');
-            }
-            continue;
-          }
-          throw new Error(`API request failed: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log('API response data:', data);
-
-        if (!data.choices?.[0]?.message?.content) {
-          console.error('Invalid API response format:', data);
-          throw new Error('Invalid API response format');
-        }
-
-        const aiResponse: Message = {
-          role: 'assistant',
-          content: data.choices[0].message.content
-        };
-        
-        setMessages(prev => [...prev, aiResponse]);
-        break; // If successful, exit retry loop
-      } catch (error: any) {
-        console.error('Request failed:', error);
-        if (error.name === 'AbortError') {
-          if (currentTry === maxRetries - 1) {
-            setMessages(prev => [...prev, { 
-              role: 'assistant', 
-              content: 'Request timed out. Please try sending a shorter message or try again later.'
-            }]);
-          }
-        } else {
-          if (currentTry === maxRetries - 1) {
-            setMessages(prev => [...prev, { 
-              role: 'assistant', 
-              content: 'An error occurred. Please try again later.'
-            }]);
-          }
-        }
-        currentTry++;
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.status}`);
       }
+
+      if (!response.body) {
+        throw new Error('No response body');
+      }
+
+      // 创建一个新的消息用于流式更新
+      setMessages(prev => [...prev, { role: 'assistant', content: '' }]);
+      
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let currentMessage = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const text = decoder.decode(value);
+        const lines = text.split('\n');
+        
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const data = JSON.parse(line.slice(6));
+              currentMessage += data.content;
+              // 更新最后一条消息
+              setMessages(prev => {
+                const newMessages = [...prev];
+                newMessages[newMessages.length - 1] = {
+                  role: 'assistant',
+                  content: currentMessage
+                };
+                return newMessages;
+              });
+            } catch (e) {
+              console.error('Error parsing SSE data:', e);
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: 'An error occurred. Please try again later.'
+      }]);
     }
+    
     setLoading(false);
   };
 
@@ -189,7 +180,7 @@ export default function ChatPage() {
                               ),
                             }}
                           >
-                            {message.content}
+                            {message.content || '▊'}
                           </ReactMarkdown>
                         </div>
                       ) : (
@@ -198,10 +189,10 @@ export default function ChatPage() {
                     </div>
                   </div>
                 ))}
-                {loading && (
+                {loading && messages[messages.length - 1]?.role !== 'assistant' && (
                   <div className="flex justify-start">
                     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-4 py-2">
-                      Replying...
+                      Waiting for response...
                     </div>
                   </div>
                 )}

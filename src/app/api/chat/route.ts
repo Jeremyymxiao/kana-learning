@@ -12,15 +12,13 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     
-    // 添加超时控制
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 50000); // 50秒超时
+    const timeoutId = setTimeout(() => controller.abort(), 50000);
 
     try {
       const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
         method: 'POST',
         headers: {
-          ...headers,
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`,
         },
@@ -28,6 +26,7 @@ export async function POST(request: Request) {
           model: 'deepseek-chat',
           messages: body.messages,
           temperature: 0.7,
+          stream: true, // 启用流式响应
         }),
         signal: controller.signal,
       });
@@ -44,8 +43,42 @@ export async function POST(request: Request) {
         throw new Error(`API request failed: ${response.status} ${response.statusText}`);
       }
 
-      const data = await response.json();
-      return NextResponse.json(data, { headers });
+      const encoder = new TextEncoder();
+      const decoder = new TextDecoder();
+
+      const stream = new TransformStream({
+        async transform(chunk, controller) {
+          const text = decoder.decode(chunk);
+          const lines = text.split('\n');
+          const parsedLines = lines
+            .map(line => line.replace(/^data: /, '').trim())
+            .filter(line => line !== '' && line !== '[DONE]')
+            .map(line => {
+              try {
+                return JSON.parse(line);
+              } catch {
+                return undefined;
+              }
+            })
+            .filter(line => line);
+
+          for (const parsedLine of parsedLines) {
+            const content = parsedLine.choices[0]?.delta?.content || '';
+            if (content) {
+              controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`));
+            }
+          }
+        }
+      });
+
+      return new Response(response.body?.pipeThrough(stream), {
+        headers: {
+          ...headers,
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        },
+      });
     } catch (error) {
       clearTimeout(timeoutId);
       console.error('API error:', error);
