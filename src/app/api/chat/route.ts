@@ -50,7 +50,7 @@ export async function POST(request: Request) {
       clearTimeout(timeoutId);
       console.error('API error:', error);
       
-      if (error.name === 'AbortError') {
+      if (error instanceof Error && error.name === 'AbortError') {
         return NextResponse.json(
           { error: '请求超时，请稍后重试' },
           { status: 504 }
