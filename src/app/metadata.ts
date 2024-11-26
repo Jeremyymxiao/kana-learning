@@ -2,14 +2,14 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "LearnKana | Learn Japanese Hiragana & Katakana",
-  description: "Master Japanese writing systems with our interactive tools. Features include hiragana/katakana converter, interactive gojuon chart, and memory games. The best platform for learning Japanese kana.",
+  description: "Master Japanese kana with our comprehensive learning platform. Features include interactive lessons, AI-powered chat assistance, kana converter, practice quizzes, and visual learning charts. Perfect for beginners and intermediate learners seeking to master Japanese writing systems.",
   keywords: [
     "hiragana",
     "katakana", 
     "hiragana converter",
     "katakana converter",
     "japanese kana",
-    "gojuon chart",
+    "kana chart",
     "learn hiragana",
     "learn katakana",
     "japanese alphabet",
@@ -18,11 +18,13 @@ export const metadata: Metadata = {
     "japanese for beginners",
     "kana practice",
     "japanese characters",
-    "japanese study"
+    "japanese study",
+    "AI japanese tutor",
+    "japanese learning tools"
   ],
   openGraph: {
     title: "LearnKana | Japanese Kana Learning Platform",
-    description: "Master Japanese Hiragana & Katakana with interactive tools. Free online converter, practice games and study materials.",
+    description: "Master Japanese kana through interactive lessons, AI tutoring, practice quizzes, and visual learning tools. Featuring instant kana conversion and personalized learning assistance.",
     type: "website",
     locale: "en_US",
     alternateLocale: ["ja_JP", "zh_CN"],
