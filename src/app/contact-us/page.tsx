@@ -2,15 +2,22 @@
 
 import MainLayout from '@/components/layouts/main-layout';
 import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 
 export default function ContactUsPage() {
   const router = useRouter();
 
   const handleTabChange = (tab: string) => {
-    if (tab === 'gojuon') {
-      router.push('/');
-    } else if (tab === 'test') {
-      router.push('/test');
+    switch (tab) {
+      case 'gojuon':
+        router.push(ROUTES.HOME);
+        break;
+      case 'test':
+        // Temporarily disable test route
+        // router.replace(ROUTES.TEST);
+        break;
+      default:
+        break;
     }
   };
 

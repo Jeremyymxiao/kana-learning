@@ -3,14 +3,15 @@ import { getArticleBySlug, getArticleContent } from '@/data/articles';
 import { notFound } from 'next/navigation';
 import ClientPage from './client-page';
 
-type Props = {
-  params: {
-    slug: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+export async function generateStaticParams() {
+  return [{ slug: 'hiragana' }, { slug: 'katakana' }];
 }
 
-export default async function Page({ params, searchParams }: Props): Promise<JSX.Element> {
+export default async function Page({
+  params,
+}: {
+  params: { slug: string };
+}) {
   try {
     const article = await getArticleBySlug(params.slug);
     if (!article) {
