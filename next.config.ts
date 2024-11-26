@@ -49,15 +49,19 @@ const nextConfig = {
               default-src 'self';
               script-src 'self' 'unsafe-eval' 'unsafe-inline';
               style-src 'self' 'unsafe-inline';
-              img-src 'self' data: blob:;
+              img-src 'self' data: https:;
               font-src 'self';
               connect-src 'self' https://api.deepseek.com;
-            `.replace(/\s{2,}/g, ' ').trim()
+            `.replace(/\s+/g, ' ').trim(),
           },
-          // 添加 Strict Transport Security
+        ],
+      },
+      {
+        source: '/api/:path*',
+        headers: [
           {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains'
+            key: 'Cache-Control',
+            value: 'no-store, max-age=0',
           },
         ],
       },
@@ -77,6 +81,10 @@ const nextConfig = {
   // 启用实验性功能以支持 TypeScript
   experimental: {
     typedRoutes: true,
+    serverActions: {
+      bodySizeLimit: '10mb',
+      timeout: 60000, // 60 seconds
+    },
   },
 
   // webpack 配置
@@ -92,6 +100,12 @@ const nextConfig = {
       test: /\.md$/,
       use: 'raw-loader',
     });
+
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.NEXT_PUBLIC_APP_ENV': JSON.stringify(process.env.NODE_ENV),
+      })
+    );
 
     return config;
   },
