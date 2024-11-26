@@ -18,39 +18,45 @@ export function GojuonTable() {
     cell: "group relative p-2 md:p-3 cursor-pointer transition-all duration-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg",
     kanaText: "text-lg md:text-xl lg:text-2xl font-japanese transition-transform group-hover:scale-110 group-hover:text-blue-600 dark:group-hover:text-blue-400",
     romajiText: "text-xs md:text-sm text-gray-500 dark:text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity",
-    wrapper: "relative bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 shadow-lg",
+    wrapper: "relative z-0 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 shadow-lg",
     title: "text-center mb-6 text-xl font-bold text-gray-800 dark:text-gray-200"
   };
 
   return (
-    <Card className="w-full overflow-hidden bg-gradient-to-br from-white/50 to-gray-50/50 dark:from-gray-900/50 dark:to-gray-800/50 backdrop-blur-sm border-0 shadow-xl">
+    <Card className="relative w-full overflow-hidden bg-gradient-to-br from-white/50 to-gray-50/50 dark:from-gray-900/50 dark:to-gray-800/50 backdrop-blur-sm border-0 shadow-xl">
       <CardHeader className="border-b border-gray-100 dark:border-gray-800">
         <CardTitle className="text-2xl font-bold text-center">五十音図 Gojūon</CardTitle>
       </CardHeader>
       <CardContent className="p-2 sm:p-6">
         <Tabs defaultValue="seion" className="w-full">
-          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 gap-2 mb-6 bg-gray-100/50 dark:bg-gray-800/50 p-1 rounded-lg">
+          <TabsList className="sticky top-0 z-50 grid w-full grid-cols-1 md:grid-cols-3 gap-1.5 md:gap-2 mb-4 md:mb-6 bg-gray-100/50 dark:bg-gray-800/50 p-1 rounded-lg">
             <TabsTrigger 
               value="seion" 
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white transition-all duration-300"
+              className="bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white transition-all duration-300"
             >
-              清音 Seion
+              <span className="block md:hidden">清音</span>
+              <span className="hidden md:block">清音 Seion</span>
             </TabsTrigger>
             <TabsTrigger 
               value="dakuon" 
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white transition-all duration-300"
+              className="bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white transition-all duration-300"
             >
-              濁音・半濁音 Dakuten・Handakuten
+              <span className="block md:hidden">濁音</span>
+              <span className="hidden md:block">濁音・半濁音 Dakuten・Handakuten</span>
             </TabsTrigger>
             <TabsTrigger 
               value="youon" 
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white transition-all duration-300"
+              className="bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white transition-all duration-300"
             >
-              拗音 Yōon
+              <span className="block md:hidden">拗音</span>
+              <span className="hidden md:block">拗音 Yōon</span>
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="seion">
+          <TabsContent 
+            value="seion"
+            className="relative z-0 mt-16 md:mt-0"
+          >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* 平假名部分 */}
               <div className={tableStyles.wrapper}>
@@ -136,7 +142,7 @@ export function GojuonTable() {
             </div>
           </TabsContent>
           {/* 浊音内容 */}
-          <TabsContent value="dakuon">
+          <TabsContent value="dakuon" className="relative z-0 mt-16 md:mt-0">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* 平假名部分 */}
               <div className={tableStyles.wrapper}>
@@ -191,7 +197,7 @@ export function GojuonTable() {
           </TabsContent>
 
           {/* 拗音内容 */}
-          <TabsContent value="youon">
+          <TabsContent value="youon" className="relative z-0 mt-16 md:mt-0">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* 平假名部分 */}
               <div className={tableStyles.wrapper}>
