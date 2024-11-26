@@ -32,6 +32,7 @@ export default function ChatPage() {
     setLoading(true);
 
     try {
+      console.log('开始发送聊天请求');
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -41,7 +42,7 @@ export default function ChatPage() {
           messages: [
             {
               role: 'system',
-              content: 'You are a professional Japanese language learning assistant. Help users learn Japanese kana and improve their Japanese skills. When users ask about practicing kana, games, quizzes, or kana conversion, please guide them to use the following features of our website:\n\n- Games: /games\n- Quizzes: /quiz\n- Kana Converter: /converter\n- Kana Tables: /table\n\nPlease provide clear and easy-to-understand responses.'
+              content: 'You are a professional Japanese language learning assistant. Help users learn Japanese kana and improve their Japanese skills. When users ask about practicing kana, games, quizzes, or kana conversion, please guide them to use the following features of our website:\n\n- Games: /games\n- Quizzes: /quiz\n- Kana Converter: /converter\n- Kana Tables: /table\n\nPlease provide clear and easy-to-understand and more organized responses.'
             },
             ...messages.map(msg => ({ role: msg.role, content: msg.content })),
             { role: 'user', content: userMessage }
@@ -49,19 +50,39 @@ export default function ChatPage() {
         }),
       });
 
+      console.log('收到响应状态:', response.status);
+      
       if (!response.ok) {
-        throw new Error('API Request Error');
+        const errorText = await response.text();
+        console.error('API错误详情:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorText: errorText
+        });
+        throw new Error(`API请求失败: ${response.status} ${errorText}`);
       }
 
       const data = await response.json();
+      console.log('API响应数据:', data);
+
+      if (!data.choices?.[0]?.message?.content) {
+        console.error('API响应格式错误:', data);
+        throw new Error('API响应格式不正确');
+      }
+
       const aiResponse: Message = {
         role: 'assistant',
-        content: data.choices[0].message.content || 'Sorry, I can not answer the question right now.'
+        content: data.choices[0].message.content
       };
       
       setMessages(prev => [...prev, aiResponse]);
     } catch (error) {
-      console.error('Chat error:', error);
+      console.error('聊天错误:', error);
+      // 向用户显示错误信息
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: '抱歉，服务暂时不可用，请稍后重试。' 
+      }]);
     } finally {
       setLoading(false);
     }

@@ -3,13 +3,20 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const headers = {
-      'Access-Control-Allow-Origin': 'https://learnkana.pro',
+      'Access-Control-Allow-Origin': process.env.NODE_ENV === 'development' 
+        ? 'http://localhost:3000' 
+        : 'https://learnkana.pro',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     };
 
     const body = await request.json();
     
+    console.log('Sending request to Deepseek API with headers:', {
+      ...headers,
+      'Authorization': 'Bearer [HIDDEN]'
+    });
+
     const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -25,7 +32,13 @@ export async function POST(request: Request) {
     });
 
     if (!response.ok) {
-      throw new Error('API request failed');
+      const errorText = await response.text();
+      console.error('Deepseek API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText
+      });
+      throw new Error(`Deepseek API request failed: ${response.status} ${errorText}`);
     }
 
     const data = await response.json();
@@ -33,8 +46,8 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('API error:', error);
     return NextResponse.json(
-      { error: '处理请求时出错' },
-      { status: 500 }
+      { error: error.message || '处理请求时出错' },
+      { status: 500, headers }
     );
   }
 }
