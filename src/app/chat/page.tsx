@@ -21,7 +21,7 @@ interface DeepSeekMessage {
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>(() => {
-    // 从 localStorage 加载历史消息
+    // Load history messages from localStorage
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('chatHistory');
       return saved ? JSON.parse(saved) : [];
@@ -31,7 +31,7 @@ export default function ChatPage() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // 当消息更新时保存到 localStorage
+  // Save messages to localStorage when updated
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('chatHistory', JSON.stringify(messages));
@@ -52,61 +52,84 @@ export default function ChatPage() {
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setLoading(true);
 
-    try {
-      console.log('开始发送聊天请求');
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a professional Japanese language learning assistant. Help users learn Japanese kana and improve their Japanese skills. Always respond in English unless specifically asked to use another language. When users ask about practicing kana or need guidance, please direct them to these features of our website:\n\n- Learning Materials: /learn\n- Practice Quizzes: /quiz\n- Kana Converter: /converter\n- Visual Charts: /chart\n\nPlease provide clear, well-organized responses in English to help users effectively learn Japanese.'
-            },
-            ...messages.map(msg => ({ role: msg.role, content: msg.content })),
-            { role: 'user', content: userMessage }
-          ],
-        }),
-      });
+    // Add retry mechanism
+    const maxRetries = 3;
+    let currentTry = 0;
 
-      console.log('收到响应状态:', response.status);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('API错误详情:', {
-          status: response.status,
-          statusText: response.statusText,
-          errorText: errorText
+    while (currentTry < maxRetries) {
+      try {
+        console.log(`Attempt ${currentTry + 1} of ${maxRetries}`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // Increase timeout to 60 seconds
+
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            messages: [
+              {
+                role: 'system',
+                content: 'You are a professional Japanese language learning assistant. Help users learn Japanese kana and improve their Japanese skills. Always respond in English unless specifically asked to use another language. When users ask about practicing kana or need guidance, please direct them to these features of our website:\n\n- Learning Materials: /learn\n- Practice Quizzes: /quiz\n- Kana Converter: /converter\n- Visual Charts: /chart\n\nPlease provide clear, well-organized responses in English to help users effectively learn Japanese.'
+              },
+              ...messages.map(msg => ({ role: msg.role, content: msg.content })),
+              { role: 'user', content: userMessage }
+            ],
+          }),
+          signal: controller.signal,
         });
-        throw new Error(`API请求失败: ${response.status} ${errorText}`);
+
+        clearTimeout(timeoutId); // Clear timeout if request completes
+
+        if (!response.ok) {
+          if (response.status === 504) {
+            // If it's a timeout error, try again
+            currentTry++;
+            if (currentTry === maxRetries) {
+              throw new Error('Request timeout. Please try again later.');
+            }
+            continue;
+          }
+          throw new Error(`API request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('API response data:', data);
+
+        if (!data.choices?.[0]?.message?.content) {
+          console.error('Invalid API response format:', data);
+          throw new Error('Invalid API response format');
+        }
+
+        const aiResponse: Message = {
+          role: 'assistant',
+          content: data.choices[0].message.content
+        };
+        
+        setMessages(prev => [...prev, aiResponse]);
+        break; // If successful, exit retry loop
+      } catch (error: any) {
+        console.error('Request failed:', error);
+        if (error.name === 'AbortError') {
+          if (currentTry === maxRetries - 1) {
+            setMessages(prev => [...prev, { 
+              role: 'assistant', 
+              content: 'Request timed out. Please try sending a shorter message or try again later.'
+            }]);
+          }
+        } else {
+          if (currentTry === maxRetries - 1) {
+            setMessages(prev => [...prev, { 
+              role: 'assistant', 
+              content: 'An error occurred. Please try again later.'
+            }]);
+          }
+        }
+        currentTry++;
       }
-
-      const data = await response.json();
-      console.log('API响应数据:', data);
-
-      if (!data.choices?.[0]?.message?.content) {
-        console.error('API响应格式错误:', data);
-        throw new Error('API响应格式不正确');
-      }
-
-      const aiResponse: Message = {
-        role: 'assistant',
-        content: data.choices[0].message.content
-      };
-      
-      setMessages(prev => [...prev, aiResponse]);
-    } catch (error) {
-      console.error('聊天错误:', error);
-      // 向用户显示错误信息
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
-        content: '抱歉，服务暂时不可用，请稍后重试。' 
-      }]);
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
