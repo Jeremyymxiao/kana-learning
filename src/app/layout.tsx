@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
+import { AuthProvider } from '@/components/auth/auth-provider'
+import { NavigationProvider } from '@/components/navigation/navigation-provider'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -54,11 +56,11 @@ export default function RootLayout({
         />
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
-        <div className="flex flex-col min-h-screen">
-          <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <AuthProvider>
+          <NavigationProvider>
             {children}
-          </main>
-        </div>
+          </NavigationProvider>
+        </AuthProvider>
       </body>
     </html>
   )

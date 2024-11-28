@@ -6,9 +6,26 @@ import { useRouter, usePathname } from 'next/navigation';
 import type { Route } from 'next';
 
 interface NavBarProps {
-  currentTab?: string;
-  onTabChange?: (tab: string) => void;
+  authButtons?: React.ReactNode;
 }
+
+const ROUTE_TO_TAB: Record<string, string> = {
+  '/': 'home',
+  '/chat': 'chat',
+  '/quiz': 'quiz',
+  '/chart': 'chart',
+  '/converter': 'converter',
+  '/learn': 'learn'
+};
+
+const TAB_TO_ROUTE: Record<string, string> = {
+  'home': '/',
+  'chat': '/chat',
+  'quiz': '/quiz',
+  'chart': '/chart',
+  'converter': '/converter',
+  'learn': '/learn'
+};
 
 interface NavItem {
   name: string;
@@ -16,27 +33,27 @@ interface NavItem {
   key: string;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ currentTab }) => {
+const NavBar: React.FC<NavBarProps> = ({ authButtons }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavClick = (key: string) => {
-    if (key === 'home') {
-      router.push('/');
-    } else if (key === 'converter') {
-      router.push('/converter' as Route);
-    } else if (key === 'learn') {
-      router.push('/learn');
-    } else if (key === 'chart') {
-      router.push('/chart');
-    } else if (key === 'quiz') {
-      router.push('/quiz' as Route);
-    } else if (key === 'chat') {
-      router.push('/chat' as Route);
+    const route = TAB_TO_ROUTE[key];
+    if (route) {
+      router.push(route as Route);
     }
     setIsMenuOpen(false);
   };
+
+  // 根据当前路径判断活动标签
+  const getActiveTab = () => {
+    // 处理子路由，例如 /learn/hiragana 应该激活 learn 标签
+    const baseRoute = '/' + pathname.split('/')[1];
+    return ROUTE_TO_TAB[baseRoute] || 'home';
+  };
+
+  const activeTab = getActiveTab();
 
   const navItems: NavItem[] = [
     { name: 'Home', icon: <Book className="w-7 h-4" />, key: 'home' },
@@ -76,7 +93,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab }) => {
                 className={`
                   flex items-center space-x-2 px-4 py-2 rounded-lg
                   transition-colors duration-200 mx-2
-                  ${(currentTab === item.key || (item.key === 'about' && pathname === '/about'))
+                  ${item.key === activeTab
                     ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400' 
                     : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'}
                 `}
@@ -85,6 +102,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab }) => {
                 <span className="text-sm font-medium">{item.name}</span>
               </button>
             ))}
+            {authButtons && <div className="ml-4">{authButtons}</div>}
           </div>
 
           {/* Mobile Menu Button */}
@@ -110,7 +128,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab }) => {
                 className={`
                   flex items-center space-x-2 px-4 py-3 rounded-lg w-full
                   transition-colors duration-200
-                  ${(currentTab === item.key || (item.key === 'about' && pathname === '/about'))
+                  ${item.key === activeTab
                     ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400' 
                     : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'}
                 `}
@@ -119,6 +137,7 @@ const NavBar: React.FC<NavBarProps> = ({ currentTab }) => {
                 <span className="text-sm font-medium">{item.name}</span>
               </button>
             ))}
+            {authButtons && <div className="py-2">{authButtons}</div>}
           </div>
         )}
       </div>

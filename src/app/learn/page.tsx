@@ -3,31 +3,10 @@
 import MainLayout from '@/components/layouts/main-layout';
 import { articles } from '@/data/articles';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { ROUTES } from '@/constants/routes';
 
 export default function LearnPage() {
-  const router = useRouter();
-  
-  const handleTabChange = (tab: string) => {
-    switch (tab) {
-      case 'gojuon':
-        router.push(ROUTES.HOME);
-        break;
-      case 'test':
-        // Temporarily disable test route
-        // router.replace(ROUTES.TEST);
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
-    <MainLayout 
-      currentTab="learn"
-      onTabChange={handleTabChange}
-    >
+    <MainLayout>
       <main className="max-w-4xl mx-auto p-6">
         <h1 className="text-3xl font-bold mb-8">Learn Japanese Writing Systems</h1>
         <section 
@@ -49,21 +28,12 @@ export default function LearnPage() {
                 </Link>
               </h2>
               <p className="text-gray-600 mb-4">{article.description}</p>
-              <div 
-                className="flex gap-2"
-                role="list"
-                aria-label="Article tags"
+              <Link
+                href={`/learn/${article.slug}`}
+                className="text-indigo-600 hover:text-indigo-800"
               >
-                {article.tags.map(tag => (
-                  <span 
-                    key={tag} 
-                    className="text-sm bg-gray-100 px-2 py-1 rounded"
-                    role="listitem"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                Read More →
+              </Link>
             </article>
           ))}
         </section>
