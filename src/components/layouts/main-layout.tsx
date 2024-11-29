@@ -58,16 +58,16 @@ const AuthButtons: React.FC<{ user: any; isLoading: boolean; logout: () => Promi
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => router.push('/profile')}>
-            个人资料
+            Profile
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push('/settings')}>
-            设置
+            Settings
           </DropdownMenuItem>
           <DropdownMenuItem onClick={async () => {
             await logout();
             router.push('/');
           }}>
-            退出登录
+            Logout
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -75,19 +75,11 @@ const AuthButtons: React.FC<{ user: any; isLoading: boolean; logout: () => Promi
   }
 
   return (
-    <>
-      <Button
-        variant="ghost"
-        onClick={() => router.push('/login')}
-      >
-        登录
-      </Button>
-      <Button
-        onClick={() => router.push('/register')}
-      >
-        注册
-      </Button>
-    </>
+    <Button
+      onClick={() => router.push('/login')}
+    >
+      Login
+    </Button>
   );
 };
 
@@ -134,7 +126,7 @@ export default function MainLayout({
           </div>
         }
       />
-      <main className="flex-grow container mx-auto px-4 py-8">
+      <main className="flex-grow container mx-auto px-4 py-8 mt-16">
         {children}
       </main>
       <Footer />

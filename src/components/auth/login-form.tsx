@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuthContext } from '@/components/auth/auth-provider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert } from '@/components/ui/alert';
@@ -10,7 +10,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 export const LoginForm = () => {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login } = useAuthContext();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -26,8 +26,8 @@ export const LoginForm = () => {
     try {
       const result = await login(formData);
       if (result.success) {
-        // 登录成功，跳转到主页
-        router.push('/');
+        await router.push('/');
+        router.refresh();
       } else {
         setError('登录失败，请检查邮箱和密码');
       }
@@ -105,7 +105,7 @@ export const LoginForm = () => {
               className="text-sm"
               disabled={loading}
             >
-              Don't have an account? Sign up
+              Don&apos;t have an account? Sign up
             </Button>
           </div>
         </form>
