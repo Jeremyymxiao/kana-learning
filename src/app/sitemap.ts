@@ -23,19 +23,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: 'https://learnkana.pro/test',
+      url: 'https://learnkana.pro/hiragana-katakana-quiz',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: 'https://learnkana.pro/chart',
+      url: 'https://learnkana.pro/hiragana-katakana-chart',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://learnkana.pro/converter',
+      url: 'https://learnkana.pro/hiragana-katakana-converter',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,

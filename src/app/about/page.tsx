@@ -1,32 +1,11 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import { useRouter } from 'next/navigation';
 import { GithubIcon, TwitterIcon, MailIcon } from 'lucide-react';
-import { ROUTES } from '@/constants/routes';
 
 export default function AboutPage() {
-  const router = useRouter();
-
-  const handleTabChange = (tab: string) => {
-    switch (tab) {
-      case 'gojuon':
-        router.push(ROUTES.HOME);
-        break;
-      case 'test':
-        // Temporarily disable test route
-        // router.replace(ROUTES.TEST);
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
-    <MainLayout 
-      currentTab="about"
-      onTabChange={handleTabChange}
-    >
+    <MainLayout currentTab="about">
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
