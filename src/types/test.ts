@@ -2,6 +2,8 @@ export type Difficulty = 'easy' | 'middle' | 'hard';
 
 export type QuestionType = 'kanaToRomaji' | 'romajiToKana' | 'matching' | 'dictation';
 
+export type KanaType = 'hiragana' | 'katakana' | 'mixed' | 'special';
+
 export interface Question {
   id: string;
   type: QuestionType;

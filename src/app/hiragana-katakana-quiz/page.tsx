@@ -21,7 +21,7 @@ export default function KanaQuizPage() {
                   Kana Quiz
                 </h2>
                 <p className="text-lg text-gray-600 text-center">
-                  Choose quiz type and difficulty level to start practicing
+                  Choose Kana type and quiz type to start practicing
                 </p>
               </div>
             )}

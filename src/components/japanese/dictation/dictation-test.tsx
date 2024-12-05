@@ -1,8 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
-import { Difficulty } from '@/types/test';
+import { KanaType } from '@/types/test';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { gojuonData } from '@/data/gojuon';
 import { Button } from '@/components/ui/button';
+import { useSpeech } from '@/hooks/useSpeech';
+import { Play } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
+import { cn } from '@/lib/utils';
 
 interface KanaChar {
   hiragana: string;
@@ -18,14 +22,14 @@ interface DictationState {
   currentIndex: number;
   score: number;
   wrongAnswers: Array<{
-    correct: string;
-    selected: string;
+    question: KanaChar;
+    selected: KanaChar;
   }>;
   isComplete: boolean;
 }
 
 interface DictationTestProps {
-  difficulty: Difficulty;
+  difficulty: KanaType;
   onComplete: () => void;
 }
 
@@ -37,32 +41,35 @@ export const DictationTest: React.FC<DictationTestProps> = ({ difficulty, onComp
     wrongAnswers: [],
     isComplete: false
   });
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<KanaChar | null>(null);
+  const [isAnswered, setIsAnswered] = useState(false);
+
+  const { speak } = useSpeech();
 
   // 检查数据是否正确加载
   useEffect(() => {
     // 获取所有假名字符
     const allKana: KanaChar[] = [];
-    console.log('Available kana:', allKana.length);
     
-    // 添加清音
+    // 添加基本假名
     allKana.push(...gojuonData.seion.vowels);
     gojuonData.seion.consonants.forEach(row => allKana.push(...row));
     
-    // 根据难度添加其他假名
-    if (difficulty === 'middle' || difficulty === 'hard') {
-      // 添加浊音
+    // 根据类型添加其他假名
+    if (difficulty === 'special') {
       gojuonData.dakuon.consonants.forEach(row => allKana.push(...row));
-    }
-    
-    if (difficulty === 'hard') {
-      // 添加拗音
       gojuonData.youon.combinations.forEach(row => allKana.push(...row));
     }
 
+    // 随机选择10个不重复的假名作为正确答案
+    const shuffledKana = [...allKana].sort(() => Math.random() - 0.5);
+    const selectedKana = shuffledKana.slice(0, 10);
+
     // 生成问题
-    const questions = Array(10).fill(null).map(() => {
-      const correctAnswer = allKana[Math.floor(Math.random() * allKana.length)];
-      const wrongOptions = allKana
+    const questions = selectedKana.map(correctAnswer => {
+      // 从剩余的假名中选择3个作为错误选项
+      const wrongOptions = shuffledKana
         .filter(k => k.romaji !== correctAnswer.romaji)
         .sort(() => Math.random() - 0.5)
         .slice(0, 3);
@@ -82,81 +89,133 @@ export const DictationTest: React.FC<DictationTestProps> = ({ difficulty, onComp
   // 播放当前假名的音频
   const playCurrentKana = useCallback(() => {
     const currentQuestion = state.questions[state.currentIndex];
-    if (currentQuestion) {
-      const audio = new Audio(`/audio/${currentQuestion.correct.romaji}.mp3`);
-      audio.play().catch(error => console.error('播放音频失败:', error));
+    if (currentQuestion && !isPlaying) {
+      setIsPlaying(true);
+      speak(currentQuestion.correct.hiragana);
+      setTimeout(() => setIsPlaying(false), 1000); // 1秒后重置状态
     }
-  }, [state.questions, state.currentIndex]);
+  }, [state.questions, state.currentIndex, speak, isPlaying]);
 
   // 处理选择答案
   const handleSelect = (selected: KanaChar) => {
+    if (isAnswered) return;
+    
     const currentQuestion = state.questions[state.currentIndex];
     const isCorrect = selected.romaji === currentQuestion.correct.romaji;
 
+    setSelectedAnswer(selected);
+    setIsAnswered(true);
+
     if (isCorrect) {
       playCorrectSound();
-      setState(prev => ({
-        ...prev,
-        score: prev.score + 1,
-        currentIndex: prev.currentIndex + 1,
-        isComplete: prev.currentIndex + 1 >= prev.questions.length
-      }));
     } else {
       playWrongSound();
-      setState(prev => ({
-        ...prev,
-        wrongAnswers: [...prev.wrongAnswers, {
-          correct: currentQuestion.correct.hiragana,
-          selected: selected.hiragana
-        }],
-        currentIndex: prev.currentIndex + 1,
-        isComplete: prev.currentIndex + 1 >= prev.questions.length
-      }));
     }
 
-    if (state.currentIndex + 1 >= state.questions.length) {
-      onComplete();
-    }
+    // 延迟更新状态，让用户看到答案反馈
+    setTimeout(() => {
+      const nextIndex = state.currentIndex + 1;
+      const isTestComplete = nextIndex >= state.questions.length;
+
+      setState(prev => ({
+        ...prev,
+        score: isCorrect ? prev.score + 10 : prev.score,
+        currentIndex: nextIndex,
+        isComplete: isTestComplete,
+        wrongAnswers: isCorrect 
+          ? prev.wrongAnswers 
+          : [...prev.wrongAnswers, {
+              question: currentQuestion.correct,
+              selected: selected
+            }]
+      }));
+
+      setSelectedAnswer(null);
+      setIsAnswered(false);
+    }, 1000);
   };
 
   if (state.questions.length === 0) {
-    return <div>加载中...</div>;
+    return <div>Loading...</div>;
   }
 
   if (state.isComplete) {
     return (
-      <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">测试完成！</h2>
-        <p>得分: {state.score} / {state.questions.length}</p>
+      <div className="p-4 space-y-6">
+        <div className="text-center space-y-2">
+          <h2 className="text-3xl font-bold">Test Complete!</h2>
+          <p className="text-2xl">
+            Score: {state.score} / 100
+          </p>
+        </div>
+
         {state.wrongAnswers.length > 0 && (
-          <div className="mt-4">
-            <h3 className="font-bold mb-2">错误答案:</h3>
-            <ul>
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Wrong Answers:</h3>
+            <div className="space-y-2">
               {state.wrongAnswers.map((wrong, index) => (
-                <li key={index}>
-                  正确答案: {wrong.correct} - 你的选择: {wrong.selected}
-                </li>
+                <div 
+                  key={index} 
+                  className="p-4 bg-gray-100 rounded-lg dark:bg-gray-800"
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <span className="text-sm text-gray-500">Question {index + 1}</span>
+                      <p className="text-lg font-medium mt-1">{wrong.question.hiragana}</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-green-600 dark:text-green-400">
+                        Correct: {wrong.question.romaji}
+                      </div>
+                      <div className="text-red-600 dark:text-red-400">
+                        Your answer: {wrong.selected.romaji}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         )}
+
+        <Button className="w-full" onClick={onComplete}>
+          Try Again
+        </Button>
       </div>
     );
   }
 
   const currentQuestion = state.questions[state.currentIndex];
+  const progress = (state.currentIndex / state.questions.length) * 100;
 
   return (
     <div className="p-4 flex flex-col items-center">
-      <h2 className="text-xl font-bold mb-4">听写测试</h2>
-      <p className="mb-4">当前进度: {state.currentIndex + 1} / 10</p>
+      <h2 className="text-xl font-bold mb-4">Dictation Test</h2>
+      <div className="w-full max-w-md mb-4">
+        <Progress value={progress} className="h-2" />
+        <p className="text-sm text-gray-500 mt-2 text-center">
+          Progress: {state.currentIndex + 1} / {state.questions.length}
+        </p>
+      </div>
       
       {/* 播放音频按钮 */}
       <Button
         onClick={playCurrentKana}
-        className="w-32 h-32 rounded-full mb-8 bg-primary text-white"
+        disabled={isPlaying}
+        className={cn(
+          "w-32 h-32 rounded-full mb-8 bg-primary text-white relative",
+          "transition-transform duration-200 hover:scale-105",
+          isPlaying && "animate-pulse"
+        )}
       >
-        播放读音
+        <div className="flex flex-col items-center gap-2">
+          <Play className={cn(
+            "w-8 h-8",
+            "transition-transform duration-200",
+            isPlaying && "scale-90"
+          )} />
+          <span className="text-sm">Play Sound</span>
+        </div>
       </Button>
 
       {/* 选项按钮组 */}
@@ -165,8 +224,19 @@ export const DictationTest: React.FC<DictationTestProps> = ({ difficulty, onComp
           <Button
             key={index}
             onClick={() => handleSelect(option)}
-            variant="outline"
-            className="p-6 text-2xl h-24"
+            disabled={isAnswered}
+            variant={isAnswered ? (
+              option.romaji === currentQuestion.correct.romaji ? 'default' :
+              option === selectedAnswer ? 'destructive' : 'outline'
+            ) : 'outline'}
+            className={cn(
+              "p-6 text-2xl h-24",
+              isAnswered && option === selectedAnswer && (
+                option.romaji === currentQuestion.correct.romaji
+                  ? "bg-green-500 hover:bg-green-600"
+                  : "bg-red-500 hover:bg-red-600"
+              )
+            )}
           >
             {option.hiragana}
           </Button>
@@ -174,4 +244,4 @@ export const DictationTest: React.FC<DictationTestProps> = ({ difficulty, onComp
       </div>
     </div>
   );
-};
+}

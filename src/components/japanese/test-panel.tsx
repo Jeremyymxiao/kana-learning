@@ -1,13 +1,14 @@
 "use client"
 
 import { useState } from 'react';
-import { useTest, Difficulty } from '@/hooks/useTest';
+import { useTest, KanaType } from '@/hooks/useTest';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import TestQuestion from './test-question';
 import TestResult from './test-result';
 import MatchingGame from './matching/matching-game';
 import { DictationTest } from './dictation/dictation-test';
+import { SpellingTest } from './spelling/spelling-test';
 import { ArrowLeft } from 'lucide-react';
 
 interface TestPanelProps {
@@ -15,8 +16,8 @@ interface TestPanelProps {
 }
 
 export default function TestPanel({ onConfigChange }: TestPanelProps) {
-  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>('easy');
-  const [testType, setTestType] = useState<'choice' | 'matching' | 'dictation'>('choice');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<KanaType>('hiragana');
+  const [testType, setTestType] = useState<'choice' | 'matching' | 'dictation' | 'spelling'>('choice');
   const [showConfig, setShowConfig] = useState(true);
   const { 
     startTest, 
@@ -44,50 +45,31 @@ export default function TestPanel({ onConfigChange }: TestPanelProps) {
   // 定义测试类型选项
   const quizTypes = [
     { value: 'choice', label: 'Single Choice', description: 'Choose the correct kana or romaji' },
+    { value: 'spelling', label: 'Spelling', description: 'Type the romaji for the given kana' },
     { value: 'matching', label: 'Matching Game', description: 'Match kana with their romaji' },
     { value: 'dictation', label: 'Dictation', description: 'Listen and select the correct kana' }
   ] as const;
 
   // 定义难度选项
   const difficultyLevels = [
-    { value: 'easy', label: 'Easy', description: 'Hiragana Only' },
-    { value: 'middle', label: 'Middle', description: 'Hiragana + Katakana' },
-    { value: 'hard', label: 'Hard', description: 'All Kana Types' }
+    { value: 'hiragana', label: 'Hiragana Only', description: 'Basic Hiragana Characters (あ、い、う...)' },
+    { value: 'katakana', label: 'Katakana Only', description: 'Basic Katakana Characters (ア、イ、ウ...)' },
+    { value: 'mixed', label: 'Hiragana & Katakana', description: 'Mix of Basic Hiragana and Katakana' },
+    { value: 'special', label: 'Special Combinations', description: 'Dakuten, Handakuten & Yōon (が、ぱ、きょ...)' }
   ] as const;
 
   // 渲染配置面板
   const renderConfig = () => (
     <div className="space-y-8 p-4 w-full max-w-4xl mx-auto">
-      {/* Quiz Type Selection */}
-      <div className="space-y-4">
-        <h3 className="text-xl font-medium text-center">Select Quiz Type</h3>
-        <div className="grid md:grid-cols-3 gap-4">
-          {quizTypes.map((type) => (
-            <div
-              key={type.value}
-              onClick={() => setTestType(type.value)}
-              className={`cursor-pointer rounded-lg p-6 border-2 transition-all h-40 flex flex-col justify-center items-center text-center
-                ${testType === type.value 
-                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
-                  : 'border-gray-200 hover:border-blue-300'
-                }`}
-            >
-              <h4 className="font-bold mb-3">{type.label}</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-300">{type.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Difficulty Selection */}
-      <div className="space-y-4">
-        <h3 className="text-xl font-medium text-center">Select Difficulty Level</h3>
-        <div className="grid md:grid-cols-3 gap-4">
+        {/* Kana Type Selection */}
+        <div className="space-y-4">
+        <h3 className="text-xl font-medium text-center">Select Kana Type</h3>
+        <div className="grid md:grid-cols-2 gap-4">
           {difficultyLevels.map((level) => (
             <div
               key={level.value}
               onClick={() => setSelectedDifficulty(level.value)}
-              className={`cursor-pointer rounded-lg p-6 border-2 transition-all h-40 flex flex-col justify-center items-center text-center
+              className={`cursor-pointer rounded-lg p-6 border-2 transition-all h-24 flex flex-col justify-center items-center text-center
                 ${selectedDifficulty === level.value 
                   ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
                   : 'border-gray-200 hover:border-blue-300'
@@ -95,6 +77,26 @@ export default function TestPanel({ onConfigChange }: TestPanelProps) {
             >
               <h4 className="font-bold mb-3">{level.label}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-300">{level.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* Quiz Type Selection */}
+      <div className="space-y-4">
+        <h3 className="text-xl font-medium text-center">Select Quiz Type</h3>
+        <div className="grid md:grid-cols-2 gap-4">
+          {quizTypes.map((type) => (
+            <div
+              key={type.value}
+              onClick={() => setTestType(type.value)}
+              className={`cursor-pointer rounded-lg p-6 border-2 transition-all h-24 flex flex-col justify-center items-center text-center
+                ${testType === type.value 
+                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
+                  : 'border-gray-200 hover:border-blue-300'
+                }`}
+            >
+              <h4 className="font-bold mb-3">{type.label}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{type.description}</p>
             </div>
           ))}
         </div>
@@ -132,17 +134,21 @@ export default function TestPanel({ onConfigChange }: TestPanelProps) {
           </div>
 
           {/* 包装测试内容的容器 */}
-          <div className="flex-1 flex flex-col justify-center">
+          <div className="flex-1 flex flex-col">
             {testType === 'choice' && (
               !isComplete ? (
                 <>
-                  <div className="space-y-2">
+                  <div className="mb-8">
                     <Progress value={(currentQuestionIndex / 10) * 100} />
                   </div>
-                  <TestQuestion
-                    question={getCurrentQuestion()}
-                    onSubmit={submitAnswer}
-                  />
+                  <div className="flex-1 flex flex-col">
+                    <div className="flex-[0.7]" /> {/* 上部空白 */}
+                    <TestQuestion
+                      question={getCurrentQuestion()}
+                      onSubmit={submitAnswer}
+                    />
+                    <div className="flex-[1.3]" /> {/* 下部空白，比上部空白更大 */}
+                  </div>
                 </>
               ) : (
                 <TestResult
@@ -162,6 +168,13 @@ export default function TestPanel({ onConfigChange }: TestPanelProps) {
             
             {testType === 'dictation' && (
               <DictationTest
+                difficulty={selectedDifficulty}
+                onComplete={handleReset}
+              />
+            )}
+
+            {testType === 'spelling' && (
+              <SpellingTest
                 difficulty={selectedDifficulty}
                 onComplete={handleReset}
               />

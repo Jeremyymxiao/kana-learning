@@ -10,10 +10,21 @@ interface NavigationContextType {
 
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
 
+const ROUTE_TO_TAB = {
+  '/': 'home',
+  '/hiragana-katakana-chart': 'chart',
+  '/hiragana-katakana-quiz': 'quiz',
+  '/hiragana-katakana-converter': 'converter',
+  // ... 其他路由
+};
+
 export function NavigationProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [currentTab, setCurrentTab] = useState(() => {
     if (pathname === '/') return 'home';
+    if (pathname === '/hiragana-katakana-chart') return 'chart';
+    if (pathname === '/hiragana-katakana-quiz') return 'quiz';
+    if (pathname === '/hiragana-katakana-converter') return 'converter';
     const path = pathname.split('/')[1];
     return path || 'home';
   });

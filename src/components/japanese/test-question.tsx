@@ -42,7 +42,7 @@ export default function TestQuestion({ question, onSubmit }: TestQuestionProps) 
       <div className="text-center">
         <div className="text-4xl font-bold mb-2">{question.question}</div>
         <div className="text-sm text-gray-500">
-          {question.type === 'kanaToRomaji' ? '选择正确的罗马音' : '选择正确的假名'}
+          {question.type === 'kanaToRomaji' ? 'Choose the right romaji' : 'Choose the right kana'}
         </div>
       </div>
 

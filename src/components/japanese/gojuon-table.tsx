@@ -15,52 +15,46 @@ export function GojuonTable() {
   };
 
   const tableStyles = {
-    cell: "group relative p-2 md:p-3 cursor-pointer transition-all duration-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg",
-    kanaText: "text-lg md:text-xl lg:text-2xl font-japanese transition-transform group-hover:scale-110 group-hover:text-blue-600 dark:group-hover:text-blue-400",
-    romajiText: "text-xs md:text-sm text-gray-500 dark:text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity",
-    wrapper: "relative z-0 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 shadow-lg",
-    title: "text-center mb-6 text-xl font-bold text-gray-800 dark:text-gray-200"
+    cell: "group relative p-0.5 sm:p-1 md:p-2 cursor-pointer transition-all duration-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg",
+    kanaText: "text-sm sm:text-base md:text-lg lg:text-xl font-japanese transition-transform group-hover:scale-110 group-hover:text-blue-600 dark:group-hover:text-blue-400",
+    romajiText: "text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity",
+    wrapper: "relative z-0 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-1 sm:p-2 shadow-lg",
+    title: "text-center mb-1 sm:mb-2 text-base sm:text-lg font-bold text-gray-800 dark:text-gray-200"
   };
 
   return (
     <Card className="relative w-full overflow-hidden bg-gradient-to-br from-white/50 to-gray-50/50 dark:from-gray-900/50 dark:to-gray-800/50 backdrop-blur-sm border-0 shadow-xl">
-      <CardHeader className="border-b border-gray-100 dark:border-gray-800">
-        <CardTitle className="text-2xl font-bold text-center">五十音図 Gojūon</CardTitle>
-      </CardHeader>
-      <CardContent className="p-2 sm:p-6">
+      <CardContent className="p-1 sm:p-2">
         <Tabs defaultValue="seion" className="w-full">
-          <TabsList className="sticky top-0 z-50 grid w-full grid-cols-1 md:grid-cols-3 gap-1.5 md:gap-2 mb-4 md:mb-6 bg-gray-100/50 dark:bg-gray-800/50 p-1 rounded-lg">
+          <TabsList className="relative md:sticky top-0 z-50 grid w-full grid-cols-3 gap-0.5 sm:gap-1 md:gap-1.5 mb-2 md:mb-4 bg-gray-100/50 dark:bg-gray-800/50 p-0.5 sm:p-1 rounded-lg text-xs sm:text-sm md:text-base">
             <TabsTrigger 
               value="seion" 
-              className="bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white transition-all duration-300"
+              className="flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-blue-500 data-[state=active]:text-white transition-all duration-300"
             >
-              <span className="block md:hidden">清音</span>
-              <span className="hidden md:block">清音 Seion</span>
+              <span className="font-bold">清音</span>
+              <span className="text-[10px] sm:text-xs opacity-90">Seion</span>
             </TabsTrigger>
             <TabsTrigger 
               value="dakuon" 
-              className="bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white transition-all duration-300"
+              className="flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-blue-500 data-[state=active]:text-white transition-all duration-300"
             >
-              <span className="block md:hidden">濁音</span>
-              <span className="hidden md:block">濁音・半濁音 Dakuten・Handakuten</span>
+              <span className="font-bold">濁音</span>
+              <span className="text-[10px] sm:text-xs opacity-90">Dakuon</span>
             </TabsTrigger>
             <TabsTrigger 
               value="youon" 
-              className="bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white transition-all duration-300"
+              className="flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-blue-500 data-[state=active]:text-white transition-all duration-300"
             >
-              <span className="block md:hidden">拗音</span>
-              <span className="hidden md:block">拗音 Yōon</span>
+              <span className="font-bold">拗音</span>
+              <span className="text-[10px] sm:text-xs opacity-90">Yōon</span>
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent 
-            value="seion"
-            className="relative z-0 mt-16 md:mt-0"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <TabsContent value="seion" className="relative z-0 mt-2 sm:mt-4 md:mt-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
               {/* 平假名部分 */}
               <div className={tableStyles.wrapper}>
-                <h3 className={tableStyles.title}>Hiragana</h3>
+                <h3 className={`${tableStyles.title} text-blue-500 dark:text-blue-400`}>Hiragana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {/* 元音行 */}
@@ -101,7 +95,7 @@ export function GojuonTable() {
               
               {/* 片假名部分 */}
               <div className={tableStyles.wrapper}>
-                <h3 className={tableStyles.title}>Katakana</h3>
+                <h3 className={`${tableStyles.title} text-blue-500 dark:text-blue-400`}>Katakana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {/* 元音行 */}
@@ -142,11 +136,11 @@ export function GojuonTable() {
             </div>
           </TabsContent>
           {/* 浊音内容 */}
-          <TabsContent value="dakuon" className="relative z-0 mt-16 md:mt-0">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <TabsContent value="dakuon" className="relative z-0 mt-2 sm:mt-4 md:mt-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
               {/* 平假名部分 */}
               <div className={tableStyles.wrapper}>
-                <h3 className={tableStyles.title}>Hiragana</h3>
+                <h3 className={`${tableStyles.title} text-purple-800 dark:text-purple-300`}>Hiragana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {gojuonData.dakuon.consonants.map((row, rowIndex) => (
@@ -171,7 +165,7 @@ export function GojuonTable() {
               
               {/* 片假名部分 */}
               <div className={tableStyles.wrapper}>
-                <h3 className={tableStyles.title}>Katakana</h3>
+                <h3 className={`${tableStyles.title} text-purple-800 dark:text-purple-300`}>Katakana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {gojuonData.dakuon.consonants.map((row, rowIndex) => (
@@ -197,11 +191,11 @@ export function GojuonTable() {
           </TabsContent>
 
           {/* 拗音内容 */}
-          <TabsContent value="youon" className="relative z-0 mt-16 md:mt-0">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <TabsContent value="youon" className="relative z-0 mt-2 sm:mt-4 md:mt-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
               {/* 平假名部分 */}
               <div className={tableStyles.wrapper}>
-                <h3 className={tableStyles.title}>Hiragana</h3>
+                <h3 className={`${tableStyles.title} text-green-800 dark:text-green-300`}>Hiragana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {gojuonData.youon.combinations.map((row, rowIndex) => (
@@ -226,7 +220,7 @@ export function GojuonTable() {
               
               {/* 片假名部分 */}
               <div className={tableStyles.wrapper}>
-                <h3 className={tableStyles.title}>Katakana</h3>
+                <h3 className={`${tableStyles.title} text-green-800 dark:text-green-300`}>Katakana</h3>
                 <table className="w-full text-center">
                   <tbody>
                     {gojuonData.youon.combinations.map((row, rowIndex) => (

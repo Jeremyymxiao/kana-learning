@@ -11,7 +11,7 @@ export default function LandingPage() {
   const [showQuizHeader, setShowQuizHeader] = useState(true);
 
   return (
-    <MainLayout currentTab="home">
+    <MainLayout>
       {/* Hero Section */}
       <header 
         className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 py-28 overflow-hidden"
@@ -30,7 +30,7 @@ export default function LandingPage() {
             </span>
             <span className="text-slate-800 dark:text-white"> Japanese</span>
             <span className="block mt-6 text-slate-800 dark:text-white">
-              Language Learning
+              Hiragana & Katakana Learning
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl mx-auto mb-12">
@@ -49,7 +49,7 @@ export default function LandingPage() {
             </Link>
             
             <Link 
-              href="/chart" 
+              href="/hiragana-katakana-chart" 
               className="group inline-flex items-center justify-center px-8 py-3 font-bold text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
             >
               View Kana Chart
@@ -92,16 +92,16 @@ export default function LandingPage() {
               </Link>
 
               {/* Interactive Chart Feature */}
-              <Link href="/chart" className="group h-full">
+              <Link href="/hiragana-katakana-chart" className="group h-full">
                 <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
                   <div className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
                     <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
                       <Table className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Interactive Kana Chart</h3>
+                    <h3 className="text-xl font-semibold mb-3">Interactive Hiragana Chart</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Learn with our interactive Gojuon chart featuring clear visuals and native audio pronunciation.
+                      Learn with our interactive Hiragana & Katakana chart featuring clear visuals and native audio pronunciation.
                     </p>
                     <span className="text-blue-600 dark:text-blue-400 inline-flex items-center mt-auto">
                       View chart <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -111,7 +111,7 @@ export default function LandingPage() {
               </Link>
 
               {/* Quiz Feature */}
-              <Link href="/quiz" className="group h-full">
+              <Link href="/hiragana-katakana-quiz" className="group h-full">
                 <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
                   <div className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
@@ -120,7 +120,7 @@ export default function LandingPage() {
                     </div>
                     <h3 className="text-xl font-semibold mb-3">Practice Quizzes</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Test your knowledge with various quiz types and track your learning progress.
+                      Test your hiragana & katakana knowledge with various quiz types and track your learning progress.
                     </p>
                     <span className="text-green-600 dark:text-green-400 inline-flex items-center mt-auto">
                       Start quiz <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -138,7 +138,7 @@ export default function LandingPage() {
           className="container mx-auto px-4 py-16"
         >
           <h2 id="kana-intro-heading" className="text-4xl font-bold text-center mb-12">
-            Japanese Writing System
+            Japanese Alphabet System
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             {/* Hiragana Card */}

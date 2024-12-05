@@ -18,14 +18,15 @@ import { usePathname } from 'next/navigation';
 
 interface MainLayoutProps {
   children: ReactNode;
+  currentTab?: string;
 }
 
 const ROUTE_TO_TAB: Record<string, string> = {
   '/': 'home',
   '/chat': 'chat',
-  '/quiz': 'quiz',
-  '/chart': 'chart',
-  '/converter': 'converter',
+  '/hiragana-katakana-quiz': 'quiz',
+  '/hiragana-katakana-chart': 'chart',
+  '/hiragana-katakana-converter': 'converter',
   '/learn': 'learn'
 };
 

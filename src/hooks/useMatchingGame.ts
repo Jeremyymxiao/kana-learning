@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { gojuonData } from '@/data/gojuon';
-import { Difficulty } from '@/types/test';
+import { KanaType } from '@/types/test';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 
 interface KanaChar {
@@ -28,44 +28,39 @@ interface MatchingGameState {
   }>;
 }
 
-// 根据难度获取可用的假名字符
-const getAvailableKana = (difficulty: Difficulty): KanaChar[] => {
+// 根据假名类型获取可用的假名字符
+const getAvailableKana = (kanaType: KanaType): KanaChar[] => {
   const kanaChars: KanaChar[] = [];
 
-  // 收集清音
   const addSeion = () => {
     kanaChars.push(...gojuonData.seion.vowels);
     gojuonData.seion.consonants.forEach(row => kanaChars.push(...row));
   };
 
-  // 添加片假名
-  const addKatakana = (chars: KanaChar[]) => {
-    return chars.map(char => ({ ...char }));
-  };
-
-  // 收集浊音和拗音
-  const addDakuonAndYouon = () => {
+  const addSpecial = () => {
     gojuonData.dakuon.consonants.forEach(row => kanaChars.push(...row));
     gojuonData.youon.combinations.forEach(row => kanaChars.push(...row));
   };
 
-  switch (difficulty) {
-    case 'easy':
+  switch (kanaType) {
+    case 'hiragana':
       addSeion();
       return kanaChars;
-    case 'middle':
+    case 'katakana':
       addSeion();
-      return [...kanaChars, ...addKatakana(kanaChars)];
-    case 'hard':
+      return kanaChars;
+    case 'mixed':
       addSeion();
-      addDakuonAndYouon();
-      return [...kanaChars, ...addKatakana(kanaChars)];
+      return kanaChars;
+    case 'special':
+      addSpecial();
+      return kanaChars;
     default:
       return kanaChars;
   }
 };
 
-export const useMatchingGame = (difficulty: Difficulty) => {
+export const useMatchingGame = (kanaType: KanaType) => {
   const [state, setState] = useState<MatchingGameState>({
     cards: [],
     score: 0,
@@ -76,7 +71,7 @@ export const useMatchingGame = (difficulty: Difficulty) => {
 
   // 初始化游戏
   const initGame = useCallback(() => {
-    const availableKana = getAvailableKana(difficulty);
+    const availableKana = getAvailableKana(kanaType);
     const selectedKana = availableKana.slice(0, 10); // 只取10个字符
     
     const cards: MatchingCard[] = [];
@@ -84,7 +79,7 @@ export const useMatchingGame = (difficulty: Difficulty) => {
       // 添加假名卡片
       cards.push({
         id: index * 2,
-        content: difficulty === 'easy' ? kana.hiragana : Math.random() > 0.5 ? kana.hiragana : kana.katakana,
+        content: kana.hiragana,
         type: 'kana',
         matched: false,
         selected: false
@@ -106,7 +101,7 @@ export const useMatchingGame = (difficulty: Difficulty) => {
       isComplete: false,
       wrongPairs: []
     });
-  }, [difficulty]);
+  }, [kanaType]);
 
   // 处理卡片选择
   const handleCardSelect = useCallback((card: MatchingCard) => {

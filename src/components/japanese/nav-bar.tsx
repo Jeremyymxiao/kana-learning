@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Book, Info, Menu, X, FileText, Table, PenTool, MessageSquare } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import type { Route } from 'next';
+import Link from 'next/link';
 
 interface NavBarProps {
   authButtons?: React.ReactNode;
@@ -12,18 +13,18 @@ interface NavBarProps {
 const ROUTE_TO_TAB: Record<string, string> = {
   '/': 'home',
   '/chat': 'chat',
-  '/quiz': 'quiz',
-  '/chart': 'chart',
-  '/converter': 'converter',
+  '/hiragana-katakana-quiz': 'quiz',
+  '/hiragana-katakana-chart': 'chart',
+  '/hiragana-katakana-converter': 'converter',
   '/learn': 'learn'
 };
 
 const TAB_TO_ROUTE: Record<string, string> = {
   'home': '/',
   'chat': '/chat',
-  'quiz': '/quiz',
-  'chart': '/chart',
-  'converter': '/converter',
+  'quiz': '/hiragana-katakana-quiz',
+  'chart': '/hiragana-katakana-chart',
+  'converter': '/hiragana-katakana-converter',
   'learn': '/learn'
 };
 

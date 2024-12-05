@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { useMatchingGame } from '@/hooks/useMatchingGame';
-import { Difficulty } from '@/types/test';
+import { KanaType } from '@/types/test';
 import MatchingCard from './matching-card';
 import MatchingResult from './matching-result';
 
 interface MatchingGameProps {
-  difficulty: Difficulty;
+  difficulty: KanaType;
   onComplete: () => void;
 }
 

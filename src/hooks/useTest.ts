@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { gojuonData } from '@/data/gojuon';
 
-export type Difficulty = 'easy' | 'middle' | 'hard';
+export type KanaType = 'hiragana' | 'katakana' | 'mixed' | 'special';
 export type QuestionType = 'kanaToRomaji' | 'romajiToKana';
 
 export interface Question {
@@ -21,8 +21,8 @@ interface TestState {
   isComplete: boolean;
 }
 
-// 根据难度获取可用的假名字符
-const getAvailableKana = (difficulty: Difficulty) => {
+// 根据假名类型获取可用的假名字符
+const getAvailableKana = (kanaType: KanaType) => {
   const kanaChars: Array<{ hiragana: string; katakana: string; romaji: string }> = [];
 
   // 收集清音
@@ -31,29 +31,25 @@ const getAvailableKana = (difficulty: Difficulty) => {
     gojuonData.seion.consonants.forEach(row => kanaChars.push(...row));
   };
 
-  // 添加片假名
-  const addKatakana = (chars: typeof kanaChars) => {
-    return chars.map(char => ({ ...char }));
-  };
-
   // 收集浊音和拗音
-  const addDakuonAndYouon = () => {
+  const addSpecial = () => {
     gojuonData.dakuon.consonants.forEach(row => kanaChars.push(...row));
     gojuonData.youon.combinations.forEach(row => kanaChars.push(...row));
   };
 
-  // 根据难度级别选择字符
-  switch (difficulty) {
-    case 'easy':
+  switch (kanaType) {
+    case 'hiragana':
       addSeion();
       return kanaChars;
-    case 'middle':
+    case 'katakana':
       addSeion();
-      return [...kanaChars, ...addKatakana(kanaChars)];
-    case 'hard':
+      return kanaChars;
+    case 'mixed':
       addSeion();
-      addDakuonAndYouon();
-      return [...kanaChars, ...addKatakana(kanaChars)];
+      return kanaChars;
+    case 'special':
+      addSpecial();
+      return kanaChars;
     default:
       return kanaChars;
   }
@@ -97,36 +93,62 @@ export const useTest = () => {
   });
 
   // 开始新测试
-  const startTest = useCallback((difficulty: Difficulty) => {
-    const availableKana = getAvailableKana(difficulty);
-    const questions: Question[] = [];
-  
+  const startTest = useCallback((kanaType: KanaType) => {
+    const availableKana = getAvailableKana(kanaType);
+    
+    // 随机选择10个不重复的假名
+    const shuffledKana = [...availableKana].sort(() => Math.random() - 0.5);
+    const selectedKana = shuffledKana.slice(0, 10);
+    
     // 生成10个问题
-    for (let i = 0; i < 10; i++) {
-      const randomKana = availableKana[Math.floor(Math.random() * availableKana.length)];
+    const questions: Question[] = selectedKana.map((randomKana, i) => {
       // 随机决定题目类型
       const questionType: QuestionType = Math.random() > 0.5 ? 'kanaToRomaji' : 'romajiToKana';
       
+      // 根据假名类型选择显示的字符
+      const getKanaChar = () => {
+        switch (kanaType) {
+          case 'hiragana':
+            return randomKana.hiragana;
+          case 'katakana':
+            return randomKana.katakana;
+          case 'mixed':
+            return Math.random() > 0.5 ? randomKana.hiragana : randomKana.katakana;
+          case 'special':
+            return Math.random() > 0.5 ? randomKana.hiragana : randomKana.katakana;
+          default:
+            return randomKana.hiragana;
+        }
+      };
+
       const question: Question = {
         id: i,
         type: questionType,
-        question: questionType === 'kanaToRomaji' ? 
-          (difficulty === 'easy' ? randomKana.hiragana : Math.random() > 0.5 ? randomKana.hiragana : randomKana.katakana) :
-          randomKana.romaji,
-        correctAnswer: questionType === 'kanaToRomaji' ? 
-          randomKana.romaji :
-          (difficulty === 'easy' ? randomKana.hiragana : Math.random() > 0.5 ? randomKana.hiragana : randomKana.katakana),
+        question: questionType === 'kanaToRomaji' ? getKanaChar() : randomKana.romaji,
+        correctAnswer: questionType === 'kanaToRomaji' ? randomKana.romaji : getKanaChar(),
         options: []
       };
-  
+
       const allPossibleAnswers = questionType === 'kanaToRomaji' ?
         availableKana.map(k => k.romaji) :
-        availableKana.map(k => difficulty === 'easy' ? k.hiragana : Math.random() > 0.5 ? k.hiragana : k.katakana);
-  
+        availableKana.map(k => {
+          switch (kanaType) {
+            case 'hiragana':
+              return k.hiragana;
+            case 'katakana':
+              return k.katakana;
+            case 'mixed':
+            case 'special':
+              return Math.random() > 0.5 ? k.hiragana : k.katakana;
+            default:
+              return k.hiragana;
+          }
+        });
+
       question.options = generateOptions(question.correctAnswer, allPossibleAnswers);
-      questions.push(question);
-    }
-  
+      return question;
+    });
+
     setState({
       questions: shuffle(questions),
       currentQuestionIndex: 0,
