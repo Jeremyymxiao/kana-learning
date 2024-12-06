@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
+import { User } from '@/types/auth';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -30,7 +31,7 @@ const ROUTE_TO_TAB: Record<string, string> = {
   '/learn': 'learn'
 };
 
-const AuthButtons: React.FC<{ user: any; isLoading: boolean; logout: () => Promise<void> }> = ({
+const AuthButtons: React.FC<{ user: User | null; isLoading: boolean; logout: () => Promise<void> }> = ({
   user,
   isLoading,
   logout

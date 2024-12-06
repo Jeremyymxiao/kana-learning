@@ -1,30 +1,11 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import { useRouter } from 'next/navigation';
-import { ROUTES } from '@/constants/routes';
 
 export default function ContactUsPage() {
-  const router = useRouter();
-
-  const handleTabChange = (tab: string) => {
-    switch (tab) {
-      case 'gojuon':
-        router.push(ROUTES.HOME);
-        break;
-      case 'test':
-        // Temporarily disable test route
-        // router.replace(ROUTES.TEST);
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
     <MainLayout 
       currentTab="contact"
-      onTabChange={handleTabChange}
     >
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>

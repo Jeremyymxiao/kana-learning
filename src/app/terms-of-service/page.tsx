@@ -1,24 +1,11 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import { useRouter } from 'next/navigation';
-import type { Route } from 'next';
 
 export default function TermsOfServicePage() {
-  const router = useRouter();
-
-  const handleTabChange = (tab: string) => {
-    if (tab === 'gojuon') {
-      router.push('/');
-    } else if (tab === 'KanaQuiz') {
-      router.push('/quiz' as Route);
-    }
-  };
-
   return (
     <MainLayout 
       currentTab="terms"
-      onTabChange={handleTabChange}
     >
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <h1 className="text-4xl font-bold mb-8 text-center">Terms of Service</h1>

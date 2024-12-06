@@ -1,15 +1,11 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import TestPanel from '@/components/japanese/test-panel';
-import { useState } from 'react';
 import { MessageSquare, Table, PenTool, ArrowRight, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { articles } from '@/data/articles';
 
 export default function LandingPage() {
-  const [showQuizHeader, setShowQuizHeader] = useState(true);
-
   return (
     <MainLayout>
       {/* Hero Section */}

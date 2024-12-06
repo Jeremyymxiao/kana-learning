@@ -25,6 +25,12 @@ interface YoudaoParams {
   curtime: number;
 }
 
+interface KuroshiroOptions {
+  mode: 'normal' | 'spaced' | 'okurigana' | 'furigana';
+  to: 'hiragana' | 'katakana' | 'romaji';
+  romajiSystem?: string;
+}
+
 function truncate(q: string): string {
   const len = q.length;
   return len <= 20 ? q : q.substring(0, 10) + len + q.substring(len - 10, len);
@@ -83,8 +89,9 @@ export async function POST(req: Request) {
     
     const conversionResults = await Promise.all(
       options.targetTypes.map(async (targetType: string) => {
-        const kuroshiroOptions: any = {
-          mode: 'normal'
+        const kuroshiroOptions: KuroshiroOptions = {
+          mode: 'normal',
+          to: 'hiragana'
         };
 
         switch (targetType) {

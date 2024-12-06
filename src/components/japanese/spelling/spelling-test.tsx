@@ -60,6 +60,21 @@ const getAvailableKana = (kanaType: KanaType): KanaChar[] => {
   }
 };
 
+// 获取显示的假名
+const getDisplayKana = (kana: KanaChar, type: KanaType) => {
+  switch (type) {
+    case 'hiragana':
+      return kana.hiragana;
+    case 'katakana':
+      return kana.katakana;
+    case 'mixed':
+    case 'special':
+      return Math.random() > 0.5 ? kana.hiragana : kana.katakana;
+    default:
+      return kana.hiragana;
+  }
+};
+
 export const SpellingTest: React.FC<SpellingTestProps> = ({ difficulty: kanaType, onComplete }) => {
   const [state, setState] = useState<SpellingState>({
     questions: [],
@@ -112,7 +127,7 @@ export const SpellingTest: React.FC<SpellingTestProps> = ({ difficulty: kanaType
           wrongAnswers: isCorrect 
             ? prev.wrongAnswers 
             : [...prev.wrongAnswers, {
-                kana: getDisplayKana(currentQuestion),
+                kana: getDisplayKana(currentQuestion, kanaType),
                 romaji: currentQuestion.romaji,
                 userAnswer: userInput
               }]
@@ -122,22 +137,7 @@ export const SpellingTest: React.FC<SpellingTestProps> = ({ difficulty: kanaType
       setUserInput('');
       setIsAnswered(false);
     }, 1000);
-  }, [state.questions, state.currentIndex, userInput, isAnswered]);
-
-  // 获取显示的假名
-  const getDisplayKana = (kana: KanaChar) => {
-    switch (kanaType) {
-      case 'hiragana':
-        return kana.hiragana;
-      case 'katakana':
-        return kana.katakana;
-      case 'mixed':
-      case 'special':
-        return Math.random() > 0.5 ? kana.hiragana : kana.katakana;
-      default:
-        return kana.hiragana;
-    }
-  };
+  }, [state.questions, state.currentIndex, userInput, isAnswered, kanaType]);
 
   // Fisher-Yates 洗牌算法
   const shuffle = <T,>(array: T[]): T[] => {
@@ -217,7 +217,7 @@ export const SpellingTest: React.FC<SpellingTestProps> = ({ difficulty: kanaType
 
       <div className="text-center mb-8">
         <div className="text-6xl font-japanese mb-4">
-          {getDisplayKana(currentQuestion)}
+          {getDisplayKana(currentQuestion, kanaType)}
         </div>
         <p className="text-sm text-gray-500">Type the romaji for this kana</p>
       </div>

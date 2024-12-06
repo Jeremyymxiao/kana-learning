@@ -31,7 +31,6 @@ export default function ClientPage({ article }: ClientPageProps) {
   return (
     <MainLayout
       currentTab="learn"
-      onTabChange={handleTabChange}
     >
       <div className="max-w-4xl mx-auto p-6">
         <article className="prose prose-slate lg:prose-lg dark:prose-invert max-w-none

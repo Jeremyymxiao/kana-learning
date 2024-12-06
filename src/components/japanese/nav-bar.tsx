@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Book, Info, Menu, X, FileText, Table, PenTool, MessageSquare } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import type { Route } from 'next';
-import Link from 'next/link';
 
 interface NavBarProps {
   authButtons?: React.ReactNode;

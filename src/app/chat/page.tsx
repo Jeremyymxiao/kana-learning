@@ -14,11 +14,6 @@ interface Message {
   content: string;
 }
 
-interface DeepSeekMessage {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
-}
-
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>(() => {
     // Load history messages from localStorage
@@ -163,19 +158,19 @@ export default function ChatPage() {
                           <ReactMarkdown 
                             remarkPlugins={[remarkGfm]}
                             components={{
-                              a: ({ node, ...props }) => (
+                              a: (props) => (
                                 <a {...props} className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500" />
                               ),
-                              ul: ({ node, ...props }) => (
+                              ul: (props) => (
                                 <ul {...props} className="list-disc pl-4 my-2" />
                               ),
-                              li: ({ node, ...props }) => (
+                              li: (props) => (
                                 <li {...props} className="my-1" />
                               ),
-                              strong: ({ node, ...props }) => (
+                              strong: (props) => (
                                 <strong {...props} className="font-semibold" />
                               ),
-                              p: ({ node, ...props }) => (
+                              p: (props) => (
                                 <p {...props} className="my-2" />
                               ),
                             }}

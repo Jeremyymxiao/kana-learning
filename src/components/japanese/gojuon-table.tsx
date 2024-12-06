@@ -1,13 +1,10 @@
 'use client'
 
-import { useState } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { gojuonData } from "@/data/gojuon";
 
 export function GojuonTable() {
-  const [hoveredCell, setHoveredCell] = useState<string | null>(null);
-
   const speak = (text: string) => {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'ja-JP';

@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 });
+import { Configuration } from 'webpack';
+import { NextConfig } from 'next';
 
 const nextConfig = {
   reactStrictMode: true,
@@ -88,20 +90,20 @@ const nextConfig = {
   },
 
   // webpack 配置
-  webpack: (config: any) => {
+  webpack: (config: Configuration) => {
     // 现有的静态资源处理
-    config.module.rules.push({
+    config.module!.rules!.push({
       test: /\.(woffcss)$/,
       type: 'asset/resource',
     });
 
     // 添加 Markdown 处理
-    config.module.rules.push({
+    config.module!.rules!.push({
       test: /\.md$/,
       use: 'raw-loader',
     });
 
-    config.plugins.push(
+    config.plugins!.push(
       new webpack.DefinePlugin({
         'process.env.NEXT_PUBLIC_APP_ENV': JSON.stringify(process.env.NODE_ENV),
       })
