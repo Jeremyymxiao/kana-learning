@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { KanaType } from '../../types';
 import { gojuonData } from '@/data/gojuon';
@@ -38,6 +38,10 @@ export function DictationQuiz({ difficulty, onComplete }: DictationQuizProps) {
     setScore(0);
     setIsComplete(false);
   }, [difficulty]);
+
+  useEffect(() => {
+    initQuiz();
+  }, [initQuiz]);
 
   const getAvailableKana = () => {
     const pairs: Array<{ kana: string; romaji: string }> = [];
@@ -120,11 +124,6 @@ export function DictationQuiz({ difficulty, onComplete }: DictationQuizProps) {
       setCurrentIndex(currentIndex + 1);
     }
   };
-
-  // 初始化测试
-  useState(() => {
-    initQuiz();
-  });
 
   return (
     <div className="space-y-6">

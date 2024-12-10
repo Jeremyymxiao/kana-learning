@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { gojuonData } from '@/data/gojuon';
-import { KanaType } from '@/types/test';
+import { KanaType } from '@/features/quiz/types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 
 interface KanaChar {
@@ -51,7 +51,13 @@ const getAvailableKana = (kanaType: KanaType): KanaChar[] => {
       return kanaChars;
     case 'mixed':
       addSeion();
-      return kanaChars;
+      const hiraganaChars = [...kanaChars];
+      const katakanaChars = hiraganaChars.map(char => ({
+        ...char,
+        hiragana: char.katakana,
+        katakana: char.hiragana
+      }));
+      return [...hiraganaChars, ...katakanaChars];
     case 'special':
       addSpecial();
       return kanaChars;

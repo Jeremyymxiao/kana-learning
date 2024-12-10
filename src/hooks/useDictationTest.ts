@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Difficulty } from '@/types/test';
+import { Difficulty } from '@/features/quiz/types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { gojuonData } from '@/data/gojuon';
 

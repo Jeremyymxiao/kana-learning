@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { KanaType } from '../../types';
@@ -41,6 +41,10 @@ export function SpellingQuiz({ difficulty, onComplete }: SpellingQuizProps) {
     setIsComplete(false);
     setCurrentAnswer('');
   }, [difficulty]);
+
+  useEffect(() => {
+    initQuiz();
+  }, [initQuiz]);
 
   const getAvailableKana = () => {
     const pairs: Array<{ kana: string; romaji: string }> = [];
@@ -118,11 +122,6 @@ export function SpellingQuiz({ difficulty, onComplete }: SpellingQuizProps) {
       setCurrentIndex(currentIndex + 1);
     }
   };
-
-  // 初始化测试
-  useState(() => {
-    initQuiz();
-  });
 
   return (
     <div className="space-y-6">
