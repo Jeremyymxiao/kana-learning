@@ -1,91 +1,94 @@
 import { NextResponse } from 'next/server';
-import Kuroshiro from 'kuroshiro';
-import KuromojiAnalyzer from 'kuroshiro-analyzer-kuromoji';
-
-// 扩展 KuromojiAnalyzer 的类型
-interface KuromojiAnalyzerOptions {
-  dictPath?: string;
-}
-
-// 扩展 Kuroshiro 选项的类型
-interface KuroshiroOptions {
-  to: 'hiragana' | 'katakana' | 'romaji';
-  mode: 'normal' | 'spaced' | 'okurigana' | 'furigana';
-  romajiSystem?: 'nippon' | 'passport' | 'hepburn';
-}
-
-// Kuroshiro 实例
-let kuroshiroInstance: Kuroshiro | null = null;
-
-// 初始化 Kuroshiro
-async function initializeKuroshiro(): Promise<Kuroshiro> {
-  if (!kuroshiroInstance) {
-    console.log('创建新的 Kuroshiro 实例');
-    kuroshiroInstance = new Kuroshiro();
-    const analyzer = new (KuromojiAnalyzer as any)({
-      dictPath: process.cwd() + '/node_modules/kuromoji/dict'  // 使用绝对路径
-    });
-    try {
-      await kuroshiroInstance.init(analyzer);
-      console.log('Kuroshiro 初始化完成');
-    } catch (error) {
-      console.error('Kuroshiro 初始化失败:', error);
-      throw error;
-    }
-  }
-  return kuroshiroInstance;
-}
 
 export async function POST(req: Request) {
   try {
-    const { text, options } = await req.json();
-    console.log('收到转换请求:', { text, options });
-    console.log('当前工作目录:', process.cwd());
+    const { text, sourceType } = await req.json();
+    console.log('收到转换请求:', { text, sourceType });
 
-    // 确保 Kuroshiro 已初始化
-    console.log('开始初始化 Kuroshiro...');
-    const kuroshiro = await initializeKuroshiro();
-    console.log('Kuroshiro 初始化成功');
-    
-    const conversionResults = await Promise.all(
-      options.targetTypes.map(async (targetType: string) => {
-        let to: 'hiragana' | 'katakana' | 'romaji';
-        
-        // 根据目标类型设置转换选项
-        switch (targetType) {
-          case 'hiragana':
-            to = 'hiragana';
-            break;
-          case 'katakana':
-            to = 'katakana';
-            break;
-          case 'romaji':
-            to = 'romaji';
-            break;
-          default:
-            throw new Error(`不支持的转换类型: ${targetType}`);
+    // 假名与片假名的转换偏移量
+    const KATAKANA_START = 0x30A1;
+    const HIRAGANA_START = 0x3041;
+    const CONVERSION_DIFFERENCE = KATAKANA_START - HIRAGANA_START;
+
+    // 罗马音映射表
+    const romajiToHiraganaMap: { [key: string]: string } = {
+      'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お',
+      'ka': 'か', 'ki': 'き', 'ku': 'く', 'ke': 'け', 'ko': 'こ',
+      'sa': 'さ', 'shi': 'し', 'su': 'す', 'se': 'せ', 'so': 'そ',
+      'ta': 'た', 'chi': 'ち', 'tsu': 'つ', 'te': 'て', 'to': 'と',
+      'na': 'な', 'ni': 'に', 'nu': 'ぬ', 'ne': 'ね', 'no': 'の',
+      'ha': 'は', 'hi': 'ひ', 'fu': 'ふ', 'he': 'へ', 'ho': 'ほ',
+      'ma': 'ま', 'mi': 'み', 'mu': 'む', 'me': 'め', 'mo': 'も',
+      'ya': 'や', 'yu': 'ゆ', 'yo': 'よ',
+      'ra': 'ら', 'ri': 'り', 'ru': 'る', 're': 'れ', 'ro': 'ろ',
+      'wa': 'わ', 'wo': 'を', 'n': 'ん'
+    };
+
+    // 转换函数
+    const convertToKatakana = (text: string) => {
+      return text.replace(/[\u3041-\u3096]/g, char => 
+        String.fromCharCode(char.charCodeAt(0) + CONVERSION_DIFFERENCE)
+      );
+    };
+
+    const convertToHiragana = (text: string) => {
+      return text.replace(/[\u30A1-\u30F6]/g, char => 
+        String.fromCharCode(char.charCodeAt(0) - CONVERSION_DIFFERENCE)
+      );
+    };
+
+    const convertRomajiToHiragana = (text: string) => {
+      const input = text.toLowerCase();
+      let result = '';
+      let i = 0;
+      while (i < input.length) {
+        let found = false;
+        // 尝试匹配两个字符
+        if (i + 1 < input.length) {
+          const twoChars = input.slice(i, i + 2);
+          if (romajiToHiraganaMap[twoChars]) {
+            result += romajiToHiraganaMap[twoChars];
+            i += 2;
+            found = true;
+            continue;
+          }
         }
+        // 如果没有匹配到两个字符，尝试匹配单个字符
+        if (!found) {
+          const oneChar = input[i];
+          result += romajiToHiraganaMap[oneChar] || oneChar;
+          i++;
+        }
+      }
+      return result;
+    };
 
-        console.log(`开始转换到 ${to}`);
-        const convertedText = await kuroshiro.convert(text, {
-          mode: 'normal',
-          to: to,
-          romajiSystem: options.romajiSystem || 'hepburn'
-        } as KuroshiroOptions);
-        console.log(`转换结果:`, convertedText);
+    let hiragana = text;
+    let katakana = text;
+    let romaji = text;
 
-        return {
-          type: targetType,
-          text: convertedText
-        };
-      })
-    );
+    switch (sourceType) {
+      case 'hiragana':
+        katakana = convertToKatakana(text);
+        break;
+      case 'katakana':
+        hiragana = convertToHiragana(text);
+        break;
+      case 'romaji':
+        hiragana = convertRomajiToHiragana(text);
+        katakana = convertToKatakana(hiragana);
+        break;
+    }
 
-    return NextResponse.json({ results: conversionResults });
+    return NextResponse.json({
+      hiragana,
+      katakana,
+      romaji
+    });
   } catch (error) {
-    console.error('转换错误:', error);
+    console.error('处理请求失败:', error);
     return NextResponse.json(
-      { error: `转换失败: ${error instanceof Error ? error.message : String(error)}` },
+      { error: '转换失败' },
       { status: 500 }
     );
   }

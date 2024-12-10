@@ -46,4 +46,4 @@ export function useNavigation() {
     throw new Error('useNavigation must be used within a NavigationProvider');
   }
   return context;
-}
+} 

@@ -1,6 +1,6 @@
 'use client';
 
-import { LoginForm } from '@/components/auth/login-form';
+import { LoginForm } from '@/features/auth/components/login-form';
 import MainLayout from '@/components/layouts/main-layout';
 
 export default function LoginPage() {

@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
-import { AuthProvider } from '@/components/auth/auth-provider'
-import { NavigationProvider } from '@/components/navigation/navigation-provider'
+import { AuthProvider } from '@/features/auth/components/auth-provider'
+import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],

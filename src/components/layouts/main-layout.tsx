@@ -1,10 +1,10 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
-import NavBar from "@/components/japanese/nav-bar";
+import { NavBar } from "@/features/kana/components/nav-bar";
 import Footer from './footer';
-import { useAuthContext } from '@/components/auth/auth-provider';
-import { useNavigation } from '@/components/navigation/navigation-provider';
+import { useAuthContext } from '@/features/auth/components/auth-provider';
+import { useNavigation } from '@/features/kana/components/navigation-provider';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
-import { User } from '@/types/auth';
+import { User } from '@/features/auth/types';
 
 interface MainLayoutProps {
   children: ReactNode;

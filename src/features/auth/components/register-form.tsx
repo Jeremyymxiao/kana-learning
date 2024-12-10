@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/hooks/useAuth';
+import Link from 'next/link';
+import { useAuth } from '../hooks/useAuth';
+import { RegisterData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert } from '@/components/ui/alert';
@@ -23,19 +25,19 @@ export const RegisterForm = () => {
     e.preventDefault();
     setError(null);
 
-    // 表单验证
+    // Form validation
     if (formData.password !== formData.confirmPassword) {
-      setError('两次输入的密码不一致');
+      setError('Passwords do not match');
       return;
     }
 
     if (formData.password.length < 6) {
-      setError('密码长度至少为6个字符');
+      setError('Password must be at least 6 characters');
       return;
     }
 
     if (formData.username.length < 3 || formData.username.length > 20) {
-      setError('用户名长度应在3-20个字符之间');
+      setError('Username must be between 3-20 characters');
       return;
     }
 
@@ -44,13 +46,17 @@ export const RegisterForm = () => {
     try {
       const result = await register(formData);
       if (result.success) {
-        // 注册成功，跳转到主页
-        router.push('/');
+        // 先等待一下让状态更新
+        await new Promise(resolve => setTimeout(resolve, 100));
+        // 先刷新状态
+        router.refresh();
+        // 然后再跳转
+        await router.push('/');
       } else {
-        setError('注册失败，请稍后重试');
+        setError('Registration failed, please try again later');
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : '注册失败，请稍后重试');
+      setError(err instanceof Error ? err.message : 'Registration failed, please try again later');
     } finally {
       setLoading(false);
     }
@@ -65,7 +71,7 @@ export const RegisterForm = () => {
 
   return (
     <div className="w-full max-w-md mx-auto p-6">
-      <h1 className="text-2xl font-bold text-center mb-6">注册账号</h1>
+      <h1 className="text-2xl font-bold text-center mb-6">Register Account</h1>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
@@ -76,7 +82,7 @@ export const RegisterForm = () => {
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium mb-1">
-            邮箱
+            Email
           </label>
           <Input
             id="email"
@@ -86,13 +92,13 @@ export const RegisterForm = () => {
             onChange={handleChange}
             required
             className="w-full"
-            placeholder="请输入邮箱"
+            placeholder="Enter your email"
           />
         </div>
 
         <div>
           <label htmlFor="username" className="block text-sm font-medium mb-1">
-            用户名
+            Username
           </label>
           <Input
             id="username"
@@ -102,13 +108,13 @@ export const RegisterForm = () => {
             onChange={handleChange}
             required
             className="w-full"
-            placeholder="请输入用户名（3-20个字符）"
+            placeholder="Enter username (3-20 characters)"
           />
         </div>
 
         <div>
           <label htmlFor="password" className="block text-sm font-medium mb-1">
-            密码
+            Password
           </label>
           <Input
             id="password"
@@ -118,13 +124,13 @@ export const RegisterForm = () => {
             onChange={handleChange}
             required
             className="w-full"
-            placeholder="请输入密码（至少6个字符）"
+            placeholder="Enter password (min 6 characters)"
           />
         </div>
 
         <div>
           <label htmlFor="confirmPassword" className="block text-sm font-medium mb-1">
-            确认密码
+            Confirm Password
           </label>
           <Input
             id="confirmPassword"
@@ -134,7 +140,7 @@ export const RegisterForm = () => {
             onChange={handleChange}
             required
             className="w-full"
-            placeholder="请再次输入密码"
+            placeholder="Re-enter your password"
           />
         </div>
 
@@ -143,18 +149,14 @@ export const RegisterForm = () => {
           className="w-full"
           disabled={loading}
         >
-          {loading ? '注册中...' : '注册'}
+          {loading ? 'Registering...' : 'Register'}
         </Button>
       </form>
 
       <div className="mt-4 text-center">
-        <Button
-          variant="link"
-          onClick={() => router.push('/login')}
-          className="text-sm"
-        >
-          已有账号？点击登录
-        </Button>
+        <Link href="/login" className="text-sm text-blue-500 hover:text-blue-700">
+          Already have an account? Login here
+        </Link>
       </div>
     </div>
   );

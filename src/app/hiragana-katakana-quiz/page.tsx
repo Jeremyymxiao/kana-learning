@@ -1,7 +1,7 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import TestPanel from '@/components/japanese/test-panel';
+import { QuizPanel } from '@/features/quiz/components/QuizPanel';
 import { useState } from 'react';
 
 export default function KanaQuizPage() {
@@ -59,7 +59,7 @@ export default function KanaQuizPage() {
                     </div>
                   )}
                   <div className="min-h-[600px]">
-                    <TestPanel onConfigChange={setShowQuizHeader} />
+                    <QuizPanel onConfigChange={setShowQuizHeader} />
                   </div>
                 </div>
               </div>

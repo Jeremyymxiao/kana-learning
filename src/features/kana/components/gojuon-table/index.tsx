@@ -3,6 +3,15 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { gojuonData } from "@/data/gojuon";
+import { GojuonData } from "../../types";
+
+interface TableStyles {
+  cell: string;
+  kanaText: string;
+  romajiText: string;
+  wrapper: string;
+  title: string;
+}
 
 export function GojuonTable() {
   const speak = (text: string) => {
@@ -11,7 +20,7 @@ export function GojuonTable() {
     window.speechSynthesis.speak(utterance);
   };
 
-  const tableStyles = {
+  const tableStyles: TableStyles = {
     cell: "group relative p-0.5 sm:p-1 md:p-2 cursor-pointer transition-all duration-300 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg",
     kanaText: "text-sm sm:text-base md:text-lg lg:text-xl font-japanese transition-transform group-hover:scale-110 group-hover:text-blue-600 dark:group-hover:text-blue-400",
     romajiText: "text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity",
@@ -245,4 +254,4 @@ export function GojuonTable() {
       </CardContent>
     </Card>
   );
-}
+} 

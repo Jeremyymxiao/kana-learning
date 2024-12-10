@@ -33,7 +33,7 @@ interface NavItem {
   key: string;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ authButtons }) => {
+export function NavBar({ authButtons }: NavBarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -143,6 +143,4 @@ const NavBar: React.FC<NavBarProps> = ({ authButtons }) => {
       </div>
     </nav>
   );
-};
-
-export default NavBar;
+} 

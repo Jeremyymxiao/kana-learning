@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuthContext } from '@/components/auth/auth-provider';
+import Link from 'next/link';
+import { useAuth } from '../hooks/useAuth';
+import { LoginCredentials } from '../types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert } from '@/components/ui/alert';
@@ -10,7 +12,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 export const LoginForm = () => {
   const router = useRouter();
-  const { login } = useAuthContext();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -26,8 +28,9 @@ export const LoginForm = () => {
     try {
       const result = await login(formData);
       if (result.success) {
-        await router.push('/');
+        await new Promise(resolve => setTimeout(resolve, 100));
         router.refresh();
+        await router.push('/');
       } else {
         setError('登录失败，请检查邮箱和密码');
       }
@@ -99,14 +102,9 @@ export const LoginForm = () => {
           </Button>
 
           <div className="text-center text-sm">
-            <Button
-              variant="link"
-              onClick={() => router.push('/register')}
-              className="text-sm"
-              disabled={loading}
-            >
+            <Link href="/register" className="text-sm text-blue-500 hover:text-blue-700">
               Don&apos;t have an account? Sign up
-            </Button>
+            </Link>
           </div>
         </form>
       </CardContent>

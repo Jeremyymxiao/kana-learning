@@ -1,13 +1,37 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import { prisma } from '@/lib/prisma';
+import jwt from 'jsonwebtoken';
 
 export async function GET() {
-  // 简化处理：直接返回未登录状态，但是是一个正常的响应
-  return NextResponse.json(
-    { 
-      user: null,
-      // 可以添加一个标志，表明这是临时的未认证状态
-      message: 'Authentication not implemented yet'
-    },
-    { status: 200 }  // 改为 200 状态码，这样不会触发错误
-  );
+  try {
+    // 从 cookie 中获取 token
+    const token = (await cookies()).get('token')?.value;
+    
+    if (!token) {
+      return NextResponse.json({ user: null }, { status: 200 });
+    }
+
+    // 验证 token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret') as any;
+    
+    // 获取用户信息
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+      }
+    });
+
+    if (!user) {
+      return NextResponse.json({ user: null }, { status: 200 });
+    }
+
+    return NextResponse.json({ user }, { status: 200 });
+  } catch (error) {
+    console.error('Auth check error:', error);
+    return NextResponse.json({ user: null }, { status: 200 });
+  }
 }

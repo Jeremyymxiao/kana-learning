@@ -1,11 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { User, LoginCredentials, RegisterData, AuthError } from '@/types/auth';
-
-interface AuthState {
-  user: User | null;
-  isLoading: boolean;
-  error: AuthError | null;
-}
+import { User, LoginCredentials, RegisterData, AuthError, AuthState } from '../types';
 
 export const useAuth = () => {
   const [state, setState] = useState<AuthState>({
@@ -158,4 +152,4 @@ export const useAuth = () => {
     register,
     logout
   };
-};
+}; 

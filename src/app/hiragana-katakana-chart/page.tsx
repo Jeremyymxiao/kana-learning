@@ -1,7 +1,7 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import { GojuonTable } from "@/components/japanese/gojuon-table";
+import { GojuonTable } from "@/features/kana/components/gojuon-table";
 
 export default function ChartPage() {
   return (
