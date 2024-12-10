@@ -19,6 +19,13 @@ const nextConfig = {
       },
     ]
   },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.dat\.gz$/,
+      use: 'file-loader',
+    });
+    return config;
+  },
 }
 
 module.exports = nextConfig 

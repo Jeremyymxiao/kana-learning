@@ -28,9 +28,9 @@ export default function Footer() {
             <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4">Legal</h3>
               <ul className="space-y-2">
-                <li><Link href={{ pathname: '/terms-of-service' }} className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link href={{ pathname: '/privacy-policy' }} className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link href={{ pathname: '/contact-us' }} className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/contact-us" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
               </ul>
             </div>
 
@@ -40,11 +40,11 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li><a href="https://iuu.ai/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">iuu AI</a></li>
                 <li><a href="https://magicbox.tools/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">MagicBox.Tools</a></li>
-                <li><a href="https://aiwith.me/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="AI With Me: Discover thousands of AI Tools">AI With Me</a></li>
-                <li><a href="https://allinai.tools" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="The Best AI Tools">All in AI Tools</a></li>
-                <li><a href="https://SeekAIs.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="SeekAIs">SeekAIs - AI Tools Directory</a></li>
-                <li><a href="https://AIToolly.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="AIToolly AI Tools Directory">AIToolly</a></li>
-                <li><a href="https://www.dir2ai.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" title="Dir2AI Tools Directory">Dir2AI</a></li>
+                <li><a href="https://aiwith.me/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">AI With Me</a></li>
+                <li><a href="https://allinai.tools" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">All in AI Tools</a></li>
+                <li><a href="https://SeekAIs.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">SeekAIs</a></li>
+                <li><a href="https://AIToolly.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">AIToolly</a></li>
+                <li><a href="https://www.dir2ai.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Dir2AI</a></li>
               </ul>
             </div>
           </div>

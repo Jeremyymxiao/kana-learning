@@ -1,115 +1,79 @@
 import { NextResponse } from 'next/server';
 import Kuroshiro from 'kuroshiro';
 import KuromojiAnalyzer from 'kuroshiro-analyzer-kuromoji';
-import axios from 'axios';
-import crypto from 'crypto';
 
-// 有道翻译API配置
-const YOUDAO_APP_KEY = process.env.YOUDAO_APP_KEY!;
-const YOUDAO_APP_SECRET = process.env.YOUDAO_APP_SECRET!;
-const YOUDAO_API_URL = 'https://openapi.youdao.com/api';
-
-interface YoudaoResponse {
-  translation: string[];
-  // 可以根据需要添加其他字段
+// 扩展 KuromojiAnalyzer 的类型
+interface KuromojiAnalyzerOptions {
+  dictPath?: string;
 }
 
-interface YoudaoParams {
-  q: string;
-  from: string;
-  to: string;
-  appKey: string;
-  salt: number;
-  sign: string;
-  signType: string;
-  curtime: number;
-}
-
+// 扩展 Kuroshiro 选项的类型
 interface KuroshiroOptions {
-  mode: 'normal' | 'spaced' | 'okurigana' | 'furigana';
   to: 'hiragana' | 'katakana' | 'romaji';
-  romajiSystem?: string;
+  mode: 'normal' | 'spaced' | 'okurigana' | 'furigana';
+  romajiSystem?: 'nippon' | 'passport' | 'hepburn';
 }
 
-function truncate(q: string): string {
-  const len = q.length;
-  return len <= 20 ? q : q.substring(0, 10) + len + q.substring(len - 10, len);
-}
+// Kuroshiro 实例
+let kuroshiroInstance: Kuroshiro | null = null;
 
-async function translateToJapanese(text: string): Promise<string> {
-  try {
-    const salt = new Date().getTime();
-    const curtime = Math.round(new Date().getTime() / 1000);
-    const str = YOUDAO_APP_KEY + truncate(text) + salt + curtime + YOUDAO_APP_SECRET;
-    const sign = crypto.createHash('sha256').update(str).digest('hex');
-
-    const params: YoudaoParams = {
-      q: text,
-      from: 'en',
-      to: 'ja',
-      appKey: YOUDAO_APP_KEY,
-      salt: salt,
-      sign: sign,
-      signType: 'v3',
-      curtime: curtime,
-    };
-
-    const response = await axios.post<YoudaoResponse>(YOUDAO_API_URL, new URLSearchParams({
-      ...params,
-      salt: String(params.salt),
-      curtime: String(params.curtime)
-    }), {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
+// 初始化 Kuroshiro
+async function initializeKuroshiro(): Promise<Kuroshiro> {
+  if (!kuroshiroInstance) {
+    console.log('创建新的 Kuroshiro 实例');
+    kuroshiroInstance = new Kuroshiro();
+    const analyzer = new (KuromojiAnalyzer as any)({
+      dictPath: process.cwd() + '/node_modules/kuromoji/dict'  // 使用绝对路径
     });
-
-    if (response.data && response.data.translation && response.data.translation[0]) {
-      return response.data.translation[0];
+    try {
+      await kuroshiroInstance.init(analyzer);
+      console.log('Kuroshiro 初始化完成');
+    } catch (error) {
+      console.error('Kuroshiro 初始化失败:', error);
+      throw error;
     }
-    throw new Error('翻译返回数据格式错误');
-  } catch (error) {
-    console.error('有道翻译错误:', error);
-    throw new Error('翻译服务出错');
   }
+  return kuroshiroInstance;
 }
 
 export async function POST(req: Request) {
   try {
     const { text, options } = await req.json();
-    const kuroshiro = new Kuroshiro();
-    const analyzer = new KuromojiAnalyzer();
-    await kuroshiro.init(analyzer);
-    
-    // 如果是英文输入，先用有道翻译成日文
-    let japaneseText = text;
-    if (options.sourceType === 'english') {
-      japaneseText = await translateToJapanese(text);
-    }
+    console.log('收到转换请求:', { text, options });
+    console.log('当前工作目录:', process.cwd());
+
+    // 确保 Kuroshiro 已初始化
+    console.log('开始初始化 Kuroshiro...');
+    const kuroshiro = await initializeKuroshiro();
+    console.log('Kuroshiro 初始化成功');
     
     const conversionResults = await Promise.all(
       options.targetTypes.map(async (targetType: string) => {
-        const kuroshiroOptions: KuroshiroOptions = {
-          mode: 'normal',
-          to: 'hiragana'
-        };
-
+        let to: 'hiragana' | 'katakana' | 'romaji';
+        
+        // 根据目标类型设置转换选项
         switch (targetType) {
           case 'hiragana':
-            kuroshiroOptions.to = 'hiragana';
+            to = 'hiragana';
             break;
           case 'katakana':
-            kuroshiroOptions.to = 'katakana';
+            to = 'katakana';
             break;
           case 'romaji':
-            kuroshiroOptions.to = 'romaji';
-            kuroshiroOptions.romajiSystem = options.romajiSystem;
+            to = 'romaji';
             break;
           default:
-            kuroshiroOptions.to = 'hiragana';
+            throw new Error(`不支持的转换类型: ${targetType}`);
         }
 
-        const convertedText = await kuroshiro.convert(japaneseText, kuroshiroOptions);
+        console.log(`开始转换到 ${to}`);
+        const convertedText = await kuroshiro.convert(text, {
+          mode: 'normal',
+          to: to,
+          romajiSystem: options.romajiSystem || 'hepburn'
+        } as KuroshiroOptions);
+        console.log(`转换结果:`, convertedText);
+
         return {
           type: targetType,
           text: convertedText

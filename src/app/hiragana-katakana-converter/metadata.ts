@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export function generateMetadata(): Metadata {
   return {
-    title: "Japanese Text Converter | Kanji to Hiragana Tool",
+    title: "Japanese Text Converter | Kanji to Hiragana & Katakana Converter",
     description: "Free online Japanese text converter. Convert Kanji to Hiragana instantly with our easy-to-use tool. Perfect for Japanese language learners and students.",
     keywords: [
       "japanese converter",

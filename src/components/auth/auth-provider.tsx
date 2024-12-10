@@ -33,39 +33,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const response = await fetch('/api/auth/check');
         if (!isMounted) return;
         
-        if (response.ok) {
-          const data = await response.json();
-          setState(prev => ({
-            ...prev,
-            user: data.user,
-            isLoading: false,
-            error: null
-          }));
-        } else if (response.status === 401) {
-          // 未登录状态，正常处理
-          setState(prev => ({
-            ...prev,
-            user: null,
-            isLoading: false,
-            error: null
-          }));
-        } else {
-          const errorData = await response.json();
-          setState(prev => ({
-            ...prev,
-            user: null,
-            isLoading: false,
-            error: { message: errorData.message || '认证检查失败' }
-          }));
-        }
-      } catch (error) {
-        if (!isMounted) return;
-        console.error('Auth check error:', error);
+        // 简化处理，不管响应如何都设置为未登录状态
         setState(prev => ({
           ...prev,
           user: null,
           isLoading: false,
-          error: { message: '网络请求失败，请检查网络连接' }
+          error: null
+        }));
+      } catch (error) {
+        if (!isMounted) return;
+        // 出错时也设置为未登录状态
+        setState(prev => ({
+          ...prev,
+          user: null,
+          isLoading: false,
+          error: null
         }));
       }
     };

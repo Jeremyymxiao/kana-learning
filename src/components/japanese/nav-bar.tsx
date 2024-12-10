@@ -65,7 +65,7 @@ const NavBar: React.FC<NavBarProps> = ({ authButtons }) => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#1A1B2F]/80 backdrop-blur-xl border-b border-gray-200/20 dark:border-white/10">
       <div className="w-full px-4">
         <div className="flex items-center h-16">
           {/* Logo */}
@@ -73,11 +73,11 @@ const NavBar: React.FC<NavBarProps> = ({ authButtons }) => {
             className="flex items-center space-x-2 mr-8 cursor-pointer" 
             onClick={() => router.push('/')}
           >
-            <div className="font-['Noto_Sans_JP','Poppins',sans-serif] text-lg font-bold">
-              <span className="text-gray-800 dark:text-gray-200">Learn</span>
-              <span className="text-indigo-600 dark:text-indigo-400 relative">
+            <div className="font-['Noto_Sans_JP','Poppins',sans-serif] text-xl font-bold">
+              <span className="text-[#1A1B2F] dark:text-white">Learn</span>
+              <span className="text-[#2B7FFF] dark:text-[#2B7FFF] relative">
                 Kana
-                <span className="absolute -top-3 -right-2 text-[10px] opacity-60">
+                <span className="absolute -top-3 -right-2 text-[10px] text-[#FFD600] dark:text-[#FFD600]">
                   かな
                 </span>
               </span>
@@ -91,11 +91,11 @@ const NavBar: React.FC<NavBarProps> = ({ authButtons }) => {
                 key={item.key}
                 onClick={() => handleNavClick(item.key)}
                 className={`
-                  flex items-center space-x-2 px-4 py-2 rounded-lg
-                  transition-colors duration-200 mx-2
+                  flex items-center space-x-2 px-4 py-2 rounded-xl
+                  transition-all duration-200 mx-2
                   ${item.key === activeTab
-                    ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400' 
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'}
+                    ? 'bg-[#2B7FFF]/10 dark:bg-[#2B7FFF]/20 text-[#2B7FFF] dark:text-[#2B7FFF] scale-105' 
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100/50 dark:hover:bg-white/5'}
                 `}
               >
                 {item.icon && <span className="opacity-75">{item.icon}</span>}
@@ -105,39 +105,39 @@ const NavBar: React.FC<NavBarProps> = ({ authButtons }) => {
             {authButtons && <div className="ml-4">{authButtons}</div>}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden ml-auto"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="h-6 w-6 text-gray-600 dark:text-gray-400" />
-            ) : (
-              <Menu className="h-6 w-6 text-gray-600 dark:text-gray-400" />
-            )}
-          </button>
+          {/* Mobile menu button */}
+          <div className="flex md:hidden ml-auto">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 rounded-xl bg-gray-100/50 dark:bg-white/5 text-gray-600 dark:text-gray-400"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-2 space-y-1">
-            {navItems.map((item) => (
-              <button
-                key={item.key}
-                onClick={() => handleNavClick(item.key)}
-                className={`
-                  flex items-center space-x-2 px-4 py-3 rounded-lg w-full
-                  transition-colors duration-200
-                  ${item.key === activeTab
-                    ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400' 
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'}
-                `}
-              >
-                {item.icon && <span className="opacity-75">{item.icon}</span>}
-                <span className="text-sm font-medium">{item.name}</span>
-              </button>
-            ))}
-            {authButtons && <div className="py-2">{authButtons}</div>}
+          <div className="md:hidden absolute top-16 inset-x-0 bg-white/80 dark:bg-[#1A1B2F]/80 backdrop-blur-xl border-b border-gray-200/20 dark:border-white/10">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.key}
+                  onClick={() => handleNavClick(item.key)}
+                  className={`
+                    flex items-center space-x-3 w-full px-4 py-3 rounded-xl
+                    transition-all duration-200
+                    ${item.key === activeTab
+                      ? 'bg-[#2B7FFF]/10 dark:bg-[#2B7FFF]/20 text-[#2B7FFF] dark:text-[#2B7FFF]' 
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100/50 dark:hover:bg-white/5'}
+                  `}
+                >
+                  {item.icon && <span className="opacity-75">{item.icon}</span>}
+                  <span className="text-sm font-medium">{item.name}</span>
+                </button>
+              ))}
+              {authButtons && <div className="px-4 py-3">{authButtons}</div>}
+            </div>
           </div>
         )}
       </div>

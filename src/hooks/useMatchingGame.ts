@@ -106,14 +106,12 @@ export const useMatchingGame = (kanaType: KanaType) => {
   // 处理卡片选择
   const handleCardSelect = useCallback((card: MatchingCard) => {
     setState(prevState => {
-      // 如果卡片已匹配或已选中，则不处理
       if (card.matched || card.selected) return prevState;
 
       const updatedCards = prevState.cards.map(c => 
         c.id === card.id ? { ...c, selected: true } : c
       );
 
-      // 如果没有选中的卡片，则选中当前卡片
       if (!prevState.selectedCard) {
         return {
           ...prevState,
@@ -122,7 +120,6 @@ export const useMatchingGame = (kanaType: KanaType) => {
         };
       }
 
-      // 如果选中了相同类型的卡片，则取消之前的选择
       if (prevState.selectedCard.type === card.type) {
         return {
           ...prevState,
@@ -131,7 +128,6 @@ export const useMatchingGame = (kanaType: KanaType) => {
         };
       }
 
-      // 检查匹配
       const isMatch = checkMatch(prevState.selectedCard, card);
       
       if (isMatch) {
@@ -139,20 +135,21 @@ export const useMatchingGame = (kanaType: KanaType) => {
         const newScore = Math.min(100, prevState.score + 10);
         const matchedCards = updatedCards.map(c => 
           (c.id === card.id || c.id === prevState.selectedCard!.id)
-            ? { ...c, matched: true }
+            ? { ...c, matched: true, selected: false }
             : c
         );
+
+        const matchedCount = matchedCards.filter(c => c.matched).length / 2;
 
         return {
           ...prevState,
           cards: matchedCards,
           score: newScore,
           selectedCard: null,
-          isComplete: matchedCards.every(c => c.matched)
+          isComplete: matchedCount === 10
         };
       } else {
         playWrongSound();
-        // 记录错误配对
         const wrongPair = {
           kana: prevState.selectedCard.type === 'kana' 
             ? prevState.selectedCard.content 
@@ -162,20 +159,19 @@ export const useMatchingGame = (kanaType: KanaType) => {
             : card.content
         };
 
-        // 延迟重置选中状态
         setTimeout(() => {
           setState(prev => ({
             ...prev,
             cards: prev.cards.map(c => ({ ...c, selected: false })),
-            selectedCard: null,
-            score: Math.max(0, prev.score - 10)
+            selectedCard: null
           }));
         }, 1000);
 
         return {
           ...prevState,
           cards: updatedCards,
-          wrongPairs: [...prevState.wrongPairs, wrongPair]
+          wrongPairs: [...prevState.wrongPairs, wrongPair],
+          score: Math.max(0, prevState.score - 10)
         };
       }
     });
@@ -186,8 +182,12 @@ export const useMatchingGame = (kanaType: KanaType) => {
     const kanaCard = card1.type === 'kana' ? card1 : card2;
     const romajiCard = card1.type === 'romaji' ? card1 : card2;
     
-    // Check if the kana and romaji content match
-    return kanaCard.content === romajiCard.content;
+    // Find the matching kana in gojuonData
+    const availableKana = getAvailableKana(kanaType);
+    return availableKana.some(kana => 
+      (kana.hiragana === kanaCard.content || kana.katakana === kanaCard.content) && 
+      kana.romaji === romajiCard.content
+    );
   };
 
   // Fisher-Yates 洗牌算法

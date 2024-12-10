@@ -1,7 +1,7 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import { MessageSquare, Table, PenTool, ArrowRight, FileText } from 'lucide-react';
+import { MessageSquare, Table, PenTool, ArrowRight, Repeat, Sparkles, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import { articles } from '@/data/articles';
 
@@ -10,120 +10,144 @@ export default function LandingPage() {
     <MainLayout>
       {/* Hero Section */}
       <header 
-        className="relative bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 py-28 overflow-hidden"
+        className="relative bg-[#1A1B2F] dark:bg-[#1A1B2F] overflow-hidden"
         role="banner"
       >
-        {/* Background Decoration */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-blue-200/20 dark:bg-blue-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-indigo-200/20 dark:bg-indigo-500/10 rounded-full blur-3xl"></div>
+        {/* 大面积色块装饰 */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-[70%] bg-[#2B7FFF] transform -skew-y-6"></div>
+          <div className="absolute top-[20%] right-0 w-[40%] h-[40%] bg-[#FFD600] transform rotate-12 opacity-90"></div>
+          <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-[#FF7E67] rounded-full opacity-80"></div>
+          <div className="absolute top-[40%] left-[60%] w-[20%] h-[20%] bg-[#00D6A4] transform -rotate-12 opacity-90"></div>
         </div>
 
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 animate-fade-in">
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 text-transparent bg-clip-text">
-              AI-Powered
-            </span>
-            <span className="text-slate-800 dark:text-white"> Japanese</span>
-            <span className="block mt-6 text-slate-800 dark:text-white">
-              Hiragana & Katakana Learning
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl mx-auto mb-12">
-            Master Japanese Kana with personalized AI tutoring and interactive learning tools.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link 
-              href="/chat" 
-              className="group relative inline-flex items-center justify-center px-8 py-3 font-bold text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 dark:from-blue-600 dark:to-indigo-600 dark:hover:from-blue-500 dark:hover:to-indigo-500 rounded-full overflow-hidden transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              <span className="relative z-10 flex items-center">
-                Start Chatting
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+        <div className="relative container mx-auto px-4 pt-32 pb-20">
+          {/* 主标题区域 */}
+          <div className="max-w-5xl mx-auto text-center">
+            <h1 className="text-7xl md:text-8xl font-bold mb-8">
+              <span className="text-white block mb-4">
+                Master Japanese
               </span>
-            </Link>
+              <span className="text-[#FFD600] block mb-4">
+                Hiragana ひらがな
+              </span>
+              <span className="text-[#FF7E67] block">
+                Katakana カタカナ
+              </span>
+            </h1>
             
-            <Link 
-              href="/hiragana-katakana-chart" 
-              className="group inline-flex items-center justify-center px-8 py-3 font-bold text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
-            >
-              View Kana Chart
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <p className="text-2xl md:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-16">
+              Experience our AI-powered self-developed platform for mastering Japanese writing systems.
+            </p>
+
+            {/* 功能预览列表 */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center">
+              <div className="flex items-center gap-2 text-white/60">
+                <MessageSquare className="w-8 h-8" />
+                <span className="text-2xl md:text-1xl">AI-Powered Tutor</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60">
+                <PenTool className="w-8 h-8" />
+                <span className="text-2xl md:text-1xl">Interactive Practice</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60">
+                <Table className="w-8 h-8" />
+                <span className="text-2xl md:text-1xl">Visual Learning</span>
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
       <main>
-
         {/* Features Section */}
         <section 
           aria-labelledby="features-heading"
-          className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-900/50"
+          className="py-24 bg-white dark:bg-[#1A1B2F]"
         >
           <div className="container mx-auto px-4">
-            <h2 id="features-heading" className="text-4xl font-bold text-center mb-12">
-              Master Japanese with Powerful Tools
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* AI Chat Feature */}
-              <Link href="/chat" className="group h-full">
-                <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                  <div className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
-                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center mb-4">
-                      <MessageSquare className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            <div className="max-w-6xl mx-auto">
+              <h2 id="features-heading" className="text-4xl md:text-5xl font-bold mb-16 text-[#1A1B2F] dark:text-white text-center">
+                Tools for Hiragana and Katakana Learning
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* AI Chat Feature */}
+                <Link href="/chat" className="group">
+                  <div className="relative bg-gradient-to-br from-[#2B7FFF] to-[#00D6A4] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
+                      <div className="w-12 h-12 bg-[#2B7FFF] rounded-xl flex items-center justify-center mb-4">
+                        <MessageSquare className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">AI Tutor</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
+                        Get personalized help with Hiragana and Katakana writing, pronunciation, and practice exercises.
+                      </p>
+                      <div className="flex items-center text-[#2B7FFF] font-semibold text-sm">
+                        Start Learning
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">AI Language Assistant</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Get instant help with pronunciation, grammar, and writing practice from our AI tutor.
-                    </p>
-                    <span className="text-purple-600 dark:text-purple-400 inline-flex items-center mt-auto">
-                      Start chatting <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </span>
                   </div>
-                </div>
-              </Link>
+                </Link>
 
-              {/* Interactive Chart Feature */}
-              <Link href="/hiragana-katakana-chart" className="group h-full">
-                <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                  <div className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-                      <Table className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                {/* Interactive Chart Feature */}
+                <Link href="/hiragana-katakana-chart" className="group">
+                  <div className="relative bg-gradient-to-br from-[#FFD600] to-[#FF7E67] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
+                      <div className="w-12 h-12 bg-[#FFD600] rounded-xl flex items-center justify-center mb-4">
+                        <Table className="w-6 h-6 text-[#1A1B2F]" />
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Hiragana & Katakana Chart (五十音図)</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
+                        Master Japanese syllabaries with our interactive chart featuring native audio pronunciation.
+                      </p>
+                      <div className="flex items-center text-[#FFD600] font-semibold text-sm">
+                        View Chart
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Interactive Hiragana Chart</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Learn with our interactive Hiragana & Katakana chart featuring clear visuals and native audio pronunciation.
-                    </p>
-                    <span className="text-blue-600 dark:text-blue-400 inline-flex items-center mt-auto">
-                      View chart <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </span>
                   </div>
-                </div>
-              </Link>
+                </Link>
 
-              {/* Quiz Feature */}
-              <Link href="/hiragana-katakana-quiz" className="group h-full">
-                <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                  <div className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
-                    <div className="w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center mb-4">
-                      <PenTool className="w-6 h-6 text-green-600 dark:text-green-400" />
+                {/* Quiz Feature */}
+                <Link href="/hiragana-katakana-quiz" className="group">
+                  <div className="relative bg-gradient-to-br from-[#00D6A4] to-[#2B7FFF] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
+                      <div className="w-12 h-12 bg-[#00D6A4] rounded-xl flex items-center justify-center mb-4">
+                        <PenTool className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Practical Quiz</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
+                        Test your knowledge with various quiz types including stroke order and character recognition.
+                      </p>
+                      <div className="flex items-center text-[#00D6A4] font-semibold text-sm">
+                        Start Practice
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Practice Quizzes</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      Test your hiragana & katakana knowledge with various quiz types and track your learning progress.
-                    </p>
-                    <span className="text-green-600 dark:text-green-400 inline-flex items-center mt-auto">
-                      Start quiz <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </span>
                   </div>
-                </div>
-              </Link>
+                </Link>
+
+                {/* Converter Feature */}
+                <Link href="/hiragana-katakana-converter" className="group">
+                  <div className="relative bg-gradient-to-br from-[#FF7E67] to-[#FFD600] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
+                      <div className="w-12 h-12 bg-[#FF7E67] rounded-xl flex items-center justify-center mb-4">
+                        <Repeat className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Text Converter</h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
+                        Convert text between Hiragana, Katakana, and Romaji with instant results.
+                      </p>
+                      <div className="flex items-center text-[#FF7E67] font-semibold text-sm">
+                        Convert Text
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -131,99 +155,121 @@ export default function LandingPage() {
          {/* Kana Introduction Section */}
          <section 
           aria-labelledby="kana-intro-heading"
-          className="container mx-auto px-4 py-16"
+          className="relative py-24 bg-[#1A1B2F] dark:bg-[#1A1B2F] overflow-hidden"
         >
-          <h2 id="kana-intro-heading" className="text-4xl font-bold text-center mb-12">
-            Japanese Alphabet System
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Hiragana Card */}
-            <div className="group h-full">
-              <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                <article className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-                    <span className="text-2xl font-japanese text-blue-600 dark:text-blue-400">あ</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">Hiragana ひらがな</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Hiragana is the basic Japanese phonetic script. It represents every sound in the Japanese language and is primarily used for native Japanese words, grammatical elements, and word endings.
-                  </p>
-                  <div className="text-3xl font-japanese text-blue-600/80 dark:text-blue-400/80">
-                    あ い う え お
-                  </div>
-                </article>
-              </div>
-            </div>
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 right-0 w-[50%] h-[60%] bg-[#2B7FFF] transform rotate-12 opacity-10"></div>
+            <div className="absolute bottom-0 left-0 w-[40%] h-[50%] bg-[#FFD600] transform -rotate-12 opacity-10"></div>
+          </div>
 
-            {/* Katakana Card */}
-            <div className="group h-full">
-              <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                <article className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
-                  <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center mb-4">
-                    <span className="text-2xl font-japanese text-indigo-600 dark:text-indigo-400">ア</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">Katakana カタカナ</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Katakana is another Japanese phonetic script, mainly used for foreign words, scientific terms, and emphasis. It has the same sounds as Hiragana but different characters.
-                  </p>
-                  <div className="text-3xl font-japanese text-indigo-600/80 dark:text-indigo-400/80">
-                    ア イ ウ エ オ
-                  </div>
-                </article>
-              </div>
-            </div>
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 id="kana-intro-heading" className="text-4xl md:text-5xl font-bold mb-16 text-white text-center">
+                Japanese Writing Systems Introduction
+              </h2>
 
-            {/* Dakuten/Handakuten Card */}
-            <div className="group h-full">
-              <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                <article className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
-                  <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center mb-4">
-                    <span className="text-2xl font-japanese text-purple-600 dark:text-purple-400">が</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">Dakuten/Handakuten 濁点・半濁点</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Dakuten (゛) and Handakuten (゜) are diacritical marks added to kana to create voiced and semi-voiced sounds. Dakuten changes k→g, s→z, t→d, and h→b, while Handakuten changes h→p.
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 text-2xl font-japanese">
-                    <div>
-                      <span className="text-gray-600 dark:text-gray-400 text-sm block">Dakuten:</span>
-                      <span className="text-purple-600/80 dark:text-purple-400/80">か → が</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600 dark:text-gray-400 text-sm block">Handakuten:</span>
-                      <span className="text-purple-600/80 dark:text-purple-400/80">は → ぱ</span>
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Hiragana Card */}
+                <div className="group">
+                  <div className="relative bg-gradient-to-br from-[#2B7FFF] to-[#00D6A4] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
+                      <div className="w-12 h-12 bg-[#2B7FFF] rounded-xl flex items-center justify-center mb-4">
+                        <span className="text-2xl font-japanese text-white">あ</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">
+                        Hiragana ひらがな
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
+                        The basic Japanese phonetic script, used for native Japanese words and grammatical elements.
+                      </p>
+                      <div className="text-3xl font-japanese text-[#2B7FFF] dark:text-[#2B7FFF]/80 tracking-wider">
+                        あ い う え お
+                      </div>
                     </div>
                   </div>
-                </article>
-              </div>
-            </div>
+                </div>
 
-            {/* Youon Card */}
-            <div className="group h-full">
-              <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-rose-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                <article className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
-                  <div className="w-12 h-12 bg-pink-100 dark:bg-pink-900/50 rounded-lg flex items-center justify-center mb-4">
-                    <span className="text-2xl font-japanese text-pink-600 dark:text-pink-400">きょ</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">Youon 拗音</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Youon are contracted sounds in Japanese, formed by combining a i-row kana with a small や, ゆ, or よ. These create new sounds that are essential in Japanese pronunciation.
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 text-2xl font-japanese">
-                    <div>
-                      <span className="text-gray-600 dark:text-gray-400 text-sm block">Hiragana:</span>
-                      <span className="text-pink-600/80 dark:text-pink-400/80">きょ</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600 dark:text-gray-400 text-sm block">Katakana:</span>
-                      <span className="text-pink-600/80 dark:text-pink-400/80">キョ</span>
+                {/* Katakana Card */}
+                <div className="group">
+                  <div className="relative bg-gradient-to-br from-[#FFD600] to-[#FF7E67] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
+                      <div className="w-12 h-12 bg-[#FFD600] rounded-xl flex items-center justify-center mb-4">
+                        <span className="text-2xl font-japanese text-[#1A1B2F]">ア</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">
+                        Katakana カタカナ
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
+                        Used for foreign loanwords, scientific terms, and emphasis in Japanese writing.
+                      </p>
+                      <div className="text-3xl font-japanese text-[#FFD600] dark:text-[#FFD600]/80 tracking-wider">
+                        ア イ ウ エ オ
+                      </div>
                     </div>
                   </div>
-                </article>
+                </div>
+
+                {/* Dakuten Card */}
+                <div className="group">
+                  <div className="relative bg-gradient-to-br from-[#00D6A4] to-[#2B7FFF] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full flex flex-col">
+                      <div className="w-12 h-12 bg-[#00D6A4] rounded-xl flex items-center justify-center mb-4">
+                        <span className="text-2xl font-japanese text-white">が</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">
+                        Dakuten/Handakuten 浊音/半浊音
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-base flex-grow min-h-[3rem]">
+                        Special marks (゛and ゜) that modify the pronunciation of kana characters.
+                      </p>
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <span className="text-gray-500 dark:text-gray-400 text-sm block mb-1">Dakuten:</span>
+                          <span className="text-2xl font-japanese text-[#00D6A4] dark:text-[#00D6A4]/80">
+                            か → が
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-gray-500 dark:text-gray-400 text-sm block mb-1">Handakuten:</span>
+                          <span className="text-2xl font-japanese text-[#00D6A4] dark:text-[#00D6A4]/80">
+                            は → ぱ
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Youon Card */}
+                <div className="group">
+                  <div className="relative bg-gradient-to-br from-[#FF7E67] to-[#FFD600] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full flex flex-col">
+                      <div className="w-12 h-12 bg-[#FF7E67] rounded-xl flex items-center justify-center mb-4">
+                        <span className="text-2xl font-japanese text-white">きょ</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">
+                        Youon 拗音
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4 text-base flex-grow min-h-[3rem]">
+                        Special kana combinations using small や, ゆ, or よ to create new sounds.
+                      </p>
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <span className="text-gray-500 dark:text-gray-400 text-sm block mb-1">Hiragana:</span>
+                          <span className="text-2xl font-japanese text-[#FF7E67] dark:text-[#FF7E67]/80">
+                            きょ
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-gray-500 dark:text-gray-400 text-sm block mb-1">Katakana:</span>
+                          <span className="text-2xl font-japanese text-[#FF7E67] dark:text-[#FF7E67]/80">
+                            キョ
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -232,108 +278,172 @@ export default function LandingPage() {
         {/* Latest Articles Section */}
         <section 
           aria-labelledby="articles-heading"
-          className="container mx-auto px-4 py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900/50 dark:to-gray-900"
+          className="relative py-24 bg-white dark:bg-[#1A1B2F] overflow-hidden"
         >
-          <h2 id="articles-heading" className="text-3xl font-bold mb-10 text-center">
-            Latest Learning Guides
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {articles.slice(0, 3).map(article => (
-              <Link 
-                key={article.id} 
-                href={`/learn/${article.slug}`}
-                className="group relative"
-              >
-                <div className="relative h-full transition-transform duration-300 group-hover:scale-105">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-200"></div>
-                  <article className="relative h-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-4">
-                      <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
-                      {article.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {article.tags.slice(0, 3).map(tag => (
-                        <span 
-                          key={tag}
-                          className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="text-blue-600 dark:text-blue-400 text-sm flex items-center">
-                      Read More 
-                      <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </article>
-                </div>
-              </Link>
-            ))}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 left-0 w-[30%] h-[40%] bg-[#2B7FFF] transform -skew-y-12 opacity-5"></div>
+            <div className="absolute bottom-0 right-0 w-[40%] h-[50%] bg-[#FFD600] transform skew-y-12 opacity-5"></div>
           </div>
-          <div className="text-center mt-8">
-            <Link 
-              href="/learn"
-              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
-            >
-              View All Articles
-              <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-            </Link>
+
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 id="articles-heading" className="text-4xl md:text-5xl font-bold mb-16 text-[#1A1B2F] dark:text-white text-center">
+                Latest Learning Guides
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {articles.slice(0, 3).map(article => (
+                  <Link 
+                    key={article.id} 
+                    href={`/learn/${article.slug}`}
+                    className="group h-full"
+                  >
+                    <div className="relative bg-gradient-to-br from-[#2B7FFF] via-[#00D6A4] to-[#FFD600] p-1 rounded-3xl transition-transform duration-300 group-hover:scale-[1.02] h-full">
+                      <article className="relative h-full bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl flex flex-col">
+                        <div className="w-12 h-12 bg-[#2B7FFF] rounded-xl flex items-center justify-center mb-4">
+                          <BookOpen className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white group-hover:text-[#2B7FFF] dark:group-hover:text-[#2B7FFF] transition-colors line-clamp-2">
+                          {article.title}
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-4 text-base flex-grow line-clamp-2">
+                          {article.description}
+                        </p>
+                        <div className="mt-auto">
+                          <div className="flex flex-wrap gap-2">
+                            {article.tags.map(tag => (
+                              <span 
+                                key={tag}
+                                className="px-3 py-1 text-sm rounded-full bg-[#2B7FFF]/10 dark:bg-[#2B7FFF]/20 text-[#2B7FFF]"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </article>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
         {/* FAQ Section */}
         <section 
           aria-labelledby="faq-heading"
-          className="container mx-auto px-4 py-16"
+          className="relative py-24 bg-white dark:bg-[#1A1B2F] overflow-hidden"
         >
-          <h2 id="faq-heading" className="text-3xl font-bold mb-10 text-center">
-            Frequently Asked Questions
-          </h2>
-          <div className="max-w-3xl mx-auto space-y-6">
-            {/* FAQ Item 1 */}
-            <details className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-6">
-              <summary className="text-xl font-semibold cursor-pointer">
-                How can the AI chat assistant help me learn Japanese?
-              </summary>
-              <p className="mt-3 text-gray-600 dark:text-gray-300">
-                Our AI chat assistant provides personalized help with pronunciation, grammar explanations, and writing practice. You can ask questions about kana characters, get instant feedback on your writing, and practice basic conversations in Japanese.
-              </p>
-            </details>
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-[#2B7FFF] transform rotate-12 opacity-5"></div>
+            <div className="absolute bottom-0 left-0 w-[30%] h-[30%] bg-[#FFD600] transform -rotate-12 opacity-5"></div>
+          </div>
 
-            {/* FAQ Item 2 */}
-            <details className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-6">
-              <summary className="text-xl font-semibold cursor-pointer">
-                What learning tools are available on the platform?
-              </summary>
-              <p className="mt-3 text-gray-600 dark:text-gray-300">
-                We offer several interactive tools: an AI chat assistant for personalized learning, an interactive kana chart with audio pronunciation, practice quizzes with different modes (multiple choice, matching, dictation), and a Japanese text converter for switching between writing systems.
-              </p>
-            </details>
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 id="faq-heading" className="text-4xl md:text-5xl font-bold mb-16 text-[#1A1B2F] dark:text-white text-center">
+                Frequently Asked Questions
+              </h2>
 
-            {/* FAQ Item 3 */}
-            <details className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-6">
-              <summary className="text-xl font-semibold cursor-pointer">
-                How does the Japanese text converter work?
-              </summary>
-              <p className="mt-3 text-gray-600 dark:text-gray-300">
-                Our converter allows you to transform text between different Japanese writing systems. You can convert between Hiragana, Katakana, Romaji, and even English. Simply input your text, select your desired conversion options, and get instant results.
-              </p>
-            </details>
+              <div className="space-y-6">
+                {/* FAQ Item 1 */}
+                <div className="group">
+                  <details className="relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#2B7FFF] to-[#00D6A4] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <summary className="relative bg-white/50 dark:bg-[#1A1B2F]/50 backdrop-blur-sm rounded-xl p-6 cursor-pointer list-none border border-gray-200/20 dark:border-white/10">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-semibold text-[#1A1B2F] dark:text-white pr-8">
+                          How can the AI chat assistant help me learn Japanese?
+                        </h3>
+                        <span className="text-[#2B7FFF] transition-transform duration-300 group-open:rotate-180">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      </div>
+                    </summary>
+                    <div className="relative bg-white/30 dark:bg-[#1A1B2F]/30 backdrop-blur-sm mt-1 p-6 rounded-xl border border-gray-200/20 dark:border-white/10">
+                      <p className="text-gray-600 dark:text-gray-300">
+                        Our AI chat assistant provides personalized help with pronunciation, grammar explanations, and writing practice. You can ask questions about kana characters, get instant feedback on your writing, and practice basic conversations in Japanese.
+                      </p>
+                    </div>
+                  </details>
+                </div>
 
-            {/* FAQ Item 4 */}
-            <details className="backdrop-blur-sm bg-white/50 dark:bg-gray-900/50 rounded-lg shadow-lg p-6">
-              <summary className="text-xl font-semibold cursor-pointer">
-                Is this platform suitable for complete beginners?
-              </summary>
-              <p className="mt-3 text-gray-600 dark:text-gray-300">
-                Yes! Our platform is designed for learners of all levels, especially beginners. We start with basic kana characters and provide comprehensive guides for both Hiragana and Katakana. The interactive tools and AI assistant help make learning Japanese accessible and enjoyable.
-              </p>
-            </details>
+                {/* FAQ Item 2 */}
+                <div className="group">
+                  <details className="relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#FFD600] to-[#FF7E67] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <summary className="relative bg-white/50 dark:bg-[#1A1B2F]/50 backdrop-blur-sm rounded-xl p-6 cursor-pointer list-none border border-gray-200/20 dark:border-white/10">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-semibold text-[#1A1B2F] dark:text-white pr-8">
+                          What learning tools are available on the platform?
+                        </h3>
+                        <span className="text-[#FFD600] transition-transform duration-300 group-open:rotate-180">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      </div>
+                    </summary>
+                    <div className="relative bg-white/30 dark:bg-[#1A1B2F]/30 backdrop-blur-sm mt-1 p-6 rounded-xl border border-gray-200/20 dark:border-white/10">
+                      <p className="text-gray-600 dark:text-gray-300">
+                        We offer several interactive tools: an AI chat assistant for personalized learning, an interactive kana chart with audio pronunciation, practice quizzes with different modes (multiple choice, matching, dictation), and a Japanese text converter for switching between writing systems.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+
+                {/* FAQ Item 3 */}
+                <div className="group">
+                  <details className="relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#00D6A4] to-[#2B7FFF] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <summary className="relative bg-white/50 dark:bg-[#1A1B2F]/50 backdrop-blur-sm rounded-xl p-6 cursor-pointer list-none border border-gray-200/20 dark:border-white/10">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-semibold text-[#1A1B2F] dark:text-white pr-8">
+                          How does the Japanese text converter work?
+                        </h3>
+                        <span className="text-[#00D6A4] transition-transform duration-300 group-open:rotate-180">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      </div>
+                    </summary>
+                    <div className="relative bg-white/30 dark:bg-[#1A1B2F]/30 backdrop-blur-sm mt-1 p-6 rounded-xl border border-gray-200/20 dark:border-white/10">
+                      <p className="text-gray-600 dark:text-gray-300">
+                        Our converter allows you to transform text between different Japanese writing systems. You can convert between Hiragana, Katakana, Romaji, and even English. Simply input your text, select your desired conversion options, and get instant results.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+
+                {/* FAQ Item 4 */}
+                <div className="group">
+                  <details className="relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#FF7E67] to-[#FFD600] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <summary className="relative bg-white/50 dark:bg-[#1A1B2F]/50 backdrop-blur-sm rounded-xl p-6 cursor-pointer list-none border border-gray-200/20 dark:border-white/10">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-semibold text-[#1A1B2F] dark:text-white pr-8">
+                          Is this platform suitable for complete beginners?
+                        </h3>
+                        <span className="text-[#FF7E67] transition-transform duration-300 group-open:rotate-180">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      </div>
+                    </summary>
+                    <div className="relative bg-white/30 dark:bg-[#1A1B2F]/30 backdrop-blur-sm mt-1 p-6 rounded-xl border border-gray-200/20 dark:border-white/10">
+                      <p className="text-gray-600 dark:text-gray-300">
+                        Yes! Our platform is designed for learners of all levels, especially beginners. We start with basic kana characters and provide comprehensive guides for both Hiragana and Katakana. The interactive tools and AI assistant help make learning Japanese accessible and enjoyable.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       

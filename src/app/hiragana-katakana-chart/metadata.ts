@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export function generateMetadata(): Metadata {
   return {
-    title: "Japanese Kana Chart | Interactive Gojuon Table",
+    title: "Japanese Kana Chart | Interactive Hiragana & Katakana Chart",
     description: "Learn Japanese Hiragana and Katakana with our interactive Gojuon chart. Features clear visuals, audio pronunciation, and practice tools for mastering Japanese writing systems.",
     keywords: [
       "gojuon chart",
