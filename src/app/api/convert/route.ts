@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       'wa': 'わ', 'wo': 'を', 'n': 'ん'
     };
 
-    // 转换函数
+    // ��换函数
     const convertToKatakana = (text: string) => {
       return text.replace(/[\u3041-\u3096]/g, char => 
         String.fromCharCode(char.charCodeAt(0) + CONVERSION_DIFFERENCE)
@@ -65,7 +65,7 @@ export async function POST(req: Request) {
 
     let hiragana = text;
     let katakana = text;
-    let romaji = text;
+    const romaji = text;
 
     switch (sourceType) {
       case 'hiragana':
