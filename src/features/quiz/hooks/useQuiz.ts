@@ -1,8 +1,16 @@
 import { useState, useCallback } from 'react';
 import { gojuonData } from '@/data/gojuon';
-import { KanaType, Question, TestState } from '../types';
-
-export type QuestionType = 'kanaToRomaji' | 'romajiToKana';
+import { 
+  KanaType, 
+  QuestionType, 
+  TestState, 
+  Question,
+  QuizType,
+  ChoiceQuestion,
+  DictationQuestion,
+  MatchingQuestion,
+  SpellingQuestion
+} from '../types';
 
 // 根据假名类型获取可用的假名字符
 const getAvailableKana = (kanaType: KanaType) => {
@@ -22,11 +30,7 @@ const getAvailableKana = (kanaType: KanaType) => {
 
   switch (kanaType) {
     case 'hiragana':
-      addSeion();
-      return kanaChars;
     case 'katakana':
-      addSeion();
-      return kanaChars;
     case 'mixed':
       addSeion();
       return kanaChars;
@@ -66,6 +70,63 @@ const shuffle = <T,>(array: T[]): T[] => {
   return newArray;
 };
 
+// 生成问题
+const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] => {
+  const availableKana = getAvailableKana(kanaType);
+  const shuffledKana = shuffle(availableKana);
+  const selectedKana = shuffledKana.slice(0, 10);
+
+  switch (quizType) {
+    case 'choice':
+      return selectedKana.map((kana, index): ChoiceQuestion => {
+        const questionType: 'kanaToRomaji' | 'romajiToKana' = Math.random() > 0.5 ? 'kanaToRomaji' : 'romajiToKana';
+        const kanaChar = kanaType === 'katakana' ? kana.katakana : kana.hiragana;
+        
+        return {
+          id: index,
+          type: questionType,
+          kana: kanaChar,
+          romaji: kana.romaji,
+          options: generateOptions(
+            questionType === 'kanaToRomaji' ? kana.romaji : kanaChar,
+            questionType === 'kanaToRomaji' 
+              ? availableKana.map(k => k.romaji)
+              : availableKana.map(k => kanaType === 'katakana' ? k.katakana : k.hiragana)
+          )
+        };
+      });
+
+    case 'dictation':
+      return selectedKana.map((kana, index): DictationQuestion => ({
+        id: index,
+        type: 'dictation',
+        kana: kanaType === 'katakana' ? kana.katakana : kana.hiragana,
+        romaji: kana.romaji
+      }));
+
+    case 'matching':
+      return selectedKana.map((kana, index): MatchingQuestion => ({
+        id: index,
+        type: 'matching',
+        kana: kanaType === 'katakana' ? kana.katakana : kana.hiragana,
+        romaji: kana.romaji,
+        isFlipped: false,
+        isMatched: false
+      }));
+
+    case 'spelling':
+      return selectedKana.map((kana, index): SpellingQuestion => ({
+        id: index,
+        type: 'spelling',
+        kana: kanaType === 'katakana' ? kana.katakana : kana.hiragana,
+        romaji: kana.romaji
+      }));
+
+    default:
+      return [];
+  }
+};
+
 export const useQuiz = () => {
   const [state, setState] = useState<TestState>({
     isStarted: false,
@@ -75,100 +136,55 @@ export const useQuiz = () => {
     score: 0,
     wrongAnswers: [],
     isComplete: false,
+    quizType: 'choice',
+    kanaType: 'hiragana'
   });
 
   // 开始新测试
-  const startTest = useCallback((kanaType: KanaType) => {
-    const availableKana = getAvailableKana(kanaType);
+  const startTest = useCallback((kanaType: KanaType, quizType: QuizType) => {
+    const questions = generateQuestions(kanaType, quizType);
     
-    // 随机选择10个不重复的假名
-    const shuffledKana = [...availableKana].sort(() => Math.random() - 0.5);
-    const selectedKana = shuffledKana.slice(0, 10);
-    
-    // 生成10个问题
-    const questions: Question[] = selectedKana.map((randomKana, i) => {
-      // 随机决定题目类型
-      const questionType: QuestionType = Math.random() > 0.5 ? 'kanaToRomaji' : 'romajiToKana';
-      
-      // 根据假名类型选择显示的字符
-      const getKanaChar = () => {
-        switch (kanaType) {
-          case 'hiragana':
-            return randomKana.hiragana;
-          case 'katakana':
-            return randomKana.katakana;
-          case 'mixed':
-            return Math.random() > 0.5 ? randomKana.hiragana : randomKana.katakana;
-          case 'special':
-            return Math.random() > 0.5 ? randomKana.hiragana : randomKana.katakana;
-          default:
-            return randomKana.hiragana;
-        }
-      };
-
-      const kanaChar = getKanaChar();
-      const question: Question = {
-        id: i.toString(),
-        type: questionType,
-        question: questionType === 'kanaToRomaji' ? kanaChar : randomKana.romaji,
-        correctAnswer: questionType === 'kanaToRomaji' ? randomKana.romaji : kanaChar,
-        options: []
-      };
-
-      const allPossibleAnswers = questionType === 'kanaToRomaji' ?
-        availableKana.map(k => k.romaji) :
-        availableKana.map(k => {
-          switch (kanaType) {
-            case 'hiragana':
-              return k.hiragana;
-            case 'katakana':
-              return k.katakana;
-            case 'mixed':
-            case 'special':
-              return Math.random() > 0.5 ? k.hiragana : k.katakana;
-            default:
-              return k.hiragana;
-          }
-        });
-
-      question.options = generateOptions(question.correctAnswer, allPossibleAnswers);
-      return question;
-    });
-
     setState({
       isStarted: true,
-      questions: shuffle(questions),
+      questions,
       currentQuestionIndex: 0,
       timeRemaining: 0,
       score: 0,
       wrongAnswers: [],
       isComplete: false,
+      quizType,
+      kanaType
     });
   }, []);
 
   // 提交答案
   const submitAnswer = useCallback((answer: string) => {
-    setState(prevState => {
-      const currentQuestion = prevState.questions[prevState.currentQuestionIndex];
-      const isCorrect = currentQuestion.correctAnswer === answer;
-      const updatedQuestions = [...prevState.questions];
-      updatedQuestions[prevState.currentQuestionIndex] = {
+    const currentQuestion = state.questions[state.currentQuestionIndex];
+    const isCorrect = answer.toLowerCase() === currentQuestion.romaji.toLowerCase();
+
+    setState(prev => {
+      const newQuestions = [...prev.questions];
+      newQuestions[prev.currentQuestionIndex] = {
         ...currentQuestion,
         userAnswer: answer
       };
 
+      const newWrongAnswers = isCorrect 
+        ? prev.wrongAnswers 
+        : [...prev.wrongAnswers, currentQuestion];
+
       return {
-        ...prevState,
-        questions: updatedQuestions,
-        score: isCorrect ? prevState.score + 10 : prevState.score,
-        wrongAnswers: isCorrect 
-          ? prevState.wrongAnswers 
-          : [...prevState.wrongAnswers, { ...currentQuestion, userAnswer: answer }],
-        currentQuestionIndex: prevState.currentQuestionIndex + 1,
-        isComplete: prevState.currentQuestionIndex === 9
+        ...prev,
+        questions: newQuestions,
+        score: isCorrect ? prev.score + 10 : prev.score,
+        currentQuestionIndex: prev.currentQuestionIndex + 1,
+        wrongAnswers: newWrongAnswers,
+        isComplete: prev.currentQuestionIndex === prev.questions.length - 1
       };
     });
-  }, []);
+
+    return isCorrect;
+  }, [state.currentQuestionIndex, state.questions]);
 
   // 获取当前问题
   const getCurrentQuestion = useCallback(() => {
@@ -181,4 +197,4 @@ export const useQuiz = () => {
     submitAnswer,
     getCurrentQuestion,
   };
-}; 
+};

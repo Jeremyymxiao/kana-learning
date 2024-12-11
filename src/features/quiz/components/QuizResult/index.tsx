@@ -30,11 +30,11 @@ export function QuizResult({ score, wrongAnswers, onRetry, kanaType }: QuizResul
                 <div className="flex justify-between items-start">
                   <div>
                     <span className="text-sm text-gray-500">Question {index + 1}</span>
-                    <p className="text-lg font-medium mt-1">{q.question}</p>
+                    <p className="text-lg font-medium mt-1">{q.kana}</p>
                   </div>
                   <div className="text-right">
                     <div className="text-green-600 dark:text-green-400">
-                      Correct Answer: {q.correctAnswer}
+                      Correct Answer: {q.romaji}
                     </div>
                     {q.userAnswer && (
                       <div className="text-red-600 dark:text-red-400">

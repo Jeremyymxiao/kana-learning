@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useQuiz } from '../hooks/useQuiz';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { KanaType } from '../types';
+import { KanaType, QuizType, Question } from '../types';
 import { ArrowLeft } from 'lucide-react';
 import { QuizQuestion } from './QuizQuestion/index';
 import { QuizResult } from './QuizResult/index';
@@ -18,7 +18,7 @@ interface QuizPanelProps {
 
 export function QuizPanel({ onConfigChange }: QuizPanelProps) {
   const [selectedDifficulty, setSelectedDifficulty] = useState<KanaType>('hiragana');
-  const [testType, setTestType] = useState<'choice' | 'matching' | 'dictation' | 'spelling'>('choice');
+  const [testType, setTestType] = useState<QuizType>('choice');
   const [showConfig, setShowConfig] = useState(true);
   const { 
     startTest, 
@@ -32,7 +32,7 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
 
   // 开始测试
   const handleStart = () => {
-    startTest(selectedDifficulty);
+    startTest(selectedDifficulty, testType);
     setShowConfig(false);
     onConfigChange(false);
   };
@@ -41,7 +41,7 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
   const handleReset = () => {
     if (isComplete) {
       // 如果是测试完成后的重试，直接开始新测试
-      startTest(selectedDifficulty);
+      startTest(selectedDifficulty, testType);
     } else {
       // 如果是中途返回，才显示配置页面
       setShowConfig(true);
@@ -51,25 +51,25 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
 
   // 定义测试类型选项
   const quizTypes = [
-    { value: 'choice', label: 'Single Choice', description: 'Choose the correct kana or romaji' },
-    { value: 'spelling', label: 'Spelling', description: 'Type the romaji for the given kana' },
-    { value: 'matching', label: 'Matching Game', description: 'Match kana with their romaji' },
-    { value: 'dictation', label: 'Dictation', description: 'Listen and select the correct kana' }
-  ] as const;
+    { value: 'choice' as const, label: 'Single Choice', description: 'Choose the correct kana or romaji' },
+    { value: 'spelling' as const, label: 'Spelling', description: 'Type the romaji for the given kana' },
+    { value: 'matching' as const, label: 'Matching Game', description: 'Match kana with their romaji' },
+    { value: 'dictation' as const, label: 'Dictation', description: 'Listen and select the correct kana' }
+  ];
 
   // 定义难度选项
   const difficultyLevels = [
-    { value: 'hiragana', label: 'Hiragana Only', description: 'Basic Hiragana Characters (あ、い、う...)' },
-    { value: 'katakana', label: 'Katakana Only', description: 'Basic Katakana Characters (ア、イ、ウ...)' },
-    { value: 'mixed', label: 'Hiragana & Katakana', description: 'Mix of Basic Hiragana and Katakana' },
-    { value: 'special', label: 'Special Combinations', description: 'Dakuten, Handakuten & Yōon (が、ぱ、きょ...)' }
-  ] as const;
+    { value: 'hiragana' as const, label: 'Hiragana Only', description: 'Basic Hiragana Characters (あ、い、う...)' },
+    { value: 'katakana' as const, label: 'Katakana Only', description: 'Basic Katakana Characters (ア、イ、ウ...)' },
+    { value: 'mixed' as const, label: 'Hiragana & Katakana', description: 'Mix of Basic Hiragana and Katakana' },
+    { value: 'special' as const, label: 'Special Combinations', description: 'Dakuten, Handakuten & Yōon (が、ぱ、きょ...)' }
+  ];
 
   // 渲染配置面板
   const renderConfig = () => (
     <div className="space-y-8 p-4 w-full max-w-4xl mx-auto">
-        {/* Kana Type Selection */}
-        <div className="space-y-4">
+      {/* Kana Type Selection */}
+      <div className="space-y-4">
         <h3 className="text-xl font-medium text-center">Select Kana Type</h3>
         <div className="grid md:grid-cols-2 gap-4">
           {difficultyLevels.map((level) => (
@@ -88,6 +88,7 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
           ))}
         </div>
       </div>
+
       {/* Quiz Type Selection */}
       <div className="space-y-4">
         <h3 className="text-xl font-medium text-center">Select Quiz Type</h3>
@@ -118,6 +119,8 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
     </div>
   );
 
+  const currentQuestion = getCurrentQuestion();
+
   return (
     <div className="w-full max-w-2xl mx-auto min-h-[650px] flex flex-col">
       {showConfig ? (
@@ -142,7 +145,7 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
 
           {/* 包装测试内容的容器 */}
           <div className="flex-1 flex flex-col">
-            {testType === 'choice' && (
+            {testType === 'choice' && currentQuestion?.type === 'kanaToRomaji' || currentQuestion?.type === 'romajiToKana' && (
               !isComplete ? (
                 <>
                   <div className="mb-8">
@@ -151,7 +154,7 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
                   <div className="flex-1 flex flex-col">
                     <div className="flex-[0.7]" /> {/* 上部空白 */}
                     <QuizQuestion
-                      question={getCurrentQuestion()}
+                      question={currentQuestion}
                       onSubmit={submitAnswer}
                     />
                     <div className="flex-[1.3]" /> {/* 下部空白，比上部空白更大 */}
@@ -192,4 +195,4 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
       )}
     </div>
   );
-} 
+}

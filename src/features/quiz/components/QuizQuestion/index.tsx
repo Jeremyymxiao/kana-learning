@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Question } from '../../types';
+import { ChoiceQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 
 interface QuizQuestionProps {
-  question: Question;
-  onSubmit: (answer: string) => void;
+  question: ChoiceQuestion;
+  onSubmit: (answer: string) => boolean;
 }
 
 export function QuizQuestion({ question, onSubmit }: QuizQuestionProps) {
@@ -20,23 +20,26 @@ export function QuizQuestion({ question, onSubmit }: QuizQuestionProps) {
     setSelectedAnswer(answer);
     setIsAnswered(true);
 
-    if (answer === question.correctAnswer) {
+    const isCorrect = onSubmit(answer);
+    if (isCorrect) {
       playCorrectSound();
     } else {
       playWrongSound();
     }
     
     setTimeout(() => {
-      onSubmit(answer);
       setSelectedAnswer(null);
       setIsAnswered(false);
     }, 1000);
   };
 
+  const displayText = question.type === 'kanaToRomaji' ? question.kana : question.romaji;
+  const correctAnswer = question.type === 'kanaToRomaji' ? question.romaji : question.kana;
+
   return (
     <div className="space-y-4">
       <div className="text-center">
-        <div className="text-4xl font-bold mb-2">{question.question}</div>
+        <div className="text-4xl font-bold mb-2">{displayText}</div>
         <div className="text-sm text-gray-500">
           {question.type === 'kanaToRomaji' ? 'Choose the right romaji' : 'Choose the right kana'}
         </div>
@@ -49,12 +52,12 @@ export function QuizQuestion({ question, onSubmit }: QuizQuestionProps) {
             onClick={() => handleAnswer(option)}
             disabled={isAnswered}
             variant={isAnswered ? (
-              option === question.correctAnswer ? 'default' :
+              option === correctAnswer ? 'default' :
               option === selectedAnswer ? 'destructive' : 'outline'
             ) : 'outline'}
             className={`h-16 text-lg ${
               isAnswered && option === selectedAnswer
-                ? option === question.correctAnswer
+                ? option === correctAnswer
                   ? 'bg-green-500 hover:bg-green-600'
                   : 'bg-red-500 hover:bg-red-600'
                 : ''
@@ -66,4 +69,4 @@ export function QuizQuestion({ question, onSubmit }: QuizQuestionProps) {
       </div>
     </div>
   );
-} 
+}
