@@ -140,6 +140,23 @@ export const useQuiz = () => {
     kanaType: 'hiragana'
   });
 
+  // 添加设置分数的方法
+  const setScore = useCallback((newScore: number) => {
+    setState(prev => ({
+      ...prev,
+      score: newScore
+    }));
+  }, []);
+
+  // 添加设置当前问题索引的方法
+  const setCurrentQuestionIndex = useCallback((newIndex: number) => {
+    setState(prev => ({
+      ...prev,
+      currentQuestionIndex: newIndex,
+      isComplete: newIndex >= prev.questions.length
+    }));
+  }, []);
+
   // 开始新测试
   const startTest = useCallback((kanaType: KanaType, quizType: QuizType) => {
     const questions = generateQuestions(kanaType, quizType);
@@ -160,7 +177,11 @@ export const useQuiz = () => {
   // 提交答案
   const submitAnswer = useCallback((answer: string) => {
     const currentQuestion = state.questions[state.currentQuestionIndex];
-    const isCorrect = answer.toLowerCase() === currentQuestion.romaji.toLowerCase();
+    
+    // 根据问题类型判断正确答案
+    const isCorrect = currentQuestion.type === 'kanaToRomaji'
+      ? answer.toLowerCase() === currentQuestion.romaji.toLowerCase()
+      : answer === currentQuestion.kana; // romajiToKana 类型需要精确匹配假名
 
     setState(prev => {
       const newQuestions = [...prev.questions];
@@ -179,7 +200,7 @@ export const useQuiz = () => {
         score: isCorrect ? prev.score + 10 : prev.score,
         currentQuestionIndex: prev.currentQuestionIndex + 1,
         wrongAnswers: newWrongAnswers,
-        isComplete: prev.currentQuestionIndex === prev.questions.length - 1
+        isComplete: prev.currentQuestionIndex + 1 >= prev.questions.length
       };
     });
 
@@ -196,5 +217,7 @@ export const useQuiz = () => {
     startTest,
     submitAnswer,
     getCurrentQuestion,
+    setScore,           // 暴露设置分数的方法
+    setCurrentQuestionIndex  // 暴露设置当前问题索引的方法
   };
 };

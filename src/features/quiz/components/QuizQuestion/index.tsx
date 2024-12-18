@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect } from 'react';
+import { Button, ButtonProps } from '@/components/ui/button';
 import { ChoiceQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 
@@ -13,24 +13,29 @@ interface QuizQuestionProps {
 export function QuizQuestion({ question, onSubmit }: QuizQuestionProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setSelectedAnswer(null);
+    setIsAnswered(false);
+    setIsCorrect(null);
+  }, [question.id]);
 
   const handleAnswer = (answer: string) => {
     if (isAnswered) return;
     
+    const correct = onSubmit(answer);
+    
     setSelectedAnswer(answer);
+    setIsCorrect(correct);
+    
     setIsAnswered(true);
-
-    const isCorrect = onSubmit(answer);
-    if (isCorrect) {
+    
+    if (correct) {
       playCorrectSound();
     } else {
       playWrongSound();
     }
-    
-    setTimeout(() => {
-      setSelectedAnswer(null);
-      setIsAnswered(false);
-    }, 1000);
   };
 
   const displayText = question.type === 'kanaToRomaji' ? question.kana : question.romaji;
@@ -44,29 +49,36 @@ export function QuizQuestion({ question, onSubmit }: QuizQuestionProps) {
           {question.type === 'kanaToRomaji' ? 'Choose the right romaji' : 'Choose the right kana'}
         </div>
       </div>
-
+  
       <div className="grid grid-cols-2 gap-4">
-        {question.options.map((option, index) => (
-          <Button
-            key={index}
-            onClick={() => handleAnswer(option)}
-            disabled={isAnswered}
-            variant={isAnswered ? (
-              option === correctAnswer ? 'default' :
-              option === selectedAnswer ? 'destructive' : 'outline'
-            ) : 'outline'}
-            className={`h-16 text-lg ${
-              isAnswered && option === selectedAnswer
-                ? option === correctAnswer
-                  ? 'bg-green-500 hover:bg-green-600'
-                  : 'bg-red-500 hover:bg-red-600'
-                : ''
-            }`}
-          >
-            {option}
-          </Button>
-        ))}
-      </div>
+  {question.options.map((option, index) => {
+    const isSelected = option === selectedAnswer;
+    const isCorrectAnswer = option === correctAnswer;
+    
+    let variant: ButtonProps['variant'] = 'outline';
+    if (isAnswered) {
+      if (isSelected && isCorrect) {
+        variant = 'correct';
+      } else if (isSelected && !isCorrect) {
+        variant = 'incorrect';
+      } else if (isCorrectAnswer && !isCorrect) {
+        variant = 'correct';
+      }
+    }
+
+    return (
+      <Button
+        key={index}
+        onClick={() => handleAnswer(option)}
+        disabled={isAnswered}
+        variant={variant}
+        size="quiz"
+      >
+        {option}
+      </Button>
+    );
+  })}
+</div>
     </div>
   );
 }

@@ -28,6 +28,8 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
     score, 
     isComplete,
     wrongAnswers,
+    setScore,
+    setCurrentQuestionIndex
   } = useQuiz();
 
   // 开始测试
@@ -145,28 +147,31 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
 
           {/* 包装测试内容的容器 */}
           <div className="flex-1 flex flex-col">
-            {testType === 'choice' && currentQuestion?.type === 'kanaToRomaji' || currentQuestion?.type === 'romajiToKana' && (
-              !isComplete ? (
-                <>
-                  <div className="mb-8">
-                    <Progress value={(currentQuestionIndex / 10) * 100} />
-                  </div>
-                  <div className="flex-1 flex flex-col">
-                    <div className="flex-[0.7]" /> {/* 上部空白 */}
-                    <QuizQuestion
-                      question={currentQuestion}
-                      onSubmit={submitAnswer}
-                    />
-                    <div className="flex-[1.3]" /> {/* 下部空白，比上部空白更大 */}
-                  </div>
-                </>
-              ) : (
+            {testType === 'choice' && (
+              isComplete ? (
                 <QuizResult
                   score={score}
                   wrongAnswers={wrongAnswers}
                   onRetry={handleReset}
                   kanaType={selectedDifficulty}
+                  quizType="choice"
                 />
+              ) : (
+                currentQuestion?.type === 'kanaToRomaji' || currentQuestion?.type === 'romajiToKana' ? (
+                  <>
+                    <div className="mb-8">
+                      <Progress value={(currentQuestionIndex / 10) * 100} />
+                    </div>
+                    <div className="flex-1 flex flex-col">
+                      <div className="flex-[0.7]" /> {/* 上部空白 */}
+                      <QuizQuestion
+                        question={currentQuestion}
+                        onSubmit={submitAnswer}
+                      />
+                      <div className="flex-[1.3]" /> {/* 下部空白，比上部空白更大 */}
+                    </div>
+                  </>
+                ) : null
               )
             )}
             
@@ -181,6 +186,8 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
               <DictationQuiz
                 difficulty={selectedDifficulty}
                 onComplete={handleReset}
+                onScoreChange={setScore}
+                onProgressChange={setCurrentQuestionIndex}
               />
             )}
 

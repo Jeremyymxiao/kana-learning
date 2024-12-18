@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { KanaType } from '../../types';
+import { KanaType, Question } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { gojuonData } from '@/data/gojuon';
+import { QuizResult } from '../QuizResult';
 
 interface MatchingGameProps {
   difficulty: KanaType;
@@ -17,6 +18,8 @@ interface Card {
   type: 'kana' | 'romaji';
   isMatched: boolean;
   isWrong: boolean;
+  matchId: number;
+  matchContent: string;
 }
 
 interface KanaPair {
@@ -81,8 +84,10 @@ const getAvailableKana = (difficulty: KanaType): KanaPair[] => {
 export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
   const [cards, setCards] = useState<Card[]>([]);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
-  const [score, setScore] = useState(100);
   const [matchedPairs, setMatchedPairs] = useState(0);
+  const [score, setScore] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState<Question[]>([]);
+  const [isComplete, setIsComplete] = useState(false);
 
   // 初始化游戏
   useEffect(() => {
@@ -98,7 +103,9 @@ export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
           content: pair.kana,
           type: 'kana',
           isMatched: false,
-          isWrong: false
+          isWrong: false,
+          matchId: index,
+          matchContent: pair.romaji
         });
         // 添加罗马字卡片
         cards.push({
@@ -106,7 +113,9 @@ export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
           content: pair.romaji,
           type: 'romaji',
           isMatched: false,
-          isWrong: false
+          isWrong: false,
+          matchId: index,
+          matchContent: pair.kana
         });
       });
 
@@ -122,70 +131,78 @@ export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
 
   // 处理卡片点击
   const handleCardClick = (index: number) => {
-    // 如果已经选择了两张卡片，或者点击的卡片已经匹配，则不处理
-    if (selectedCards.length === 2 || cards[index].isMatched) {
-      return;
-    }
+    if (cards[index].isMatched || selectedCards.length === 2) return;
 
-    // 添加到已选择的卡片中
     const newSelectedCards = [...selectedCards, index];
     setSelectedCards(newSelectedCards);
 
-    // 如果已经选择了两张卡片，检查是否匹配
     if (newSelectedCards.length === 2) {
-      const firstCard = cards[newSelectedCards[0]];
-      const secondCard = cards[newSelectedCards[1]];
+      const [firstIndex, secondIndex] = newSelectedCards;
+      const firstCard = cards[firstIndex];
+      const secondCard = cards[secondIndex];
 
-      // 检查是否匹配（一张是假名，一张是罗马字，且内容对应）
-      let isMatch = false;
-      if (firstCard.type !== secondCard.type) {
+      if (
+        firstCard.matchId === secondCard.matchId &&
+        firstCard.type !== secondCard.type
+      ) {
+        // Matched
+        playCorrectSound();
+        const newCards = [...cards];
+        newCards[firstIndex].isMatched = true;
+        newCards[secondIndex].isMatched = true;
+        setCards(newCards);
+        setMatchedPairs(prev => prev + 1);
+        setScore(prev => prev + 10);
+
+        if (matchedPairs + 1 === 10) {
+          setIsComplete(true);
+        }
+      } else {
+        // Not matched
+        playWrongSound();
         const kanaCard = firstCard.type === 'kana' ? firstCard : secondCard;
         const romajiCard = firstCard.type === 'romaji' ? firstCard : secondCard;
         
-        // 在所有可用假名中查找匹配
-        const availablePairs = getAvailableKana(difficulty);
-        isMatch = availablePairs.some(pair => 
-          (kanaCard.content === pair.kana && romajiCard.content === pair.romaji)
-        );
-      }
+        setWrongAnswers(prev => [...prev, {
+          id: kanaCard.matchId,
+          kana: kanaCard.content,
+          romaji: kanaCard.matchContent,
+          userAnswer: romajiCard.content,
+          type: 'matching',
+          isFlipped: false,
+          isMatched: false
+        }]);
 
-      if (isMatch) {
-        // 找到匹配的卡片
-        setTimeout(() => {
-          const newCards = [...cards];
-          newCards[newSelectedCards[0]].isMatched = true;
-          newCards[newSelectedCards[1]].isMatched = true;
-          setCards(newCards);
-          setSelectedCards([]);
-          setMatchedPairs(prev => {
-            const newMatchedPairs = prev + 1;
-            if (newMatchedPairs === 10) {
-              onComplete();
-            }
-            return newMatchedPairs;
-          });
-          playCorrectSound();
-        }, 500);
-      } else {
-        // 不匹配，显示错误状态
         const newCards = [...cards];
-        newCards[newSelectedCards[0]].isWrong = true;
-        newCards[newSelectedCards[1]].isWrong = true;
+        newCards[firstIndex].isWrong = true;
+        newCards[secondIndex].isWrong = true;
         setCards(newCards);
-        playWrongSound();
-        setScore(Math.max(0, score - 10)); // 扣分，但不低于0分
 
-        // 一秒后重置卡片状态
         setTimeout(() => {
-          const newCards = [...cards];
-          newCards[newSelectedCards[0]].isWrong = false;
-          newCards[newSelectedCards[1]].isWrong = false;
-          setCards(newCards);
-          setSelectedCards([]);
+          const resetCards = [...newCards];
+          resetCards[firstIndex].isWrong = false;
+          resetCards[secondIndex].isWrong = false;
+          setCards(resetCards);
         }, 1000);
       }
+
+      setTimeout(() => {
+        setSelectedCards([]);
+      }, 1000);
     }
   };
+
+  if (isComplete) {
+    return (
+      <QuizResult
+        score={score}
+        wrongAnswers={wrongAnswers}
+        onRetry={onComplete}
+        kanaType={difficulty}
+        quizType="matching"
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">

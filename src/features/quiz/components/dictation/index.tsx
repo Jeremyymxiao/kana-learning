@@ -6,19 +6,29 @@ import { Input } from '@/components/ui/input';
 import { KanaType, DictationQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { gojuonData } from '@/data/gojuon';
+import { QuizResult } from '../QuizResult';
+import { Progress } from '@/components/ui/progress';
 
 interface DictationQuizProps {
   difficulty: KanaType;
   onComplete: () => void;
+  onScoreChange?: (score: number) => void;
+  onProgressChange?: (current: number, total: number) => void;
 }
 
-export function DictationQuiz({ difficulty, onComplete }: DictationQuizProps) {
+type FeedbackStatus = {
+  show: boolean;
+  isCorrect: boolean;
+};
+
+export function DictationQuiz({ difficulty, onComplete, onScoreChange, onProgressChange }: DictationQuizProps) {
   const [questions, setQuestions] = useState<DictationQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [userInput, setUserInput] = useState('');
+  const [feedback, setFeedback] = useState<FeedbackStatus>({ show: false, isCorrect: false });
 
   const playSound = async () => {
     if (isPlaying || isComplete) return;
@@ -32,36 +42,47 @@ export function DictationQuiz({ difficulty, onComplete }: DictationQuizProps) {
 
   const handleSubmit = () => {
     if (!userInput) return;
-
+  
     const currentQuestion = questions[currentIndex];
     const isCorrect = userInput.toLowerCase() === currentQuestion.romaji.toLowerCase();
+  
+    setFeedback({ show: true, isCorrect });
+    
+    setTimeout(() => {
+      setFeedback({ show: false, isCorrect: false });
+    }, 1500);
 
-    // Play sound feedback
     if (isCorrect) {
       playCorrectSound();
+      setScore(prevScore => {
+        const newScore = prevScore + 10;
+        onScoreChange?.(newScore);
+        return newScore;
+      });
     } else {
       playWrongSound();
     }
-
-    // Update question with user's answer
+  
     const newQuestions = [...questions];
     newQuestions[currentIndex] = {
       ...currentQuestion,
       userAnswer: userInput
     };
-
+  
     setQuestions(newQuestions);
     setUserInput('');
-
-    if (isCorrect) {
-      setScore(score + 10);
-    }
-
+  
     if (currentIndex === questions.length - 1) {
       setIsComplete(true);
       onComplete();
     } else {
-      setCurrentIndex(currentIndex + 1);
+      setTimeout(() => {
+        setCurrentIndex(prevIndex => {
+          const newIndex = prevIndex + 1;
+          onProgressChange?.(newIndex, questions.length);
+          return newIndex;
+        });
+      }, 0);
     }
   };
 
@@ -78,8 +99,9 @@ export function DictationQuiz({ difficulty, onComplete }: DictationQuizProps) {
     })));
     setCurrentIndex(0);
     setScore(0);
+    onScoreChange?.(0);
     setIsComplete(false);
-  }, [difficulty]);
+  }, [difficulty, onScoreChange]);
 
   useEffect(() => {
     initQuiz();
@@ -145,19 +167,26 @@ export function DictationQuiz({ difficulty, onComplete }: DictationQuizProps) {
 
   if (isComplete) {
     return (
-      <div className="text-center space-y-4">
-        <h2 className="text-2xl font-bold">Quiz Complete!</h2>
-        <p>Your score: {score} / 100</p>
-        <Button onClick={initQuiz}>Try Again</Button>
-      </div>
+      <QuizResult
+        score={score}
+        wrongAnswers={questions.filter(q => q.userAnswer?.toLowerCase() !== q.romaji.toLowerCase())}
+        onRetry={initQuiz}
+        kanaType={difficulty}
+        quizType="dictation"
+      />
     );
   }
 
   return (
     <div className="space-y-4">
+      <div className="mb-8">
+        <Progress value={(currentIndex / questions.length) * 100} />
+      </div>
+
       <div className="text-center">
         <div className="text-4xl font-bold mb-2">{questions[currentIndex]?.kana || ''}</div>
         <div className="text-sm text-gray-500">Type the romaji for this kana</div>
+        <div className="text-sm text-gray-500">Current Score: {score}</div>
       </div>
 
       <div className="flex flex-col items-center gap-4">
@@ -170,14 +199,30 @@ export function DictationQuiz({ difficulty, onComplete }: DictationQuizProps) {
           {isPlaying ? 'Playing...' : 'Play Sound'}
         </Button>
 
-        <Input
-          type="text"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-          placeholder="Type romaji here..."
-          className="text-center"
-        />
+        <div className="relative w-full">
+          <Input
+            type="text"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+            placeholder="Type romaji here..."
+            className="text-center"
+          />
+          
+          {feedback.show && (
+            <div
+              className={`
+                absolute top-[-40px] left-0 right-0 text-center p-2 rounded-md
+                transition-opacity duration-300
+                ${feedback.isCorrect 
+                  ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' 
+                  : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400'}
+              `}
+            >
+              {feedback.isCorrect ? 'Correct!' : 'Incorrect!'}
+            </div>
+          )}
+        </div>
 
         <Button onClick={handleSubmit} disabled={!userInput}>
           Submit
