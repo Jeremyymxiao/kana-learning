@@ -1,124 +1,84 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import { UserRole } from "@/types/user";
+import connectDB from '@/lib/mongodb';
+import User from '@/models/user';
 
 export async function POST(request: Request) {
   try {
-    console.log('Received registration request'); 
-    const body = await request.json();
-    console.log('Request body:', body); 
+    const { email, username, password } = await request.json();
 
-    const { email, username, password } = body;
-
-    // Validate required fields
+    // 验证必填字段
     if (!email || !username || !password) {
-      console.log('Missing required fields'); 
-      return NextResponse.json({ 
-        error: '请填写所有必填字段' 
-      }, { status: 400 });
+      return NextResponse.json(
+        { error: "请填写所有必填字段" },
+        { status: 400 }
+      );
     }
 
-    // Validate email format
+    // 验证邮箱格式
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      console.log('Invalid email format'); 
-      return NextResponse.json({ error: '邮箱格式不正确' }, { status: 400 });
+      return NextResponse.json({ error: "邮箱格式不正确" }, { status: 400 });
     }
 
-    // Validate username length
-    if (username.length < 3 || username.length > 20) {
-      console.log('Invalid username length'); 
-      return NextResponse.json({ error: '用户名长度应在3-20个字符之间' }, { status: 400 });
+    // 验证用户名长度
+    if (username.length < 2 || username.length > 20) {
+      return NextResponse.json(
+        { error: "用户名长度应在2-20个字符之间" },
+        { status: 400 }
+      );
     }
 
-    // Validate password strength
+    // 验证密码长度
     if (password.length < 6) {
-      console.log('Password too short'); 
-      return NextResponse.json({ error: '密码长度至少为6个字符' }, { status: 400 });
+      return NextResponse.json(
+        { error: "密码长度至少为6个字符" },
+        { status: 400 }
+      );
     }
 
-    // Check if email already exists
-    const existingEmail = await prisma.user.findUnique({
-      where: { email }
-    });
+    await connectDB();
+
+    // 检查邮箱是否已存在
+    const existingEmail = await User.findOne({ email });
+
     if (existingEmail) {
-      console.log('Email already exists'); 
-      return NextResponse.json({ error: '该邮箱已被注册' }, { status: 400 });
+      return NextResponse.json({ error: "该邮箱已被注册" }, { status: 400 });
     }
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(password, salt);
+    // 检查用户名是否已存在
+    const existingUsername = await User.findOne({ username });
 
-    // Create new user
-    console.log('Creating new user...'); 
-    const user = await prisma.user.create({
-      data: {
-        email,
-        username,
-        passwordHash
-      }
+    if (existingUsername) {
+      return NextResponse.json({ error: "该用户名已被使用" }, { status: 400 });
+    }
+
+    // 加密密码
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // 创建用户
+    const user = await User.create({
+      email,
+      username,
+      passwordHash: hashedPassword,
+      role: UserRole.FREE
     });
-    console.log('User created successfully:', user.id); 
 
-    // Generate JWT token
-    const token = jwt.sign(
-      { 
-        userId: user.id,
-        email: user.email,
-        username: user.username
-      },
-      process.env.JWT_SECRET || 'fallback-secret',
-      { expiresIn: '30d' }  // 改为30天
-    );
-
-    // 设置响应头
-    const headers = {
-      'Access-Control-Allow-Origin': process.env.NODE_ENV === 'development' 
-        ? 'http://localhost:3000' 
-        : 'https://learnkana.pro',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    };
-
-    // 创建响应
-    const response = NextResponse.json({
-      message: '注册成功',
+    return NextResponse.json({
+      message: "注册成功",
       user: {
-        id: user.id,
+        id: user._id,
         email: user.email,
-        username: user.username
+        username: user.username,
+        role: user.role
       }
-    }, { headers });
-
-    // 设置 cookie
-    response.cookies.set('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 30 * 24 * 60 * 60  // 改为30天
     });
-
-    return response;
 
   } catch (error) {
-    console.error('Registration error details:', error); 
-    
-    // 检查是否是 Prisma 错误
-    if (error && typeof error === 'object' && 'code' in error) {
-      console.error('Prisma error code:', error.code);
-      // 处理特定的 Prisma 错误
-      switch (error.code) {
-        case 'P2002':
-          return NextResponse.json({ error: '该用户名或邮箱已被使用' }, { status: 400 });
-        default:
-          return NextResponse.json({ error: '数据库操作失败' }, { status: 500 });
-      }
-    }
-
+    console.error("注册错误:", error);
     return NextResponse.json(
-      { error: '注册失败，请稍后重试' },
+      { error: "注册失败，请稍后重试" },
       { status: 500 }
     );
   }

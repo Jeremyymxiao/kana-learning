@@ -3,6 +3,7 @@ import { Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/features/auth/components/auth-provider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
+import { SessionProvider } from '@/providers/session-provider'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -56,11 +57,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
-        <AuthProvider>
-          <NavigationProvider>
-            {children}
-          </NavigationProvider>
-        </AuthProvider>
+        <SessionProvider>
+          <AuthProvider>
+            <NavigationProvider>
+              {children}
+            </NavigationProvider>
+          </AuthProvider>
+        </SessionProvider>
       </body>
     </html>
   )
