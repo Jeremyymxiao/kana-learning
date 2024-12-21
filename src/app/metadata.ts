@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "LearnKana | AI-Powered Japanese Hiragana (ひらがな) & Katakana (カタカナ) Learning",
-  description: "Revolutionary AI-powered platform for mastering Japanese writing systems. Our advanced AI tutor provides personalized guidance for Hiragana (平仮名) and Katakana (片仮名), with real-time feedback, intelligent practice suggestions, and adaptive learning paths. Features include AI chat assistance, smart kana converter, interactive quizzes, and visual learning tools with the gojuon chart (五十音図).",
+  description: "Revolutionary AI-powered platform for mastering Japanese Hiragana & Katakana. Our advanced AI tutor provides personalized guidance for Hiragana (平仮名) and Katakana (片仮名), with real-time feedback, intelligent practice suggestions, and adaptive learning paths. Features include AI chat assistance, smart kana converter, interactive quizzes, and visual learning tools with the gojuon chart (五十音図).",
   keywords: [
     "AI japanese tutor",
     "AI language learning",
