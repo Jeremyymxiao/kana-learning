@@ -11,7 +11,7 @@ function LoadingState() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <h2 className="mt-4 text-gray-600">加载中...</h2>
+          <h2 className="mt-4 text-gray-600">Loading...</h2>
         </div>
       </div>
     </div>
@@ -37,45 +37,45 @@ function AuthContent() {
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          {mode === 'login' ? '登录账号' : mode === 'register' ? '注册新账号' : '重置密码'}
+          {mode === 'login' ? 'Sign In' : mode === 'register' ? 'Create Account' : 'Reset Password'}
         </h2>
         
         <div className="mt-2 text-center text-sm text-gray-600">
           {mode === 'login' ? (
             <>
-              还没有账号？{' '}
+              Don't have an account?{' '}
               <button
                 onClick={() => setMode('register')}
                 className="font-medium text-blue-600 hover:text-blue-500"
               >
-                立即注册
+                Sign Up
               </button>
               {' | '}
               <button
                 onClick={() => setMode('reset')}
                 className="font-medium text-blue-600 hover:text-blue-500"
               >
-                忘记密码
+                Forgot Password
               </button>
             </>
           ) : mode === 'register' ? (
             <>
-              已有账号？{' '}
+              Already have an account?{' '}
               <button
                 onClick={() => setMode('login')}
                 className="font-medium text-blue-600 hover:text-blue-500"
               >
-                立即登录
+                Sign In
               </button>
             </>
           ) : (
             <>
-              记起密码了？{' '}
+              Remember your password?{' '}
               <button
                 onClick={() => setMode('login')}
                 className="font-medium text-blue-600 hover:text-blue-500"
               >
-                返回登录
+                Back to Sign In
               </button>
             </>
           )}
@@ -95,4 +95,4 @@ export default function AuthPage() {
       <AuthContent />
     </Suspense>
   );
-} 
+}

@@ -60,16 +60,16 @@ const AuthButtons: React.FC<{ user: AuthUser | null; loading: boolean; signOut: 
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => router.push('/profile')}>
-            个人资料
+            Profile
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push('/settings')}>
-            设置
+            Settings
           </DropdownMenuItem>
           <DropdownMenuItem onClick={async () => {
             await signOut();
             router.push('/');
           }}>
-            退出登录
+            Logout
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -80,7 +80,7 @@ const AuthButtons: React.FC<{ user: AuthUser | null; loading: boolean; signOut: 
     <Button
       onClick={() => router.push('/auth?mode=login')}
     >
-      登录
+      Login
     </Button>
   );
 };

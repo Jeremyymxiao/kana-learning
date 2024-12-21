@@ -34,7 +34,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
     try {
       if (mode === 'register' && password !== confirmPassword) {
-        throw new Error('密码不匹配');
+        throw new Error('Passwords do not match');
       }
 
       switch (mode) {
@@ -47,7 +47,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
         case 'reset':
           await resetPassword(email);
           // 显示成功消息并返回登录页面
-          alert('重置密码邮件已发送，请查收');
+          alert('Password reset email has been sent. Please check your inbox.');
           router.push('/auth?mode=login');
           return;
       }
@@ -85,13 +85,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
         
         <form onSubmit={handleSubmit} className="space-y-4 mb-4">
           <div className="space-y-2">
-            <Label htmlFor="email">邮箱</Label>
+            <Label htmlFor="email">Email</Label>
             <Input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="请输入邮箱"
+              placeholder="Enter your email"
               required
             />
           </div>
@@ -99,13 +99,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
           {mode !== 'reset' && (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <Label htmlFor="password">密码</Label>
+                <Label htmlFor="password">Password</Label>
                 {mode === 'login' && (
                   <Link
                     href="/auth?mode=reset"
                     className="text-sm text-primary hover:underline"
                   >
-                    忘记密码？
+                    Forgot password?
                   </Link>
                 )}
               </div>
@@ -114,7 +114,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="请输入密码"
+                placeholder="Enter your password"
                 required
               />
             </div>
@@ -122,13 +122,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 
           {mode === 'register' && (
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">确认密码</Label>
+              <Label htmlFor="confirmPassword">Confirm your password</Label>
               <Input
                 id="confirmPassword"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="请再次输入密码"
+                placeholder="Enter your password again"
                 required
               />
             </div>
@@ -140,12 +140,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
             disabled={loading}
           >
             {loading
-              ? '处理中...'
+              ? 'Processing...'
               : mode === 'login'
-              ? '登录'
+              ? 'Sign In'
               : mode === 'register'
-              ? '注册'
-              : '重置密码'}
+              ? 'Sign Up'
+              : 'Reset Password'}
           </Button>
         </form>
 
@@ -183,7 +183,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              {loading ? '处理中...' : `使用 Google 账号${mode === 'login' ? '登录' : '注册'}`}
+              {loading ? 'Processing...' : `Continue with Google${mode === 'login' ? ' Sign In' : ' Sign Up'}`}
             </Button>
           </>
         )}
@@ -193,30 +193,30 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
 };
 
 function getErrorMessage(error: any): string {
-  if (error instanceof Error) {
-    const message = error.message.toLowerCase();
+    if (error instanceof Error) {
+      const message = error.message.toLowerCase();
+      
+      if (message.includes('user-not-found')) {
+        return 'User not found';
+      }
+      if (message.includes('wrong-password')) {
+        return 'Incorrect password';
+      }
+      if (message.includes('email-already-in-use')) {
+        return 'Email is already registered';
+      }
+      if (message.includes('weak-password')) {
+        return 'Password is too weak. Please use at least 6 characters';
+      }
+      if (message.includes('invalid-email')) {
+        return 'Invalid email format';
+      }
+      if (message.includes('too-many-requests')) {
+        return 'Too many login attempts. Please try again later';
+      }
+      
+      return error.message;
+    }
     
-    if (message.includes('user-not-found')) {
-      return '用户不存在';
-    }
-    if (message.includes('wrong-password')) {
-      return '密码错误';
-    }
-    if (message.includes('email-already-in-use')) {
-      return '该邮箱已被注册';
-    }
-    if (message.includes('weak-password')) {
-      return '密码强度太弱，请使用至少6个字符';
-    }
-    if (message.includes('invalid-email')) {
-      return '邮箱格式不正确';
-    }
-    if (message.includes('too-many-requests')) {
-      return '登录尝试次数过多，请稍后再试';
-    }
-    
-    return error.message;
+    return 'Operation failed. Please try again later';
   }
-  
-  return '操作失败，请稍后重试';
-} 

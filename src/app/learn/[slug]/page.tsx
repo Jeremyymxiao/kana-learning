@@ -1,10 +1,12 @@
 import { Suspense } from 'react';
-import { getArticleBySlug, getArticleContent } from '@/data/articles';
+import { getArticleBySlug, articles } from '@/data/articles';
 import { notFound } from 'next/navigation';
 import ClientPage from './client-page';
 
 export async function generateStaticParams() {
-  return [{ slug: 'hiragana' }, { slug: 'katakana' }];
+  return articles.map(article => ({
+    slug: article.slug
+  }));
 }
 
 export default async function Page({
@@ -14,7 +16,15 @@ export default async function Page({
 }) {
   try {
     const article = await getArticleBySlug(params.slug);
-    const content = await getArticleContent(params.slug);
+    if (!article) {
+      notFound();
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/articles/${params.slug}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch article content for ${params.slug}`);
+    }
+    const content = await response.text();
 
     return (
       <Suspense fallback={<div>Loading...</div>}>

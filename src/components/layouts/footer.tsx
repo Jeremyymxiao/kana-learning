@@ -44,7 +44,6 @@ export default function Footer() {
                 <li><a href="https://allinai.tools" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">All in AI Tools</a></li>
                 <li><a href="https://SeekAIs.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">SeekAIs</a></li>
                 <li><a href="https://AIToolly.com/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">AIToolly</a></li>
-                <li><a href="https://www.dir2ai.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Dir2AI</a></li>
               </ul>
             </div>
           </div>
