@@ -28,10 +28,13 @@ const nextConfig = {
       style-src 'self' 'unsafe-inline' https://*.googleapis.com;
       img-src 'self' data: https: blob:;
       font-src 'self' https://*.gstatic.com;
-      frame-src 'self' https://*.google.com https://*.firebaseapp.com;
-      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com;
+      frame-src 'self' https://*.google.com https://*.firebaseapp.com https://accounts.google.com;
+      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com wss://*.firebaseio.com;
       media-src 'self';
       object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      upgrade-insecure-requests;
     `;
 
     return [
@@ -56,13 +59,13 @@ const nextConfig = {
           },
           {
             key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin-allow-popups',
+            value: 'unsafe-none',
           },
           {
             key: 'Cross-Origin-Embedder-Policy',
-            value: 'credentialless',
+            value: 'unsafe-none',
           },
-          // 添加 Content Security Policy
+          // 更新 Content Security Policy
           {
             key: 'Content-Security-Policy',
             value: cspConfig.replace(/\s+/g, ' ').trim(),

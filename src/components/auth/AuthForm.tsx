@@ -61,18 +61,22 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      setError(null);
-      setLoading(true);
-      await signInWithGoogle();
-      router.push(returnTo);
-    } catch (err) {
-      setError(getErrorMessage(err));
-    } finally {
-      setLoading(false);
-    }
-  };
+  function handleGoogleSignIn(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    signInWithGoogle()
+      .then(() => {
+        router.push(returnTo);
+      })
+      .catch((err) => {
+        setError(getErrorMessage(err));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
 
   return (
     <Card className="w-full max-w-md mx-auto">

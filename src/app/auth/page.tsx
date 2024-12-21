@@ -27,9 +27,9 @@ function AuthContent() {
   );
 
   useEffect(() => {
-    if (user) {
-      const returnTo = searchParams?.get('returnTo') || '/';
-      router.push(returnTo);
+    const returnTo = searchParams?.get('returnTo') || '/';
+    if (user && window.location.pathname === '/auth') {
+      router.replace(returnTo);
     }
   }, [user, router, searchParams]);
 
