@@ -2,38 +2,37 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { useAuth } from '@/providers/AuthProvider';
 import MainLayout from '@/components/layouts/main-layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert } from '@/components/ui/alert';
+import { updateProfile, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 
 export default function SettingsPage() {
   const router = useRouter();
-  const { user, isLoading } = useAuth();
+  const { user, loading } = useAuth();
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
+    displayName: '',
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   });
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!loading && !user) {
       router.push('/login');
     } else if (user) {
       setFormData(prev => ({
         ...prev,
-        username: user.username,
-        email: user.email
+        displayName: user.displayName || '',
       }));
     }
-  }, [user, isLoading, router]);
+  }, [user, loading, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -46,40 +45,52 @@ export default function SettingsPage() {
     e.preventDefault();
     setError(null);
     setSuccess(null);
-    setLoading(true);
+    setIsSubmitting(true);
 
     try {
-      // Validate form
-      if (formData.newPassword && formData.newPassword.length < 6) {
-        throw new Error('New password must be at least 6 characters');
+      if (!user) {
+        throw new Error('You must be logged in to update your profile');
       }
 
-      if (formData.newPassword !== formData.confirmPassword) {
-        throw new Error('New passwords do not match');
+      // 更新显示名称
+      if (formData.displayName !== user.displayName) {
+        await updateProfile(user, {
+          displayName: formData.displayName
+        });
       }
 
-      // Call API to update user info
-      const response = await fetch('/api/user/update', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          currentPassword: formData.currentPassword,
-          newPassword: formData.newPassword,
-        }),
-      });
+      // 更新密码
+      if (formData.newPassword) {
+        // 验证密码长度
+        if (formData.newPassword.length < 6) {
+          throw new Error('New password must be at least 6 characters');
+        }
 
-      const data = await response.json();
+        // 确认密码匹配
+        if (formData.newPassword !== formData.confirmPassword) {
+          throw new Error('New passwords do not match');
+        }
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to update profile');
+        // 重新认证用户
+        if (!formData.currentPassword) {
+          throw new Error('Current password is required to change password');
+        }
+
+        if (!user.email) {
+          throw new Error('No email associated with this account');
+        }
+
+        const credential = EmailAuthProvider.credential(
+          user.email,
+          formData.currentPassword
+        );
+
+        await reauthenticateWithCredential(user, credential);
+        await updatePassword(user, formData.newPassword);
       }
 
-      setSuccess('Settings saved successfully');
-      // Clear password fields
+      setSuccess('Settings updated successfully');
+      // 清除密码字段
       setFormData(prev => ({
         ...prev,
         currentPassword: '',
@@ -89,11 +100,11 @@ export default function SettingsPage() {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update profile');
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
-  if (isLoading) {
+  if (loading) {
     return (
       <MainLayout>
         <div className="container mx-auto p-6">
@@ -131,16 +142,16 @@ export default function SettingsPage() {
               )}
 
               <div>
-                <label htmlFor="username" className="block text-sm font-medium mb-1">
-                  Username
+                <label htmlFor="displayName" className="block text-sm font-medium mb-1">
+                  Display Name
                 </label>
                 <Input
-                  id="username"
-                  name="username"
+                  id="displayName"
+                  name="displayName"
                   type="text"
-                  value={formData.username}
+                  value={formData.displayName}
                   onChange={handleChange}
-                  disabled={loading}
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -152,10 +163,12 @@ export default function SettingsPage() {
                   id="email"
                   name="email"
                   type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled={loading}
+                  value={user.email || ''}
+                  disabled
                 />
+                <p className="mt-1 text-sm text-gray-500">
+                  Email cannot be changed
+                </p>
               </div>
 
               <div className="pt-4 border-t">
@@ -172,7 +185,7 @@ export default function SettingsPage() {
                       type="password"
                       value={formData.currentPassword}
                       onChange={handleChange}
-                      disabled={loading}
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -186,7 +199,7 @@ export default function SettingsPage() {
                       type="password"
                       value={formData.newPassword}
                       onChange={handleChange}
-                      disabled={loading}
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -200,7 +213,7 @@ export default function SettingsPage() {
                       type="password"
                       value={formData.confirmPassword}
                       onChange={handleChange}
-                      disabled={loading}
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -211,15 +224,15 @@ export default function SettingsPage() {
                   type="button"
                   variant="outline"
                   onClick={() => router.back()}
-                  disabled={loading}
+                  disabled={isSubmitting}
                 >
                   Cancel
                 </Button>
                 <Button
                   type="submit"
-                  disabled={loading}
+                  disabled={isSubmitting}
                 >
-                  {loading ? 'Saving...' : 'Save Changes'}
+                  {isSubmitting ? 'Saving...' : 'Save Changes'}
                 </Button>
               </div>
             </form>

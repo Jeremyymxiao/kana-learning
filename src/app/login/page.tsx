@@ -1,7 +1,9 @@
+// app/login/page.tsx
 'use client';
 
-import { LoginForm } from '@/features/auth/components/login-form';
+import { Suspense } from 'react';
 import MainLayout from '@/components/layouts/main-layout';
+import { AuthForm } from '@/components/auth/AuthForm';
 
 export default function LoginPage() {
   return (
@@ -17,7 +19,9 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <LoginForm />
+          <Suspense fallback={<div>Loading...</div>}>
+            <AuthForm mode="login" />
+          </Suspense>
         </div>
       </div>
     </MainLayout>

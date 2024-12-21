@@ -2,22 +2,22 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/features/auth/hooks/useAuth';
+import { useAuth } from '@/providers/AuthProvider';
 import MainLayout from '@/components/layouts/main-layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { user, isLoading } = useAuth();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!loading && !user) {
       router.push('/login');
     }
-  }, [user, isLoading, router]);
+  }, [user, loading, router]);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <MainLayout>
         <div className="container mx-auto p-6">
@@ -43,12 +43,16 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="text-sm font-medium">Username</label>
-                <p className="mt-1">{user.username}</p>
+                <label className="text-sm font-medium">Display Name</label>
+                <p className="mt-1">{user.displayName || 'Not set'}</p>
               </div>
               <div>
                 <label className="text-sm font-medium">Email</label>
                 <p className="mt-1">{user.email}</p>
+              </div>
+              <div>
+                <label className="text-sm font-medium">Email Verified</label>
+                <p className="mt-1">{user.emailVerified ? 'Yes' : 'No'}</p>
               </div>
               <Button 
                 variant="outline"

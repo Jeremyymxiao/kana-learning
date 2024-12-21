@@ -1,7 +1,8 @@
 'use client';
 
-import { RegisterForm } from '@/features/auth/components/register-form';
+import { Suspense } from 'react';
 import MainLayout from '@/components/layouts/main-layout';
+import { AuthForm } from '@/components/auth/AuthForm';
 
 export default function RegisterPage() {
   return (
@@ -17,7 +18,9 @@ export default function RegisterPage() {
             </p>
           </div>
 
-          <RegisterForm />
+          <Suspense fallback={<div>Loading...</div>}>
+            <AuthForm mode="register" />
+          </Suspense>
         </div>
       </div>
     </MainLayout>

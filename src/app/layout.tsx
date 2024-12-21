@@ -1,9 +1,8 @@
 import { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
-import { AuthProvider } from '@/features/auth/components/auth-provider'
+import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
-import { SessionProvider } from '@/providers/session-provider'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -27,6 +26,7 @@ export const metadata: Metadata = {
     }
   }
 };
+
 
 // 添加结构化数据
 const jsonLd = {
@@ -57,13 +57,11 @@ export default function RootLayout({
         />
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
-        <SessionProvider>
-          <AuthProvider>
-            <NavigationProvider>
-              {children}
-            </NavigationProvider>
-          </AuthProvider>
-        </SessionProvider>
+        <AuthProvider>
+          <NavigationProvider>
+            {children}
+          </NavigationProvider>
+        </AuthProvider>
       </body>
     </html>
   )

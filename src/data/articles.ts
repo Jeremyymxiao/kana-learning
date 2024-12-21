@@ -91,17 +91,34 @@ export interface Article {
   ];
 
 export async function getArticleContent(slug: string): Promise<string> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  
   try {
-    const content = await import(`!!raw-loader!./articles/${slug}.md`);
-    return content.default;
+    const response = await fetch(`${baseUrl}/articles/${slug}.md`);
+    if (!response.ok) {
+      throw new Error('Article not found');
+    }
+    return response.text();
   } catch (error) {
-    console.error(`Failed to load article content for ${slug}:`, error);
-    throw new Error(`Article content not found for ${slug}`);
+    console.log(`Article content not found for ${slug}, using default template`);
+    const defaultResponse = await fetch(`${baseUrl}/articles/default.md`);
+    return defaultResponse.text();
   }
 }
 
-export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
-  return articles.find(article => article.slug === slug);
+export async function getArticleBySlug(slug: string): Promise<Article> {
+  const article = articles.find(article => article.slug === slug);
+  if (!article) {
+    return {
+      id: slug,
+      slug: slug,
+      title: 'Coming Soon',
+      description: 'This article is currently under development.',
+      tags: ['upcoming'],
+      publishedAt: new Date().toISOString().split('T')[0]
+    };
+  }
+  return article;
 }
 
 export async function getArticlesByTag(tag: string): Promise<Article[]> {

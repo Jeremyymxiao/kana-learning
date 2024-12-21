@@ -22,6 +22,18 @@ const nextConfig = {
 
   // 安全头配置
   headers: async () => {
+    const cspConfig = `
+      default-src 'self';
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.google.com https://*.googleapis.com https://*.firebaseapp.com https://*.gstatic.com;
+      style-src 'self' 'unsafe-inline' https://*.googleapis.com;
+      img-src 'self' data: https: blob:;
+      font-src 'self' https://*.gstatic.com;
+      frame-src 'self' https://*.google.com https://*.firebaseapp.com;
+      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com;
+      media-src 'self';
+      object-src 'none';
+    `;
+
     return [
       {
         source: '/:path*',
@@ -42,17 +54,18 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
           },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups',
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'credentialless',
+          },
           // 添加 Content Security Policy
           {
             key: 'Content-Security-Policy',
-            value: `
-              default-src 'self';
-              script-src 'self' 'unsafe-eval' 'unsafe-inline';
-              style-src 'self' 'unsafe-inline';
-              img-src 'self' data: https:;
-              font-src 'self';
-              connect-src 'self' https://api.deepseek.com;
-            `.replace(/\s+/g, ' ').trim(),
+            value: cspConfig.replace(/\s+/g, ' ').trim(),
           },
         ],
       },
@@ -89,7 +102,7 @@ const nextConfig = {
 
   // webpack 配置
   webpack: (config) => {
-    // 现有的静态资源处理
+    // 有的静态资源处理
     config.module.rules.push({
       test: /\.(woffcss)$/,
       type: 'asset/resource',

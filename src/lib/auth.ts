@@ -1,10 +1,25 @@
-import { auth } from "@/app/api/auth/[...nextauth]/route"
+import { auth } from '@/lib/firebase';
+import { User } from 'firebase/auth';
 
-export async function getSession() {
-  return await auth()
+export async function getCurrentUser(): Promise<User | null> {
+  return new Promise((resolve) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      unsubscribe();
+      resolve(user);
+    });
+  });
 }
 
-export async function getCurrentUser() {
-  const session = await auth()
-  return session?.user
+export function getAuthToken(): Promise<string | null> {
+  return new Promise((resolve) => {
+    const unsubscribe = auth.onIdTokenChanged(async (user) => {
+      unsubscribe();
+      if (!user) {
+        resolve(null);
+        return;
+      }
+      const token = await user.getIdToken();
+      resolve(token);
+    });
+  });
 }

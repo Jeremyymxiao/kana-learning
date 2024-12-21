@@ -14,10 +14,6 @@ export default async function Page({
 }) {
   try {
     const article = await getArticleBySlug(params.slug);
-    if (!article) {
-      notFound();
-    }
-
     const content = await getArticleContent(params.slug);
 
     return (
