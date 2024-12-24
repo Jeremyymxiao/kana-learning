@@ -6,21 +6,20 @@ const withMDX = require('@next/mdx')({
 
 const nextConfig = {
   reactStrictMode: true,
-  
-  // 环境变量配置
-  env: {
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-    GITHUB_ID: process.env.GITHUB_ID,
-    GITHUB_SECRET: process.env.GITHUB_SECRET,
-    YOUDAO_APP_KEY: process.env.YOUDAO_APP_KEY,
-    YOUDAO_APP_SECRET: process.env.YOUDAO_APP_SECRET,
+  images: {
+    domains: [
+      'lh3.googleusercontent.com',
+      'avatars.githubusercontent.com',
+      'images.unsplash.com'
+    ],
   },
-
-  // 页面扩展名配置
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-
-  // 安全头配置
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.md$/,
+      use: 'raw-loader',
+    });
+    return config;
+  },
   headers: async () => {
     const cspConfig = `
       default-src 'self';
@@ -29,7 +28,7 @@ const nextConfig = {
       img-src 'self' data: https: blob:;
       font-src 'self' https://*.gstatic.com;
       frame-src 'self' https://*.google.com https://*.firebaseapp.com https://accounts.google.com;
-      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com wss://*.firebaseio.com;
+      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com wss://*.firebaseio.com https://*.learnkana.pro;
       media-src 'self';
       object-src 'none';
       base-uri 'self';
@@ -59,13 +58,12 @@ const nextConfig = {
           },
           {
             key: 'Cross-Origin-Opener-Policy',
-            value: 'unsafe-none',
+            value: 'same-origin-allow-popups',
           },
           {
             key: 'Cross-Origin-Embedder-Policy',
-            value: 'unsafe-none',
+            value: 'require-corp',
           },
-          // 更新 Content Security Policy
           {
             key: 'Content-Security-Policy',
             value: cspConfig.replace(/\s+/g, ' ').trim(),
@@ -82,49 +80,7 @@ const nextConfig = {
         ],
       },
     ];
-  },
-
-  // 添加跨域配置
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: '/api/:path*',
-      },
-    ];
-  },
-
-  // 启用实验性功能
-  experimental: {
-    typedRoutes: true,
-    serverActions: {
-      bodySizeLimit: '10mb',
-      timeout: 60000, // 60 seconds
-    },
-  },
-
-  // webpack 配置
-  webpack: (config) => {
-    // 有的静态资源处理
-    config.module.rules.push({
-      test: /\.(woffcss)$/,
-      type: 'asset/resource',
-    });
-
-    // 添加 Markdown 处理
-    config.module.rules.push({
-      test: /\.md$/,
-      use: 'raw-loader',
-    });
-
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        'process.env.NEXT_PUBLIC_APP_ENV': JSON.stringify(process.env.NODE_ENV),
-      })
-    );
-
-    return config;
-  },
+  }
 };
 
 // 使用 withMDX 包装配置

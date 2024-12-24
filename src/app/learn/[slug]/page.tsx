@@ -2,6 +2,8 @@ import { Suspense } from 'react';
 import { getArticleBySlug, articles } from '@/data/articles';
 import { notFound } from 'next/navigation';
 import ClientPage from './client-page';
+import fs from 'fs/promises';
+import path from 'path';
 
 export async function generateStaticParams() {
   return articles.map(article => ({
@@ -20,11 +22,8 @@ export default async function Page({
       notFound();
     }
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/articles/${params.slug}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch article content for ${params.slug}`);
-    }
-    const content = await response.text();
+    const filePath = path.join(process.cwd(), 'public', 'articles', `${params.slug}.md`);
+    const content = await fs.readFile(filePath, 'utf-8');
 
     return (
       <Suspense fallback={<div>Loading...</div>}>
