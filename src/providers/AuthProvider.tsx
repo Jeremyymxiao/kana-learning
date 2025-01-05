@@ -1,6 +1,7 @@
+
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useRef } from 'react';
 import {
   signInWithPopup,
   signInWithRedirect,
@@ -29,27 +30,75 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const initialized = useRef(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user as AuthUser);
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
-    });
+    if (initialized.current) return;
+    initialized.current = true;
 
-    return () => unsubscribe();
+    console.log('AuthProvider initialized');
+    let unsubscribe: (() => void) | undefined;
+
+    const handleAuth = async () => {
+      try {
+        console.log('Checking redirect result...');
+        const result = await getRedirectResult(auth);
+        console.log('Redirect result:', result);
+        
+        if (result) {
+          console.log('Setting user from redirect result');
+          setUser(result.user as AuthUser);
+          setLoading(false);
+        } else {
+          console.log('Setting up auth state listener');
+          unsubscribe = onAuthStateChanged(auth, (user) => {
+            console.log('Auth state changed:', user);
+            if (user) {
+              setUser(user as AuthUser);
+            } else {
+              setUser(null);
+            }
+            setLoading(false);
+          });
+        }
+      } catch (error) {
+        console.error('Auth Error:', error);
+        setError((error as Error).message);
+        setLoading(false);
+      }
+    };
+
+    handleAuth();
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
   }, []);
 
   const signInWithGoogle = async () => {
     try {
+      console.log('Starting Google sign in...');
       setError(null);
-      const result = await signInWithPopup(auth, googleProvider);
-      setUser(result.user as AuthUser);
+      setLoading(true);
+      
+      // 在重定向之前保存当前 URL
+      const currentPath = window.location.pathname + window.location.search;
+      sessionStorage.setItem('redirectPath', currentPath);
+      
+      // 设置自定义参数
+      googleProvider.setCustomParameters({
+        prompt: 'select_account',
+        access_type: 'offline'
+      });
+      
+      console.log('Redirecting to Google...');
+      await signInWithRedirect(auth, googleProvider);
     } catch (error) {
+      console.error('Google sign in error:', error);
       setError((error as Error).message);
+      setLoading(false);
       throw error;
     }
   };

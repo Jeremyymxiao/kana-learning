@@ -1,8 +1,8 @@
-import { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
+import { metadata } from './metadata'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -10,36 +10,7 @@ const notoSansJP = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://learnkana.pro'),
-  title: {
-    template: '%s | LearnKana',
-    default: 'LearnKana | Japanese Kana Learning & Converter'
-  },
-  description: 'Learn Japanese Hiragana & Katakana with interactive tools. Free online converter and study materials.',
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/en',
-      'ja-JP': '/ja',
-      'zh-CN': '/zh'
-    }
-  },
-  icons: {
-    icon: [
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png' }
-    ],
-    other: [
-      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
-    ]
-  }
-};
-
+export { metadata }
 
 // 添加结构化数据
 const jsonLd = {

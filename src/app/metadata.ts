@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "LearnKana | AI-Powered Japanese Hiragana (ひらがな) & Katakana (カタカナ) Learning",
-  description: "Revolutionary AI-powered platform for mastering Japanese Hiragana & Katakana. Our advanced AI tutor provides personalized guidance for Hiragana (平仮名) and Katakana (片仮名), with real-time feedback, intelligent practice suggestions, and adaptive learning paths. Features include AI chat assistance, smart kana converter, interactive quizzes, and visual learning tools with the gojuon chart (五十音図).",
+  title: "Learn Hiragana & Katakana: Tools for Beginners",
+  description: "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
   keywords: [
     "AI japanese tutor",
     "AI language learning",
@@ -14,31 +14,28 @@ export const metadata: Metadata = {
     "カタカナ",
     "平仮名",
     "片仮名",
-    "gojuon",
-    "五十音図",
-    "dakuten",
-    "濁点",
-    "handakuten",
-    "半濁点",
-    "japanese kana",
-    "kana chart",
-    "learn hiragana",
-    "learn katakana",
-    "hiragana converter",
-    "katakana converter",
-    "japanese alphabet",
-    "japanese writing system",
-    "learn japanese",
-    "japanese for beginners",
-    "kana practice",
-    "japanese characters",
-    "japanese study",
-    "japanese learning tools",
-    "romaji to hiragana",
-    "romaji to katakana",
-    "japanese pronunciation",
-    "japanese writing practice"
   ],
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en',
+      'ja-JP': '/ja',
+      'zh-CN': '/zh'
+    }
+  },
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png' }
+    ],
+    other: [
+      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ]
+  },
   openGraph: {
     title: "LearnKana | AI-Powered Japanese Writing System Learning Platform",
     description: "Experience the future of Japanese language learning with our AI-powered platform. Get personalized tutoring, instant feedback, and adaptive learning for Hiragana (ひらがな) and Katakana (カタカナ) mastery.",
