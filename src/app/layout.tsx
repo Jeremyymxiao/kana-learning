@@ -3,6 +3,7 @@ import './globals.css'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 import { metadata } from './metadata'
+import { Analytics } from "@vercel/analytics/react"
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -44,6 +45,7 @@ export default function RootLayout({
         <AuthProvider>
           <NavigationProvider>
             {children}
+            <Analytics />
           </NavigationProvider>
         </AuthProvider>
       </body>
