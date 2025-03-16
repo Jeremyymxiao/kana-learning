@@ -4,6 +4,7 @@ import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 import { metadata } from './metadata'
 import { Analytics } from "@vercel/analytics/react"
+import Script from 'next/script'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -48,6 +49,19 @@ export default function RootLayout({
             <Analytics />
           </NavigationProvider>
         </AuthProvider>
+        {/* Google Analytics */}
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-0M56J3EFEE" 
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-0M56J3EFEE');
+          `}
+        </Script>
       </body>
     </html>
   )
