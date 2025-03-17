@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { pageview } from '@/lib/gtag';
 
-export default function PageViewTracker() {
+// 创建一个内部组件来使用 useSearchParams
+function PageViewTrackerInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -20,5 +21,14 @@ export default function PageViewTracker() {
     }
   }, [pathname, searchParams]);
 
-  return null; // 这个组件不渲染任何内容
+  return null;
+}
+
+// 主组件使用 Suspense 包裹内部组件
+export default function PageViewTracker() {
+  return (
+    <Suspense fallback={null}>
+      <PageViewTrackerInner />
+    </Suspense>
+  );
 } 

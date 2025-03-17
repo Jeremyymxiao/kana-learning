@@ -3,18 +3,16 @@ import './globals.css'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 import { metadata } from './metadata'
-import { Analytics } from "@vercel/analytics/react"
-import Script from 'next/script'
-import GoogleAnalytics from '@/components/GoogleAnalytics'
-import PageViewTracker from '@/components/PageViewTracker'
+import dynamic from 'next/dynamic'
+
+// 使用动态导入，确保分析组件只在客户端渲染
+const AnalyticsProvider = dynamic(() => import('@/components/AnalyticsProvider'), { ssr: false })
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
   weight: ['400', '500', '700'],
   variable: '--font-noto-sans-jp',
 })
-
-export { metadata }
 
 // 添加结构化数据
 const jsonLd = {
@@ -48,12 +46,12 @@ export default function RootLayout({
         <AuthProvider>
           <NavigationProvider>
             {children}
-            <Analytics />
-            <GoogleAnalytics />
-            <PageViewTracker />
+            <AnalyticsProvider />
           </NavigationProvider>
         </AuthProvider>
       </body>
     </html>
   )
 }
+
+export { metadata }

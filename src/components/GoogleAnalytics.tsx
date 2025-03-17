@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import Script from 'next/script';
 import { GA_MEASUREMENT_ID } from '@/lib/gtag';
 
@@ -11,6 +12,11 @@ declare global {
 }
 
 export default function GoogleAnalytics() {
+  // 确保只在客户端渲染
+  useEffect(() => {
+    // 这个空的 useEffect 确保组件只在客户端渲染
+  }, []);
+
   return (
     <>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
