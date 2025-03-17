@@ -6,6 +6,7 @@ const withMDX = require('@next/mdx')({
 
 const nextConfig = {
   reactStrictMode: true,
+  analytics: true,
   images: {
     domains: [
       'lh3.googleusercontent.com',
@@ -23,12 +24,12 @@ const nextConfig = {
   headers: async () => {
     const cspConfig = `
       default-src 'self';
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.google.com https://*.googleapis.com https://*.firebaseapp.com https://*.gstatic.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.google.com https://*.googleapis.com https://*.firebaseapp.com https://*.gstatic.com https://*.googletagmanager.com;
       style-src 'self' 'unsafe-inline' https://*.googleapis.com;
-      img-src 'self' data: https: blob:;
+      img-src 'self' data: https: blob: https://*.google-analytics.com https://*.googletagmanager.com;
       font-src 'self' https://*.gstatic.com;
       frame-src 'self' https://*.google.com https://*.firebaseapp.com https://accounts.google.com;
-      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com wss://*.firebaseio.com https://*.learnkana.pro;
+      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com wss://*.firebaseio.com https://*.learnkana.pro https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;
       media-src 'self';
       object-src 'none';
       base-uri 'self';

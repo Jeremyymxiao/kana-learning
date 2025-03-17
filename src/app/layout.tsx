@@ -5,6 +5,8 @@ import { NavigationProvider } from '@/features/kana/components/navigation-provid
 import { metadata } from './metadata'
 import { Analytics } from "@vercel/analytics/react"
 import Script from 'next/script'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
+import PageViewTracker from '@/components/PageViewTracker'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -41,25 +43,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* Google Analytics */}
-        <Script 
-          src="https://www.googletagmanager.com/gtag/js?id=G-0M56J3EFEE" 
-          strategy="beforeInteractive"
-        />
-        <Script id="google-analytics" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-0M56J3EFEE');
-          `}
-        </Script>
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
         <AuthProvider>
           <NavigationProvider>
             {children}
             <Analytics />
+            <GoogleAnalytics />
+            <PageViewTracker />
           </NavigationProvider>
         </AuthProvider>
       </body>
