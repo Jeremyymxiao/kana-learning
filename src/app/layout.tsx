@@ -3,10 +3,7 @@ import './globals.css'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 import { metadata } from './metadata'
-import dynamic from 'next/dynamic'
-
-// 使用动态导入，确保分析组件只在客户端渲染
-const AnalyticsProvider = dynamic(() => import('@/components/AnalyticsProvider'), { ssr: false })
+import { Analytics } from "@vercel/analytics/react"
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -41,12 +38,24 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Google Analytics - 直接内联脚本 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0M56J3EFEE"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-0M56J3EFEE');
+            `
+          }}
+        />
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
         <AuthProvider>
           <NavigationProvider>
             {children}
-            <AnalyticsProvider />
+            <Analytics />
           </NavigationProvider>
         </AuthProvider>
       </body>

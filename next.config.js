@@ -21,6 +21,8 @@ const nextConfig = {
     });
     return config;
   },
+  // 临时禁用 CSP 配置
+  /*
   headers: async () => {
     const cspConfig = `
       default-src 'self';
@@ -82,6 +84,7 @@ const nextConfig = {
       },
     ];
   }
+  */
 };
 
 // 使用 withMDX 包装配置
