@@ -26,12 +26,12 @@ const nextConfig = {
   headers: async () => {
     const cspConfig = `
       default-src 'self';
-      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.google.com https://*.googleapis.com https://*.firebaseapp.com https://*.gstatic.com https://*.googletagmanager.com;
+      script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.google.com https://*.googleapis.com https://*.firebaseapp.com https://*.gstatic.com https://*.googletagmanager.com https://*.clarity.ms;
       style-src 'self' 'unsafe-inline' https://*.googleapis.com;
-      img-src 'self' data: https: blob: https://*.google-analytics.com https://*.googletagmanager.com;
+      img-src 'self' data: https: blob: https://*.google-analytics.com https://*.googletagmanager.com https://*.clarity.ms https://*.clarity.ms https://*.bing.com https://*.bing.net;
       font-src 'self' https://*.gstatic.com;
       frame-src 'self' https://*.google.com https://*.firebaseapp.com https://accounts.google.com;
-      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com wss://*.firebaseio.com https://*.learnkana.pro https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;
+      connect-src 'self' https://*.googleapis.com https://*.google.com https://*.firebaseapp.com https://*.firebaseio.com https://identitytoolkit.googleapis.com wss://*.firebaseio.com https://*.learnkana.pro https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.clarity.ms https://*.clarity.ms https://*.bing.com https://*.bing.net;
       media-src 'self';
       object-src 'none';
       base-uri 'self';
