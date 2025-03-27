@@ -2,7 +2,7 @@ import { Noto_Sans_JP } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
-import { metadata } from './metadata'
+import { metadata, structuredData } from './metadata'
 import { Analytics } from "@vercel/analytics/react"
 
 const notoSansJP = Noto_Sans_JP({ 
@@ -10,21 +10,6 @@ const notoSansJP = Noto_Sans_JP({
   weight: ['400', '500', '700'],
   variable: '--font-noto-sans-jp',
 })
-
-// 添加结构化数据
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  name: 'LearnKana',
-  description: 'Japanese Kana Learning Platform with Hiragana/Katakana Converter',
-  applicationCategory: 'EducationalApplication',
-  operatingSystem: 'Web',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD'
-  }
-};
 
 export default function RootLayout({
   children,
@@ -36,7 +21,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {/* Google Analytics - 直接内联脚本 */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0M56J3EFEE"></script>

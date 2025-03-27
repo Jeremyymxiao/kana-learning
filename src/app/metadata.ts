@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Learn Hiragana & Katakana: Tools for Beginners",
+  title: "LearnKana | Free AI-Powered Hiragana & Katakana Quiz Tool",
   description: "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
   keywords: [
     "AI japanese tutor",
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     ]
   },
   openGraph: {
-    title: "LearnKana | AI-Powered Japanese Writing System Learning Platform",
-    description: "Experience the future of Japanese language learning with our AI-powered platform. Get personalized tutoring, instant feedback, and adaptive learning for Hiragana (ひらがな) and Katakana (カタカナ) mastery.",
+    title: "LearnKana | Free AI-Powered Hiragana & Katakana Quiz Tool",
+    description: "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
     type: "website",
     locale: "en_US",
     alternateLocale: ["ja_JP", "zh_CN"],
@@ -50,10 +50,17 @@ export const metadata: Metadata = {
 export const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "LearnKana - AI-Powered Japanese Writing System Learning Platform",
+  "name": "LearnKana | Free AI-Powered Hiragana & Katakana Quiz Tool",
   "alternateName": ["Learn Kana", "AI Japanese Learning", "ひらがな・カタカナ学習"],
-  "description": "Revolutionary AI-powered platform for learning Japanese Hiragana and Katakana writing systems with personalized tutoring",
+  "description": "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
   "url": "https://learnkana.pro",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
   "potentialAction": {
     "@type": "SearchAction",
     "target": "https://learnkana.pro/search?q={search_term_string}",

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://learnkana.com/sitemap.xml',
+    sitemap: 'https://learnkana.pro/sitemap.xml',
   }
 }

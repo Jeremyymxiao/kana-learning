@@ -1,5 +1,66 @@
 # 项目进度记录
 
+## 2024-03-27: 优化首页SEO
+
+### 已完成：
+- 优化首页内容，控制总词数在800-1000之间
+- 增加"Hiragana & Katakana Quiz"关键词密度至3.5%-4%
+- 重构页面标题和描述，使其更专注于核心功能
+- 精简冗余内容，保留最具SEO价值的部分
+- 优化FAQ部分，提高相关性和关键词集中度
+
+### 目的：
+- 提高搜索引擎排名和点击率
+- 明确传达网站核心功能和价值主张
+- 增强目标关键词的权重
+- 减少页面加载时间，提升用户体验
+
+## 2024-03-27: 简化元数据管理
+
+### 已完成：
+- 删除了layout.tsx中重复的jsonLd对象，消除了元数据定义的重复
+- 在metadata.ts中补充了之前jsonLd中的applicationCategory、operatingSystem和offers属性
+- 实现元数据的集中管理，所有元数据现在只在metadata.ts中定义
+- 简化了layout.tsx，只保留必要的structuredData注入
+
+### 目的：
+- 减少冗余，降低维护成本
+- 避免不同位置的元数据定义不一致的问题
+- 实现更清晰的关注点分离，元数据定义与布局定义分开
+
+## 2024-03-27: 修改网站标题
+
+### 已完成：
+- 将网站标题从"Learn Hiragana & Katakana: Tools for Beginners"修改为"LearnKana | Free AI-Powered Hiragana & Katakana Quiz Tool"
+- 更新了metadata.ts中的title、openGraph.title和structuredData.name
+- 更新了layout.tsx中jsonLd对象的name属性
+- 保持所有元数据命名一致性
+- 重新构建项目以应用标题更改
+
+### 目的：
+- 优化SEO，使标题更能突出网站的核心功能和价值
+- 添加"Free"和"AI-Powered"等关键词，提高点击率
+- 保持网站品牌"LearnKana"的一致性
+
+## 2024-03-27: 修复metadata不一致问题
+
+### 已完成：
+- 修复了网站metadata与Google搜索结果不一致的问题
+- 统一了layout.tsx中的jsonLd对象与metadata.ts中的title和description
+- 从metadata.ts导入structuredData并添加到页面head部分
+- 更新了openGraph配置中的title和description，使其与基本metadata保持一致
+- 验证了robots.ts中sitemap URL配置正确使用了learnkana.pro域名
+- 重新构建项目以应用所有元数据更改
+
+### 问题原因：
+- layout.tsx中的jsonLd对象与metadata.ts中定义的元数据不一致
+- 页面中未包含structuredData结构化数据
+- openGraph配置的title和description与基本metadata存在差异
+
+### 后续行动：
+- 监控Google Search Console，确认网站被重新索引
+- 定期检查Google搜索结果，验证metadata更改是否生效
+
 ## 2023-12-22: 添加Google Analytics
 
 ### 已完成：
