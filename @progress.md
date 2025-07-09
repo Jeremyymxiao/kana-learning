@@ -1,5 +1,54 @@
 # 项目进度记录
 
+## 2024-12-22: 添加首页Hero部分CTA按钮
+
+### 已完成：
+- 在首页Hero部分添加了突出的CTA按钮
+- 按钮链接到 `/hiragana-katakana-quiz` 页面
+- 使用了渐变背景色彩 (from-[#FF7E67] to-[#FFD600])，与网站整体设计风格保持一致
+- 添加了hover动画效果：
+  - 按钮缩放效果 (hover:scale-105)
+  - 箭头图标平移效果 (group-hover:translate-x-1)
+  - 阴影变化效果 (hover:shadow-xl)
+- 按钮文字："Start Hiragana & Katakana Quiz"
+- 调整了描述文字的底部边距以配合新按钮的布局
+
+### 技术细节：
+- 使用Next.js Link组件确保客户端路由
+- 采用Tailwind CSS进行样式设计
+- 使用Lucide React的ArrowRight图标
+- 响应式设计，在各设备上都能良好显示
+- 保持与现有Hero部分设计语言的一致性
+
+### 目的：
+- 提高用户转化率，引导用户直接参与测验
+- 增强首页的行动导向性
+- 提升用户体验，减少用户寻找测验功能的时间
+
+## 2024-12-22: 添加友情链接到Footer
+
+### 已完成：
+- 在Footer组件中新增"Friend Links"部分
+- 调整了Footer的网格布局，将Company Info、Quick Links、Legal部分从col-span-3调整为col-span-2
+- 添加了6个友情链接，使用域名核心词作为显示名称：
+  - Ramen (https://ramen.tools/@JeremyXiao)
+  - FFS (https://www.ffs.com/changman)
+  - Ramen Docs (https://ramen.tools/docs/developer)
+  - Rollr (https://rollr.io/profile/dashboard)
+  - Ramen Book (https://ramen.tools/book/demo/)
+  - Jeremy (https://jeremym.carrd.co/)
+- 保持了与现有Footer样式的一致性，包括hover效果和外部链接属性
+
+### 技术细节：
+- 使用target="_blank"和rel="noopener noreferrer"确保外部链接的安全性
+- 保持响应式设计，在移动端和桌面端都能正常显示
+- 友情链接使用与其他Footer链接相同的样式和交互效果
+
+### 目的：
+- 增强网站的外部合作关系展示
+- 提供更多相关资源链接给用户
+- 增强网站的社交网络价值
+
 ## 2024-03-27: 增加首页内容和FAQ
 
 ### 已完成：

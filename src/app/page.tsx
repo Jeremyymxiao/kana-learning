@@ -33,9 +33,20 @@ export default function LandingPage() {
               </span>
             </h1>
             
-            <p className="text-2xl md:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-16">
+            <p className="text-2xl md:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-12">
               Master Japanese kana with our interactive Hiragana & Katakana Quiz platform featuring AI assistance and custom learning paths.
             </p>
+
+            {/* CTA Button */}
+            <div className="mb-16">
+              <Link 
+                href="/hiragana-katakana-quiz"
+                className="inline-flex items-center px-8 py-4 text-xl font-bold bg-gradient-to-r from-[#FF7E67] to-[#FFD600] text-[#1A1B2F] rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl group"
+              >
+                Start Hiragana & Katakana Quiz
+                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
 
             {/* 功能预览列表 */}
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center">

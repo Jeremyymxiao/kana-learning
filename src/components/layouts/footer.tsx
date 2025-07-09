@@ -7,7 +7,7 @@ export default function Footer() {
           {/* Footer Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             {/* Company Info */}
-            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
+            <div className="md:col-span-2 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-xl font-bold mb-4">LearnKana</h3>
               <p className="text-gray-400 mb-4">
                 Making Japanese learning accessible and enjoyable for everyone.
@@ -15,7 +15,7 @@ export default function Footer() {
             </div>
   
             {/* Quick Links */}
-            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
+            <div className="md:col-span-2 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li><Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
@@ -25,12 +25,25 @@ export default function Footer() {
             </div>
   
             {/* Legal */}
-            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
+            <div className="md:col-span-2 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4">Legal</h3>
               <ul className="space-y-2">
                 <li><Link href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
                 <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/contact-us" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+              </ul>
+            </div>
+
+            {/* Friend Links */}
+            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
+              <h3 className="text-lg font-semibold mb-4">Friend Links</h3>
+              <ul className="space-y-2">
+                <li><a href="https://ramen.tools/@JeremyXiao" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Ramen</a></li>
+                <li><a href="https://www.ffs.com/changman" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">FFS</a></li>
+                <li><a href="https://ramen.tools/docs/developer" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Ramen Docs</a></li>
+                <li><a href="https://rollr.io/profile/dashboard" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Rollr</a></li>
+                <li><a href="https://ramen.tools/book/demo/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Ramen Book</a></li>
+                <li><a href="https://jeremym.carrd.co/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Jeremy</a></li>
               </ul>
             </div>
 

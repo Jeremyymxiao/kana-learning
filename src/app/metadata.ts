@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "LearnKana | Free AI-Powered Hiragana & Katakana Quiz Tool",
+  title: "LearnKana | Free Hiragana & Katakana Quiz and Chatbot",
   description: "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
   keywords: [
     "AI japanese tutor",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 export const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "LearnKana | Free AI-Powered Hiragana & Katakana Quiz Tool",
+  "name": "LearnKana | Free Hiragana & Katakana Quiz and Chatbot",
   "alternateName": ["Learn Kana", "AI Japanese Learning", "ひらがな・カタカナ学習"],
   "description": "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
   "url": "https://learnkana.pro",
