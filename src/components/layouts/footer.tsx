@@ -38,6 +38,7 @@ export default function Footer() {
             <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4">Friend Links</h3>
               <ul className="space-y-2">
+                <li><a href="https://grok-ani.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Grok Ani</a></li>
                 <li><a href="https://ramen.tools/@JeremyXiao" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Ramen</a></li>
                 <li><a href="https://www.ffs.com/changman" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">FFS</a></li>
                 <li><a href="https://ramen.tools/docs/developer" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Ramen Docs</a></li>

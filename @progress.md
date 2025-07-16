@@ -1,5 +1,26 @@
 # 项目进度记录
 
+## 2024-12-22: 添加Grok Ani友情链接
+
+### 已完成：
+- 在Footer组件的Friend Links部分第一个位置添加了Grok Ani友情链接
+- 链接URL: https://grok-ani.com
+- 保持与现有友情链接一致的样式：
+  - 使用text-gray-400基础颜色，hover时变为white
+  - 包含transition-colors过渡效果
+  - 设置target="_blank"和rel="noopener noreferrer"属性确保安全性
+
+### 技术细节：
+- 修改文件: src/components/layouts/footer.tsx
+- 在现有的Friend Links列表最前面添加新的<li>元素
+- 保持响应式设计和无障碍访问性
+- 链接文字显示为"Grok Ani"
+
+### 目的：
+- 增强网站的外部合作关系展示
+- 为用户提供更多相关的AI工具资源
+- 加强与Grok Ani网站的友情链接合作
+
 ## 2024-12-22: 添加首页Hero部分CTA按钮
 
 ### 已完成：
