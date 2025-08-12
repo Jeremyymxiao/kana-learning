@@ -20,13 +20,17 @@ export const metadata: Metadata = {
     "假名转换",
     "日语学习"
   ],
+  alternates: {
+    canonical: 'https://learnkana.pro/about'
+  },
   openGraph: {
     title: "LearnKana | Japanese Kana Learning & Converter",
     description: "Learn Japanese Hiragana & Katakana with interactive tools. Free online converter, practice games and study materials.",
     type: "website",
     locale: "zh_CN",
     alternateLocale: ["en_US", "ja_JP"],
-    siteName: "LearnKana"
+    siteName: "LearnKana",
+    url: "https://learnkana.pro/about"
   }
 };
 

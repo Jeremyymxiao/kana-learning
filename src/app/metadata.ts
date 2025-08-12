@@ -16,11 +16,13 @@ export const metadata: Metadata = {
     "片仮名",
   ],
   alternates: {
-    canonical: '/',
+    canonical: 'https://learnkana.pro/',
     languages: {
-      'en-US': '/en',
-      'ja-JP': '/ja',
-      'zh-CN': '/zh'
+      'en': 'https://learnkana.pro/',
+      'de': 'https://learnkana.pro/de',
+      'fr': 'https://learnkana.pro/fr',
+      'pt': 'https://learnkana.pro/pt',
+      'es': 'https://learnkana.pro/es'
     }
   },
   icons: {

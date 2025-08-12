@@ -1,6 +1,11 @@
 import { Metadata } from 'next';
 
-export function generateMetadata(): Metadata {
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  const { locale } = params;
+  const baseUrl = 'https://learnkana.pro';
+  const localePath = locale === 'en' ? '' : `/${locale}`;
+  const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-chart`;
+  
   return {
     title: "Japanese Kana Chart | Interactive Hiragana & Katakana Chart",
     description: "Learn Japanese Hiragana and Katakana with our interactive Gojuon chart. Features clear visuals, audio pronunciation, and practice tools for mastering Japanese writing systems.",
@@ -16,41 +21,51 @@ export function generateMetadata(): Metadata {
       "japanese writing system",
       "kana pronunciation"
     ],
+    alternates: {
+      canonical: canonicalUrl
+    },
     openGraph: {
       title: "Interactive Japanese Kana Chart | LearnKana",
       description: "Master Japanese Hiragana and Katakana with our interactive Gojuon chart. Clear visuals and audio pronunciation.",
       type: "website",
       locale: "en_US",
-      url: "https://learnkana.pro/chart"
+      url: canonicalUrl
     }
   };
 }
 
-export const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "LearningResource",
-  "name": "Interactive Japanese Kana Chart",
-  "description": "Comprehensive Japanese Kana chart with audio pronunciation",
-  "url": "https://learnkana.pro/chart",
-  "provider": {
-    "@type": "Organization",
-    "name": "LearnKana",
-    "url": "https://learnkana.pro"
-  },
-  "learningResourceType": "Interactive Resource",
-  "interactivityType": "active",
-  "educationalUse": ["Practice", "Self-Assessment"],
-  "educationalAlignment": {
-    "@type": "AlignmentObject",
-    "alignmentType": "teaches",
-    "educationalFramework": "Japanese Language Learning",
-    "targetName": "Japanese Writing System",
-    "targetUrl": "https://learnkana.pro/learn/writing-system"
-  },
-  "isAccessibleForFree": true,
-  "accessibilityFeature": [
-    "audioDescription",
-    "highContrast",
-    "tableOfContents"
-  ]
-};
+export function generateStructuredData({ params }: { params: { locale: string } }) {
+  const { locale } = params;
+  const baseUrl = 'https://learnkana.pro';
+  const localePath = locale === 'en' ? '' : `/${locale}`;
+  const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-chart`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "Interactive Japanese Kana Chart",
+    "description": "Comprehensive Japanese Kana chart with audio pronunciation",
+    "url": canonicalUrl,
+    "provider": {
+      "@type": "Organization",
+      "name": "LearnKana",
+      "url": baseUrl
+    },
+    "learningResourceType": "Interactive Resource",
+    "interactivityType": "active",
+    "educationalUse": ["Practice", "Self-Assessment"],
+    "educationalAlignment": {
+      "@type": "AlignmentObject",
+      "alignmentType": "teaches",
+      "educationalFramework": "Japanese Language Learning",
+      "targetName": "Japanese Writing System",
+      "targetUrl": `${baseUrl}${localePath}/learn/writing-system`
+    },
+    "isAccessibleForFree": true,
+    "accessibilityFeature": [
+      "audioDescription",
+      "highContrast",
+      "tableOfContents"
+    ]
+  };
+}

@@ -1,6 +1,11 @@
 import { Metadata } from 'next';
 
-export function generateMetadata(): Metadata {
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  const { locale } = params;
+  const baseUrl = 'https://learnkana.pro';
+  const localePath = locale === 'en' ? '' : `/${locale}`;
+  const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-converter`;
+  
   return {
     title: "Japanese Text Converter | Hiragana & Katakana & Romaji Converter",
     description: "Free online Japanese text converter. Convert Hiragana & Katakana & Romaji instantly with our easy-to-use tool. Perfect for Japanese language learners and students.",
@@ -24,40 +29,50 @@ export function generateMetadata(): Metadata {
       "romaji to katakana",
       "japanese writing converter"
     ],
+    alternates: {
+      canonical: canonicalUrl
+    },
     openGraph: {
       title: "Japanese Text Converter | LearnKana",
       description: "Convert Japanese text between Kanji and Hiragana instantly. Free online tool for Japanese language learners.",
       type: "website",
       locale: "en_US",
-      url: "https://learnkana.pro/converter"
+      url: canonicalUrl
     }
   };
 }
 
-export const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Japanese Text Converter",
-  "description": "Online tool for converting Japanese text between writing systems",
-  "url": "https://learnkana.pro/converter",
-  "applicationCategory": "EducationalApplication",
-  "operatingSystem": "Web",
-  "provider": {
-    "@type": "Organization",
-    "name": "LearnKana",
-    "url": "https://learnkana.pro"
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "featureList": [
-    "Kanji to Hiragana conversion",
-    "Instant results",
-    "User-friendly interface",
-    "Free to use"
-  ],
-  "browserRequirements": "Requires JavaScript. Works in all modern browsers.",
-  "softwareVersion": "1.0.0"
-};
+export function generateStructuredData({ params }: { params: { locale: string } }) {
+  const { locale } = params;
+  const baseUrl = 'https://learnkana.pro';
+  const localePath = locale === 'en' ? '' : `/${locale}`;
+  const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-converter`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Japanese Text Converter",
+    "description": "Online tool for converting Japanese text between writing systems",
+    "url": canonicalUrl,
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "provider": {
+      "@type": "Organization",
+      "name": "LearnKana",
+      "url": baseUrl
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Kanji to Hiragana conversion",
+      "Instant results",
+      "User-friendly interface",
+      "Free to use"
+    ],
+    "browserRequirements": "Requires JavaScript. Works in all modern browsers.",
+    "softwareVersion": "1.0.0"
+  };
+}

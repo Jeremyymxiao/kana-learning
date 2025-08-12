@@ -24,12 +24,15 @@ export function generateMetadata(): Metadata {
       "romaji to katakana",
       "japanese writing converter"
     ],
+    alternates: {
+      canonical: 'https://learnkana.pro/hiragana-katakana-converter'
+    },
     openGraph: {
       title: "Japanese Text Converter | LearnKana",
       description: "Convert Japanese text between Kanji and Hiragana instantly. Free online tool for Japanese language learners.",
       type: "website",
       locale: "en_US",
-      url: "https://learnkana.pro/converter"
+      url: "https://learnkana.pro/hiragana-katakana-converter"
     }
   };
 }
@@ -39,7 +42,7 @@ export const structuredData = {
   "@type": "WebApplication",
   "name": "Japanese Text Converter",
   "description": "Online tool for converting Japanese text between writing systems",
-  "url": "https://learnkana.pro/converter",
+  "url": "https://learnkana.pro/hiragana-katakana-converter",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web",
   "provider": {

@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     "假名练习",
     "日语会话"
   ],
+  alternates: {
+    canonical: 'https://learnkana.pro/chat'
+  },
   openGraph: {
     title: "Japanese Learning Chat Assistant | LearnKana",
     description: "Learn Japanese with AI chat assistant. Real-time conversation and practice.",

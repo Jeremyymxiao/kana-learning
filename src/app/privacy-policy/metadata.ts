@@ -3,6 +3,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "Privacy Policy | LearnKana",
   description: "LearnKana's privacy policy. Learn how we collect, use, and protect your data while using our Japanese language learning platform.",
+  alternates: {
+    canonical: 'https://learnkana.pro/privacy-policy'
+  },
   openGraph: {
     title: "Privacy Policy | LearnKana",
     description: "Our commitment to protecting your privacy while learning Japanese.",

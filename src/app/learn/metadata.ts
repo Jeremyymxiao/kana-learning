@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     "日语发音",
     "日语入门"
   ],
+  alternates: {
+    canonical: 'https://learnkana.pro/learn'
+  },
   openGraph: {
     title: "Japanese Writing System Guide | LearnKana",
     description: "Complete guide to learning Japanese writing systems. Interactive tutorials and practice materials.",

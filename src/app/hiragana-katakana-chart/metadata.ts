@@ -16,12 +16,15 @@ export function generateMetadata(): Metadata {
       "japanese writing system",
       "kana pronunciation"
     ],
+    alternates: {
+      canonical: 'https://learnkana.pro/hiragana-katakana-chart'
+    },
     openGraph: {
       title: "Interactive Japanese Kana Chart | LearnKana",
       description: "Master Japanese Hiragana and Katakana with our interactive Gojuon chart. Clear visuals and audio pronunciation.",
       type: "website",
       locale: "en_US",
-      url: "https://learnkana.pro/chart"
+      url: "https://learnkana.pro/hiragana-katakana-chart"
     }
   };
 }
@@ -31,7 +34,7 @@ export const structuredData = {
   "@type": "LearningResource",
   "name": "Interactive Japanese Kana Chart",
   "description": "Comprehensive Japanese Kana chart with audio pronunciation",
-  "url": "https://learnkana.pro/chart",
+  "url": "https://learnkana.pro/hiragana-katakana-chart",
   "provider": {
     "@type": "Organization",
     "name": "LearnKana",

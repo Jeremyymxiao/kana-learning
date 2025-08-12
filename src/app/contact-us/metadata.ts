@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     "Japanese learning platform",
     "get in touch"
   ],
+  alternates: {
+    canonical: 'https://learnkana.pro/contact-us'
+  },
   openGraph: {
     title: "Contact Us | LearnKana",
     description: "Get in touch with the LearnKana team and share your thoughts.",
