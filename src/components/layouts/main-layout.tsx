@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
 import { AuthUser } from '@/types/auth';
+import { LanguageSwitcher } from '@/components/ui/language-switcher';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -103,6 +104,7 @@ export default function MainLayout({
       <NavBar 
         authButtons={
           <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
             <AuthButtons user={user} loading={loading} signOut={signOut} />
           </div>
         }

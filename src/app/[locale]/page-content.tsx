@@ -1,9 +1,17 @@
+'use client';
+
 import MainLayout from '@/components/layouts/main-layout';
 import { MessageSquare, Table, PenTool, ArrowRight, Repeat, BookOpen } from 'lucide-react';
 import Link from 'next/link';
-import { articles } from '@/data/articles';
+import { useTranslations } from 'next-intl';
 
-export default function RootPage() {
+interface HomePageContentProps {
+  locale: string;
+}
+
+export default function HomePageContent({ locale }: HomePageContentProps) {
+  const t = useTranslations('HomePage');
+  
   return (
     <MainLayout>
       {/* Hero Section */}
@@ -24,24 +32,24 @@ export default function RootPage() {
           <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-7xl md:text-8xl font-bold mb-8">
               <span className="text-[#FF7E67] block">
-                AI-Powered
+                {t('aiPowered')}
               </span>
               <span className="text-white block mb-4">
-                Free Hiragana & Katakana Quiz
+                {t('freeHiraganaKatakana')}
               </span>
             </h1>
             
             <p className="text-2xl md:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-12">
-              Master Japanese kana with our interactive Hiragana & Katakana Quiz platform featuring AI assistance and custom learning paths.
+              {t('heroDescription')}
             </p>
 
             {/* CTA Button */}
             <div className="mb-16">
               <Link 
-                href="/hiragana-katakana-quiz"
+                href={`/${locale}/hiragana-katakana-quiz`}
                 className="inline-flex items-center px-8 py-4 text-xl font-bold bg-gradient-to-r from-[#FF7E67] to-[#FFD600] text-[#1A1B2F] rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl group"
               >
-                Start Hiragana & Katakana Quiz
+                {t('startQuiz')}
                 <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -50,15 +58,15 @@ export default function RootPage() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center">
               <div className="flex items-center gap-2 text-white/60">
                 <MessageSquare className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">AI Tutor</span>
+                <span className="text-2xl md:text-1xl">{t('aiTutor')}</span>
               </div>
               <div className="flex items-center gap-2 text-white/60">
                 <PenTool className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">Kana Practice</span>
+                <span className="text-2xl md:text-1xl">{t('kanaPractice')}</span>
               </div>
               <div className="flex items-center gap-2 text-white/60">
                 <Table className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">Kana Charts</span>
+                <span className="text-2xl md:text-1xl">{t('kanaCharts')}</span>
               </div>
             </div>
           </div>
@@ -74,23 +82,23 @@ export default function RootPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 id="features-heading" className="text-4xl md:text-5xl font-bold mb-16 text-[#1A1B2F] dark:text-white text-center">
-                Features
+                {t('featuresTitle')}
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* AI Tutor Feature */}
-                <Link href="/chat" className="group">
+                <Link href={`/${locale}/hiragana-katakana-quiz`} className="group">
                   <div className="relative bg-gradient-to-br from-[#2B7FFF] to-[#00D6A4] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#2B7FFF] rounded-xl flex items-center justify-center mb-4">
                         <MessageSquare className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">AI Tutor for Hiragana & Katakana Quiz</h3>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('aiTutor')}</h3>
                       <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
-                        Get personalized help with our Hiragana & Katakana Quiz assistant for writing practice, pronunciation guidance, and interactive exercises.
+                        {t('aiTutorDesc')}
                       </p>
                       <div className="flex items-center text-[#2B7FFF] font-semibold text-sm">
-                        Learn More
+                        {t('learnMore')}
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                       </div>
                     </div>
@@ -98,18 +106,18 @@ export default function RootPage() {
                 </Link>
 
                 {/* Kana Charts Feature */}
-                <Link href="/hiragana-katakana-chart" className="group">
+                <Link href={`/${locale}/hiragana-katakana-chart`} className="group">
                   <div className="relative bg-gradient-to-br from-[#FFD600] to-[#FF7E67] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#FFD600] rounded-xl flex items-center justify-center mb-4">
                         <Table className="w-6 h-6 text-[#1A1B2F]" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Complete Hiragana & Katakana Charts</h3>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('kanaCharts')}</h3>
                       <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
-                        Reference our Hiragana & Katakana Quiz charts with native and nature audio pronunciation to reinforce your kana recognition skills.
+                        {t('kanaChartsDesc')}
                       </p>
                       <div className="flex items-center text-[#FFD600] font-semibold text-sm">
-                        Learn More
+                        {t('learnMore')}
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                       </div>
                     </div>
@@ -117,18 +125,18 @@ export default function RootPage() {
                 </Link>
 
                 {/* Kana Practice Feature */}
-                <Link href="/hiragana-katakana-quiz" className="group">
+                <Link href={`/${locale}/hiragana-katakana-quiz`} className="group">
                   <div className="relative bg-gradient-to-br from-[#00D6A4] to-[#2B7FFF] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#00D6A4] rounded-xl flex items-center justify-center mb-4">
                         <PenTool className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Hiragana & Katakana Quiz Practice</h3>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('kanaPractice')}</h3>
                       <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
-                        Test your knowledge with our adaptive Hiragana & Katakana Quiz featuring recognition exercises, stroke order practice, and progress tracking.
+                        {t('kanaPracticeDesc')}
                       </p>
                       <div className="flex items-center text-[#00D6A4] font-semibold text-sm">
-                        Learn More
+                        {t('learnMore')}
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                       </div>
                     </div>
@@ -136,18 +144,18 @@ export default function RootPage() {
                 </Link>
 
                 {/* Text Converter Feature */}
-                <Link href="/hiragana-katakana-converter" className="group">
+                <Link href={`/${locale}/hiragana-katakana-converter`} className="group">
                   <div className="relative bg-gradient-to-br from-[#FF7E67] to-[#FFD600] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#FF7E67] rounded-xl flex items-center justify-center mb-4">
                         <Repeat className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Japanese Text Converter</h3>
+                      <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('textConverter')}</h3>
                       <p className="text-gray-600 dark:text-gray-300 mb-4 text-base">
-                        Convert text between Japanese writing systems to support your Hiragana & Katakana Quiz study and reinforce character recognition.
+                        {t('textConverterDesc')}
                       </p>
                       <div className="flex items-center text-[#FF7E67] font-semibold text-sm">
-                        Learn More
+                        {t('learnMore')}
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" />
                       </div>
                     </div>
@@ -171,7 +179,7 @@ export default function RootPage() {
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     The fundamental Japanese phonetic script used for native words, particles, and verb conjugations.
                   </p>
-                  <Link href="/hiragana-katakana-chart" className="text-[#FF7E67] font-semibold hover:underline">
+                  <Link href={`/${locale}/hiragana-katakana-chart`} className="text-[#FF7E67] font-semibold hover:underline">
                     Learn Hiragana →
                   </Link>
                 </div>
@@ -180,7 +188,7 @@ export default function RootPage() {
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     Used for foreign loanwords, emphasis, and technical terms in Japanese writing.
                   </p>
-                  <Link href="/hiragana-katakana-chart" className="text-[#2B7FFF] font-semibold hover:underline">
+                  <Link href={`/${locale}/hiragana-katakana-chart`} className="text-[#2B7FFF] font-semibold hover:underline">
                     Learn Katakana →
                   </Link>
                 </div>
@@ -197,27 +205,27 @@ export default function RootPage() {
                 Learning Guides
               </h2>
               <div className="grid md:grid-cols-3 gap-8">
-                <Link href="/learn" className="group">
+                <Link href={`/${locale}/learn`} className="group">
                   <div className="bg-gradient-to-br from-[#2B7FFF]/10 to-[#00D6A4]/10 p-6 rounded-2xl hover:shadow-lg transition-all">
                     <BookOpen className="w-12 h-12 mb-4 text-[#2B7FFF]" />
-                    <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Hiragana Quiz Basics Guide</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">Master the fundamentals of hiragana with our dedicated quiz practice system.</p>
+                    <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('hiraganaGuide')}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{t('hiraganaGuideDesc')}</p>
                     <span className="text-[#2B7FFF] font-semibold">Learn More →</span>
                   </div>
                 </Link>
-                <Link href="/learn" className="group">
+                <Link href={`/${locale}/learn`} className="group">
                   <div className="bg-gradient-to-br from-[#FFD600]/10 to-[#FF7E67]/10 p-6 rounded-2xl hover:shadow-lg transition-all">
                     <BookOpen className="w-12 h-12 mb-4 text-[#FFD600]" />
-                    <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Katakana Quiz Practice Guide</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">Learn how to effectively use our katakana quizzes for rapid character memorization.</p>
+                    <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('katakanaGuide')}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{t('katakanaGuideDesc')}</p>
                     <span className="text-[#FFD600] font-semibold">Learn More →</span>
                   </div>
                 </Link>
-                <Link href="/hiragana-katakana-quiz" className="group">
+                <Link href={`/${locale}/hiragana-katakana-quiz`} className="group">
                   <div className="bg-gradient-to-br from-[#00D6A4]/10 to-[#2B7FFF]/10 p-6 rounded-2xl hover:shadow-lg transition-all">
                     <BookOpen className="w-12 h-12 mb-4 text-[#00D6A4]" />
-                    <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">Combined Hiragana & Katakana Quiz Strategy</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">Discover the optimal approach to mastering both kana systems with our integrated quiz platform.</p>
+                    <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('combinedGuide')}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{t('combinedGuideDesc')}</p>
                     <span className="text-[#00D6A4] font-semibold">Learn More →</span>
                   </div>
                 </Link>
@@ -231,32 +239,32 @@ export default function RootPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-[#1A1B2F] dark:text-white">
-                Hiragana & Katakana Quiz FAQ
+                {t('faqTitle')}
               </h2>
               <div className="space-y-6">
                 <div className="bg-white dark:bg-[#1A1B2F] p-6 rounded-2xl shadow-lg">
-                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">How does the Hiragana & Katakana Quiz tool help beginners?</h3>
-                  <p className="text-gray-600 dark:text-gray-300">Our Hiragana & Katakana Quiz platform offers progressive difficulty levels, visual mnemonics, and instant feedback to make learning Japanese characters accessible to complete beginners. The quiz system adapts to your learning pace, ensuring you master each character before moving to more complex ones.</p>
+                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">{t('faq1Question')}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{t('faq1Answer')}</p>
                 </div>
                 <div className="bg-white dark:bg-[#1A1B2F] p-6 rounded-2xl shadow-lg">
-                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">Is the Hiragana & Katakana Quiz system scientifically designed?</h3>
-                  <p className="text-gray-600 dark:text-gray-300">Yes, our Hiragana & Katakana Quiz employs spaced repetition and active recall techniques proven by cognitive science to optimize character memorization and retention. We&apos;ve collaborated with language learning experts to design a quiz system that maximizes learning efficiency while minimizing study time.</p>
+                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">{t('faq2Question')}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{t('faq2Answer')}</p>
                 </div>
                 <div className="bg-white dark:bg-[#1A1B2F] p-6 rounded-2xl shadow-lg">
-                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">How often should I practice with the Hiragana & Katakana Quiz?</h3>
-                  <p className="text-gray-600 dark:text-gray-300">For optimal results, we recommend using our Hiragana & Katakana Quiz system for 15-20 minutes daily rather than infrequent longer sessions. This consistent practice helps reinforce neural pathways and build long-term memory. Our quiz tool will track your progress and suggest personalized practice schedules based on your learning patterns.</p>
+                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">{t('faq3Question')}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{t('faq3Answer')}</p>
                 </div>
                 <div className="bg-white dark:bg-[#1A1B2F] p-6 rounded-2xl shadow-lg">
-                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">Can the Hiragana & Katakana Quiz help with stroke order?</h3>
-                  <p className="text-gray-600 dark:text-gray-300">Absolutely! Our Hiragana & Katakana Quiz features dedicated stroke order practice modes with animated demonstrations and interactive tracing exercises. The system analyzes your stroke order and provides instant feedback to help you develop proper writing habits from the beginning. This is essential for developing natural, fluid handwriting in Japanese.</p>
+                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">{t('faq4Question')}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{t('faq4Answer')}</p>
                 </div>
                 <div className="bg-white dark:bg-[#1A1B2F] p-6 rounded-2xl shadow-lg">
-                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">What makes your Hiragana & Katakana Quiz different from other learning tools?</h3>
-                  <p className="text-gray-600 dark:text-gray-300">Our Hiragana & Katakana Quiz stands out through its AI-powered personalization and comprehensive approach. Unlike basic flashcard apps, we offer context-aware learning that adapts to your strengths and weaknesses. Our quiz system creates custom learning paths, provides detailed analytics on your progress, and offers multiple quiz modes (recognition, recall, writing, etc.) to strengthen different aspects of your kana knowledge.</p>
+                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">{t('faq5Question')}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{t('faq5Answer')}</p>
                 </div>
                 <div className="bg-white dark:bg-[#1A1B2F] p-6 rounded-2xl shadow-lg">
-                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">Can I track my progress with the Hiragana & Katakana Quiz system?</h3>
-                  <p className="text-gray-600 dark:text-gray-300">Yes, comprehensive progress tracking is a core feature of our Hiragana & Katakana Quiz platform. You&apos;ll get detailed analytics showing your mastery level for each character, accuracy rates, response times, and learning trends over time. Our dashboard visualizes your progress with intuitive charts and highlights characters that need additional practice, ensuring efficient and targeted study sessions.</p>
+                  <h3 className="text-xl font-bold mb-3 text-[#1A1B2F] dark:text-white">{t('faq6Question')}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">{t('faq6Answer')}</p>
                 </div>
               </div>
             </div>

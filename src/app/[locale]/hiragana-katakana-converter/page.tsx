@@ -5,12 +5,14 @@ import styles from './page.module.css';
 import MainLayout from '@/components/layouts/main-layout';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useTranslations } from 'next-intl';
 
 export default function Converter() {
   const [hiragana, setHiragana] = useState('');
   const [katakana, setKatakana] = useState('');
   const [romaji, setRomaji] = useState('');
   const [lastChanged, setLastChanged] = useState<'hiragana' | 'katakana' | 'romaji' | null>(null);
+  const t = useTranslations('ConverterPage');
 
   useEffect(() => {
     if (!lastChanged) return;
@@ -29,7 +31,7 @@ export default function Converter() {
           }),
         });
 
-        if (!response.ok) throw new Error('Conversion failed');
+        if (!response.ok) throw new Error('转换失败');
 
         const data = await response.json();
         
@@ -37,7 +39,7 @@ export default function Converter() {
         if (lastChanged !== 'katakana') setKatakana(data.katakana);
         if (lastChanged !== 'romaji') setRomaji(data.romaji);
       } catch (error) {
-        console.error('Conversion error:', error);
+        console.error('转换错误:', error);
       }
     };
 
@@ -47,17 +49,17 @@ export default function Converter() {
   return (
     <MainLayout>
       <div className="relative min-h-screen bg-white dark:bg-[#1A1B2F]">
-        {/* Decorative Background */}
+        {/* 装饰背景 */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          {/* Top left large block */}
+          {/* 左上角大块 */}
           <div className="absolute top-0 left-0 w-full h-[70%] bg-[#64748B] transform -skew-y-6 opacity-10"></div>
-          {/* Right block */}
+          {/* 右侧块 */}
           <div className="absolute top-[20%] right-0 w-[40%] h-[40%] bg-[#60A5FA] transform rotate-12 opacity-10"></div>
-          {/* Bottom left circle */}
+          {/* 左下角圆形 */}
           <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-[#64748B] rounded-full opacity-10"></div>
-          {/* Bottom right decoration */}
+          {/* 右下角装饰 */}
           <div className="absolute bottom-[5%] right-[5%] w-[25%] h-[25%] bg-[#60A5FA] transform -rotate-12 opacity-10"></div>
-          {/* Middle accent */}
+          {/* 中间点缀 */}
           <div className="absolute top-[40%] left-[30%] w-[20%] h-[20%] bg-[#93C5FD] rounded-full blur-3xl opacity-5"></div>
         </div>
 
@@ -84,13 +86,11 @@ export default function Converter() {
                 Hiragana Katakana Romaji Converter
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">
-                Instantly convert between Japanese hiragana, katakana, and romaji with our accurate 
-                text converter. Perfect for students, translators, and anyone learning Japanese writing systems.
+                {t('description')}
               </p>
               <p className="text-lg text-gray-500 dark:text-gray-400 max-w-3xl mx-auto">
-                Our advanced Japanese text converter handles all 46 basic characters plus dakuten, handakuten, 
-                and combination sounds. Convert hiragana to katakana, romaji to hiragana, or katakana to romaji 
-                with 100% accuracy using standard Hepburn romanization.
+                Instantly convert between Japanese hiragana, katakana, and romaji with our accurate 
+                text converter. Perfect for students, translators, and anyone learning Japanese writing systems.
               </p>
             </div>
 
@@ -101,7 +101,7 @@ export default function Converter() {
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Hiragana
+                        {t('hiragana')}
                       </label>
                       <Input
                         value={hiragana}
@@ -109,14 +109,14 @@ export default function Converter() {
                           setHiragana(e.target.value);
                           setLastChanged('hiragana');
                         }}
-                        placeholder="Enter hiragana text..."
+                        placeholder={t('inputPlaceholder')}
                         className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 h-14 text-lg"
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Katakana
+                        {t('katakana')}
                       </label>
                       <Input
                         value={katakana}
@@ -124,14 +124,14 @@ export default function Converter() {
                           setKatakana(e.target.value);
                           setLastChanged('katakana');
                         }}
-                        placeholder="Enter katakana text..."
+                        placeholder={t('inputPlaceholder')}
                         className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 h-14 text-lg"
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Romaji
+                        {t('romaji')}
                       </label>
                       <Input
                         value={romaji}
@@ -139,7 +139,7 @@ export default function Converter() {
                           setRomaji(e.target.value);
                           setLastChanged('romaji');
                         }}
-                        placeholder="Enter romaji text..."
+                        placeholder={t('inputPlaceholder')}
                         className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 h-14 text-lg"
                       />
                     </div>

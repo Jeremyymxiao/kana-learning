@@ -1,14 +1,12 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import {routing} from './i18n.config';
 
-export default async function middleware(request: NextRequest) {
-  console.log('Middleware path:', request.nextUrl.pathname);
-  return NextResponse.next();
-}
+export default createMiddleware(routing);
 
 export const config = {
   matcher: [
-    // 完全排除 api 路径和静态资源
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*$).*)'
+    '/',
+    '/(de|fr|pt|es)/:path*',
+    '/((?!api|_next/static|_next/image|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$|.*\\.ico$|.*\\.woff$|.*\\.woff2$).*)'
   ]
 };

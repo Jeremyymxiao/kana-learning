@@ -4,6 +4,7 @@ import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 import { metadata, structuredData } from './metadata'
 import { Analytics } from "@vercel/analytics/react"
+import { NextIntlClientProvider } from 'next-intl'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html className="scroll-smooth">
       <head>
         <script
           type="application/ld+json"
@@ -49,12 +50,29 @@ export default function RootLayout({
         />
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
-        <AuthProvider>
-          <NavigationProvider>
-            {children}
-            <Analytics />
-          </NavigationProvider>
-        </AuthProvider>
+        <NextIntlClientProvider locale="en" messages={{
+          Navigation: {
+            home: "Home",
+            chat: "Chat",
+            quiz: "Quiz",
+            chart: "Chart",
+            converter: "Converter",
+            learn: "Learn",
+            about: "About",
+            contact: "Contact",
+            login: "Login",
+            register: "Register",
+            profile: "Profile",
+            settings: "Settings"
+          }
+        }}>
+          <AuthProvider>
+            <NavigationProvider>
+              {children}
+              <Analytics />
+            </NavigationProvider>
+          </AuthProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

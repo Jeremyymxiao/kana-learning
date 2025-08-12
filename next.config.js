@@ -3,11 +3,13 @@ const webpack = require('webpack');
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 });
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = {
   reactStrictMode: true,
-  analytics: true,
-  images: {
+    images: {
     domains: [
       'lh3.googleusercontent.com',
       'avatars.githubusercontent.com',
@@ -88,4 +90,4 @@ const nextConfig = {
 };
 
 // 使用 withMDX 包装配置
-module.exports = withMDX(nextConfig); 
+module.exports = withNextIntl(withMDX(nextConfig)); 

@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import { Book, Info, Menu, X, FileText, Table, PenTool, MessageSquare } from 'lucide-react';
-import { useRouter, usePathname } from 'next/navigation';
-import type { Route } from 'next';
+import { useRouter, usePathname, Link } from '../../../../../i18n.config';
+import { useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 interface NavBarProps {
   authButtons?: React.ReactNode;
@@ -41,7 +42,7 @@ export function NavBar({ authButtons }: NavBarProps) {
   const handleNavClick = (key: string) => {
     const route = TAB_TO_ROUTE[key];
     if (route) {
-      router.push(route as Route);
+      router.push(route as any);
     }
     setIsMenuOpen(false);
   };
@@ -49,19 +50,29 @@ export function NavBar({ authButtons }: NavBarProps) {
   // 根据当前路径判断活动标签
   const getActiveTab = () => {
     // 处理子路由，例如 /learn/hiragana 应该激活 learn 标签
-    const baseRoute = '/' + pathname.split('/')[1];
+    const pathParts = pathname.split('/');
+    // 处理根路径和locale路径
+    let baseRoute = '/';
+    if (pathParts.length > 2 && pathParts[1].match(/^(de|fr|pt|es)$/)) {
+      baseRoute = '/' + (pathParts[2] || '');
+    } else if (pathParts.length > 1 && !pathParts[1].match(/^(de|fr|pt|es)$/)) {
+      baseRoute = '/' + (pathParts[1] || '');
+    }
     return ROUTE_TO_TAB[baseRoute] || 'home';
   };
 
   const activeTab = getActiveTab();
 
+  const t = useTranslations('Navigation');
+  const locale = useLocale();
+
   const navItems: NavItem[] = [
-    { name: 'Home', icon: <Book className="w-7 h-4" />, key: 'home' },
-    { name: 'AI Chat', icon: <MessageSquare className="w-7 h-4" />, key: 'chat' },
-    { name: 'Kana Quiz', icon: <PenTool className="w-7 h-4" />, key: 'quiz' },
-    { name: 'Kana Chart', icon: <Table className="w-7 h-4" />, key: 'chart' },
-    { name: 'Text Converter', icon: <FileText className="w-7 h-4" />, key: 'converter' },
-    { name: 'Blog', icon: <Info className="w-7 h-4" />, key: 'learn' }
+    { name: t('home'), icon: <Book className="w-7 h-4" />, key: 'home' },
+    { name: t('chat'), icon: <MessageSquare className="w-7 h-4" />, key: 'chat' },
+    { name: t('quiz'), icon: <PenTool className="w-7 h-4" />, key: 'quiz' },
+    { name: t('chart'), icon: <Table className="w-7 h-4" />, key: 'chart' },
+    { name: t('converter'), icon: <FileText className="w-7 h-4" />, key: 'converter' },
+    { name: t('learn'), icon: <Info className="w-7 h-4" />, key: 'learn' }
   ];
 
   return (
@@ -121,9 +132,10 @@ export function NavBar({ authButtons }: NavBarProps) {
           <div className="md:hidden absolute top-16 inset-x-0 bg-white/80 dark:bg-[#1A1B2F]/80 backdrop-blur-xl border-b border-gray-200/20 dark:border-white/10">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <button
+                <Link
                   key={item.key}
-                  onClick={() => handleNavClick(item.key)}
+                  href={TAB_TO_ROUTE[item.key] as any}
+                  onClick={() => setIsMenuOpen(false)}
                   className={`
                     flex items-center space-x-3 w-full px-4 py-3 rounded-xl
                     transition-all duration-200
@@ -134,7 +146,7 @@ export function NavBar({ authButtons }: NavBarProps) {
                 >
                   {item.icon && <span className="opacity-75">{item.icon}</span>}
                   <span className="text-sm font-medium">{item.name}</span>
-                </button>
+                </Link>
               ))}
               {authButtons && <div className="px-4 py-3">{authButtons}</div>}
             </div>

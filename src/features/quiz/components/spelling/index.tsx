@@ -233,7 +233,7 @@ export function SpellingQuiz({ difficulty, onComplete }: SpellingQuizProps) {
               </form>
               {showHint && (
                 <div className="mt-4 text-sm text-gray-500 animate-fade-in">
-                  Hint: First letter is "{questions[currentIndex]?.romaji[0]}"
+                  Hint: First letter is &quot;{questions[currentIndex]?.romaji[0]}&quot;
                 </div>
               )}
             </div>
