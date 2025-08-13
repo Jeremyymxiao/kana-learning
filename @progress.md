@@ -1,5 +1,44 @@
 # 项目进度记录
 
+## 2024-12-22: 修复404链接和优化Sitemap
+
+### 已完成：
+- 识别并分析了网站存在的404链接问题：
+  - 不支持的语言版本（ja、zh）导致的404错误
+  - 错误的/chart路径引用
+  - 缺少正确的hreflang标签配置
+- 更新了两个sitemap文件（src/app/sitemap.ts 和 src/app/[locale]/sitemap.ts）：
+  - 移除了对不支持语言（ja, zh）的引用
+  - 添加了所有支持语言的完整URL列表（en, de, fr, pt, es）
+  - 为每个URL添加了正确的hreflang alternates配置
+  - 包含了之前遗漏的/chat路由
+- 在next.config.js中添加了重定向规则：
+  - /chart -> /hiragana-katakana-chart
+  - /(de|fr|pt|es)/chart -> /$1/hiragana-katakana-chart
+
+### 技术细节：
+- 支持的语言：['en', 'de', 'fr', 'pt', 'es']
+- 英语作为默认语言使用根路径（无前缀）
+- 其他语言使用/{locale}前缀路径
+- hreflang标签正确映射：en-US, DE-DE, FR-FR, PT-PT, ES-ES
+- 301永久重定向确保SEO权重传递
+
+### 解决的问题：
+- 修复了指向不存在语言版本的404错误（约40+个404链接）
+- 修复了/chart路径的404错误（约10+个404链接） 
+- 改善了搜索引擎对多语言内容的理解和索引
+- 提供了正确的语言替代选项给搜索引擎
+
+### 验证状态：
+- 验证了所有路由在根目录和[locale]目录中都存在
+- 检查了TypeScript编译通过，无linter错误
+- 确认redirect规则语法正确
+
+### 后续修复（2024-12-22）：
+- 新增了 `/learn/katakana-guide` 到 `/learn/hiragana-vs-katakana` 的重定向
+- 包含了所有语言版本的重定向规则（en, de, fr, pt, es）
+- 确认了 `/chart` 重定向规则仍然有效
+
 ## 2024-12-22: 添加Grok Ani友情链接
 
 ### 已完成：

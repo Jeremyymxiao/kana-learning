@@ -1,69 +1,77 @@
 import { MetadataRoute } from 'next'
 import { articles } from '@/data/articles'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const articleUrls = articles.map(article => ({
-    url: `https://learnkana.pro/learn/${article.slug}`,
-    lastModified: new Date(article.publishedAt),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
+const supportedLocales = ['en', 'de', 'fr', 'pt', 'es'] as const
+const baseUrl = 'https://learnkana.pro'
 
-  return [
-    {
-      url: 'https://learnkana.pro',
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1,
-    },
-    {
-      url: 'https://learnkana.pro/about',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://learnkana.pro/hiragana-katakana-quiz',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: 'https://learnkana.pro/hiragana-katakana-chart',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://learnkana.pro/hiragana-katakana-converter',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://learnkana.pro/learn',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: 'https://learnkana.pro/contact-us',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://learnkana.pro/privacy-policy',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
-    {
-      url: 'https://learnkana.pro/terms-of-service',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
-    ...articleUrls
+export default function sitemap(): MetadataRoute.Sitemap {
+  const sitemapEntries: MetadataRoute.Sitemap = []
+
+  // Main routes with locale variants
+  const routes = [
+    { path: '', priority: 1, changeFrequency: 'daily' as const },
+    { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/hiragana-katakana-quiz', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/hiragana-katakana-chart', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/hiragana-katakana-converter', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/learn', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/contact-us', priority: 0.5, changeFrequency: 'monthly' as const },
+    { path: '/privacy-policy', priority: 0.3, changeFrequency: 'monthly' as const },
+    { path: '/terms-of-service', priority: 0.3, changeFrequency: 'monthly' as const },
+    { path: '/chat', priority: 0.7, changeFrequency: 'weekly' as const },
   ]
+
+  // Add main routes with all locale variants
+  routes.forEach(route => {
+    supportedLocales.forEach(locale => {
+      const url = locale === 'en' 
+        ? `${baseUrl}${route.path || '/'}`
+        : `${baseUrl}/${locale}${route.path || ''}`
+      
+      sitemapEntries.push({
+        url,
+        lastModified: new Date(),
+        changeFrequency: route.changeFrequency,
+        priority: route.priority,
+        alternates: {
+          languages: Object.fromEntries(
+            supportedLocales.map(lang => [
+              lang === 'en' ? 'en-US' : `${lang}-${lang.toUpperCase()}`,
+              lang === 'en' 
+                ? `${baseUrl}${route.path || '/'}`
+                : `${baseUrl}/${lang}${route.path || ''}`
+            ])
+          )
+        }
+      })
+    })
+  })
+
+  // Add article URLs with locale variants
+  articles.forEach(article => {
+    supportedLocales.forEach(locale => {
+      const url = locale === 'en'
+        ? `${baseUrl}/learn/${article.slug}`
+        : `${baseUrl}/${locale}/learn/${article.slug}`
+      
+      sitemapEntries.push({
+        url,
+        lastModified: new Date(article.publishedAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+        alternates: {
+          languages: Object.fromEntries(
+            supportedLocales.map(lang => [
+              lang === 'en' ? 'en-US' : `${lang}-${lang.toUpperCase()}`,
+              lang === 'en'
+                ? `${baseUrl}/learn/${article.slug}`
+                : `${baseUrl}/${lang}/learn/${article.slug}`
+            ])
+          )
+        }
+      })
+    })
+  })
+
+  return sitemapEntries
 }

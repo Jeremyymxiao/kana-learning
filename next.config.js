@@ -16,6 +16,34 @@ const nextConfig = {
       'images.unsplash.com'
     ],
   },
+  async redirects() {
+    return [
+      // Redirect /chart to /hiragana-katakana-chart
+      {
+        source: '/chart',
+        destination: '/hiragana-katakana-chart',
+        permanent: true,
+      },
+      // Redirect locale-specific /chart routes
+      {
+        source: '/(de|fr|pt|es)/chart',
+        destination: '/$1/hiragana-katakana-chart',
+        permanent: true,
+      },
+      // Redirect /learn/katakana-guide to /learn/hiragana-vs-katakana
+      {
+        source: '/learn/katakana-guide',
+        destination: '/learn/hiragana-vs-katakana',
+        permanent: true,
+      },
+      // Redirect locale-specific /learn/katakana-guide routes
+      {
+        source: '/(de|fr|pt|es)/learn/katakana-guide',
+        destination: '/$1/learn/hiragana-vs-katakana',
+        permanent: true,
+      },
+    ];
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.md$/,
