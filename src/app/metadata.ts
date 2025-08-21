@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     "片仮名",
   ],
   alternates: {
-    canonical: 'https://learnkana.pro/',
+    canonical: 'https://learnkana.pro',
     languages: {
-      'en': 'https://learnkana.pro/',
+      'en': 'https://learnkana.pro',
       'de': 'https://learnkana.pro/de',
       'fr': 'https://learnkana.pro/fr',
       'pt': 'https://learnkana.pro/pt',

@@ -25,9 +25,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   routes.forEach(route => {
     supportedLocales.forEach(locale => {
       const url = locale === 'en' 
-        ? `${baseUrl}${route.path || '/'}`
-        : `${baseUrl}/${locale}${route.path || ''}`
+        ? `${baseUrl}${route.path || ''}`.replace(/^\/$/, '') || baseUrl
+        : `${baseUrl}/${locale}${route.path || ''}`.replace(/\/$/, '')
       
+      // Create proper hreflang entries including self-reference
+      const hreflangs = {
+        'en': `${baseUrl}${route.path || ''}`.replace(/^\/$/, '') || baseUrl,
+        'de': `${baseUrl}/de${route.path || ''}`.replace(/\/$/, ''),
+        'fr': `${baseUrl}/fr${route.path || ''}`.replace(/\/$/, ''),
+        'pt': `${baseUrl}/pt${route.path || ''}`.replace(/\/$/, ''),
+        'es': `${baseUrl}/es${route.path || ''}`.replace(/\/$/, '')
+      }
+
       sitemapEntries.push({
         url,
         lastModified: new Date(),
@@ -35,11 +44,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: route.priority,
         alternates: {
           languages: Object.fromEntries(
-            supportedLocales.map(lang => [
-              lang === 'en' ? 'en-US' : `${lang}-${lang.toUpperCase()}`,
-              lang === 'en' 
-                ? `${baseUrl}${route.path || '/'}`
-                : `${baseUrl}/${lang}${route.path || ''}`
+            Object.entries(hreflangs).map(([lang, href]) => [
+              lang === 'en' ? 'en' : lang,
+              href
             ])
           )
         }
@@ -54,6 +61,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ? `${baseUrl}/learn/${article.slug}`
         : `${baseUrl}/${locale}/learn/${article.slug}`
       
+      // Create proper hreflang entries including self-reference
+      const hreflangs = {
+        'en': `${baseUrl}/learn/${article.slug}`,
+        'de': `${baseUrl}/de/learn/${article.slug}`,
+        'fr': `${baseUrl}/fr/learn/${article.slug}`,
+        'pt': `${baseUrl}/pt/learn/${article.slug}`,
+        'es': `${baseUrl}/es/learn/${article.slug}`
+      }
+
       sitemapEntries.push({
         url,
         lastModified: new Date(article.publishedAt),
@@ -61,11 +77,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7,
         alternates: {
           languages: Object.fromEntries(
-            supportedLocales.map(lang => [
-              lang === 'en' ? 'en-US' : `${lang}-${lang.toUpperCase()}`,
-              lang === 'en'
-                ? `${baseUrl}/learn/${article.slug}`
-                : `${baseUrl}/${lang}/learn/${article.slug}`
+            Object.entries(hreflangs).map(([lang, href]) => [
+              lang === 'en' ? 'en' : lang,
+              href
             ])
           )
         }

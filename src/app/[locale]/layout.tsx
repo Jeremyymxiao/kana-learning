@@ -35,13 +35,17 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <AuthProvider>
-        <NavigationProvider>
-          {children}
-          <Analytics />
-        </NavigationProvider>
-      </AuthProvider>
-    </NextIntlClientProvider>
+    <html lang={locale} className="scroll-smooth">
+      <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <AuthProvider>
+            <NavigationProvider>
+              {children}
+              <Analytics />
+            </NavigationProvider>
+          </AuthProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   )
 }
