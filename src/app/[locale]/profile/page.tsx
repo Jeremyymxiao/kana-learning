@@ -6,16 +6,19 @@ import { useAuth } from '@/providers/AuthProvider';
 import MainLayout from '@/components/layouts/main-layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useLocale } from 'next-intl';
 
 export default function ProfilePage() {
   const router = useRouter();
   const { user, loading } = useAuth();
+  const locale = useLocale();
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push('/login');
+      const loginPath = locale === 'en' ? '/login' : `/${locale}/login`;
+      router.push(loginPath);
     }
-  }, [user, loading, router]);
+  }, [user, loading, router, locale]);
 
   if (loading) {
     return (
@@ -56,7 +59,10 @@ export default function ProfilePage() {
               </div>
               <Button 
                 variant="outline"
-                onClick={() => router.push('/settings')}
+                onClick={() => {
+                  const settingsPath = locale === 'en' ? '/settings' : `/${locale}/settings`;
+                  router.push(settingsPath);
+                }}
               >
                 Edit Profile
               </Button>

@@ -60,15 +60,15 @@ const AuthButtons: React.FC<{ user: AuthUser | null; loading: boolean; signOut: 
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => router.push('/profile')}>
+          <DropdownMenuItem onClick={() => router.push('/en/profile')}>
             Profile
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push('/settings')}>
+          <DropdownMenuItem onClick={() => router.push('/en/settings')}>
             Settings
           </DropdownMenuItem>
           <DropdownMenuItem onClick={async () => {
             await signOut();
-            router.push('/');
+            router.push('/en');
           }}>
             Logout
           </DropdownMenuItem>
@@ -79,7 +79,7 @@ const AuthButtons: React.FC<{ user: AuthUser | null; loading: boolean; signOut: 
 
   return (
     <Button
-      onClick={() => router.push('/auth?mode=login')}
+      onClick={() => router.push('/en/auth?mode=login')}
     >
       Login
     </Button>

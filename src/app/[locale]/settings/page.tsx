@@ -9,10 +9,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert } from '@/components/ui/alert';
 import { updateProfile, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
+import { useLocale } from 'next-intl';
 
 export default function SettingsPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
+  const locale = useLocale();
   const [formData, setFormData] = useState({
     displayName: '',
     currentPassword: '',
@@ -25,14 +27,15 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push('/login');
+      const loginPath = locale === 'en' ? '/login' : `/${locale}/login`;
+      router.push(loginPath);
     } else if (user) {
       setFormData(prev => ({
         ...prev,
         displayName: user.displayName || '',
       }));
     }
-  }, [user, loading, router]);
+  }, [user, loading, router, locale]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({

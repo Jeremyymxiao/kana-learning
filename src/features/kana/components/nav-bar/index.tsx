@@ -20,12 +20,12 @@ const ROUTE_TO_TAB: Record<string, string> = {
 };
 
 const TAB_TO_ROUTE: Record<string, string> = {
-  'home': '/',
-  'chat': '/chat',
-  'quiz': '/hiragana-katakana-quiz',
-  'chart': '/hiragana-katakana-chart',
-  'converter': '/hiragana-katakana-converter',
-  'learn': '/learn'
+  'home': '/en',
+  'chat': '/en/chat',
+  'quiz': '/en/hiragana-katakana-quiz',
+  'chart': '/en/hiragana-katakana-chart',
+  'converter': '/en/hiragana-katakana-converter',
+  'learn': '/en/learn'
 };
 
 interface NavItem {
@@ -82,7 +82,7 @@ export function NavBar({ authButtons }: NavBarProps) {
           {/* Logo */}
           <div 
             className="flex items-center space-x-2 mr-8 cursor-pointer" 
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/en' as any)}
           >
             <div className="font-['Noto_Sans_JP','Poppins',sans-serif] text-xl font-bold">
               <span className="text-[#1A1B2F] dark:text-white">Learn</span>

@@ -7,6 +7,7 @@ import '../globals.css'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 import { Analytics } from "@vercel/analytics/react"
+import { generateMetadata, generateStructuredData } from './metadata'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -17,6 +18,8 @@ const notoSansJP = Noto_Sans_JP({
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+export { generateMetadata, generateStructuredData }
 
 export default async function LocaleLayout({
   children,
@@ -33,9 +36,18 @@ export default async function LocaleLayout({
 
   // Load messages for the specific locale
   const messages = await getMessages({ locale });
+  
+  // Generate structured data
+  const structuredData = await generateStructuredData({ params: Promise.resolve({ locale }) });
 
   return (
     <html lang={locale} className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AuthProvider>
