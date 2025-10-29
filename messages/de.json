@@ -203,5 +203,25 @@
     "termsOfService": "Nutzungsbedingungen",
     "cookiePolicy": "Cookie-Richtlinie",
     "allRightsReserved": "Alle Rechte vorbehalten"
+  },
+  "Metadata": {
+    "siteName": "LearnKana",
+    "siteDescription": "Lernen Sie japanische Kana einfach mit unseren interaktiven Tools. Üben Sie Hiragana und Katakana mit KI-Unterstützung, Quiz und Textkonverter.",
+    "homeTitle": "LearnKana | Kostenloses Hiragana & Katakana Quiz und Chatbot",
+    "homeDescription": "Lernen Sie japanische Kana einfach mit unseren interaktiven Tools. Üben Sie Hiragana und Katakana mit KI-Unterstützung, Quiz und Textkonverter.",
+    "aboutTitle": "Über uns | LearnKana",
+    "aboutDescription": "Erfahren Sie mehr über unsere Mission, Ihnen zu helfen, japanische Kana mit interaktiven Lektionen, Quiz und Tabellen zu meistern",
+    "quizTitle": "Hiragana & Katakana Quiz | LearnKana",
+    "quizDescription": "Testen Sie Ihr Wissen über japanische Kana mit unserem interaktiven Quiz. Üben Sie Hiragana und Katakana mit KI-gestützten adaptiven Fragen und sofortigem Feedback.",
+    "learnTitle": "Japanische Kana lernen | LearnKana",
+    "learnDescription": "Meistern Sie Hiragana und Katakana mit umfassenden Lektionen und interaktiven Tutorials",
+    "chartTitle": "Hiragana & Katakana Tabelle | LearnKana",
+    "chartDescription": "Vollständige Referenztabelle für Hiragana und Katakana mit Ausspracheleitfäden",
+    "converterTitle": "Hiragana & Katakana Konverter | LearnKana",
+    "converterDescription": "Konvertieren Sie zwischen Hiragana, Katakana und Romaji mit unserem kostenlosen Online-Tool",
+    "contactTitle": "Kontakt | LearnKana",
+    "contactDescription": "Kontaktieren Sie uns für Fragen, Feedback oder Unterstützung beim Lernen japanischer Kana",
+    "chatTitle": "Japanischer Lernassistent | LearnKana",
+    "chatDescription": "Chatten Sie mit KI, um japanische Kana zu lernen und Ihre Fähigkeiten mit personalisierter Unterstützung zu verbessern"
   }
 }

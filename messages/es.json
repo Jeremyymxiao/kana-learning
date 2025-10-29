@@ -203,5 +203,25 @@
     "termsOfService": "Términos de Servicio",
     "cookiePolicy": "Política de Cookies",
     "allRightsReserved": "Todos los derechos reservados"
+  },
+  "Metadata": {
+    "siteName": "LearnKana",
+    "siteDescription": "Aprende kana japonés fácilmente con nuestras herramientas interactivas. Practica Hiragana y Katakana con asistencia de IA, cuestionarios y convertidor de texto.",
+    "homeTitle": "LearnKana | Quiz Hiragana y Katakana Gratuito y Chatbot",
+    "homeDescription": "Aprende kana japonés fácilmente con nuestras herramientas interactivas. Practica Hiragana y Katakana con asistencia de IA, cuestionarios y convertidor de texto.",
+    "aboutTitle": "Acerca de | LearnKana",
+    "aboutDescription": "Conoce nuestra misión para ayudarte a dominar el kana japonés con lecciones interactivas, cuestionarios y tablas",
+    "quizTitle": "Quiz Hiragana y Katakana | LearnKana",
+    "quizDescription": "Pon a prueba tu conocimiento de kana japonés con nuestro quiz interactivo. Practica Hiragana y Katakana con preguntas adaptativas alimentadas por IA y retroalimentación instantánea.",
+    "learnTitle": "Aprender Kana Japonés | LearnKana",
+    "learnDescription": "Domina Hiragana y Katakana con lecciones completas y tutoriales interactivos",
+    "chartTitle": "Tabla Hiragana y Katakana | LearnKana",
+    "chartDescription": "Tabla de referencia completa para Hiragana y Katakana con guías de pronunciación",
+    "converterTitle": "Convertidor Hiragana y Katakana | LearnKana",
+    "converterDescription": "Convierte entre Hiragana, Katakana y Rōmaji con nuestra herramienta en línea gratuita",
+    "contactTitle": "Contacto | LearnKana",
+    "contactDescription": "Ponte en contacto con nosotros para preguntas, comentarios o soporte sobre el aprendizaje de kana japonés",
+    "chatTitle": "Asistente de Aprendizaje Japonés | LearnKana",
+    "chatDescription": "Chatea con IA para aprender kana japonés y mejorar tus habilidades con asistencia personalizada"
   }
 }

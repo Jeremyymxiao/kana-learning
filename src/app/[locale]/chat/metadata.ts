@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/chat`;
   
   return {
-    title: "Japanese Learning Chat | AI Language Assistant",
-    description: "通过AI助手学习日语假名。支持实时对话、发音指导和写法练习。Chat with AI to learn Japanese kana, get pronunciation guidance and writing practice.",
+    title: t('chatTitle'),
+    description: t('chatDescription'),
     keywords: [
       "japanese chat",
       "ai language tutor",
@@ -25,11 +27,12 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       canonical: canonicalUrl
     },
     openGraph: {
-      title: "Japanese Learning Chat Assistant | LearnKana",
-      description: "Learn Japanese with AI chat assistant. Real-time conversation and practice.",
+      title: t('chatTitle'),
+      description: t('chatDescription'),
       type: "website",
-      locale: "zh_CN",
-      alternateLocale: ["en_US", "ja_JP"],
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };

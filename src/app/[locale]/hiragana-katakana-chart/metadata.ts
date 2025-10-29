@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-chart`;
   
   return {
-    title: "Japanese Kana Chart | Interactive Hiragana & Katakana Chart",
-    description: "Learn Japanese Hiragana and Katakana with our interactive Gojuon chart. Features clear visuals, audio pronunciation, and practice tools for mastering Japanese writing systems.",
+    title: t('chartTitle'),
+    description: t('chartDescription'),
     keywords: [
       "gojuon chart",
       "japanese kana chart",
@@ -25,10 +27,11 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       canonical: canonicalUrl
     },
     openGraph: {
-      title: "Interactive Japanese Kana Chart | LearnKana",
-      description: "Master Japanese Hiragana and Katakana with our interactive Gojuon chart. Clear visuals and audio pronunciation.",
+      title: t('chartTitle'),
+      description: t('chartDescription'),
       type: "website",
-      locale: "en_US",
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };

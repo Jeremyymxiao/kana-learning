@@ -18,9 +18,9 @@ export default function Footer() {
             <div className="md:col-span-2 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><Link href="/en" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/en/about" className="text-gray-400 hover:text-white transition-colors">About</Link></li>
-                <li><Link href="/en/hiragana-katakana-chart" className="text-gray-400 hover:text-white transition-colors">Kana Chart</Link></li>
+                <li><Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
+                <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors">About</Link></li>
+                <li><Link href="/hiragana-katakana-chart" className="text-gray-400 hover:text-white transition-colors">Kana Chart</Link></li>
               </ul>
             </div>
   
@@ -28,9 +28,9 @@ export default function Footer() {
             <div className="md:col-span-2 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
               <h3 className="text-lg font-semibold mb-4">Legal</h3>
               <ul className="space-y-2">
-                <li><Link href="/en/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link href="/en/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/en/contact-us" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/contact-us" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
               </ul>
             </div>
 

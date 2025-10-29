@@ -33,7 +33,9 @@ export default function robots(): MetadataRoute.Robots {
           '/admin/',
           '/private/',
           '*.json',
-          '*.xml'
+          '*.xml',
+          '/*?utm_*',
+          '/*?ref=*'
         ]
       },
       {
@@ -48,7 +50,9 @@ export default function robots(): MetadataRoute.Robots {
           '/settings',
           '/_next/',
           '/admin/',
-          '/private/'
+          '/private/',
+          '/*?utm_*',
+          '/*?ref=*'
         ]
       },
       {
@@ -63,7 +67,9 @@ export default function robots(): MetadataRoute.Robots {
           '/settings',
           '/_next/',
           '/admin/',
-          '/private/'
+          '/private/',
+          '/*?utm_*',
+          '/*?ref=*'
         ]
       }
     ],

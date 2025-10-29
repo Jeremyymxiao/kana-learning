@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/about`;
   
   return {
-    title: "LearnKana | 日语假名学习 | Hiragana & Katakana Converter",
-    description: "免费的日语假名学习平台。包含平假名(ひらがな)、片假名(カタカナ)转换器,互动式五十音图,记忆游戏等功能。The best free Japanese kana learning platform with hiragana/katakana converter, interactive gojuon chart and memory games.",
+    title: t('aboutTitle'),
+    description: t('aboutDescription'),
     keywords: [
       "hiragana",
       "katakana", 
@@ -30,12 +32,12 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       canonical: canonicalUrl
     },
     openGraph: {
-      title: "LearnKana | Japanese Kana Learning & Converter",
-      description: "Learn Japanese Hiragana & Katakana with interactive tools. Free online converter, practice games and study materials.",
+      title: t('aboutTitle'),
+      description: t('aboutDescription'),
       type: "website",
-      locale: "zh_CN",
-      alternateLocale: ["en_US", "ja_JP"],
-      siteName: "LearnKana",
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };

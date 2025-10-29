@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-quiz`;
   
   return {
-    title: "Hiragana & Katakana Quiz | Interactive Japanese Learning",
-    description: "Test your knowledge of Japanese kana with our interactive quiz. Practice Hiragana and Katakana with AI-powered adaptive questions and instant feedback.",
+    title: t('quizTitle'),
+    description: t('quizDescription'),
     keywords: [
       "hiragana quiz",
       "katakana quiz", 
@@ -25,11 +27,11 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       canonical: canonicalUrl
     },
     openGraph: {
-      title: "Hiragana & Katakana Quiz | Interactive Practice",
-      description: "Master Japanese kana with our smart quiz system. Get instant feedback and personalized practice.",
+      title: t('quizTitle'),
+      description: t('quizDescription'),
       type: "website",
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
-      siteName: "LearnKana",
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };

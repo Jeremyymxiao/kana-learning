@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/contact-us`;
   
   return {
-    title: "Contact Us | LearnKana",
-    description: "Contact the LearnKana team. Share your feedback, suggestions, or report issues. We'd love to hear from you!",
+    title: t('contactTitle'),
+    description: t('contactDescription'),
     keywords: [
       "contact",
       "feedback",
@@ -21,11 +23,12 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       canonical: canonicalUrl
     },
     openGraph: {
-      title: "Contact Us | LearnKana",
-      description: "Get in touch with the LearnKana team and share your thoughts.",
+      title: t('contactTitle'),
+      description: t('contactDescription'),
       type: "website",
-      locale: "en_US",
-      alternateLocale: ["ja_JP", "zh_CN"],
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };

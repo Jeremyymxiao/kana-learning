@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-converter`;
   
   return {
-    title: "Japanese Text Converter | Hiragana & Katakana & Romaji Converter",
-    description: "Free online Japanese text converter. Convert Hiragana & Katakana & Romaji instantly with our easy-to-use tool. Perfect for Japanese language learners and students.",
+    title: t('converterTitle'),
+    description: t('converterDescription'),
     keywords: [
       "japanese converter",
       "kanji to hiragana",
@@ -33,10 +35,11 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       canonical: canonicalUrl
     },
     openGraph: {
-      title: "Japanese Text Converter | LearnKana",
-      description: "Convert Japanese text between Kanji and Hiragana instantly. Free online tool for Japanese language learners.",
+      title: t('converterTitle'),
+      description: t('converterDescription'),
       type: "website",
-      locale: "en_US",
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };

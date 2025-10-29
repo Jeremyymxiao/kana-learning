@@ -4,11 +4,12 @@ import {defineRouting} from 'next-intl/routing';
 export const routing = defineRouting({
   locales: ['en', 'de', 'fr', 'pt', 'es'],
   defaultLocale: 'en',
-  localePrefix: 'never',
+  localePrefix: 'as-needed',
   pathnames: {
     '/': '/',
     '/about': '/about',
     '/learn': '/learn',
+    '/learn/[slug]': '/learn/[slug]',
     '/contact-us': '/contact-us',
     '/chat': '/chat',
     '/hiragana-katakana-chart': '/hiragana-katakana-chart',

@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/learn`;
   
   return {
-    title: "Japanese Writing Guide | Learn Hiragana & Katakana",
-    description: "深入学习日语书写系统。包含详细的平假名(ひらがな)和片假名(カタカナ)教程,发音指南以及实用练习材料。Master Japanese writing systems with comprehensive guides and practice materials.",
+    title: t('learnTitle'),
+    description: t('learnDescription'),
     keywords: [
       "japanese writing",
       "learn hiragana",
@@ -29,11 +31,12 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       canonical: canonicalUrl
     },
     openGraph: {
-      title: "Japanese Writing System Guide | LearnKana",
-      description: "Complete guide to learning Japanese writing systems. Interactive tutorials and practice materials.",
+      title: t('learnTitle'),
+      description: t('learnDescription'),
       type: "website",
-      locale: "zh_CN",
-      alternateLocale: ["en_US", "ja_JP"],
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };

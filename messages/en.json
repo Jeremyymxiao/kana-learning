@@ -222,5 +222,25 @@
     "termsOfService": "Terms of Service",
     "cookiePolicy": "Cookie Policy",
     "allRightsReserved": "All rights reserved"
+  },
+  "Metadata": {
+    "siteName": "LearnKana",
+    "siteDescription": "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
+    "homeTitle": "LearnKana | Free Hiragana & Katakana Quiz and Chatbot",
+    "homeDescription": "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
+    "aboutTitle": "About Us | LearnKana",
+    "aboutDescription": "Learn about our mission to help you master Japanese kana with interactive lessons, quizzes, and charts",
+    "quizTitle": "Hiragana & Katakana Quiz | LearnKana",
+    "quizDescription": "Test your knowledge of Japanese kana with our interactive quiz. Practice Hiragana and Katakana with AI-powered adaptive questions and instant feedback.",
+    "learnTitle": "Learn Japanese Kana | LearnKana",
+    "learnDescription": "Master hiragana and katakana with comprehensive lessons and interactive tutorials",
+    "chartTitle": "Hiragana & Katakana Chart | LearnKana",
+    "chartDescription": "Complete reference chart for hiragana and katakana with pronunciation guides",
+    "converterTitle": "Hiragana & Katakana Converter | LearnKana",
+    "converterDescription": "Convert between hiragana, katakana, and romaji with our free online tool",
+    "contactTitle": "Contact Us | LearnKana",
+    "contactDescription": "Get in touch with us for questions, feedback, or support about learning Japanese kana",
+    "chatTitle": "Japanese Learning Assistant | LearnKana",
+    "chatDescription": "Chat with AI to learn Japanese kana and improve your skills with personalized assistance"
   }
 }
