@@ -19,6 +19,11 @@ const nextConfig = {
   async rewrites() {
     return {
       beforeFiles: [
+        // Allow ads.txt to be served from public directory
+        {
+          source: '/ads.txt',
+          destination: '/ads.txt',
+        },
         // Rewrite root English routes to /en routes
         {
           source: '/hiragana-katakana-converter',
