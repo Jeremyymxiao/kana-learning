@@ -24,6 +24,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {/* Google AdSense */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5334706525054343" crossOrigin="anonymous"></script>
         {/* Google Analytics - 直接内联脚本 */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-0M56J3EFEE"></script>
         <script
