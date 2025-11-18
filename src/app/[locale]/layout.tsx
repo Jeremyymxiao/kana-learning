@@ -47,6 +47,8 @@ export default async function LocaleLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {/* AdSense site verification */}
+        <meta name="google-adsense-account" content="ca-pub-5334706525054343" />
         {/* Google AdSense */}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5334706525054343" crossOrigin="anonymous"></script>
         {/* Umami Analytics */}
