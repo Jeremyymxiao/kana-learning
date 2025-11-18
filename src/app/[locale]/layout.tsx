@@ -47,6 +47,10 @@ export default async function LocaleLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {/* Google AdSense */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5334706525054343" crossOrigin="anonymous"></script>
+        {/* Umami Analytics */}
+        <script defer src="https://umami.jeremyym0612.work/random-string.js" data-website-id="6e68d4ad-8953-412c-8791-43d9c0021c61"></script>
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
         <NextIntlClientProvider messages={messages} locale={locale}>

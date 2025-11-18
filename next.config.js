@@ -16,6 +16,77 @@ const nextConfig = {
       'images.unsplash.com'
     ],
   },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // Rewrite root English routes to /en routes
+        {
+          source: '/hiragana-katakana-converter',
+          destination: '/en/hiragana-katakana-converter',
+        },
+        {
+          source: '/hiragana-katakana-quiz',
+          destination: '/en/hiragana-katakana-quiz',
+        },
+        {
+          source: '/hiragana-katakana-chart',
+          destination: '/en/hiragana-katakana-chart',
+        },
+        {
+          source: '/chat',
+          destination: '/en/chat',
+        },
+        {
+          source: '/learn',
+          destination: '/en/learn',
+        },
+        {
+          source: '/learn/:slug',
+          destination: '/en/learn/:slug',
+        },
+        {
+          source: '/about',
+          destination: '/en/about',
+        },
+        {
+          source: '/contact-us',
+          destination: '/en/contact-us',
+        },
+        {
+          source: '/privacy-policy',
+          destination: '/en/privacy-policy',
+        },
+        {
+          source: '/terms-of-service',
+          destination: '/en/terms-of-service',
+        },
+        {
+          source: '/cookie-policy',
+          destination: '/en/cookie-policy',
+        },
+        {
+          source: '/auth',
+          destination: '/en/auth',
+        },
+        {
+          source: '/login',
+          destination: '/en/login',
+        },
+        {
+          source: '/register',
+          destination: '/en/register',
+        },
+        {
+          source: '/profile',
+          destination: '/en/profile',
+        },
+        {
+          source: '/settings',
+          destination: '/en/settings',
+        },
+      ],
+    };
+  },
   async redirects() {
     return [
       // Redirect /chart to /hiragana-katakana-chart

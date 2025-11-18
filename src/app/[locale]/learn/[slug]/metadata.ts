@@ -4,9 +4,9 @@ import { getArticleBySlug } from '@/data/articles';
 export async function generateMetadata({ 
   params 
 }: { 
-  params: { locale: string; slug: string } 
+  params: Promise<{ locale: string; slug: string }> 
 }): Promise<Metadata> {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/learn/${slug}`;
@@ -49,9 +49,9 @@ export async function generateMetadata({
 export async function generateStructuredData({ 
   params 
 }: { 
-  params: { locale: string; slug: string } 
+  params: Promise<{ locale: string; slug: string }> 
 }) {
-  const { locale, slug } = params;
+  const { locale, slug } = await params;
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/learn/${slug}`;
