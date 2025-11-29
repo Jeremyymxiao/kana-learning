@@ -6,7 +6,7 @@ import Footer from './footer';
 import { useAuth } from '@/providers/AuthProvider';
 import { useNavigation } from '@/features/kana/components/navigation-provider';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from '../../../i18n.config';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -14,7 +14,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { usePathname } from 'next/navigation';
 import { AuthUser } from '@/types/auth';
 import { LanguageSwitcher } from '@/components/ui/language-switcher';
 

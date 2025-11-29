@@ -2,9 +2,10 @@
 
 import MainLayout from '@/components/layouts/main-layout';
 import { useRouter } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import React from 'react';
 
 interface ClientPageProps {
   article: {
@@ -14,6 +15,17 @@ interface ClientPageProps {
     content: string;
   };
 }
+
+// Custom components to downgrade heading levels by 1
+// This prevents duplicate H1 tags since the page title is already H1
+const markdownComponents: Components = {
+  h1: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
+  h2: ({ children, ...props }) => <h3 {...props}>{children}</h3>,
+  h3: ({ children, ...props }) => <h4 {...props}>{children}</h4>,
+  h4: ({ children, ...props }) => <h5 {...props}>{children}</h5>,
+  h5: ({ children, ...props }) => <h6 {...props}>{children}</h6>,
+  h6: ({ children, ...props }) => <p className="font-bold" {...props}>{children}</p>,
+};
 
 export default function ClientPage({ article }: ClientPageProps) {
   const router = useRouter();
@@ -55,6 +67,7 @@ export default function ClientPage({ article }: ClientPageProps) {
           <ReactMarkdown 
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
+            components={markdownComponents}
           >
             {article.content}
           </ReactMarkdown>

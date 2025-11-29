@@ -49,12 +49,12 @@ export default function KanaQuizPage() {
                           />
                         </svg>
                       </div>
-                      <h2 
+                      <h1 
                         id="quiz-heading" 
                         className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#60A5FA] to-[#34D399] text-transparent bg-clip-text"
                       >
                         {t('title')}
-                      </h2>
+                      </h1>
                       <p className="text-xl text-gray-600 dark:text-gray-300">
                         {t('description')}
                       </p>

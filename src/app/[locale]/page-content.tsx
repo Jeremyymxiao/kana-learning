@@ -2,14 +2,10 @@
 
 import MainLayout from '@/components/layouts/main-layout';
 import { MessageSquare, Table, PenTool, ArrowRight, Repeat, BookOpen } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '../../../i18n.config';
 import { useTranslations } from 'next-intl';
 
-interface HomePageContentProps {
-  locale: string;
-}
-
-export default function HomePageContent({ locale }: HomePageContentProps) {
+export default function HomePageContent() {
   const t = useTranslations('HomePage');
   
   return (
@@ -46,7 +42,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
             {/* CTA Button */}
             <div className="mb-16">
               <Link 
-                href={`/${locale}/hiragana-katakana-quiz`}
+                href="/hiragana-katakana-quiz"
                 className="inline-flex items-center px-8 py-4 text-xl font-bold bg-gradient-to-r from-[#FF7E67] to-[#FFD600] text-[#1A1B2F] rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl group"
               >
                 {t('startQuiz')}
@@ -87,7 +83,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* AI Tutor Feature */}
-                <Link href={`/${locale}/hiragana-katakana-quiz`} className="group">
+                <Link href="/chat" className="group">
                   <div className="relative bg-gradient-to-br from-[#2B7FFF] to-[#00D6A4] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#2B7FFF] rounded-xl flex items-center justify-center mb-4">
@@ -106,7 +102,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                 </Link>
 
                 {/* Kana Charts Feature */}
-                <Link href={`/${locale}/hiragana-katakana-chart`} className="group">
+                <Link href="/hiragana-katakana-chart" className="group">
                   <div className="relative bg-gradient-to-br from-[#FFD600] to-[#FF7E67] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#FFD600] rounded-xl flex items-center justify-center mb-4">
@@ -125,7 +121,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                 </Link>
 
                 {/* Kana Practice Feature */}
-                <Link href={`/${locale}/hiragana-katakana-quiz`} className="group">
+                <Link href="/hiragana-katakana-quiz" className="group">
                   <div className="relative bg-gradient-to-br from-[#00D6A4] to-[#2B7FFF] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#00D6A4] rounded-xl flex items-center justify-center mb-4">
@@ -144,7 +140,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                 </Link>
 
                 {/* Text Converter Feature */}
-                <Link href={`/${locale}/hiragana-katakana-converter`} className="group">
+                <Link href="/hiragana-katakana-converter" className="group">
                   <div className="relative bg-gradient-to-br from-[#FF7E67] to-[#FFD600] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#FF7E67] rounded-xl flex items-center justify-center mb-4">
@@ -179,7 +175,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     The fundamental Japanese phonetic script used for native words, particles, and verb conjugations.
                   </p>
-                  <Link href={`/${locale}/hiragana-katakana-chart`} className="text-[#FF7E67] font-semibold hover:underline">
+                  <Link href="/hiragana-katakana-chart" className="text-[#FF7E67] font-semibold hover:underline">
                     Learn Hiragana →
                   </Link>
                 </div>
@@ -188,7 +184,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     Used for foreign loanwords, emphasis, and technical terms in Japanese writing.
                   </p>
-                  <Link href={`/${locale}/hiragana-katakana-chart`} className="text-[#2B7FFF] font-semibold hover:underline">
+                  <Link href="/hiragana-katakana-chart" className="text-[#2B7FFF] font-semibold hover:underline">
                     Learn Katakana →
                   </Link>
                 </div>
@@ -205,7 +201,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                 Learning Guides
               </h2>
               <div className="grid md:grid-cols-3 gap-8">
-                <Link href={`/${locale}/learn`} className="group">
+                <Link href="/learn" className="group">
                   <div className="bg-gradient-to-br from-[#2B7FFF]/10 to-[#00D6A4]/10 p-6 rounded-2xl hover:shadow-lg transition-all">
                     <BookOpen className="w-12 h-12 mb-4 text-[#2B7FFF]" />
                     <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('hiraganaGuide')}</h3>
@@ -213,7 +209,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                     <span className="text-[#2B7FFF] font-semibold">Learn More →</span>
                   </div>
                 </Link>
-                <Link href={`/${locale}/learn`} className="group">
+                <Link href="/learn" className="group">
                   <div className="bg-gradient-to-br from-[#FFD600]/10 to-[#FF7E67]/10 p-6 rounded-2xl hover:shadow-lg transition-all">
                     <BookOpen className="w-12 h-12 mb-4 text-[#FFD600]" />
                     <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('katakanaGuide')}</h3>
@@ -221,7 +217,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                     <span className="text-[#FFD600] font-semibold">Learn More →</span>
                   </div>
                 </Link>
-                <Link href={`/${locale}/hiragana-katakana-quiz`} className="group">
+                <Link href="/hiragana-katakana-quiz" className="group">
                   <div className="bg-gradient-to-br from-[#00D6A4]/10 to-[#2B7FFF]/10 p-6 rounded-2xl hover:shadow-lg transition-all">
                     <BookOpen className="w-12 h-12 mb-4 text-[#00D6A4]" />
                     <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('combinedGuide')}</h3>

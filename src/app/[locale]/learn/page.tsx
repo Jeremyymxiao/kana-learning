@@ -2,7 +2,7 @@
 
 import MainLayout from '@/components/layouts/main-layout';
 import { articles } from '@/data/articles';
-import Link from 'next/link';
+import { Link } from '../../../../i18n.config';
 import { useTranslations } from 'next-intl';
 
 export default function LearnPage() {
