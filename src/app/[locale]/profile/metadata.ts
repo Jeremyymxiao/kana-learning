@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/profile`;
   
   return {
-    title: "User Profile | LearnKana Dashboard",
-    description: "View and manage your LearnKana profile, track your Japanese learning progress, and customize your learning experience.",
+    title: t('profileTitle'),
+    description: t('profileDescription'),
     keywords: [
       "user profile",
       "learning progress",
@@ -17,14 +19,22 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       "japanese learning stats"
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/profile`,
+        'de': `${baseUrl}/de/profile`,
+        'fr': `${baseUrl}/fr/profile`,
+        'pt': `${baseUrl}/pt/profile`,
+        'es': `${baseUrl}/es/profile`
+      }
     },
     openGraph: {
-      title: "Profile | LearnKana",
-      description: "Your personalized Japanese learning dashboard with progress tracking and settings.",
+      title: t('profileTitle'),
+      description: t('profileDescription'),
       type: "website",
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
-      siteName: "LearnKana",
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };

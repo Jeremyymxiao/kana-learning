@@ -31,13 +31,21 @@ export async function generateMetadata({
       article.slug.replace('-', ' ')
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/learn/${slug}`,
+        'de': `${baseUrl}/de/learn/${slug}`,
+        'fr': `${baseUrl}/fr/learn/${slug}`,
+        'pt': `${baseUrl}/pt/learn/${slug}`,
+        'es': `${baseUrl}/es/learn/${slug}`
+      }
     },
     openGraph: {
       title: `${article.title} | LearnKana`,
       description: article.description,
       type: "article",
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
       siteName: "LearnKana",
       url: canonicalUrl,
       publishedTime: article.publishedAt,

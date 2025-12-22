@@ -24,7 +24,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       "日语会话"
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/chat`,
+        'de': `${baseUrl}/de/chat`,
+        'fr': `${baseUrl}/fr/chat`,
+        'pt': `${baseUrl}/pt/chat`,
+        'es': `${baseUrl}/es/chat`
+      }
     },
     openGraph: {
       title: t('chatTitle'),

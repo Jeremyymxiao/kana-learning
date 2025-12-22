@@ -24,13 +24,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       "japanese learning quiz"
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/hiragana-katakana-quiz`,
+        'de': `${baseUrl}/de/hiragana-katakana-quiz`,
+        'fr': `${baseUrl}/fr/hiragana-katakana-quiz`,
+        'pt': `${baseUrl}/pt/hiragana-katakana-quiz`,
+        'es': `${baseUrl}/es/hiragana-katakana-quiz`
+      }
     },
     openGraph: {
       title: t('quizTitle'),
       description: t('quizDescription'),
       type: "website",
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
       siteName: t('siteName'),
       url: canonicalUrl
     }

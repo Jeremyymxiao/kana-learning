@@ -29,7 +29,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       "日语学习"
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/about`,
+        'de': `${baseUrl}/de/about`,
+        'fr': `${baseUrl}/fr/about`,
+        'pt': `${baseUrl}/pt/about`,
+        'es': `${baseUrl}/es/about`
+      }
     },
     openGraph: {
       title: t('aboutTitle'),

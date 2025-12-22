@@ -222,6 +222,22 @@
     "contactTitle": "Contato | LearnKana",
     "contactDescription": "Entre em contato conosco para dúvidas, feedback ou suporte sobre aprendizado de kana japonês",
     "chatTitle": "Assistente de Aprendizado Japonês | LearnKana",
-    "chatDescription": "Converse com IA para aprender kana japonês e melhorar suas habilidades com assistência personalizada"
+    "chatDescription": "Converse com IA para aprender kana japonês e melhorar suas habilidades com assistência personalizada",
+    "privacyTitle": "Política de Privacidade | LearnKana",
+    "privacyDescription": "Política de privacidade do LearnKana. Saiba como coletamos, usamos e protegemos seus dados em nossa plataforma de aprendizado de japonês.",
+    "termsTitle": "Termos de Serviço | LearnKana",
+    "termsDescription": "Termos de Serviço do LearnKana - plataforma de aprendizado de japonês. Leia nossos termos e condições para usar nossos serviços e ferramentas educacionais.",
+    "loginTitle": "Entrar | LearnKana",
+    "loginDescription": "Entre na sua conta LearnKana para acessar recursos de aprendizado personalizados e acompanhar seu progresso.",
+    "registerTitle": "Registrar | LearnKana",
+    "registerDescription": "Crie uma conta LearnKana gratuita para começar a aprender Hiragana e Katakana japonês com recursos personalizados e acompanhamento de progresso.",
+    "profileTitle": "Perfil do Usuário | Painel LearnKana",
+    "profileDescription": "Visualize e gerencie seu perfil LearnKana, acompanhe seu progresso no aprendizado de japonês e personalize sua experiência.",
+    "settingsTitle": "Configurações | Preferências LearnKana",
+    "settingsDescription": "Personalize sua experiência de aprendizado LearnKana. Ajuste preferências de idioma e configurações de notificação.",
+    "cookieTitle": "Política de Cookies | Privacidade LearnKana",
+    "cookieDescription": "Saiba como o LearnKana usa cookies e tecnologias similares para melhorar sua experiência de aprendizado.",
+    "authTitle": "Autenticação | Acesso à conta LearnKana",
+    "authDescription": "Entre na sua conta LearnKana para acessar recursos de aprendizado personalizados e sincronizar em todos os dispositivos."
   }
 }

@@ -32,13 +32,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       "japanese writing converter"
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/hiragana-katakana-converter`,
+        'de': `${baseUrl}/de/hiragana-katakana-converter`,
+        'fr': `${baseUrl}/fr/hiragana-katakana-converter`,
+        'pt': `${baseUrl}/pt/hiragana-katakana-converter`,
+        'es': `${baseUrl}/es/hiragana-katakana-converter`
+      }
     },
     openGraph: {
       title: t('converterTitle'),
       description: t('converterDescription'),
       type: "website",
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
       siteName: t('siteName'),
       url: canonicalUrl
     }

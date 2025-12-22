@@ -24,13 +24,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       "kana pronunciation"
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/hiragana-katakana-chart`,
+        'de': `${baseUrl}/de/hiragana-katakana-chart`,
+        'fr': `${baseUrl}/fr/hiragana-katakana-chart`,
+        'pt': `${baseUrl}/pt/hiragana-katakana-chart`,
+        'es': `${baseUrl}/es/hiragana-katakana-chart`
+      }
     },
     openGraph: {
       title: t('chartTitle'),
       description: t('chartDescription'),
       type: "website",
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
       siteName: t('siteName'),
       url: canonicalUrl
     }

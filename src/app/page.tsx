@@ -19,10 +19,10 @@ export default function RootPage() {
           <div className="absolute top-[40%] left-[60%] w-[20%] h-[20%] bg-[#00D6A4] transform -rotate-12 opacity-90"></div>
         </div>
 
-        <div className="relative container mx-auto px-4 pt-32 pb-20">
+        <div className="relative container mx-auto px-4 pt-20 sm:pt-28 md:pt-32 pb-14 sm:pb-18 md:pb-20">
           {/* 主标题区域 */}
           <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-7xl md:text-8xl font-bold mb-8">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 sm:mb-8 leading-[1.05]">
               <span className="text-[#FF7E67] block">
                 AI-Powered
               </span>
@@ -31,35 +31,44 @@ export default function RootPage() {
               </span>
             </h1>
             
-            <p className="text-2xl md:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-12">
+            <p className="text-lg sm:text-xl md:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12">
               Master Japanese kana with our interactive Hiragana & Katakana Quiz platform featuring AI assistance and custom learning paths.
             </p>
 
             {/* CTA Button */}
-            <div className="mb-16">
+            <div className="mb-8 sm:mb-12">
               <Link 
                 href="/hiragana-katakana-quiz"
-                className="inline-flex items-center px-8 py-4 text-xl font-bold bg-gradient-to-r from-[#FF7E67] to-[#FFD600] text-[#1A1B2F] rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl group"
+                className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-[#FF7E67] to-[#FFD600] text-[#1A1B2F] rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl group"
               >
                 Start Hiragana & Katakana Quiz
-                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-3 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* 功能预览列表 */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center">
-              <div className="flex items-center gap-2 text-white/60">
-                <MessageSquare className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">AI Tutor</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/60">
-                <PenTool className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">Kana Practice</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/60">
-                <Table className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">Kana Charts</span>
-              </div>
+            <div className="flex flex-row flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-10 md:gap-16 text-center">
+              <Link
+                href="/chat"
+                className="flex items-center gap-2 text-white/60 hover:text-white transition-colors cursor-pointer"
+              >
+                <MessageSquare className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                <span className="text-base sm:text-lg md:text-xl">AI Tutor</span>
+              </Link>
+              <Link
+                href="/hiragana-katakana-quiz"
+                className="flex items-center gap-2 text-white/60 hover:text-white transition-colors cursor-pointer"
+              >
+                <PenTool className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                <span className="text-base sm:text-lg md:text-xl">Kana Practice</span>
+              </Link>
+              <Link
+                href="/hiragana-katakana-chart"
+                className="flex items-center gap-2 text-white/60 hover:text-white transition-colors cursor-pointer"
+              >
+                <Table className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                <span className="text-base sm:text-lg md:text-xl">Kana Charts</span>
+              </Link>
             </div>
           </div>
         </div>

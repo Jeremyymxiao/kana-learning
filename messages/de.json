@@ -222,6 +222,22 @@
     "contactTitle": "Kontakt | LearnKana",
     "contactDescription": "Kontaktieren Sie uns für Fragen, Feedback oder Unterstützung beim Lernen japanischer Kana",
     "chatTitle": "Japanischer Lernassistent | LearnKana",
-    "chatDescription": "Chatten Sie mit KI, um japanische Kana zu lernen und Ihre Fähigkeiten mit personalisierter Unterstützung zu verbessern"
+    "chatDescription": "Chatten Sie mit KI, um japanische Kana zu lernen und Ihre Fähigkeiten mit personalisierter Unterstützung zu verbessern",
+    "privacyTitle": "Datenschutzrichtlinie | LearnKana",
+    "privacyDescription": "LearnKanas Datenschutzrichtlinie. Erfahren Sie, wie wir Ihre Daten sammeln, verwenden und schützen, während Sie unsere japanische Sprachlernplattform nutzen.",
+    "termsTitle": "Nutzungsbedingungen | LearnKana",
+    "termsDescription": "Nutzungsbedingungen für LearnKana - Japanische Lernplattform. Lesen Sie unsere Bedingungen für die Nutzung unserer Bildungsdienste und Tools.",
+    "loginTitle": "Anmelden | LearnKana",
+    "loginDescription": "Melden Sie sich bei Ihrem LearnKana-Konto an, um auf personalisierte Japanisch-Lernfunktionen zuzugreifen und Ihren Fortschritt zu verfolgen.",
+    "registerTitle": "Registrieren | LearnKana",
+    "registerDescription": "Erstellen Sie ein kostenloses LearnKana-Konto, um Japanisch Hiragana und Katakana mit personalisierten Funktionen und Fortschrittsverfolgung zu lernen.",
+    "profileTitle": "Benutzerprofil | LearnKana Dashboard",
+    "profileDescription": "Sehen und verwalten Sie Ihr LearnKana-Profil, verfolgen Sie Ihren Japanisch-Lernfortschritt und passen Sie Ihre Lernerfahrung an.",
+    "settingsTitle": "Einstellungen | LearnKana Präferenzen",
+    "settingsDescription": "Passen Sie Ihre LearnKana-Lernerfahrung an. Spracheinstellungen, Benachrichtigungseinstellungen und personalisieren Sie Ihre Japanisch-Lernreise.",
+    "cookieTitle": "Cookie-Richtlinie | LearnKana Datenschutz",
+    "cookieDescription": "Erfahren Sie, wie LearnKana Cookies und ähnliche Technologien verwendet, um Ihre Lernerfahrung zu verbessern.",
+    "authTitle": "Authentifizierung | LearnKana Kontozugang",
+    "authDescription": "Melden Sie sich bei Ihrem LearnKana-Konto an, um auf personalisierte Japanisch-Lernfunktionen zuzugreifen und geräteübergreifend zu synchronisieren."
   }
 }

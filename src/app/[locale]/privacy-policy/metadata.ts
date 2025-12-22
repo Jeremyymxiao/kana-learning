@@ -1,29 +1,48 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/privacy-policy`;
   
   return {
-    title: "Privacy Policy | LearnKana",
-    description: "LearnKana's privacy policy. Learn how we collect, use, and protect your data while using our Japanese language learning platform.",
+    title: t('privacyTitle'),
+    description: t('privacyDescription'),
+    keywords: [
+      "privacy policy",
+      "data protection",
+      "GDPR",
+      "user privacy",
+      "data security",
+      "LearnKana privacy"
+    ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/privacy-policy`,
+        'de': `${baseUrl}/de/privacy-policy`,
+        'fr': `${baseUrl}/fr/privacy-policy`,
+        'pt': `${baseUrl}/pt/privacy-policy`,
+        'es': `${baseUrl}/es/privacy-policy`
+      }
     },
     openGraph: {
-      title: "Privacy Policy | LearnKana",
-      description: "Our commitment to protecting your privacy while learning Japanese.",
+      title: t('privacyTitle'),
+      description: t('privacyDescription'),
       type: "website",
-      locale: "en_US",
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };
 }
 
-export function generateStructuredData({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export async function generateStructuredData({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/privacy-policy`;

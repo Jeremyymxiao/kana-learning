@@ -241,6 +241,22 @@
     "contactTitle": "Contact Us | LearnKana",
     "contactDescription": "Get in touch with us for questions, feedback, or support about learning Japanese kana",
     "chatTitle": "Japanese Learning Assistant | LearnKana",
-    "chatDescription": "Chat with AI to learn Japanese kana and improve your skills with personalized assistance"
+    "chatDescription": "Chat with AI to learn Japanese kana and improve your skills with personalized assistance",
+    "privacyTitle": "Privacy Policy | LearnKana",
+    "privacyDescription": "LearnKana's privacy policy. Learn how we collect, use, and protect your data while using our Japanese language learning platform.",
+    "termsTitle": "Terms of Service | LearnKana",
+    "termsDescription": "Terms of Service for LearnKana - Japanese learning platform. Read our terms and conditions for using our educational services and tools.",
+    "loginTitle": "Login | LearnKana",
+    "loginDescription": "Login to your LearnKana account to access personalized Japanese learning features and track your progress.",
+    "registerTitle": "Register | LearnKana",
+    "registerDescription": "Create a free LearnKana account to start learning Japanese Hiragana and Katakana with personalized features and progress tracking.",
+    "profileTitle": "User Profile | LearnKana Dashboard",
+    "profileDescription": "View and manage your LearnKana profile, track your Japanese learning progress, and customize your learning experience.",
+    "settingsTitle": "Settings | LearnKana Preferences",
+    "settingsDescription": "Customize your LearnKana learning experience. Adjust language preferences, notification settings, and personalize your Japanese learning journey.",
+    "cookieTitle": "Cookie Policy | LearnKana Privacy",
+    "cookieDescription": "Learn how LearnKana uses cookies and similar technologies to enhance your learning experience and improve our services.",
+    "authTitle": "Authentication | LearnKana Account Access",
+    "authDescription": "Sign in to your LearnKana account to access personalized Japanese learning features, track your progress, and sync across devices."
   }
 }

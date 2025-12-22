@@ -20,7 +20,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       "get in touch"
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/contact-us`,
+        'de': `${baseUrl}/de/contact-us`,
+        'fr': `${baseUrl}/fr/contact-us`,
+        'pt': `${baseUrl}/pt/contact-us`,
+        'es': `${baseUrl}/es/contact-us`
+      }
     },
     openGraph: {
       title: t('contactTitle'),

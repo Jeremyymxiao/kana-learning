@@ -1,29 +1,47 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/terms-of-service`;
   
   return {
-    title: "Terms of Service | LearnKana",
-    description: "Terms of Service for LearnKana - Japanese learning platform. Read our terms and conditions for using our educational services and tools.",
+    title: t('termsTitle'),
+    description: t('termsDescription'),
+    keywords: [
+      "terms of service",
+      "terms and conditions",
+      "user agreement",
+      "legal terms",
+      "LearnKana terms"
+    ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/terms-of-service`,
+        'de': `${baseUrl}/de/terms-of-service`,
+        'fr': `${baseUrl}/fr/terms-of-service`,
+        'pt': `${baseUrl}/pt/terms-of-service`,
+        'es': `${baseUrl}/es/terms-of-service`
+      }
     },
     openGraph: {
-      title: "Terms of Service | LearnKana",
-      description: "Terms and conditions for using LearnKana's Japanese learning platform and educational tools.",
+      title: t('termsTitle'),
+      description: t('termsDescription'),
       type: "website",
-      locale: "en_US",
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };
 }
 
-export function generateStructuredData({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export async function generateStructuredData({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/terms-of-service`;

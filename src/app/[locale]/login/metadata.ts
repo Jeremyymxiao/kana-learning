@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/login`;
   
   return {
-    title: "Login | LearnKana",
-    description: "Login to your LearnKana account to access personalized Japanese learning features and track your progress.",
+    title: t('loginTitle'),
+    description: t('loginDescription'),
     keywords: [
       "login",
       "sign in",
@@ -18,20 +20,29 @@ export function generateMetadata({ params }: { params: { locale: string } }): Me
       "progress tracking"
     ],
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: {
+        'en': `${baseUrl}/login`,
+        'de': `${baseUrl}/de/login`,
+        'fr': `${baseUrl}/fr/login`,
+        'pt': `${baseUrl}/pt/login`,
+        'es': `${baseUrl}/es/login`
+      }
     },
     openGraph: {
-      title: "Login | LearnKana",
-      description: "Access your personalized Japanese learning experience with LearnKana.",
+      title: t('loginTitle'),
+      description: t('loginDescription'),
       type: "website",
-      locale: "en_US",
+      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
+      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };
 }
 
-export function generateStructuredData({ params }: { params: { locale: string } }) {
-  const { locale } = params;
+export async function generateStructuredData({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const baseUrl = 'https://learnkana.pro';
   const localePath = locale === 'en' ? '' : `/${locale}`;
   const canonicalUrl = `${baseUrl}${localePath}/login`;

@@ -222,6 +222,22 @@
     "contactTitle": "Contact | LearnKana",
     "contactDescription": "Contactez-nous pour des questions, des commentaires ou du support sur l'apprentissage du kana japonais",
     "chatTitle": "Assistant d'Apprentissage Japonais | LearnKana",
-    "chatDescription": "Discutez avec l'IA pour apprendre le kana japonais et améliorer vos compétences avec une assistance personnalisée"
+    "chatDescription": "Discutez avec l'IA pour apprendre le kana japonais et améliorer vos compétences avec une assistance personnalisée",
+    "privacyTitle": "Politique de Confidentialité | LearnKana",
+    "privacyDescription": "Politique de confidentialité de LearnKana. Découvrez comment nous collectons, utilisons et protégeons vos données sur notre plateforme d'apprentissage du japonais.",
+    "termsTitle": "Conditions d'Utilisation | LearnKana",
+    "termsDescription": "Conditions d'utilisation de LearnKana - plateforme d'apprentissage du japonais. Lisez nos conditions d'utilisation de nos services et outils éducatifs.",
+    "loginTitle": "Connexion | LearnKana",
+    "loginDescription": "Connectez-vous à votre compte LearnKana pour accéder aux fonctionnalités d'apprentissage personnalisées et suivre vos progrès.",
+    "registerTitle": "S'inscrire | LearnKana",
+    "registerDescription": "Créez un compte LearnKana gratuit pour apprendre le Hiragana et Katakana japonais avec des fonctionnalités personnalisées et un suivi des progrès.",
+    "profileTitle": "Profil Utilisateur | Tableau de bord LearnKana",
+    "profileDescription": "Consultez et gérez votre profil LearnKana, suivez vos progrès d'apprentissage du japonais et personnalisez votre expérience.",
+    "settingsTitle": "Paramètres | Préférences LearnKana",
+    "settingsDescription": "Personnalisez votre expérience d'apprentissage LearnKana. Ajustez les préférences de langue et les paramètres de notification.",
+    "cookieTitle": "Politique des Cookies | Confidentialité LearnKana",
+    "cookieDescription": "Découvrez comment LearnKana utilise les cookies et technologies similaires pour améliorer votre expérience d'apprentissage.",
+    "authTitle": "Authentification | Accès au compte LearnKana",
+    "authDescription": "Connectez-vous à votre compte LearnKana pour accéder aux fonctionnalités d'apprentissage personnalisées et synchroniser sur tous vos appareils."
   }
 }
