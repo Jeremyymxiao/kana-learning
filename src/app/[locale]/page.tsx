@@ -29,7 +29,7 @@ export default function LandingPage() {
         <div className="relative container mx-auto px-4 pt-20 sm:pt-28 md:pt-32 pb-14 sm:pb-18 md:pb-20">
           {/* 主标题区域 */}
           <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 sm:mb-8 leading-[1.05]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-[1.05]">
               <span className="text-[#FF7E67] block">
                 {t('aiPowered')}
               </span>
@@ -38,7 +38,7 @@ export default function LandingPage() {
               </span>
             </h1>
             
-            <p className="text-lg sm:text-xl md:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12">
+            <p className="text-base sm:text-lg md:text-xl lg:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12">
               {t('heroDescription')}
             </p>
 
