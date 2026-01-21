@@ -267,6 +267,67 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                   <p className="text-gray-600 dark:text-gray-300">{t('faq6Answer')}</p>
                 </div>
               </div>
+
+              {/* FAQ Schema Markup for SEO */}
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                      {
+                        "@type": "Question",
+                        "name": t('faq1Question'),
+                        "acceptedAnswer": {
+                          "@type": "Answer",
+                          "text": t('faq1Answer')
+                        }
+                      },
+                      {
+                        "@type": "Question",
+                        "name": t('faq2Question'),
+                        "acceptedAnswer": {
+                          "@type": "Answer",
+                          "text": t('faq2Answer')
+                        }
+                      },
+                      {
+                        "@type": "Question",
+                        "name": t('faq3Question'),
+                        "acceptedAnswer": {
+                          "@type": "Answer",
+                          "text": t('faq3Answer')
+                        }
+                      },
+                      {
+                        "@type": "Question",
+                        "name": t('faq4Question'),
+                        "acceptedAnswer": {
+                          "@type": "Answer",
+                          "text": t('faq4Answer')
+                        }
+                      },
+                      {
+                        "@type": "Question",
+                        "name": t('faq5Question'),
+                        "acceptedAnswer": {
+                          "@type": "Answer",
+                          "text": t('faq5Answer')
+                        }
+                      },
+                      {
+                        "@type": "Question",
+                        "name": t('faq6Question'),
+                        "acceptedAnswer": {
+                          "@type": "Answer",
+                          "text": t('faq6Answer')
+                        }
+                      }
+                    ]
+                  })
+                }}
+              />
             </div>
           </div>
         </section>

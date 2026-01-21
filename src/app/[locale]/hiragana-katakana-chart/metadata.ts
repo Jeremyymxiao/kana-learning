@@ -40,7 +40,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
       alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
       siteName: t('siteName'),
-      url: canonicalUrl
+      url: canonicalUrl,
+      images: [
+        {
+          url: `${baseUrl}/api/og?title=${encodeURIComponent(t('chartTitle'))}&type=chart&locale=${locale}`,
+          width: 1200,
+          height: 630,
+          alt: t('chartTitle')
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('chartTitle'),
+      description: t('chartDescription'),
+      images: [`${baseUrl}/api/og?title=${encodeURIComponent(t('chartTitle'))}&type=chart&locale=${locale}`],
+      site: '@learnkana'
     }
   };
 }

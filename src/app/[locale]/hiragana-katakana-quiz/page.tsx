@@ -1,9 +1,25 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import { QuizPanel } from '@/features/quiz/components/QuizPanel';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+
+// Code splitting: Lazy load QuizPanel for better initial page load
+const QuizPanel = dynamic(
+  () => import('@/features/quiz/components/QuizPanel').then(mod => ({ default: mod.QuizPanel })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#60A5FA] mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Loading quiz...</p>
+        </div>
+      </div>
+    ),
+    ssr: false
+  }
+);
 
 export default function KanaQuizPage() {
   const [showQuizHeader, setShowQuizHeader] = useState(true);
