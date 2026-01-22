@@ -65,7 +65,7 @@ export default function LearnPage() {
                         className="inline-flex items-center text-[#43A047] dark:text-[#81C784] hover:text-[#2E7D32] dark:hover:text-[#A5D6A7] font-medium transition-colors"
                       >
                         {t('readMore')}
-                        <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                           <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </Link>

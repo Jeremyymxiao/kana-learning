@@ -13,25 +13,6 @@
     "settings": "Settings",
     "chat": "Chat"
   },
-  "HomePage": {
-    "title": "Learn Japanese Kana - Hiragana & Katakana",
-    "description": "Master Japanese hiragana and katakana with interactive lessons, quizzes, and charts",
-    "heroTitle": "Master Japanese Kana",
-    "heroSubtitle": "Learn hiragana and katakana with interactive lessons, quizzes, and charts",
-    "getStarted": "Get Started",
-    "learnMore": "Learn More",
-    "featuresTitle": "Features",
-    "interactiveLessons": "Interactive Lessons",
-    "interactiveLessonsDesc": "Learn at your own pace with step-by-step lessons",
-    "quizSystem": "Quiz System",
-    "quizSystemDesc": "Test your knowledge with customizable quizzes",
-    "referenceCharts": "Reference Charts",
-    "referenceChartsDesc": "Quick access to complete hiragana and katakana charts",
-    "converter": "Hiragana/Katakana Converter",
-    "converterDesc": "Convert between hiragana, katakana, and romaji",
-    "progressTracking": "Progress Tracking",
-    "progressTrackingDesc": "Track your learning progress and achievements"
-  },
   "LearnPage": {
     "title": "Learn Japanese Kana",
     "description": "Master hiragana and katakana with comprehensive lessons",
@@ -200,7 +181,15 @@
     "faq5Question": "What makes your Hiragana & Katakana Quiz different from other learning tools?",
     "faq5Answer": "Our Hiragana & Katakana Quiz stands out through its AI-powered personalization and comprehensive approach. Unlike basic flashcard apps, we offer context-aware learning that adapts to your strengths and weaknesses. Our quiz system creates custom learning paths, provides detailed analytics on your progress, and offers multiple quiz modes (recognition, recall, writing, etc.) to strengthen different aspects of your kana knowledge.",
     "faq6Question": "Can I track my progress with the Hiragana & Katakana Quiz system?",
-    "faq6Answer": "Yes, comprehensive progress tracking is a core feature of our Hiragana & Katakana Quiz platform. You'll get detailed analytics showing your mastery level for each character, accuracy rates, response times, and learning trends over time. Our dashboard visualizes your progress with intuitive charts and highlights characters that need additional practice, ensuring efficient and targeted study sessions."
+    "faq6Answer": "Yes, comprehensive progress tracking is a core feature of our Hiragana & Katakana Quiz platform. You'll get detailed analytics showing your mastery level for each character, accuracy rates, response times, and learning trends over time. Our dashboard visualizes your progress with intuitive charts and highlights characters that need additional practice, ensuring efficient and targeted study sessions.",
+    "masterBothKana": "Master Both Kana Systems",
+    "hiraganaTitle": "Hiragana",
+    "hiraganaDescription": "The fundamental Japanese phonetic script used for native words, particles, and verb conjugations.",
+    "learnHiragana": "Learn Hiragana →",
+    "katakanaTitle": "Katakana",
+    "katakanaDescription": "Used for foreign loanwords, emphasis, and technical terms in Japanese writing.",
+    "learnKatakana": "Learn Katakana →",
+    "learningGuidesTitle": "Learning Guides"
   },
   "ChatPage": {
     "title": "Japanese Learning Assistant",

@@ -51,11 +51,12 @@ export default function KanaQuizPage() {
                   {showQuizHeader && (
                     <div className="mb-8 text-center">
                       <div className="w-16 h-16 bg-gradient-to-r from-[#60A5FA] to-[#34D399] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <svg 
-                          className="w-8 h-8 text-white" 
-                          fill="none" 
-                          stroke="currentColor" 
+                        <svg
+                          className="w-8 h-8 text-white"
+                          fill="none"
+                          stroke="currentColor"
                           viewBox="0 0 24 24"
+                          aria-hidden="true"
                         >
                           <path 
                             strokeLinecap="round" 
@@ -65,12 +66,12 @@ export default function KanaQuizPage() {
                           />
                         </svg>
                       </div>
-                      <h2 
-                        id="quiz-heading" 
+                      <h1
+                        id="quiz-heading"
                         className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#60A5FA] to-[#34D399] text-transparent bg-clip-text"
                       >
                         {t('title')}
-                      </h2>
+                      </h1>
                       <p className="text-xl text-gray-600 dark:text-gray-300">
                         {t('description')}
                       </p>

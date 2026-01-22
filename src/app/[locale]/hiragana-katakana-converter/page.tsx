@@ -68,11 +68,12 @@ export default function Converter() {
             {/* SEO-Optimized Header */}
             <div className="max-w-4xl mx-auto mb-8 text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-[#64748B] to-[#60A5FA] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <svg 
-                  className="w-8 h-8 text-white" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path 
                     strokeLinecap="round" 

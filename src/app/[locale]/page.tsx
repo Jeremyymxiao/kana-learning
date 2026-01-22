@@ -170,25 +170,25 @@ export default function LandingPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-[#1A1B2F] dark:text-white">
-                Master Both Kana Systems
+                {t('masterBothKana')}
               </h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="bg-white dark:bg-[#1A1B2F] p-8 rounded-2xl shadow-lg">
-                  <h3 className="text-2xl font-bold mb-4 text-[#FF7E67]">Hiragana</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-[#FF7E67]">{t('hiraganaTitle')}</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    The fundamental Japanese phonetic script used for native words, particles, and verb conjugations.
+                    {t('hiraganaDescription')}
                   </p>
                   <Link href={`/${locale}/hiragana-katakana-chart`} className="text-[#FF7E67] font-semibold hover:underline">
-                    Learn Hiragana →
+                    {t('learnHiragana')}
                   </Link>
                 </div>
                 <div className="bg-white dark:bg-[#1A1B2F] p-8 rounded-2xl shadow-lg">
-                  <h3 className="text-2xl font-bold mb-4 text-[#2B7FFF]">Katakana</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-[#2B7FFF]">{t('katakanaTitle')}</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Used for foreign loanwords, emphasis, and technical terms in Japanese writing.
+                    {t('katakanaDescription')}
                   </p>
                   <Link href={`/${locale}/hiragana-katakana-chart`} className="text-[#2B7FFF] font-semibold hover:underline">
-                    Learn Katakana →
+                    {t('learnKatakana')}
                   </Link>
                 </div>
               </div>
@@ -201,7 +201,7 @@ export default function LandingPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-[#1A1B2F] dark:text-white">
-                Learning Guides
+                {t('learningGuidesTitle')}
               </h2>
               <div className="grid md:grid-cols-3 gap-8">
                 <Link href={`/${locale}/learn`} className="group">

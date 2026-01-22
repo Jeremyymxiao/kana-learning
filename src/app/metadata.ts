@@ -63,11 +63,6 @@ export const structuredData = {
     "price": "0",
     "priceCurrency": "USD"
   },
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://learnkana.pro/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  },
   "hasPart": [
     {
       "@type": "WebApplication",

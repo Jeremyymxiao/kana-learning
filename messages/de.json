@@ -61,7 +61,15 @@
     "faq5Question": "Was macht unser Hiragana & Katakana Quiz anders als andere Lernwerkzeuge?",
     "faq5Answer": "Unser Hiragana & Katakana Quiz sticht durch seine KI-gesteuerte Personalisierung und umfassende Herangehensweise hervor. Im Gegensatz zu grundlegenden Karteikarten-Apps bieten wir kontextbewusstes Lernen, das sich an Ihre Stärken und Schwächen anpasst. Unser Quiz-System erstellt individuelle Lernpfade, bietet detaillierte Analysen über Ihren Fortschritt und bietet mehrere Quiz-Modi (Erkennung, Abruf, Schreiben usw.), um verschiedene Aspekte Ihres Kana-Wissens zu stärken.",
     "faq6Question": "Kann ich meinen Fortschritt mit dem Hiragana & Katakana Quiz-System verfolgen?",
-    "faq6Answer": "Ja, umfassende Fortschrittsverfolgung ist ein Kernmerkmal unserer Hiragana & Katakana Quiz-Plattform. Sie erhalten detaillierte Analysen, die Ihr Meisterniveau für jedes Zeichen, Genauigkeitsraten, Antwortzeiten und Lerntrends über die Zeit zeigen. Unser Dashboard visualisiert Ihren Fortschritt mit intuitiven Diagrammen und hebt Zeichen hervor, die zusätzliche Übung benötigen, um effiziente und gezielte Studiensitzungen sicherzustellen."
+    "faq6Answer": "Ja, umfassende Fortschrittsverfolgung ist ein Kernmerkmal unserer Hiragana & Katakana Quiz-Plattform. Sie erhalten detaillierte Analysen, die Ihr Meisterniveau für jedes Zeichen, Genauigkeitsraten, Antwortzeiten und Lerntrends über die Zeit zeigen. Unser Dashboard visualisiert Ihren Fortschritt mit intuitiven Diagrammen und hebt Zeichen hervor, die zusätzliche Übung benötigen, um effiziente und gezielte Studiensitzungen sicherzustellen.",
+    "masterBothKana": "Beide Kana-Systeme meistern",
+    "hiraganaTitle": "Hiragana",
+    "hiraganaDescription": "Das grundlegende japanische phonetische Schriftsystem für einheimische Wörter, Partikel und Verbkonjugationen.",
+    "learnHiragana": "Hiragana lernen →",
+    "katakanaTitle": "Katakana",
+    "katakanaDescription": "Wird für Fremdwörter, Betonungen und technische Begriffe in der japanischen Schrift verwendet.",
+    "learnKatakana": "Katakana lernen →",
+    "learningGuidesTitle": "Lernanleitungen"
   },
   "LearnPage": {
     "title": "Japanische Kana lernen",

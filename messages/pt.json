@@ -61,7 +61,15 @@
     "faq5Question": "O que torna nosso quiz Hiragana & Katakana diferente de outras ferramentas de aprendizado?",
     "faq5Answer": "Nosso quiz Hiragana & Katakana se destaca por sua personalização avançada por IA e abordagem abrangente. Ao contrário dos aplicativos básicos de cartões, oferecemos aprendizado contextual que se adapta às suas forças e fraquezas. Nosso sistema de quiz cria caminhos de aprendizado personalizados, fornece análises detalhadas de seus progressos e oferece múltiplos modos de quiz (reconhecimento, recuperação, escrita, etc.) para fortalecer diferentes aspectos de seu conhecimento de kana.",
     "faq6Question": "Posso acompanhar meus progressos com o sistema de quiz Hiragana & Katakana?",
-    "faq6Answer": "Sim, o acompanhamento abrangente de progresso é uma característica central de nossa plataforma de quiz Hiragana & Katakana. Você receberá análises detalhadas mostrando seu nível de domínio para cada caractere, taxas de precisão, tempos de resposta e tendências de aprendizado ao longo do tempo. Nosso painel visualiza seus progressos com gráficos intuitivos e destaca caracteres que precisam de prática adicional, garantindo sessões de estudo eficientes e direcionadas."
+    "faq6Answer": "Sim, o acompanhamento abrangente de progresso é uma característica central de nossa plataforma de quiz Hiragana & Katakana. Você receberá análises detalhadas mostrando seu nível de domínio para cada caractere, taxas de precisão, tempos de resposta e tendências de aprendizado ao longo do tempo. Nosso painel visualiza seus progressos com gráficos intuitivos e destaca caracteres que precisam de prática adicional, garantindo sessões de estudo eficientes e direcionadas.",
+    "masterBothKana": "Domine Ambos os Sistemas Kana",
+    "hiraganaTitle": "Hiragana",
+    "hiraganaDescription": "O sistema de escrita fonético japonês fundamental usado para palavras nativas, partículas e conjugações verbais.",
+    "learnHiragana": "Aprenda Hiragana →",
+    "katakanaTitle": "Katakana",
+    "katakanaDescription": "Usado para palavras estrangeiras, ênfase e termos técnicos na escrita japonesa.",
+    "learnKatakana": "Aprenda Katakana →",
+    "learningGuidesTitle": "Guias de Aprendizagem"
   },
   "LearnPage": {
     "title": "Aprender Kana Japonês",

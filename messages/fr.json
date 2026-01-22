@@ -61,7 +61,15 @@
     "faq5Question": "Qu'est-ce qui rend notre quiz Hiragana & Katakana différent des autres outils d'apprentissage ?",
     "faq5Answer": "Notre quiz Hiragana & Katakana se distingue par sa personnalisation IA avancée et son approche complète. Contrairement aux applications de cartes mémoire de base, nous offrons un apprentissage contextuel qui s'adapte à vos forces et faiblesses. Notre système de quiz crée des parcours d'apprentissage personnalisés, fournit des analyses détaillées de vos progrès et offre plusieurs modes de quiz (reconnaissance, rappel, écriture, etc.) pour renforcer différents aspects de votre connaissance des kana.",
     "faq6Question": "Puis-je suivre mes progrès avec le système de quiz Hiragana & Katakana ?",
-    "faq6Answer": "Oui, le suivi complet des progrès est une caractéristique essentielle de notre plateforme de quiz Hiragana & Katakana. Vous recevrez des analyses détaillées montrant votre niveau de maîtrise pour chaque caractère, les taux de précision, les temps de réponse et les tendances d'apprentissage au fil du temps. Notre tableau de bord visualise vos progrès avec des graphiques intuitifs et met en évidence les caractères nécessitant une pratique supplémentaire, garantissant des sessions d'étude efficaces et ciblées."
+    "faq6Answer": "Oui, le suivi complet des progrès est une caractéristique essentielle de notre plateforme de quiz Hiragana & Katakana. Vous recevrez des analyses détaillées montrant votre niveau de maîtrise pour chaque caractère, les taux de précision, les temps de réponse et les tendances d'apprentissage au fil du temps. Notre tableau de bord visualise vos progrès avec des graphiques intuitifs et met en évidence les caractères nécessitant une pratique supplémentaire, garantissant des sessions d'étude efficaces et ciblées.",
+    "masterBothKana": "Maîtriser les deux systèmes Kana",
+    "hiraganaTitle": "Hiragana",
+    "hiraganaDescription": "Le système d'écriture phonétique japonais fondamental utilisé pour les mots natifs, les particules et les conjugaisons de verbes.",
+    "learnHiragana": "Apprendre l'Hiragana →",
+    "katakanaTitle": "Katakana",
+    "katakanaDescription": "Utilisé pour les mots étrangers, l'emphase et les termes techniques dans l'écriture japonaise.",
+    "learnKatakana": "Apprendre le Katakana →",
+    "learningGuidesTitle": "Guides d'apprentissage"
   },
   "LearnPage": {
     "title": "Apprendre les Kana Japonais",

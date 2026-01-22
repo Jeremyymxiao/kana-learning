@@ -85,14 +85,6 @@ export async function generateStructuredData({ params }: { params: Promise<{ loc
     "name": "LearnKana",
     "description": "Free AI-Powered Hiragana & Katakana Quiz Tool",
     "url": canonicalUrl,
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `${canonicalUrl}/search?q={search_term_string}`
-      },
-      "query-input": "required name=search_term_string"
-    },
     "publisher": {
       "@type": "Organization",
       "name": "LearnKana",
