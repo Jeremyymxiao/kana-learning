@@ -21,89 +21,76 @@ npm run format          # Format code with Prettier
 npm run shadcn          # Add shadcn/ui components
 ```
 
+**No test framework is configured.** There are no unit or integration tests. CI runs only `type-check` and `build`.
+
 ## Architecture
 
 ### Next.js App Router with Internationalization
 
 The application uses Next.js App Router with dynamic locale routing (`[locale]`). All pages exist under `src/app/[locale]/*` and support 5 languages: English (en), German (de), French (fr), Portuguese (pt), and Spanish (es). English is the default locale.
 
-**Key files:**
-- `i18n.config.ts` - Locale configuration and routing setup using next-intl
-- `messages/*.json` - Translation files for each locale
-- `src/app/[locale]/layout.tsx` - Root locale layout with NextIntlClientProvider
+**i18n routing behavior (`i18n.config.ts`):**
+- Uses `localePrefix: "as-needed"` — English URLs have **no** `/en/` prefix, other locales do
+- `i18n.config.ts` exports shared navigation helpers: `Link`, `redirect`, `usePathname`, `useRouter`
 - URL rewrites in `next.config.js` map root paths (e.g., `/hiragana-katakana-quiz`) to `/en/...`
+- Translation files live in `messages/*.json`
+
+**Dual layout structure:**
+- `src/app/layout.tsx` — Root layout (Google Analytics, AdSense, Microsoft Clarity, Noto Sans JP font)
+- `src/app/[locale]/layout.tsx` — Locale layout (NextIntlClientProvider, Umami Analytics, structured data, `generateStaticParams`)
 
 ### Feature-Based Structure
 
 Code is organized by feature domains under `src/features/`:
 
-- **kana**: Core Kana learning features
-  - `components/gojuon-table/` - Interactive character table component
-  - `components/nav-bar/` - Navigation bar
-  - `components/navigation-provider/` - Navigation context provider
-  - `types/index.ts` - Kana-related types (KanaType: 'hiragana' | 'katakana' | 'mixed' | 'special')
+- **kana**: Core Kana learning features — character table (`gojuon-table/`), navigation bar, navigation context provider
+  - Types: `KanaType: 'hiragana' | 'katakana' | 'mixed' | 'special'`
 
-- **quiz**: Quiz system supporting multiple quiz types
-  - `components/QuizPanel.tsx` - Main quiz container
-  - `components/QuizQuestion/` - Question display logic
-  - `components/QuizResult/` - Results screen
-  - `components/dictation/` - Dictation quiz type (user types romaji)
-  - `components/matching/` - Matching quiz type (memory card game)
-  - `components/spelling/` - Spelling quiz type
-  - `hooks/useQuiz.ts` - Core quiz state management hook
-  - `types.ts` - Quiz types (QuizType: 'choice' | 'dictation' | 'matching' | 'spelling')
+- **quiz**: Quiz system with multiple quiz types
+  - `QuizPanel.tsx` — Main quiz container that delegates to type-specific components
+  - `hooks/useQuiz.ts` — Centralized quiz state management (question generation, scoring)
+  - Quiz types: `'choice' | 'dictation' | 'matching' | 'spelling'`
+  - Each type has its own component directory under `components/`
 
 ### Data Layer
 
 Character data is centralized in `src/data/` and `src/constants/`:
 
-- `src/data/gojuon.ts` - Comprehensive Kana character data organized by type:
-  - `seion`: Basic Kana (vowels, consonants)
-  - `dakuon`: Voiced/semi-voiced sounds
-  - `youon`: Compound sounds (きゃ, しゃ, etc.)
-  - Each character includes hiragana, katakana, and romaji fields
-
-- `src/constants/kana.ts` - HIRAGANA_TABLE and KATAKANA_TABLE lookup objects
+- `src/data/gojuon.ts` — Kana character data organized by `seion` (basic), `dakuon` (voiced), `youon` (compound). Each character has hiragana, katakana, and romaji fields.
+- `src/constants/kana.ts` — HIRAGANA_TABLE and KATAKANA_TABLE lookup objects
 
 ### Authentication & Database
 
-- **Firebase Auth**: User authentication with Google OAuth
-  - `src/lib/firebase.ts` - Firebase initialization and auth config
-  - `src/providers/AuthProvider.tsx` - Auth context provider
-  - `src/components/auth/AuthForm.tsx` - Login/register form component
-
-- **MongoDB**: User data persistence
-  - `src/lib/mongodb.ts` - MongoDB connection with global caching
-  - `src/models/user.ts` - Mongoose User model
-  - Connection uses singleton pattern to prevent multiple connections
+- **Firebase Auth** (primary): Google OAuth via `src/lib/firebase.ts`, context in `src/providers/AuthProvider.tsx`
+  - Note: `@auth/core` is in package.json but Firebase is the active auth provider
+- **MongoDB**: User data via Mongoose (`src/lib/mongodb.ts` uses singleton pattern, model in `src/models/user.ts`)
 
 ### API Routes
 
-API routes exist in both `src/app/api/` (legacy) and `src/app/[locale]/api/` (localized). They follow Next.js 15 Route Handler conventions.
+API routes exist in both `src/app/api/` (legacy) and `src/app/[locale]/api/` (localized). Both follow Next.js 15 Route Handler conventions.
 
-**Available endpoints:**
-- `/api/chat` - Streaming chat with DeepSeek API (requires DEEPSEEK_API_KEY env var)
-- `/api/analyze` - Text analysis and furigana generation using kuroshiro
-- `/api/convert` - Kana/romaji conversion
-- `/api/articles/[slug]` - Fetch learning articles from `public/articles/*.md`
+- `/api/chat` — Streaming chat with DeepSeek API
+- `/api/analyze` — Text analysis and furigana generation using kuroshiro
+- `/api/convert` — Kana/romaji conversion
+- `/api/articles/[slug]` — Learning articles from `public/articles/*.md`
 
 ### Styling
 
-- **Tailwind CSS** with custom theme configuration in `tailwind.config.ts`
+- **Tailwind CSS** with custom theme in `tailwind.config.ts` (darkMode: `"class"`)
 - **shadcn/ui** components in `src/components/ui/`
-- Dark mode support via class-based strategy
-- CSS variables for theming defined in `src/app/globals.css`
-- Custom color palette includes green/red variants for quiz feedback
+- CSS variables for theming in `src/app/globals.css`
+- Custom green/red color variants for quiz feedback
+- `@tailwindcss/typography` plugin for prose styling
 
 ### Key Libraries
 
 - **next-intl**: Internationalization with typed message hooks
-- **kuroshiro + kuroshiro-analyzer-kuromoji**: Japanese text analysis and furigana
-  - Dictionary files in `public/dict/` (required for kuroshiro to work)
-- **firebase**: Authentication (v11)
+- **kuroshiro + kuroshiro-analyzer-kuromoji**: Japanese text analysis and furigana (dictionary files in `public/dict/`)
+- **firebase** (v11): Authentication
 - **mongoose**: MongoDB ODM
 - **shadcn/ui + Radix UI**: Component library
-- **Vercel Analytics**: Built-in analytics tracking
+- **@vercel/og**: Open Graph image generation
+- **react-markdown** with remark-gfm and rehype-raw: Markdown rendering
 
 ## Important Patterns
 
@@ -121,29 +108,35 @@ Pages use functional metadata exports for SEO. Many pages have dedicated `metada
 
 ### Quiz State Management
 
-The quiz system uses a centralized hook pattern:
-- `useQuiz()` hook manages test state, question generation, and scoring
-- Question generation logic in `useQuiz.ts` creates 10 random questions from available Kana
-- Each quiz type implements its own component but shares the same state interface
+The `useQuiz()` hook manages test state, question generation, and scoring. It generates 10 random questions from available Kana. Each quiz type implements its own component but shares the same state interface.
 
 ### Article System
 
-Learning articles are Markdown files in `public/articles/` served dynamically via API routes. The `src/data/articles.ts` file maps article metadata (title, description, slug) for indexing.
+Learning articles are Markdown files in `public/articles/` served via API routes. `src/data/articles.ts` maps article metadata (title, description, slug) for indexing.
 
 ## Environment Variables
 
-Required environment variables (not tracked in git):
-- `MONGODB_URI` - MongoDB connection string (defaults to localhost)
-- `DEEPSEEK_API_KEY` - API key for AI chat feature
+Required (not tracked in git):
+- `MONGODB_URI` — MongoDB connection string (defaults to `mongodb://localhost:27017/kana-learning`)
+- `DEEPSEEK_API_KEY` — API key for AI chat feature
 - Firebase config is hardcoded in `src/lib/firebase.ts` (public API keys)
+
+No `.env.example` file exists.
+
+## CI/CD & Deployment
+
+- **CI**: GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, `type-check`, and `build` on pushes/PRs to main
+- **Deployment**: Vercel with `vercel.json` config (API functions have 60s maxDuration)
+- **Image domains**: `lh3.googleusercontent.com`, `avatars.githubusercontent.com`, `images.unsplash.com`, `learnkana.pro`
 
 ## Special Notes
 
-- **Next.js 15**: Uses latest Next.js with updated async params API (await params in server components)
-- **CSP disabled**: Content Security Policy configuration is commented out in `next.config.js`
-- **Duplicate API routes**: Both locale-prefixed and non-prefixed API routes exist for backward compatibility
+- **Next.js 15**: Uses updated async params API (`await params` in server components)
+- **CSP disabled**: Content Security Policy is commented out in `next.config.js`
+- **Duplicate API routes**: Both locale-prefixed and non-prefixed routes exist for backward compatibility
 - **MDX support**: Configured via `@next/mdx` but primarily uses plain Markdown
-- **TypeScript strict mode**: Enabled with path aliases and custom type roots
+- **TypeScript**: Strict mode enabled, custom `typeRoots` includes `./types` directory, incremental builds enabled
+- **Webpack**: Custom raw-loader config in `next.config.js` for Markdown file loading
 
 ## Common Tasks
 

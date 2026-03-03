@@ -70,6 +70,13 @@ const shuffle = <T,>(array: T[]): T[] => {
   return newArray;
 };
 
+// 根据假名类型选择显示的字符
+const pickKanaChar = (kana: { hiragana: string; katakana: string }, kanaType: KanaType): string => {
+  if (kanaType === 'katakana') return kana.katakana;
+  if (kanaType === 'mixed') return Math.random() > 0.5 ? kana.katakana : kana.hiragana;
+  return kana.hiragana;
+};
+
 // 生成问题
 const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] => {
   const availableKana = getAvailableKana(kanaType);
@@ -80,8 +87,8 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
     case 'choice':
       return selectedKana.map((kana, index): ChoiceQuestion => {
         const questionType: 'kanaToRomaji' | 'romajiToKana' = Math.random() > 0.5 ? 'kanaToRomaji' : 'romajiToKana';
-        const kanaChar = kanaType === 'katakana' ? kana.katakana : kana.hiragana;
-        
+        const kanaChar = pickKanaChar(kana, kanaType);
+
         return {
           id: index,
           type: questionType,
@@ -89,9 +96,9 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
           romaji: kana.romaji,
           options: generateOptions(
             questionType === 'kanaToRomaji' ? kana.romaji : kanaChar,
-            questionType === 'kanaToRomaji' 
+            questionType === 'kanaToRomaji'
               ? availableKana.map(k => k.romaji)
-              : availableKana.map(k => kanaType === 'katakana' ? k.katakana : k.hiragana)
+              : availableKana.map(k => pickKanaChar(k, kanaType))
           )
         };
       });
@@ -100,7 +107,7 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
       return selectedKana.map((kana, index): DictationQuestion => ({
         id: index,
         type: 'dictation',
-        kana: kanaType === 'katakana' ? kana.katakana : kana.hiragana,
+        kana: pickKanaChar(kana, kanaType),
         romaji: kana.romaji
       }));
 
@@ -108,7 +115,7 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
       return selectedKana.map((kana, index): MatchingQuestion => ({
         id: index,
         type: 'matching',
-        kana: kanaType === 'katakana' ? kana.katakana : kana.hiragana,
+        kana: pickKanaChar(kana, kanaType),
         romaji: kana.romaji,
         isFlipped: false,
         isMatched: false
@@ -118,7 +125,7 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
       return selectedKana.map((kana, index): SpellingQuestion => ({
         id: index,
         type: 'spelling',
-        kana: kanaType === 'katakana' ? kana.katakana : kana.hiragana,
+        kana: pickKanaChar(kana, kanaType),
         romaji: kana.romaji
       }));
 

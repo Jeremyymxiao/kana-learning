@@ -31,19 +31,19 @@ interface KanaPair {
 const getAvailableKana = (difficulty: KanaType): KanaPair[] => {
   const pairs: KanaPair[] = [];
   
+  const pickKana = (k: { hiragana: string; katakana: string }): string => {
+    if (difficulty === 'katakana') return k.katakana;
+    if (difficulty === 'mixed') return Math.random() > 0.5 ? k.katakana : k.hiragana;
+    return k.hiragana;
+  };
+
   const addSeion = () => {
     gojuonData.seion.vowels.forEach(k => {
-      pairs.push({
-        kana: difficulty === 'katakana' ? k.katakana : k.hiragana,
-        romaji: k.romaji
-      });
+      pairs.push({ kana: pickKana(k), romaji: k.romaji });
     });
     gojuonData.seion.consonants.forEach(row => {
       row.forEach(k => {
-        pairs.push({
-          kana: difficulty === 'katakana' ? k.katakana : k.hiragana,
-          romaji: k.romaji
-        });
+        pairs.push({ kana: pickKana(k), romaji: k.romaji });
       });
     });
   };
@@ -51,18 +51,12 @@ const getAvailableKana = (difficulty: KanaType): KanaPair[] => {
   const addSpecial = () => {
     gojuonData.dakuon.consonants.forEach(row => {
       row.forEach(k => {
-        pairs.push({
-          kana: difficulty === 'katakana' ? k.katakana : k.hiragana,
-          romaji: k.romaji
-        });
+        pairs.push({ kana: pickKana(k), romaji: k.romaji });
       });
     });
     gojuonData.youon.combinations.forEach(row => {
       row.forEach(k => {
-        pairs.push({
-          kana: difficulty === 'katakana' ? k.katakana : k.hiragana,
-          romaji: k.romaji
-        });
+        pairs.push({ kana: pickKana(k), romaji: k.romaji });
       });
     });
   };

@@ -51,20 +51,26 @@ export function SpellingQuiz({ difficulty, onComplete }: SpellingQuizProps) {
 
   const getAvailableKana = () => {
     const pairs: string[] = [];
-    
+
+    const pickKana = (k: { hiragana: string; katakana: string }): string => {
+      if (difficulty === 'katakana') return k.katakana;
+      if (difficulty === 'mixed') return Math.random() > 0.5 ? k.katakana : k.hiragana;
+      return k.hiragana;
+    };
+
     const addSeion = () => {
-      gojuonData.seion.vowels.forEach(k => pairs.push(difficulty === 'katakana' ? k.katakana : k.hiragana));
-      gojuonData.seion.consonants.forEach(row => 
-        row.forEach(k => pairs.push(difficulty === 'katakana' ? k.katakana : k.hiragana))
+      gojuonData.seion.vowels.forEach(k => pairs.push(pickKana(k)));
+      gojuonData.seion.consonants.forEach(row =>
+        row.forEach(k => pairs.push(pickKana(k)))
       );
     };
 
     const addSpecial = () => {
       gojuonData.dakuon.consonants.forEach(row =>
-        row.forEach(k => pairs.push(difficulty === 'katakana' ? k.katakana : k.hiragana))
+        row.forEach(k => pairs.push(pickKana(k)))
       );
       gojuonData.youon.combinations.forEach(row =>
-        row.forEach(k => pairs.push(difficulty === 'katakana' ? k.katakana : k.hiragana))
+        row.forEach(k => pairs.push(pickKana(k)))
       );
     };
 
