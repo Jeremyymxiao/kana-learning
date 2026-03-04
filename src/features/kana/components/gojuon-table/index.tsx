@@ -33,22 +33,22 @@ export function GojuonTable() {
       <CardContent className="p-1 sm:p-2">
         <Tabs defaultValue="seion" className="w-full">
           <TabsList className="relative md:sticky top-0 z-50 grid w-full grid-cols-3 gap-0.5 sm:gap-1 md:gap-1.5 mb-2 md:mb-4 bg-gray-100/50 dark:bg-gray-800/50 p-0.5 sm:p-1 rounded-lg text-xs sm:text-sm md:text-base">
-            <TabsTrigger 
-              value="seion" 
+            <TabsTrigger
+              value="seion"
               className="flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-blue-500 data-[state=active]:text-white transition-all duration-300"
             >
               <span className="font-bold">清音</span>
               <span className="text-[10px] sm:text-xs opacity-90">Seion</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="dakuon" 
+            <TabsTrigger
+              value="dakuon"
               className="flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-blue-500 data-[state=active]:text-white transition-all duration-300"
             >
               <span className="font-bold">濁音</span>
               <span className="text-[10px] sm:text-xs opacity-90">Dakuon</span>
             </TabsTrigger>
-            <TabsTrigger 
-              value="youon" 
+            <TabsTrigger
+              value="youon"
               className="flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-700 data-[state=active]:bg-blue-500 data-[state=active]:text-white transition-all duration-300"
             >
               <span className="font-bold">拗音</span>
@@ -66,7 +66,7 @@ export function GojuonTable() {
                     {/* 元音行 */}
                     <tr>
                       {gojuonData.seion.vowels.map((char) => (
-                        <td 
+                        <td
                           key={char.hiragana}
                           className={tableStyles.cell}
                           onClick={() => speak(char.hiragana)}
@@ -82,7 +82,7 @@ export function GojuonTable() {
                     {gojuonData.seion.consonants.map((row, rowIndex) => (
                       <tr key={rowIndex}>
                         {row.map((char) => (
-                          <td 
+                          <td
                             key={char.hiragana}
                             className={tableStyles.cell}
                             onClick={() => speak(char.hiragana)}
@@ -98,7 +98,7 @@ export function GojuonTable() {
                   </tbody>
                 </table>
               </div>
-              
+
               {/* 片假名部分 */}
               <div className={tableStyles.wrapper}>
                 <h3 className={`${tableStyles.title} text-blue-500 dark:text-blue-400`}>Katakana</h3>
@@ -107,7 +107,7 @@ export function GojuonTable() {
                     {/* 元音行 */}
                     <tr>
                       {gojuonData.seion.vowels.map((char) => (
-                        <td 
+                        <td
                           key={char.katakana}
                           className={tableStyles.cell}
                           onClick={() => speak(char.katakana)}
@@ -123,7 +123,7 @@ export function GojuonTable() {
                     {gojuonData.seion.consonants.map((row, rowIndex) => (
                       <tr key={rowIndex}>
                         {row.map((char) => (
-                          <td 
+                          <td
                             key={char.katakana}
                             className={tableStyles.cell}
                             onClick={() => speak(char.katakana)}
@@ -152,7 +152,7 @@ export function GojuonTable() {
                     {gojuonData.dakuon.consonants.map((row, rowIndex) => (
                       <tr key={rowIndex}>
                         {row.map((char) => (
-                          <td 
+                          <td
                             key={char.hiragana}
                             className={tableStyles.cell}
                             onClick={() => speak(char.hiragana)}
@@ -168,7 +168,7 @@ export function GojuonTable() {
                   </tbody>
                 </table>
               </div>
-              
+
               {/* 片假名部分 */}
               <div className={tableStyles.wrapper}>
                 <h3 className={`${tableStyles.title} text-purple-800 dark:text-purple-300`}>Katakana</h3>
@@ -177,7 +177,7 @@ export function GojuonTable() {
                     {gojuonData.dakuon.consonants.map((row, rowIndex) => (
                       <tr key={rowIndex}>
                         {row.map((char) => (
-                          <td 
+                          <td
                             key={char.katakana}
                             className={tableStyles.cell}
                             onClick={() => speak(char.katakana)}
@@ -207,7 +207,7 @@ export function GojuonTable() {
                     {gojuonData.youon.combinations.map((row, rowIndex) => (
                       <tr key={rowIndex}>
                         {row.map((char) => (
-                          <td 
+                          <td
                             key={char.hiragana}
                             className={tableStyles.cell}
                             onClick={() => speak(char.hiragana)}
@@ -223,7 +223,7 @@ export function GojuonTable() {
                   </tbody>
                 </table>
               </div>
-              
+
               {/* 片假名部分 */}
               <div className={tableStyles.wrapper}>
                 <h3 className={`${tableStyles.title} text-green-800 dark:text-green-300`}>Katakana</h3>
@@ -232,7 +232,7 @@ export function GojuonTable() {
                     {gojuonData.youon.combinations.map((row, rowIndex) => (
                       <tr key={rowIndex}>
                         {row.map((char) => (
-                          <td 
+                          <td
                             key={char.katakana}
                             className={tableStyles.cell}
                             onClick={() => speak(char.katakana)}
@@ -254,4 +254,4 @@ export function GojuonTable() {
       </CardContent>
     </Card>
   );
-} 
+}

@@ -157,6 +157,11 @@ export function DictationQuiz({ difficulty, onComplete, onScoreChange, onProgres
         addDakuon();
         addYouon();
         break;
+      case 'all':
+        addSeion();
+        addDakuon();
+        addYouon();
+        break;
     }
 
     return pairs;

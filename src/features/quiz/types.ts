@@ -8,7 +8,7 @@ export type QuizType = 'choice' | 'matching' | 'dictation' | 'spelling';
 export type QuestionType = 'kanaToRomaji' | 'romajiToKana' | 'dictation' | 'matching' | 'spelling';
 
 // 假名类型
-export type KanaType = 'hiragana' | 'katakana' | 'mixed' | 'special';
+export type KanaType = 'hiragana' | 'katakana' | 'mixed' | 'special' | 'all';
 
 // 基础问题接口
 export interface BaseQuestion {

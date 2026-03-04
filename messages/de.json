@@ -11,7 +11,8 @@
     "register": "Registrieren",
     "profile": "Profil",
     "settings": "Einstellungen",
-    "chat": "Chat"
+    "chat": "Chat",
+    "analyzer": "Analysator"
   },
   "HomePage": {
     "title": "Japanische Kana lernen - Hiragana & Katakana",
@@ -246,6 +247,17 @@
     "cookieTitle": "Cookie-Richtlinie | LearnKana Datenschutz",
     "cookieDescription": "Erfahren Sie, wie LearnKana Cookies und ähnliche Technologien verwendet, um Ihre Lernerfahrung zu verbessern.",
     "authTitle": "Authentifizierung | LearnKana Kontozugang",
-    "authDescription": "Melden Sie sich bei Ihrem LearnKana-Konto an, um auf personalisierte Japanisch-Lernfunktionen zuzugreifen und geräteübergreifend zu synchronisieren."
+    "authDescription": "Melden Sie sich bei Ihrem LearnKana-Konto an, um auf personalisierte Japanisch-Lernfunktionen zuzugreifen und geräteübergreifend zu synchronisieren.",
+    "analyzerTitle": "Japanischer Textanalysator - Furigana Generator | LearnKana",
+    "analyzerDescription": "Fügen Sie Furigana-Lesehilfen über Kanji in jedem japanischen Text hinzu. Kostenloses Online-Tool zum Lesen und Lernen japanischer Zeichen."
+  },
+  "AnalyzerPage": {
+    "title": "Japanischer Textanalysator",
+    "description": "Japanischen Text einfügen, um Furigana (Hiragana-Lesungen) über Kanji-Zeichen hinzuzufügen",
+    "inputLabel": "Japanischen Text eingeben",
+    "inputPlaceholder": "日本語のテキストをここに入力してください...",
+    "analyzeButton": "Analysieren",
+    "analyzing": "Analysiere...",
+    "resultLabel": "Ergebnis mit Furigana"
   }
 }

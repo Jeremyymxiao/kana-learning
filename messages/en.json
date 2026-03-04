@@ -11,7 +11,8 @@
     "register": "Register",
     "profile": "Profile",
     "settings": "Settings",
-    "chat": "Chat"
+    "chat": "Chat",
+    "analyzer": "Analyzer"
   },
   "LearnPage": {
     "title": "Learn Japanese Kana",
@@ -246,6 +247,17 @@
     "cookieTitle": "Cookie Policy | LearnKana Privacy",
     "cookieDescription": "Learn how LearnKana uses cookies and similar technologies to enhance your learning experience and improve our services.",
     "authTitle": "Authentication | LearnKana Account Access",
-    "authDescription": "Sign in to your LearnKana account to access personalized Japanese learning features, track your progress, and sync across devices."
+    "authDescription": "Sign in to your LearnKana account to access personalized Japanese learning features, track your progress, and sync across devices.",
+    "analyzerTitle": "Japanese Text Analyzer - Furigana Generator | LearnKana",
+    "analyzerDescription": "Add furigana reading aids above kanji in any Japanese text. Free online tool to help you read and learn Japanese characters."
+  },
+  "AnalyzerPage": {
+    "title": "Japanese Text Analyzer",
+    "description": "Paste Japanese text to add furigana (hiragana readings) above kanji characters",
+    "inputLabel": "Enter Japanese Text",
+    "inputPlaceholder": "日本語のテキストをここに入力してください...",
+    "analyzeButton": "Analyze",
+    "analyzing": "Analyzing...",
+    "resultLabel": "Result with Furigana"
   }
 }

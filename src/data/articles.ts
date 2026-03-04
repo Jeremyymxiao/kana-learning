@@ -87,6 +87,86 @@ export interface Article {
       description: 'Comprehensive practice exercises for mastering Hiragana',
       tags: ['hiragana', 'practice', 'exercises'],
       publishedAt: '2024-03-29'
+    },
+    {
+      id: '11',
+      slug: 'katakana-basics',
+      title: 'Katakana Basics Guide',
+      description: 'Learn the fundamentals of Katakana, including character sets, usage rules, and key differences from Hiragana',
+      tags: ['katakana', 'basics', 'japanese'],
+      publishedAt: '2025-03-01'
+    },
+    {
+      id: '12',
+      slug: 'how-to-write-katakana',
+      title: 'How to Write Katakana: Complete Guide',
+      description: 'Master the correct stroke order and writing techniques for all Katakana characters, including common mistakes and practice tips',
+      tags: ['katakana', 'writing', 'stroke-order'],
+      publishedAt: '2026-03-04'
+    },
+    {
+      id: '13',
+      slug: 'katakana-words-guide',
+      title: 'Common Katakana Words Guide',
+      description: 'Essential Katakana vocabulary organized by category: food, technology, daily life, and more',
+      tags: ['katakana', 'vocabulary', 'loanwords'],
+      publishedAt: '2025-03-03'
+    },
+    {
+      id: '14',
+      slug: 'memorize-katakana',
+      title: 'How to Memorize Katakana Effectively',
+      description: 'Proven techniques for memorizing Katakana using visual mnemonics, loanword context, and spaced repetition',
+      tags: ['katakana', 'memorization', 'study-tips'],
+      publishedAt: '2025-03-04'
+    },
+    {
+      id: '15',
+      slug: 'katakana-pronunciation',
+      title: 'Mastering Katakana Pronunciation',
+      description: 'Guide to Katakana pronunciation including long vowels, double consonants, and foreign sound combinations',
+      tags: ['katakana', 'pronunciation', 'speaking'],
+      publishedAt: '2025-03-05'
+    },
+    {
+      id: '16',
+      slug: 'typing-katakana',
+      title: 'How to Type Katakana on Different Devices',
+      description: 'Learn to type Katakana on Windows, Mac, and mobile with conversion shortcuts and IME tips',
+      tags: ['katakana', 'typing', 'digital'],
+      publishedAt: '2025-03-06'
+    },
+    {
+      id: '17',
+      slug: 'katakana-practice',
+      title: 'Katakana Practice Exercises',
+      description: 'Hands-on practice exercises for reading, writing, and recognizing Katakana characters',
+      tags: ['katakana', 'practice', 'exercises'],
+      publishedAt: '2025-03-07'
+    },
+    {
+      id: '18',
+      slug: 'katakana-loanwords',
+      title: 'Japanese Loanwords in Katakana',
+      description: 'Explore how foreign words are adapted into Japanese Katakana, from English to Portuguese and beyond',
+      tags: ['katakana', 'loanwords', 'vocabulary'],
+      publishedAt: '2025-03-08'
+    },
+    {
+      id: '19',
+      slug: 'katakana-vs-hiragana-usage',
+      title: 'When to Use Katakana vs Hiragana',
+      description: 'Advanced guide to choosing between Katakana and Hiragana in different contexts',
+      tags: ['katakana', 'hiragana', 'usage'],
+      publishedAt: '2025-03-09'
+    },
+    {
+      id: '20',
+      slug: 'common-katakana-words',
+      title: 'Essential Katakana Words for Beginners',
+      description: 'Beginner-friendly Katakana vocabulary organized by difficulty level with practice exercises',
+      tags: ['katakana', 'vocabulary', 'beginners'],
+      publishedAt: '2025-03-10'
     }
   ];
 

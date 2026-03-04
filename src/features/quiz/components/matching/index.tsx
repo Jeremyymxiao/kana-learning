@@ -70,6 +70,10 @@ const getAvailableKana = (difficulty: KanaType): KanaPair[] => {
     case 'special':
       addSpecial();
       break;
+    case 'all':
+      addSeion();
+      addSpecial();
+      break;
   }
 
   return pairs;

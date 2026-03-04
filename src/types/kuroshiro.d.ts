@@ -10,6 +10,6 @@ declare module 'kuroshiro' {
 
 declare module 'kuroshiro-analyzer-kuromoji' {
   export default class KuromojiAnalyzer {
-    constructor();
+    constructor(options?: { dictPath?: string });
   }
 }

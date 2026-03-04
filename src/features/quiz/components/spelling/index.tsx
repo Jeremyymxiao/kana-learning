@@ -83,6 +83,10 @@ export function SpellingQuiz({ difficulty, onComplete }: SpellingQuizProps) {
       case 'special':
         addSpecial();
         break;
+      case 'all':
+        addSeion();
+        addSpecial();
+        break;
     }
 
     return pairs;

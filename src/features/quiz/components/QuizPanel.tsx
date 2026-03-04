@@ -64,7 +64,8 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
     { value: 'hiragana' as const, label: 'Hiragana Only', description: 'Basic Hiragana Characters (あ、い、う...)' },
     { value: 'katakana' as const, label: 'Katakana Only', description: 'Basic Katakana Characters (ア、イ、ウ...)' },
     { value: 'mixed' as const, label: 'Hiragana & Katakana', description: 'Mix of Basic Hiragana and Katakana' },
-    { value: 'special' as const, label: 'Special Combinations', description: 'Dakuten, Handakuten & Yōon (が、ぱ、きょ...)' }
+    { value: 'special' as const, label: 'Special Combinations', description: 'Dakuten, Handakuten & Yōon (が、ぱ、きょ...)' },
+    { value: 'all' as const, label: 'All Characters', description: 'All Kana: Seion, Dakuon & Yōon combined' }
   ];
 
   // 渲染配置面板

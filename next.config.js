@@ -54,6 +54,10 @@ const nextConfig = {
           destination: '/en/learn/:slug',
         },
         {
+          source: '/japanese-text-analyzer',
+          destination: '/en/japanese-text-analyzer',
+        },
+        {
           source: '/about',
           destination: '/en/about',
         },
