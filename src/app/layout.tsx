@@ -5,8 +5,9 @@ import { NavigationProvider } from '@/features/kana/components/navigation-provid
 import { metadata, structuredData } from './metadata'
 import { Analytics } from "@vercel/analytics/react"
 import { NextIntlClientProvider } from 'next-intl'
+import { ThemeProvider } from 'next-themes'
 
-const notoSansJP = Noto_Sans_JP({ 
+const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
   variable: '--font-noto-sans-jp',
@@ -18,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className="scroll-smooth" lang="en">
+    <html className="scroll-smooth" lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -52,29 +53,31 @@ export default function RootLayout({
         />
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
-        <NextIntlClientProvider locale="en" messages={{
-          Navigation: {
-            home: "Home",
-            chat: "Chat",
-            quiz: "Quiz",
-            chart: "Chart",
-            converter: "Converter",
-            learn: "Learn",
-            about: "About",
-            contact: "Contact",
-            login: "Login",
-            register: "Register",
-            profile: "Profile",
-            settings: "Settings"
-          }
-        }}>
-          <AuthProvider>
-            <NavigationProvider>
-              {children}
-              <Analytics />
-            </NavigationProvider>
-          </AuthProvider>
-        </NextIntlClientProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <NextIntlClientProvider locale="en" messages={{
+            Navigation: {
+              home: "Home",
+              chat: "Chat",
+              quiz: "Quiz",
+              chart: "Chart",
+              converter: "Converter",
+              learn: "Learn",
+              about: "About",
+              contact: "Contact",
+              login: "Login",
+              register: "Register",
+              profile: "Profile",
+              settings: "Settings"
+            }
+          }}>
+            <AuthProvider>
+              <NavigationProvider>
+                {children}
+                <Analytics />
+              </NavigationProvider>
+            </AuthProvider>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
