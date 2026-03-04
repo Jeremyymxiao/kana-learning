@@ -1,39 +1,25 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales, BASE_URL } from '@/lib/seo-utils';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/terms-of-service`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '/terms-of-service');
+
   return {
     title: t('termsTitle'),
     description: t('termsDescription'),
-    keywords: [
-      "terms of service",
-      "terms and conditions",
-      "user agreement",
-      "legal terms",
-      "LearnKana terms"
-    ],
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}/terms-of-service`,
-        'de': `${baseUrl}/de/terms-of-service`,
-        'fr': `${baseUrl}/fr/terms-of-service`,
-        'pt': `${baseUrl}/pt/terms-of-service`,
-        'es': `${baseUrl}/es/terms-of-service`
-      }
+      languages: generateHreflangs('/terms-of-service'),
     },
     openGraph: {
       title: t('termsTitle'),
       description: t('termsDescription'),
       type: "website",
-      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
-      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
       siteName: t('siteName'),
       url: canonicalUrl
     }
@@ -42,10 +28,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export async function generateStructuredData({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/terms-of-service`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '/terms-of-service');
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -55,7 +39,7 @@ export async function generateStructuredData({ params }: { params: Promise<{ loc
     "publisher": {
       "@type": "Organization",
       "name": "LearnKana",
-      "url": baseUrl
+      "url": BASE_URL
     }
   };
 }

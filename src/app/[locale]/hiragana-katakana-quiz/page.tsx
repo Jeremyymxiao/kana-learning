@@ -1,91 +1,91 @@
-'use client';
+import QuizPageContent from './page-content';
+import { generateStructuredData } from './metadata';
 
-import MainLayout from '@/components/layouts/main-layout';
-import dynamic from 'next/dynamic';
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+export { generateMetadata } from './metadata';
 
-// Code splitting: Lazy load QuizPanel for better initial page load
-const QuizPanel = dynamic(
-  () => import('@/features/quiz/components/QuizPanel').then(mod => ({ default: mod.QuizPanel })),
-  {
-    loading: () => (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#60A5FA] mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading quiz...</p>
-        </div>
-      </div>
-    ),
-    ssr: false
-  }
-);
-
-export default function KanaQuizPage() {
-  const [showQuizHeader, setShowQuizHeader] = useState(true);
-  const t = useTranslations('QuizPage');
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const structuredData = generateStructuredData({ params: { locale } });
 
   return (
-    <MainLayout currentTab="quiz">
-      <div className="relative min-h-screen bg-white dark:bg-[#1A1B2F]">
-        {/* 全屏装饰背景 */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          {/* 左上角大块 */}
-          <div className="absolute top-0 left-0 w-full h-[70%] bg-[#60A5FA] transform -skew-y-6 opacity-10"></div>
-          {/* 右侧浅绿色块 */}
-          <div className="absolute top-[20%] right-0 w-[40%] h-[40%] bg-[#34D399] transform rotate-12 opacity-10"></div>
-          {/* 左下角圆形 */}
-          <div className="absolute bottom-[10%] left-[10%] w-[30%] h-[30%] bg-[#93C5FD] rounded-full opacity-10"></div>
-          {/* 右下角装饰 */}
-          <div className="absolute bottom-[5%] right-[5%] w-[25%] h-[25%] bg-[#6EE7B7] transform -rotate-12 opacity-10"></div>
-          {/* 中间点缀 */}
-          <div className="absolute top-[40%] left-[30%] w-[20%] h-[20%] bg-[#BAE6FD] rounded-full blur-3xl opacity-5"></div>
-        </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <QuizPageContent />
 
-        {/* 内容区域 */}
-        <div className="relative">
-          <div className="container mx-auto px-4 py-12">
-            <div className="max-w-4xl mx-auto">
-              <div className="relative bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800">
-                <div className="p-8">
-                  {showQuizHeader && (
-                    <div className="mb-8 text-center">
-                      <div className="w-16 h-16 bg-gradient-to-r from-[#60A5FA] to-[#34D399] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <svg
-                          className="w-8 h-8 text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth={2} 
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" 
-                          />
-                        </svg>
-                      </div>
-                      <h1
-                        id="quiz-heading"
-                        className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#60A5FA] to-[#34D399] text-transparent bg-clip-text"
-                      >
-                        {t('title')}
-                      </h1>
-                      <p className="text-xl text-gray-600 dark:text-gray-300">
-                        {t('description')}
-                      </p>
-                    </div>
-                  )}
-                  <div className="min-h-[600px]">
-                    <QuizPanel onConfigChange={setShowQuizHeader} />
-                  </div>
-                </div>
+      {/* Server-rendered SEO content */}
+      <section className="bg-gray-50 dark:bg-[#1A1B2F]/50 py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+              How Our Kana Quiz Works
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md">
+                <h3 className="text-xl font-bold mb-3 text-[#60A5FA]">Multiple Choice</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Select the correct romaji reading for each hiragana or katakana character.
+                  Perfect for beginners building character recognition skills.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md">
+                <h3 className="text-xl font-bold mb-3 text-[#34D399]">Dictation</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Type the romaji pronunciation for the displayed kana character.
+                  Tests your recall ability and strengthens memory retention.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md">
+                <h3 className="text-xl font-bold mb-3 text-[#FBBF24]">Matching</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Match kana characters with their correct romaji readings in a timed challenge.
+                  Great for improving speed and accuracy simultaneously.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md">
+                <h3 className="text-xl font-bold mb-3 text-[#F87171]">Spelling</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Write the correct kana character for a given romaji sound.
+                  The most advanced mode for mastering Japanese writing.
+                </p>
+              </div>
+            </div>
+
+            <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-6">
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md">
+                <h3 className="font-bold text-lg mb-2">What types of quizzes are available?</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  We offer four quiz types: multiple choice, dictation (type the answer), matching pairs,
+                  and spelling (write the kana). Each mode targets different learning skills.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md">
+                <h3 className="font-bold text-lg mb-2">Can I choose which kana to practice?</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Yes! You can select hiragana only, katakana only, or mixed mode. You can also
+                  choose specific character groups like basic (seion), voiced (dakuon), or combination (youon) sounds.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md">
+                <h3 className="font-bold text-lg mb-2">Is the quiz free to use?</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Absolutely! All quiz modes and features are completely free with no usage limits.
+                  Practice as much as you need to master Japanese kana.
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </MainLayout>
+      </section>
+    </>
   );
 }

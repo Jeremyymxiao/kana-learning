@@ -22,7 +22,8 @@ export const metadata: Metadata = {
       'de': 'https://learnkana.pro/de',
       'fr': 'https://learnkana.pro/fr',
       'pt': 'https://learnkana.pro/pt',
-      'es': 'https://learnkana.pro/es'
+      'es': 'https://learnkana.pro/es',
+      'x-default': 'https://learnkana.pro'
     }
   },
   icons: {
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     description: "Learn Japanese kana easily with our interactive tools. Practice Hiragana and Katakana with AI assistance, quizzes, and a text converter.",
     type: "website",
     locale: "en_US",
-    alternateLocale: ["ja_JP", "zh_CN"],
+    alternateLocale: ["de_DE", "fr_FR", "pt_PT", "es_ES"],
     siteName: "LearnKana",
     url: "https://learnkana.pro"
   }

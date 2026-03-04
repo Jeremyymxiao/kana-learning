@@ -1,13 +1,12 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales, BASE_URL } from '@/lib/seo-utils';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '');
+
   return {
     title: t('homeTitle'),
     description: t('homeDescription'),
@@ -17,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       "personalized japanese learning",
       "adaptive learning japanese",
       "hiragana",
-      "katakana", 
+      "katakana",
       "ひらがな",
       "カタカナ",
       "平仮名",
@@ -25,13 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     ],
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}`,
-        'de': `${baseUrl}/de`,
-        'fr': `${baseUrl}/fr`,
-        'pt': `${baseUrl}/pt`,
-        'es': `${baseUrl}/es`
-      }
+      languages: generateHreflangs(''),
     },
     icons: {
       icon: [
@@ -50,13 +43,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title: t('homeTitle'),
       description: t('homeDescription'),
       type: "website",
-      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
-      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
       siteName: t('siteName'),
       url: canonicalUrl,
       images: [
         {
-          url: `${baseUrl}/api/og?title=${encodeURIComponent(t('homeTitle'))}&type=home&locale=${locale}`,
+          url: `${BASE_URL}/api/og?title=${encodeURIComponent(t('homeTitle'))}&type=home&locale=${locale}`,
           width: 1200,
           height: 630,
           alt: t('homeTitle')
@@ -67,7 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title: t('homeTitle'),
       description: t('homeDescription'),
-      images: [`${baseUrl}/api/og?title=${encodeURIComponent(t('homeTitle'))}&type=home&locale=${locale}`],
+      images: [`${BASE_URL}/api/og?title=${encodeURIComponent(t('homeTitle'))}&type=home&locale=${locale}`],
       site: '@learnkana'
     }
   };
@@ -75,22 +68,78 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export async function generateStructuredData({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '');
+  const t = await getTranslations({ locale, namespace: 'HomePage' });
+
   return {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "LearnKana",
-    "description": "Free AI-Powered Hiragana & Katakana Quiz Tool",
-    "url": canonicalUrl,
-    "publisher": {
-      "@type": "Organization",
-      "name": "LearnKana",
-      "url": baseUrl
-    },
-    "inLanguage": locale === 'en' ? 'en' : locale,
-    "availableLanguage": ["en", "de", "fr", "pt", "es"]
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "LearnKana",
+        "description": "Free AI-Powered Hiragana & Katakana Quiz Tool",
+        "url": canonicalUrl,
+        "publisher": {
+          "@type": "Organization",
+          "name": "LearnKana",
+          "url": BASE_URL
+        },
+        "inLanguage": locale,
+        "availableLanguage": ["en", "de", "fr", "pt", "es"]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": t('faq1Question'),
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t('faq1Answer')
+            }
+          },
+          {
+            "@type": "Question",
+            "name": t('faq2Question'),
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t('faq2Answer')
+            }
+          },
+          {
+            "@type": "Question",
+            "name": t('faq3Question'),
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t('faq3Answer')
+            }
+          },
+          {
+            "@type": "Question",
+            "name": t('faq4Question'),
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t('faq4Answer')
+            }
+          },
+          {
+            "@type": "Question",
+            "name": t('faq5Question'),
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t('faq5Answer')
+            }
+          },
+          {
+            "@type": "Question",
+            "name": t('faq6Question'),
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": t('faq6Answer')
+            }
+          }
+        ]
+      }
+    ]
   };
 }

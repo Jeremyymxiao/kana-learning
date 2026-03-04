@@ -1,52 +1,54 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales, BASE_URL } from '@/lib/seo-utils';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/contact-us`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '/contact-us');
+
   return {
     title: t('contactTitle'),
     description: t('contactDescription'),
     keywords: [
-      "contact",
-      "feedback",
-      "support",
-      "LearnKana contact",
-      "Japanese learning platform",
-      "get in touch"
+      "contact", "feedback", "support",
+      "LearnKana contact", "Japanese learning platform", "get in touch"
     ],
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}/contact-us`,
-        'de': `${baseUrl}/de/contact-us`,
-        'fr': `${baseUrl}/fr/contact-us`,
-        'pt': `${baseUrl}/pt/contact-us`,
-        'es': `${baseUrl}/es/contact-us`
-      }
+      languages: generateHreflangs('/contact-us'),
     },
     openGraph: {
       title: t('contactTitle'),
       description: t('contactDescription'),
       type: "website",
-      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
-      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
       siteName: t('siteName'),
-      url: canonicalUrl
+      url: canonicalUrl,
+      images: [
+        {
+          url: `${BASE_URL}/api/og?title=${encodeURIComponent(t('contactTitle'))}&type=contact&locale=${locale}`,
+          width: 1200,
+          height: 630,
+          alt: t('contactTitle')
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('contactTitle'),
+      description: t('contactDescription'),
+      images: [`${BASE_URL}/api/og?title=${encodeURIComponent(t('contactTitle'))}&type=contact&locale=${locale}`],
+      site: '@learnkana'
     }
   };
 }
 
 export function generateStructuredData({ params }: { params: { locale: string } }) {
   const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/contact-us`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '/contact-us');
+
   return {
     "@context": "https://schema.org",
     "@type": "ContactPage",

@@ -7,7 +7,7 @@ import '../globals.css'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 import { Analytics } from "@vercel/analytics/react"
-import { generateMetadata, generateStructuredData } from './metadata'
+import { generateMetadata } from './metadata'
 
 const notoSansJP = Noto_Sans_JP({ 
   subsets: ['latin'],
@@ -19,7 +19,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export { generateMetadata, generateStructuredData }
+export { generateMetadata }
 
 export default async function LocaleLayout({
   children,
@@ -37,16 +37,9 @@ export default async function LocaleLayout({
   // Load messages for the specific locale
   const messages = await getMessages({ locale });
   
-  // Generate structured data
-  const structuredData = await generateStructuredData({ params: Promise.resolve({ locale }) });
-
   return (
     <html lang={locale} className="scroll-smooth">
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
         {/* AdSense site verification */}
         <meta name="google-adsense-account" content="ca-pub-5334706525054343" />
         {/* Google AdSense */}

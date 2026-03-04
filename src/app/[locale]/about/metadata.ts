@@ -1,89 +1,78 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales, BASE_URL } from '@/lib/seo-utils';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/about`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '/about');
+
   return {
     title: t('aboutTitle'),
     description: t('aboutDescription'),
     keywords: [
-      "hiragana",
-      "katakana", 
-      "hiragana converter",
-      "katakana converter",
-      "japanese kana",
-      "gojuon chart",
-      "learn hiragana",
-      "learn katakana",
-      "japanese alphabet",
-      "japanese writing",
-      "平假名",
-      "片假名",
-      "五十音图",
-      "假名转换",
-      "日语学习"
+      "hiragana", "katakana", "hiragana converter", "katakana converter",
+      "japanese kana", "gojuon chart", "learn hiragana", "learn katakana",
+      "japanese alphabet", "japanese writing",
     ],
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}/about`,
-        'de': `${baseUrl}/de/about`,
-        'fr': `${baseUrl}/fr/about`,
-        'pt': `${baseUrl}/pt/about`,
-        'es': `${baseUrl}/es/about`
-      }
+      languages: generateHreflangs('/about'),
     },
     openGraph: {
       title: t('aboutTitle'),
       description: t('aboutDescription'),
       type: "website",
-      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
-      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
       siteName: t('siteName'),
-      url: canonicalUrl
+      url: canonicalUrl,
+      images: [
+        {
+          url: `${BASE_URL}/api/og?title=${encodeURIComponent(t('aboutTitle'))}&type=about&locale=${locale}`,
+          width: 1200,
+          height: 630,
+          alt: t('aboutTitle')
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('aboutTitle'),
+      description: t('aboutDescription'),
+      images: [`${BASE_URL}/api/og?title=${encodeURIComponent(t('aboutTitle'))}&type=about&locale=${locale}`],
+      site: '@learnkana'
     }
   };
 }
 
 export function generateStructuredData({ params }: { params: { locale: string } }) {
   const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/about`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '/about');
+
   return {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "LearnKana",
-    "alternateName": ["Learn Kana", "かな学習", "假名学习"],
-    "description": "Interactive platform for learning Japanese Hiragana and Katakana",
-    "keywords": "hiragana, katakana, japanese learning, ひらがな, カタカナ, japanese alphabet",
-    "url": canonicalUrl,
-    "publisher": {
-      "@type": "Organization",
-      "name": "LearnKana"
-    },
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "educationalLevel": "Beginner",
-    "inLanguage": ["en", "ja", "zh-CN"],
-    "learningResourceType": "Interactive Resource",
-    "audience": {
-      "@type": "EducationalAudience",
-      "educationalRole": "Student",
-      "educationalField": "Japanese Language Learning",
-      "audienceType": "Child",
-      "audienceEducationLevel": "Elementary School",
-      "audienceGeographicArea": "Worldwide"
-    }
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "name": "About LearnKana",
+        "description": "Interactive platform for learning Japanese Hiragana and Katakana",
+        "url": canonicalUrl,
+        "publisher": {
+          "@type": "Organization",
+          "name": "LearnKana",
+          "url": BASE_URL
+        },
+        "isAccessibleForFree": true,
+        "inLanguage": locale
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+          { "@type": "ListItem", "position": 2, "name": "About", "item": canonicalUrl }
+        ]
+      }
+    ]
   };
 }

@@ -1,60 +1,39 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales, BASE_URL } from '@/lib/seo-utils';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-quiz`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '/hiragana-katakana-quiz');
+
   return {
     title: t('quizTitle'),
     description: t('quizDescription'),
     keywords: [
-      "hiragana quiz",
-      "katakana quiz", 
-      "japanese kana test",
-      "hiragana practice",
-      "katakana practice",
-      "japanese quiz",
-      "kana test",
-      "hiragana characters",
-      "katakana characters",
-      "japanese learning quiz"
+      "hiragana quiz", "katakana quiz", "japanese kana test", "hiragana practice",
+      "katakana practice", "japanese quiz", "kana test", "hiragana characters",
+      "katakana characters", "japanese learning quiz"
     ],
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}/hiragana-katakana-quiz`,
-        'de': `${baseUrl}/de/hiragana-katakana-quiz`,
-        'fr': `${baseUrl}/fr/hiragana-katakana-quiz`,
-        'pt': `${baseUrl}/pt/hiragana-katakana-quiz`,
-        'es': `${baseUrl}/es/hiragana-katakana-quiz`
-      }
+      languages: generateHreflangs('/hiragana-katakana-quiz'),
     },
     openGraph: {
       title: t('quizTitle'),
       description: t('quizDescription'),
       type: "website",
-      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
-      alternateLocale: ["en_US", "de_DE", "fr_FR", "pt_PT", "es_ES"],
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
       siteName: t('siteName'),
       url: canonicalUrl,
-      images: [
-        {
-          url: `${baseUrl}/api/og?title=${encodeURIComponent(t('quizTitle'))}&type=quiz&locale=${locale}`,
-          width: 1200,
-          height: 630,
-          alt: t('quizTitle')
-        }
-      ]
+      images: [{ url: `${BASE_URL}/api/og?title=${encodeURIComponent(t('quizTitle'))}&type=quiz&locale=${locale}`, width: 1200, height: 630, alt: t('quizTitle') }]
     },
     twitter: {
       card: 'summary_large_image',
       title: t('quizTitle'),
       description: t('quizDescription'),
-      images: [`${baseUrl}/api/og?title=${encodeURIComponent(t('quizTitle'))}&type=quiz&locale=${locale}`],
+      images: [`${BASE_URL}/api/og?title=${encodeURIComponent(t('quizTitle'))}&type=quiz&locale=${locale}`],
       site: '@learnkana'
     }
   };
@@ -62,30 +41,35 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export function generateStructuredData({ params }: { params: { locale: string } }) {
   const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/hiragana-katakana-quiz`;
-  
+  const canonicalUrl = getCanonicalUrl(locale, '/hiragana-katakana-quiz');
+
   return {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Hiragana & Katakana Quiz",
-    "description": "Interactive quiz for learning Japanese Hiragana and Katakana",
-    "url": canonicalUrl,
-    "applicationCategory": "EducationalApplication",
-    "operatingSystem": "Web",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "educationalLevel": "Beginner",
-    "inLanguage": locale,
-    "learningResourceType": "Assessment",
-    "audience": {
-      "@type": "EducationalAudience",
-      "educationalRole": "student",
-      "educationalField": "Japanese Language Learning"
-    }
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Hiragana & Katakana Quiz",
+        "description": "Interactive quiz for learning Japanese Hiragana and Katakana",
+        "url": canonicalUrl,
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "educationalLevel": "Beginner",
+        "inLanguage": locale,
+        "learningResourceType": "Assessment",
+        "audience": {
+          "@type": "EducationalAudience",
+          "educationalRole": "student",
+          "educationalField": "Japanese Language Learning"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+          { "@type": "ListItem", "position": 2, "name": "Kana Quiz", "item": canonicalUrl }
+        ]
+      }
+    ]
   };
 }

@@ -3,14 +3,13 @@
 import MainLayout from '@/components/layouts/main-layout';
 import { MessageSquare, Table, PenTool, ArrowRight, Repeat, BookOpen } from 'lucide-react';
 import Link from 'next/link';
+import { articles } from '@/data/articles';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 
-interface HomePageContentProps {
-  locale: string;
-}
-
-export default function HomePageContent({ locale }: HomePageContentProps) {
+export default function PageContent() {
   const t = useTranslations('HomePage');
+  const locale = useLocale();
   
   return (
     <MainLayout>
@@ -27,10 +26,10 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
           <div className="absolute top-[40%] left-[60%] w-[20%] h-[20%] bg-[#00D6A4] transform -rotate-12 opacity-90"></div>
         </div>
 
-        <div className="relative container mx-auto px-4 pt-32 pb-20">
+        <div className="relative container mx-auto px-4 pt-20 sm:pt-28 md:pt-32 pb-14 sm:pb-18 md:pb-20">
           {/* 主标题区域 */}
           <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-7xl md:text-8xl font-bold mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-[1.05]">
               <span className="text-[#FF7E67] block">
                 {t('aiPowered')}
               </span>
@@ -39,35 +38,35 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
               </span>
             </h1>
             
-            <p className="text-2xl md:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-12">
+            <p className="text-base sm:text-lg md:text-xl lg:text-3xl text-white/80 leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12">
               {t('heroDescription')}
             </p>
 
             {/* CTA Button */}
-            <div className="mb-16">
+            <div className="mb-8 sm:mb-12">
               <Link 
                 href={`/${locale}/hiragana-katakana-quiz`}
-                className="inline-flex items-center px-8 py-4 text-xl font-bold bg-gradient-to-r from-[#FF7E67] to-[#FFD600] text-[#1A1B2F] rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl group"
+                className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-[#FF7E67] to-[#FFD600] text-[#1A1B2F] rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl group"
               >
                 {t('startQuiz')}
-                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-3 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* 功能预览列表 */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 text-center">
-              <div className="flex items-center gap-2 text-white/60">
-                <MessageSquare className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">{t('aiTutor')}</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/60">
-                <PenTool className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">{t('kanaPractice')}</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/60">
-                <Table className="w-8 h-8" />
-                <span className="text-2xl md:text-1xl">{t('kanaCharts')}</span>
-              </div>
+            <div className="flex flex-row flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-10 md:gap-16 text-center">
+              <Link href={`/${locale}/chat`} className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <MessageSquare className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                <span className="text-base sm:text-lg md:text-xl">{t('aiTutor')}</span>
+              </Link>
+              <Link href={`/${locale}/hiragana-katakana-quiz`} className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <PenTool className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                <span className="text-base sm:text-lg md:text-xl">{t('kanaPractice')}</span>
+              </Link>
+              <Link href={`/${locale}/hiragana-katakana-chart`} className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <Table className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                <span className="text-base sm:text-lg md:text-xl">{t('kanaCharts')}</span>
+              </Link>
             </div>
           </div>
         </div>
@@ -87,7 +86,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* AI Tutor Feature */}
-                <Link href={`/${locale}/hiragana-katakana-quiz`} className="group">
+                <Link href={`/${locale}/chat`} className="group">
                   <div className="relative bg-gradient-to-br from-[#2B7FFF] to-[#00D6A4] p-1 rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
                     <div className="bg-white dark:bg-[#1A1B2F]/80 backdrop-blur-xl p-6 rounded-3xl h-full">
                       <div className="w-12 h-12 bg-[#2B7FFF] rounded-xl flex items-center justify-center mb-4">
@@ -171,25 +170,25 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-[#1A1B2F] dark:text-white">
-                Master Both Kana Systems
+                {t('masterBothKana')}
               </h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="bg-white dark:bg-[#1A1B2F] p-8 rounded-2xl shadow-lg">
-                  <h3 className="text-2xl font-bold mb-4 text-[#FF7E67]">Hiragana</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-[#FF7E67]">{t('hiraganaTitle')}</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    The fundamental Japanese phonetic script used for native words, particles, and verb conjugations.
+                    {t('hiraganaDescription')}
                   </p>
                   <Link href={`/${locale}/hiragana-katakana-chart`} className="text-[#FF7E67] font-semibold hover:underline">
-                    Learn Hiragana →
+                    {t('learnHiragana')}
                   </Link>
                 </div>
                 <div className="bg-white dark:bg-[#1A1B2F] p-8 rounded-2xl shadow-lg">
-                  <h3 className="text-2xl font-bold mb-4 text-[#2B7FFF]">Katakana</h3>
+                  <h3 className="text-2xl font-bold mb-4 text-[#2B7FFF]">{t('katakanaTitle')}</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Used for foreign loanwords, emphasis, and technical terms in Japanese writing.
+                    {t('katakanaDescription')}
                   </p>
                   <Link href={`/${locale}/hiragana-katakana-chart`} className="text-[#2B7FFF] font-semibold hover:underline">
-                    Learn Katakana →
+                    {t('learnKatakana')}
                   </Link>
                 </div>
               </div>
@@ -202,7 +201,7 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center text-[#1A1B2F] dark:text-white">
-                Learning Guides
+                {t('learningGuidesTitle')}
               </h2>
               <div className="grid md:grid-cols-3 gap-8">
                 <Link href={`/${locale}/learn`} className="group">
@@ -267,67 +266,6 @@ export default function HomePageContent({ locale }: HomePageContentProps) {
                   <p className="text-gray-600 dark:text-gray-300">{t('faq6Answer')}</p>
                 </div>
               </div>
-
-              {/* FAQ Schema Markup for SEO */}
-              <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                  __html: JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "FAQPage",
-                    "mainEntity": [
-                      {
-                        "@type": "Question",
-                        "name": t('faq1Question'),
-                        "acceptedAnswer": {
-                          "@type": "Answer",
-                          "text": t('faq1Answer')
-                        }
-                      },
-                      {
-                        "@type": "Question",
-                        "name": t('faq2Question'),
-                        "acceptedAnswer": {
-                          "@type": "Answer",
-                          "text": t('faq2Answer')
-                        }
-                      },
-                      {
-                        "@type": "Question",
-                        "name": t('faq3Question'),
-                        "acceptedAnswer": {
-                          "@type": "Answer",
-                          "text": t('faq3Answer')
-                        }
-                      },
-                      {
-                        "@type": "Question",
-                        "name": t('faq4Question'),
-                        "acceptedAnswer": {
-                          "@type": "Answer",
-                          "text": t('faq4Answer')
-                        }
-                      },
-                      {
-                        "@type": "Question",
-                        "name": t('faq5Question'),
-                        "acceptedAnswer": {
-                          "@type": "Answer",
-                          "text": t('faq5Answer')
-                        }
-                      },
-                      {
-                        "@type": "Question",
-                        "name": t('faq6Question'),
-                        "acceptedAnswer": {
-                          "@type": "Answer",
-                          "text": t('faq6Answer')
-                        }
-                      }
-                    ]
-                  })
-                }}
-              />
             </div>
           </div>
         </section>
