@@ -50,6 +50,7 @@ export default function Footer() {
                 <li><a href="https://rollr.io/profile/dashboard" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Rollr</a></li>
                 <li><a href="https://ramen.tools/book/demo/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Ramen Book</a></li>
                 <li><a href="https://jeremym.carrd.co/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">Jeremy</a></li>
+                <li><a href="https://markitdown.tech" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">MarkItDown</a></li>
               </ul>
             </div>
 
