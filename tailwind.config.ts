@@ -16,7 +16,7 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans)'],
+        sans: ['var(--font-noto-sans-jp)'],
       },
       colors: {
         border: "hsl(var(--border))",

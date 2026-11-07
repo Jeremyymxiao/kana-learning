@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/hiragana-katakana-quiz', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/hiragana-katakana-chart', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/hiragana-katakana-converter', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/japanese-text-analyzer', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/learn', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/contact-us', priority: 0.5, changeFrequency: 'monthly' as const },
     { path: '/privacy-policy', priority: 0.3, changeFrequency: 'monthly' as const },

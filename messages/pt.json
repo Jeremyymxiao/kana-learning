@@ -11,7 +11,8 @@
     "register": "Registrar",
     "profile": "Perfil",
     "settings": "Configurações",
-    "chat": "Chat"
+    "chat": "Chat",
+    "analyzer": "Analisador"
   },
   "HomePage": {
     "title": "Aprender Kana Japonês - Hiragana & Katakana",
@@ -61,7 +62,15 @@
     "faq5Question": "O que torna nosso quiz Hiragana & Katakana diferente de outras ferramentas de aprendizado?",
     "faq5Answer": "Nosso quiz Hiragana & Katakana se destaca por sua personalização avançada por IA e abordagem abrangente. Ao contrário dos aplicativos básicos de cartões, oferecemos aprendizado contextual que se adapta às suas forças e fraquezas. Nosso sistema de quiz cria caminhos de aprendizado personalizados, fornece análises detalhadas de seus progressos e oferece múltiplos modos de quiz (reconhecimento, recuperação, escrita, etc.) para fortalecer diferentes aspectos de seu conhecimento de kana.",
     "faq6Question": "Posso acompanhar meus progressos com o sistema de quiz Hiragana & Katakana?",
-    "faq6Answer": "Sim, o acompanhamento abrangente de progresso é uma característica central de nossa plataforma de quiz Hiragana & Katakana. Você receberá análises detalhadas mostrando seu nível de domínio para cada caractere, taxas de precisão, tempos de resposta e tendências de aprendizado ao longo do tempo. Nosso painel visualiza seus progressos com gráficos intuitivos e destaca caracteres que precisam de prática adicional, garantindo sessões de estudo eficientes e direcionadas."
+    "faq6Answer": "Sim, o acompanhamento abrangente de progresso é uma característica central de nossa plataforma de quiz Hiragana & Katakana. Você receberá análises detalhadas mostrando seu nível de domínio para cada caractere, taxas de precisão, tempos de resposta e tendências de aprendizado ao longo do tempo. Nosso painel visualiza seus progressos com gráficos intuitivos e destaca caracteres que precisam de prática adicional, garantindo sessões de estudo eficientes e direcionadas.",
+    "masterBothKana": "Domine Ambos os Sistemas Kana",
+    "hiraganaTitle": "Hiragana",
+    "hiraganaDescription": "O sistema de escrita fonético japonês fundamental usado para palavras nativas, partículas e conjugações verbais.",
+    "learnHiragana": "Aprenda Hiragana →",
+    "katakanaTitle": "Katakana",
+    "katakanaDescription": "Usado para palavras estrangeiras, ênfase e termos técnicos na escrita japonesa.",
+    "learnKatakana": "Aprenda Katakana →",
+    "learningGuidesTitle": "Guias de Aprendizagem"
   },
   "LearnPage": {
     "title": "Aprender Kana Japonês",
@@ -222,6 +231,33 @@
     "contactTitle": "Contato | LearnKana",
     "contactDescription": "Entre em contato conosco para dúvidas, feedback ou suporte sobre aprendizado de kana japonês",
     "chatTitle": "Assistente de Aprendizado Japonês | LearnKana",
-    "chatDescription": "Converse com IA para aprender kana japonês e melhorar suas habilidades com assistência personalizada"
+    "chatDescription": "Converse com IA para aprender kana japonês e melhorar suas habilidades com assistência personalizada",
+    "privacyTitle": "Política de Privacidade | LearnKana",
+    "privacyDescription": "Política de privacidade do LearnKana. Saiba como coletamos, usamos e protegemos seus dados em nossa plataforma de aprendizado de japonês.",
+    "termsTitle": "Termos de Serviço | LearnKana",
+    "termsDescription": "Termos de Serviço do LearnKana - plataforma de aprendizado de japonês. Leia nossos termos e condições para usar nossos serviços e ferramentas educacionais.",
+    "loginTitle": "Entrar | LearnKana",
+    "loginDescription": "Entre na sua conta LearnKana para acessar recursos de aprendizado personalizados e acompanhar seu progresso.",
+    "registerTitle": "Registrar | LearnKana",
+    "registerDescription": "Crie uma conta LearnKana gratuita para começar a aprender Hiragana e Katakana japonês com recursos personalizados e acompanhamento de progresso.",
+    "profileTitle": "Perfil do Usuário | Painel LearnKana",
+    "profileDescription": "Visualize e gerencie seu perfil LearnKana, acompanhe seu progresso no aprendizado de japonês e personalize sua experiência.",
+    "settingsTitle": "Configurações | Preferências LearnKana",
+    "settingsDescription": "Personalize sua experiência de aprendizado LearnKana. Ajuste preferências de idioma e configurações de notificação.",
+    "cookieTitle": "Política de Cookies | Privacidade LearnKana",
+    "cookieDescription": "Saiba como o LearnKana usa cookies e tecnologias similares para melhorar sua experiência de aprendizado.",
+    "authTitle": "Autenticação | Acesso à conta LearnKana",
+    "authDescription": "Entre na sua conta LearnKana para acessar recursos de aprendizado personalizados e sincronizar em todos os dispositivos.",
+    "analyzerTitle": "Analisador de Texto Japonês - Gerador de Furigana | LearnKana",
+    "analyzerDescription": "Adicione furigana acima dos kanji em qualquer texto japonês. Ferramenta online gratuita para ler e aprender caracteres japoneses."
+  },
+  "AnalyzerPage": {
+    "title": "Analisador de Texto Japonês",
+    "description": "Cole texto japonês para adicionar furigana (leituras hiragana) acima dos caracteres kanji",
+    "inputLabel": "Insira texto japonês",
+    "inputPlaceholder": "日本語のテキストをここに入力してください...",
+    "analyzeButton": "Analisar",
+    "analyzing": "Analisando...",
+    "resultLabel": "Resultado com Furigana"
   }
 }

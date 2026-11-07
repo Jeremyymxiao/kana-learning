@@ -1,33 +1,35 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales, BASE_URL } from '@/lib/seo-utils';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/privacy-policy`;
-  
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  const canonicalUrl = getCanonicalUrl(locale, '/privacy-policy');
+
   return {
-    title: "Privacy Policy | LearnKana",
-    description: "LearnKana's privacy policy. Learn how we collect, use, and protect your data while using our Japanese language learning platform.",
+    title: t('privacyTitle'),
+    description: t('privacyDescription'),
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: generateHreflangs('/privacy-policy'),
     },
     openGraph: {
-      title: "Privacy Policy | LearnKana",
-      description: "Our commitment to protecting your privacy while learning Japanese.",
+      title: t('privacyTitle'),
+      description: t('privacyDescription'),
       type: "website",
-      locale: "en_US",
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };
 }
 
-export function generateStructuredData({ params }: { params: { locale: string } }) {
-  const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/privacy-policy`;
-  
+export async function generateStructuredData({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const canonicalUrl = getCanonicalUrl(locale, '/privacy-policy');
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -37,7 +39,7 @@ export function generateStructuredData({ params }: { params: { locale: string } 
     "publisher": {
       "@type": "Organization",
       "name": "LearnKana",
-      "url": baseUrl
+      "url": BASE_URL
     }
   };
 }

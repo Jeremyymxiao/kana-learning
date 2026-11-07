@@ -18,7 +18,7 @@ Learning Hiragana is crucial because:
 ## Basic Writing Rules
 
 ### Stroke Order
-Proper stroke order is crucial in writing Hiragana. General rules include:
+Proper stroke order is crucial in writing Hiragana. For detailed instructions on proper character formation, see our [complete guide on how to write Hiragana](/learn/how-to-write-hiragana). General rules include:
 1. Write from left to right
 2. Write from top to bottom
 3. Write horizontal lines before vertical lines
@@ -32,12 +32,14 @@ Proper stroke order is crucial in writing Hiragana. General rules include:
 
 ## The Hiragana Chart Structure
 
-Hiragana is organized in a systematic way called the "gojūon" (fifty sounds), though it actually contains 46 basic characters. The chart is arranged in:
+Hiragana is organized in a systematic way called the "gojūon" (fifty sounds), though it actually contains 46 basic characters. View our [interactive Hiragana-Katakana chart](/hiragana-katakana-chart) to see the complete structure with audio pronunciations. The chart is arranged in:
 - 5 vowel sounds (a, i, u, e, o)
 - 10 consonant groups (k, s, t, n, h, m, y, r, w)
 - Each consonant combines with vowels to form syllables
 
 ## Pronunciation Guidelines
+
+For a more detailed breakdown of proper pronunciation, read our comprehensive [Hiragana pronunciation guide](/learn/hiragana-pronunciation).
 
 ### Vowel Sounds
 - あ (a) - like 'a' in "father"
@@ -66,15 +68,18 @@ The consonants are relatively similar to English sounds, with a few exceptions:
 
 ## Practice Tips and Techniques
 
+To master Hiragana effectively, check out our [proven memorization techniques](/learn/memorize-hiragana) and [structured practice exercises](/learn/hiragana-practice).
+
 1. **Regular Writing Practice**
    - Use practice sheets daily
    - Write simple words you already know
    - Copy text from children's books
-   
+
 2. **Reading Practice**
    - Start with children's books
    - Use learning apps with Hiragana modes
    - Practice with Japanese song lyrics
+   - Test yourself with our [interactive Hiragana quiz](/hiragana-katakana-quiz)
 
 3. **Memory Techniques**
    - Create memorable associations
@@ -83,16 +88,16 @@ The consonants are relatively similar to English sounds, with a few exceptions:
 
 ## Digital Learning Resources
 
-To enhance your Hiragana learning experience, consider:
-1. Mobile apps for character practice
-2. Online flashcard systems
-3. Digital writing practice tools
-4. Interactive learning websites
+To enhance your Hiragana learning experience, use our free online tools:
+1. [Hiragana-Katakana converter](/hiragana-katakana-converter) for instant text conversion
+2. [Interactive character chart](/hiragana-katakana-chart) with audio pronunciation
+3. [Learn how to type Hiragana](/learn/typing-hiragana) on various devices
+4. [Practice quiz](/hiragana-katakana-quiz) for self-assessment
 
 ## Moving Forward
 
 After mastering Hiragana, you'll be ready to:
-- Learn Katakana for foreign words
+- [Learn Katakana](/learn/hiragana-vs-katakana) for foreign words and understand when to use each script
 - Begin basic Kanji study
 - Read simple Japanese texts
 - Write basic Japanese sentences

@@ -92,6 +92,8 @@ export function QuizResult({ score, wrongAnswers, onRetry, kanaType, quizType }:
         return 'Mixed';
       case 'special':
         return 'Special Characters';
+      case 'all':
+        return 'All Characters';
       default:
         return type;
     }

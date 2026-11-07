@@ -4,14 +4,14 @@ import React from 'react';
 
 export function SakuraDecoration() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
       <div className="absolute -top-10 -left-10 w-32 h-32 opacity-10 dark:opacity-5 animate-float">
-        <svg viewBox="0 0 100 100" className="w-full h-full fill-current text-pink-300">
+        <svg viewBox="0 0 100 100" className="w-full h-full fill-current text-pink-300" aria-hidden="true">
           <path d="M50,0 C55,25 75,45 100,50 C75,55 55,75 50,100 C45,75 25,55 0,50 C25,45 45,25 50,0" />
         </svg>
       </div>
       <div className="absolute top-1/4 right-10 w-24 h-24 opacity-10 dark:opacity-5 animate-float-delayed">
-        <svg viewBox="0 0 100 100" className="w-full h-full fill-current text-pink-300">
+        <svg viewBox="0 0 100 100" className="w-full h-full fill-current text-pink-300" aria-hidden="true">
           <path d="M50,0 C55,25 75,45 100,50 C75,55 55,75 50,100 C45,75 25,55 0,50 C25,45 45,25 50,0" />
         </svg>
       </div>
@@ -21,8 +21,8 @@ export function SakuraDecoration() {
 
 export function WavePattern() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-32 pointer-events-none z-0">
-      <svg className="w-full h-full opacity-10 dark:opacity-5" viewBox="0 0 1440 320">
+    <div className="fixed bottom-0 left-0 right-0 h-32 pointer-events-none z-0" aria-hidden="true">
+      <svg className="w-full h-full opacity-10 dark:opacity-5" viewBox="0 0 1440 320" aria-hidden="true">
         <path 
           fill="currentColor" 
           className="text-indigo-200"

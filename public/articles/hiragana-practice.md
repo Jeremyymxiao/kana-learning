@@ -1,170 +1,299 @@
 # Hiragana Practice Exercises
 
-# Master Japanese Characters: A Comprehensive Guide to Learning Hiragana and Katakana
+Hiragana is the first writing system most Japanese learners tackle, and for good reason — it covers every sound in Japanese and is used constantly in native text. This article gives you hands-on exercises to build real reading, writing, and recognition skills. Work through each section at your own pace, and return to any section when you need review.
 
-Learning Japanese can seem daunting at first, especially when faced with the task of memorizing the various writing systems. However, with the right tools and approach, mastering Hiragana and Katakana can be both enjoyable and efficient. In this guide, we'll explore how to effectively learn these fundamental Japanese writing systems using modern, interactive tools.
+If you want a visual reference while working through these exercises, keep the [hiragana chart](/hiragana-katakana-chart) open in another tab.
 
-## The Challenge of Learning Japanese Characters
+---
 
-For many learners, the initial hurdle in Japanese studies is memorizing the two basic phonetic alphabets: Hiragana and Katakana. These writing systems are essential building blocks for Japanese literacy, but traditional learning methods often fall short in providing engaging and effective practice opportunities.
+## Section 1: Reading Practice
 
-## Interactive Learning with Modern Tools
+Start by reading these common Japanese words aloud. Each word uses only basic hiragana characters. The goal is to sound out each character one at a time until the combinations become natural.
 
-Thanks to technological advancement, learners now have access to powerful online resources that can significantly accelerate their learning process. One particularly effective platform is LearnKana.pro, which offers two innovative features for mastering Japanese characters:
+### Beginner Words (2–3 characters)
 
-### 1. Interactive Quizzes for Rapid Learning
+| Hiragana | Romaji | Meaning |
+|----------|--------|---------|
+| いえ | ie | house |
+| うえ | ue | above / up |
+| おに | oni | demon / ogre |
+| かわ | kawa | river |
+| きた | kita | north |
+| くも | kumo | cloud |
+| けむり | kemuri | smoke |
+| こい | koi | carp / love |
+| さかな | sakana | fish |
+| しお | shio | salt |
 
-The platform's quiz system (available at learnkana.pro/hiragana-katakana-quiz) provides a dynamic learning environment where students can:
+Read each row from left to right, then cover the romaji column and try again. When you can read all ten without the romaji, move on.
 
-- Practice both Hiragana and Katakana recognition
-- Test their knowledge through varied question formats
-- Track their progress over time
-- Focus on specific character groups they find challenging
-- Review through spaced repetition
+### Intermediate Words (4–5 characters)
 
-### 2. AI-Powered Conversation Practice
+| Hiragana | Romaji | Meaning |
+|----------|--------|---------|
+| あさごはん | asagohan | breakfast |
+| たべもの | tabemono | food |
+| のみもの | nomimono | drink |
+| ともだち | tomodachi | friend |
+| でんしゃ | densha | train |
+| がっこう | gakkou | school |
+| おかあさん | okaasan | mother |
+| おとうさん | otousan | father |
+| いもうと | imouto | younger sister |
+| おにいさん | oniisan | older brother |
 
-Taking learning to the next level, the platform's AI chat feature (accessible at learnkana.pro/chat) offers:
+**Reading tip:** When you see a small っ (tsu), it doubles the consonant that follows it. So がっこう is ga-k-kou, not ga-tsu-kou.
 
-- Real-time conversation practice with AI
-- Contextual learning of characters
-- Immediate feedback and corrections
-- Customized learning pace
-- Natural language processing for authentic interactions
+---
 
-## Benefits of Combined Learning Approaches
+## Section 2: Writing Practice
 
-By utilizing both the quiz system and AI chat features, learners can:
+Writing hiragana by hand reinforces memory more effectively than recognition alone. For each character below, study the stroke order, then copy it ten times.
 
-1. Reinforce character recognition through multiple methods
-2. Maintain motivation through varied learning activities
-3. Practice in a low-pressure environment
-4. Build confidence gradually
-5. Develop practical application skills
+### The Five Vowels — Write These First
 
-## Practical Learning Strategy
+These are the foundation. Every other hiragana syllable ends with one of these vowel sounds.
 
-To maximize learning effectiveness, consider following this structured approach:
+| Character | Reading | Stroke Notes |
+|-----------|---------|--------------|
+| あ | a | 3 strokes: horizontal line, curved left arm, then the body |
+| い | i | 2 strokes: left curve, then right curve ending with a tail |
+| う | u | 2 strokes: small horizontal line on top, then a curved body |
+| え | e | 3 strokes: horizontal, vertical through it, then the wing |
+| お | o | 3 strokes: similar to あ, with a different final curve |
 
-1. Start with the basic quiz system to build foundational knowledge
-2. Practice regularly with short, focused sessions
-3. Use the AI chat feature to apply learned characters in context
-4. Return to quizzes for review and reinforcement
-5. Track progress and adjust focus areas as needed
+### K-Row Practice
 
-## Comprehensive Topics Covered
+| Character | Reading | Character | Reading |
+|-----------|---------|-----------|---------|
+| か | ka | き | ki |
+| く | ku | け | ke |
+| こ | ko | | |
 
-The platform provides comprehensive coverage of essential Japanese language skills through its interactive features. Here's what you can expect to learn and practice:
+Copy each character five times, then write the full k-row from memory: か、き、く、け、こ
 
-### Writing Exercises
-- Master proper stroke order for characters like あ (a), か (ka), and さ (sa)
-- Receive real-time feedback on your digital writing practice, such as correcting common mistakes in characters like は (ha) and ほ (ho)
-- Practice handwriting exercises with step-by-step guidance for complex characters like れ (re) and わ (wa)
-- Progress from basic characters to challenging combinations like きょ (kyo) and びょ (byo)
-- Learn the subtle differences in writing similar-looking characters like め (me) and ぬ (nu)
+### S-Row Practice
 
-### Reading Practice
-- Start with simple character combinations like おはよう (ohayou - good morning)
-- Practice reading common phrases in different fonts: こんにちは (konnichiwa - hello)
-- Engage with real-world examples like メニュー (menyuu - menu) and トイレ (toire - toilet)
-- Read practical sentences like 私は学生です (watashi wa gakusei desu - I am a student)
-- Master context-based reading with everyday situations like ordering food or asking directions
+| Character | Reading | Notes |
+|-----------|---------|-------|
+| さ | sa | 3 strokes |
+| し | shi | 1 smooth stroke, like a fishhook |
+| す | su | 2 strokes |
+| せ | se | 3 strokes |
+| そ | so | 1 or 2 strokes depending on handwriting style |
 
-### Character Recognition
-- Learn to distinguish similar characters like さ (sa) and き (ki)
-- Practice quick recognition of character pairs: カ (ka) vs か (ka)
-- Master variations in handwritten styles of complex characters like ふ (fu) and み (mi)
-- Adapt to different font styles used in manga, websites, and street signs
-- Train speed recognition with timed exercises featuring mixed Hiragana and Katakana
+**Writing challenge:** Without looking at the table, write the entire s-row in order. Check your work, then do it again.
 
-### Word Formation
-- Build basic words like たべる (taberu - to eat) and のむ (nomu - to drink)
-- Learn common compound combinations like がっこう (gakkou - school)
-- Practice word families like 食べ物 (tabemono - food), 飲み物 (nomimono - drink)
-- Master everyday vocabulary like お母さん (okaasan - mother) and お父さん (otousan - father)
-- Create practical word combinations used in daily conversations
+### T-Row and N-Row Practice
 
-### Sentence Construction
-- Start with basic patterns like これは〇〇です (kore wa ___ desu - this is ___)
-- Progress to questions like どこですか (doko desu ka - where is it?)
-- Learn natural expressions like ちょっと待って (chotto matte - wait a moment)
-- Practice common conversation patterns like 〜が好きです (___ ga suki desu - I like ___)
-- Master polite and casual forms of the same sentences
+Copy these characters five times each:
 
-### Interactive Quizzes
-- Take customized quizzes focusing on your weak points, like confusing character pairs
-- Track your mastery of different character groups (k-series, s-series, etc.)
-- Experience progressive difficulty from single characters to full sentences
-- Receive detailed feedback on your answers with explanations
-- Review your learning history with performance analytics and suggested focus areas
+た (ta)、ち (chi)、つ (tsu)、て (te)、と (to)
 
-## AI Chat Integration: Bringing Learning to Life
+な (na)、に (ni)、ぬ (nu)、ね (ne)、の (no)
 
-The AI chat feature at learnkana.pro/chat transforms traditional learning methods into dynamic, interactive experiences. Here's how it enhances each aspect of your learning journey:
+**Note on の:** This character is one of the most common in Japanese. It appears in possessive phrases like わたしの (watashi no — my/mine). Practice it until you can write it in a single fluid motion.
 
-### Writing Practice Enhancement
-- Ask the AI to check your character writing order: "Can you verify if I'm writing 難しい correctly?"
-- Get instant feedback on common writing mistakes: "Is my stroke order for 私 correct?"
-- Practice digital character input with real-time corrections
-- Receive personalized writing exercises based on your skill level
-- Get explanations about the evolution and meaning of complex characters
+---
 
-### Interactive Reading Sessions
-- Have the AI generate reading materials at your level: "Can you give me a simple text about daily routines?"
-- Practice reading comprehension with AI-generated questions
-- Get readings with highlighted new characters: "Please show me a text using only the characters I've learned"
-- Experience adaptive difficulty based on your responses
-- Receive pronunciation tips for challenging character combinations
+## Section 3: Recognition Exercises
 
-### Dynamic Character Recognition
-- Play character recognition games with the AI: "Show me similar-looking characters and help me distinguish them"
-- Get contextual examples: "Show me different ways to use the character 食"
-- Practice speed recognition with AI-timed challenges
-- Learn character variants through real-world examples
-- Receive mnemonics and memory aids for difficult characters
+Several hiragana characters look very similar to one another. Confusing them is one of the most common mistakes beginners make. The exercises below target the most frequently mixed-up pairs.
 
-### Guided Word Formation
-- Build vocabulary through conversation: "Let's practice words related to shopping"
-- Get instant explanations of word components: "Why is 食べ物 written this way?"
-- Practice creating compound words with learned characters
-- Receive context-rich examples of word usage
-- Learn common word patterns through interactive dialogue
+### Common Confusion Pairs
 
-### Interactive Sentence Building
-- Get real-time grammar corrections: "Is この本は面白いです correct?"
-- Practice pattern variations: "Show me different ways to say 'I want to go'"
-- Receive contextual examples of sentence structures
-- Learn natural conversation flow through dialogue practice
-- Get explanations of nuanced differences in similar expressions
+Study each pair and identify the visual difference before doing the drill.
 
-### Practice Scenarios
-- Role-play daily situations: "Let's practice ordering at a restaurant"
-- Simulate real-world conversations: "Can we practice asking for directions?"
-- Get cultural context for different expressions
-- Practice formal and casual speech patterns
-- Learn situation-appropriate responses
+| Pair | Character A | Character B | Key Difference |
+|------|-------------|-------------|----------------|
+| さ vs き | さ (sa) | き (ki) | さ has 3 strokes with the bottom stroke cutting across; き has 4 strokes with a closed horizontal loop |
+| は vs ほ | は (ha) | ほ (ho) | は has an open right side; ほ has an extra small loop on the right |
+| め vs ぬ | め (me) | ぬ (nu) | め ends with a small loop that stays inside; ぬ ends with a loop that curls back out to the right |
+| る vs ろ | る (ru) | ろ (ro) | る ends with a small closed loop; ろ has no closing loop, the stroke just curves and ends |
+| わ vs れ | わ (wa) | れ (re) | わ has a simple curve on the right; れ has a loop and extra stroke |
+| ね vs れ | ね (ne) | れ (re) | ね has a loop at the bottom that crosses back left; れ loops and crosses right |
 
-### Personalized Learning Support
-- Receive progress tracking and recommendations
-- Get customized review sessions based on your error patterns
-- Practice weak areas through targeted exercises
-- Receive motivation and encouragement
-- Track long-term improvement and mastery
+### Drill: Identify the Character
 
-## Advanced Learning Tips
+Read each character and write its romaji reading without looking at the table above:
 
-For those looking to accelerate their progress:
+1. ほ → ___
+2. さ → ___
+3. ぬ → ___
+4. き → ___
+5. ろ → ___
+6. め → ___
+7. は → ___
+8. る → ___
+9. れ → ___
+10. わ → ___
 
-- Combine quiz practice with handwriting exercises
-- Use the AI chat to create memorable learning scenarios
-- Set daily practice goals using both features
-- Review difficult characters more frequently
-- Create mnemonics for challenging characters
+**Answers:** 1. ho, 2. sa, 3. nu, 4. ki, 5. ro, 6. me, 7. ha, 8. ru, 9. re, 10. wa
 
-## Conclusion
+### Discrimination Exercise
 
-Learning Japanese characters doesn't have to be overwhelming. With tools like learnkana.pro's quiz system and AI chat feature, students can now approach their studies with confidence and efficiency. By combining these interactive learning methods, mastering Hiragana and Katakana becomes an achievable and enjoyable journey.
+In each row, circle the character that matches the reading given:
 
-Whether you're a complete beginner or looking to refresh your knowledge, these modern learning tools provide the perfect environment for successful Japanese character acquisition. Start your learning journey today with learnkana.pro's comprehensive platform.
+- **ha:** は / ほ / は / ほ / は
+- **me:** ぬ / め / ぬ / め / ぬ
+- **sa:** き / さ / き / さ / き
+- **ru:** ろ / る / ろ / る / ろ
 
-Remember, consistent practice and the right tools are key to success in learning Japanese. Begin with the quiz system to build your foundation, then enhance your learning through AI-powered conversations to achieve fluency in reading and writing Japanese characters.
+For each row, the pattern alternates. Count how many times each character appears. If you can identify them consistently at a glance, your recognition is solid.
+
+---
+
+## Section 4: Word Building
+
+Now combine individual characters into words. This exercise trains you to read character sequences as complete units rather than isolated symbols.
+
+### Exercise A: Fill in the Missing Character
+
+Each word below is missing one character. Write the correct hiragana in the blank.
+
+| Incomplete Word | Missing Romaji Sound | Complete Word | Meaning |
+|-----------------|---------------------|---------------|---------|
+| __ に (__ ni) | i | いに → いぬ | dog |
+| か __ (ka __) | sa | かさ | umbrella |
+| __ し (__ shi) | su | すし | sushi |
+| み __ (mi __) | zu | みず | water |
+| は __ (ha __) | na | はな | flower |
+| __ め (__ me) | ya | やめ → やめる | to stop |
+| で __ (de __) | n | でん → でんき | electricity |
+| さ __ ら (sa __ ra) | ku | さくら | cherry blossom |
+
+### Exercise B: Build These Words from Parts
+
+Given the romaji, write each word in hiragana:
+
+1. hana (flower) → __
+2. mizu (water) → __
+3. sora (sky) → __
+4. yama (mountain) → __
+5. kawa (river) → __
+6. umi (sea) → __
+7. hoshi (star) → __
+8. tsuki (moon) → __
+
+**Answers:**
+1. はな, 2. みず, 3. そら, 4. やま, 5. かわ, 6. うみ, 7. ほし, 8. つき
+
+### Exercise C: Match Hiragana Words to Meanings
+
+Draw a line connecting each hiragana word to its English meaning.
+
+| Hiragana | Meaning |
+|----------|---------|
+| あめ | fire |
+| ひ | rain |
+| かぜ | wind |
+| ゆき | snow |
+| くも | cloud |
+
+**Answers:** あめ = rain, ひ = fire, かぜ = wind, ゆき = snow, くも = cloud
+
+---
+
+## Section 5: Mini Quiz
+
+Test yourself on everything covered so far. Work through these questions without looking back at earlier sections. Write your answers on paper, then check them at the end.
+
+**Part 1: Character Reading (write the romaji)**
+
+1. て → ___
+2. に → ___
+3. ふ → ___
+4. ぺ → ___
+5. ぞ → ___
+
+**Part 2: Character Writing (write the hiragana)**
+
+6. ko → ___
+7. shi → ___
+8. tsu → ___
+9. ne → ___
+10. mi → ___
+
+**Part 3: Word Reading (write the meaning)**
+
+11. いぬ → ___
+12. ねこ → ___
+13. さかな → ___
+14. そら → ___
+15. はな → ___
+
+**Part 4: Confusion Pairs (identify the correct character)**
+
+16. Which is "ho"? は or ほ → ___
+17. Which is "nu"? ぬ or め → ___
+18. Which is "ru"? ろ or る → ___
+19. Which is "sa"? き or さ → ___
+20. Which is "re"? れ or わ → ___
+
+**Answers:**
+
+Part 1: 1. te, 2. ni, 3. fu, 4. pe, 5. zo
+
+Part 2: 6. こ, 7. し, 8. つ, 9. ね, 10. み
+
+Part 3: 11. dog, 12. cat, 13. fish, 14. sky, 15. flower
+
+Part 4: 16. ほ, 17. ぬ, 18. る, 19. さ, 20. れ
+
+**Scoring:**
+- 18–20 correct: Strong foundation — move on to dakuon (voiced sounds) and youon (compound sounds)
+- 14–17 correct: Good progress — review the sections where you made errors
+- Below 14: Return to Sections 1–3 and spend more time on the confusion pairs before retaking
+
+---
+
+## Section 6: Daily Practice Routine
+
+Consistency matters more than session length. A focused 15-minute session every day builds stronger retention than a two-hour session once a week.
+
+### Recommended Daily Schedule
+
+**Day 1–3: Vowels and K-row**
+- Write the five vowels (あいうえお) ten times each
+- Read the beginner word list in Section 1 aloud
+- Focus on the さ/き confusion pair
+
+**Day 4–6: S-row and T-row**
+- Write each character in the s-row and t-row five times
+- Do the word-building exercises in Section 4
+- Focus on the は/ほ and め/ぬ confusion pairs
+
+**Day 7–9: N-row, H-row, M-row**
+- Write な、に、ぬ、ね、の and は、ひ、ふ、へ、ほ and ま、み、む、め、も
+- Read the intermediate word list in Section 1
+- Do the mini quiz in Section 5
+
+**Day 10–14: Y-row, R-row, W-row, and N**
+- Write や、ゆ、よ、ら、り、る、れ、ろ、わ、を、ん
+- Practice the る/ろ and れ/わ confusion pairs
+- Write five simple words from memory each day
+
+### Weekly Review Method
+
+At the end of each week, do this review sequence:
+
+1. Write the entire hiragana chart from memory (あいうえお through わをん)
+2. Read five words you have not studied before using a dictionary or flashcard app
+3. Write three sentences using only hiragana, even if they are simple ones like: わたしはがくせいです (I am a student)
+
+### Tracking Progress
+
+Keep a notebook with two columns: characters you know confidently, and characters you are still learning. Move characters between columns as your accuracy improves. When everything is in the "know" column, your baseline hiragana is complete.
+
+---
+
+## Next Steps
+
+Once you can read and write all 46 basic hiragana characters without hesitation, the natural next steps are:
+
+- **Dakuon:** Voiced versions of characters using the ゛mark, like が (ga), ざ (za), だ (da), ば (ba)
+- **Handakuon:** The ゜mark used only with the h-row to create p-sounds: ぱ (pa), ぴ (pi), ぷ (pu), ぺ (pe), ぽ (po)
+- **Youon:** Compound sounds formed by combining characters with small や、ゆ、よ — for example きゃ (kya), にゅ (nyu), びょ (byo)
+- **Katakana:** The second phonetic alphabet, which mirrors hiragana sounds but is used for foreign loanwords and emphasis
+
+Use the [interactive hiragana and katakana chart](/hiragana-katakana-chart) to see all characters organized by row, and test your recognition with the [hiragana quiz](/hiragana-katakana-quiz) when you are ready for timed practice.

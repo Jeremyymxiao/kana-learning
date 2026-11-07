@@ -61,6 +61,10 @@ const getAvailableKana = (kanaType: KanaType): KanaChar[] => {
     case 'special':
       addSpecial();
       return kanaChars;
+    case 'all':
+      addSeion();
+      addSpecial();
+      return kanaChars;
     default:
       return kanaChars;
   }

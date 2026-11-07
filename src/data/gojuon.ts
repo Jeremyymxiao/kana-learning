@@ -134,6 +134,14 @@ interface KanaChar {
         [
           { hiragana: 'わ', katakana: 'ワ', romaji: 'wa' },
           { hiragana: 'を', katakana: 'ヲ', romaji: 'wo' },
+        ],
+        // ん
+        [
+          { hiragana: 'ん', katakana: 'ン', romaji: 'n' },
+        ],
+        // っ (小さいつ)
+        [
+          { hiragana: 'っ', katakana: 'ッ', romaji: 'tsu' },
         ]
       ]
     },

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Book, Info, Menu, X, FileText, Table, PenTool, MessageSquare } from 'lucide-react';
+import { Book, Info, Menu, X, FileText, Table, PenTool, MessageSquare, Search } from 'lucide-react';
 import { useRouter, usePathname, Link } from '../../../../../i18n.config';
 import { useLocale } from 'next-intl';
 import { useTranslations } from 'next-intl';
@@ -16,7 +16,8 @@ const ROUTE_TO_TAB: Record<string, string> = {
   '/hiragana-katakana-quiz': 'quiz',
   '/hiragana-katakana-chart': 'chart',
   '/hiragana-katakana-converter': 'converter',
-  '/learn': 'learn'
+  '/learn': 'learn',
+  '/japanese-text-analyzer': 'analyzer'
 };
 
 const TAB_TO_ROUTE: Record<string, string> = {
@@ -25,6 +26,7 @@ const TAB_TO_ROUTE: Record<string, string> = {
   'quiz': '/hiragana-katakana-quiz',
   'chart': '/hiragana-katakana-chart',
   'converter': '/hiragana-katakana-converter',
+  'analyzer': '/japanese-text-analyzer',
   'learn': '/learn'
 };
 
@@ -72,6 +74,7 @@ export function NavBar({ authButtons }: NavBarProps) {
     { name: t('quiz'), icon: <PenTool className="w-7 h-4" />, key: 'quiz' },
     { name: t('chart'), icon: <Table className="w-7 h-4" />, key: 'chart' },
     { name: t('converter'), icon: <FileText className="w-7 h-4" />, key: 'converter' },
+    { name: t('analyzer'), icon: <Search className="w-7 h-4" />, key: 'analyzer' },
     { name: t('learn'), icon: <Info className="w-7 h-4" />, key: 'learn' }
   ];
 

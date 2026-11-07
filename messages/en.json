@@ -11,26 +11,8 @@
     "register": "Register",
     "profile": "Profile",
     "settings": "Settings",
-    "chat": "Chat"
-  },
-  "HomePage": {
-    "title": "Learn Japanese Kana - Hiragana & Katakana",
-    "description": "Master Japanese hiragana and katakana with interactive lessons, quizzes, and charts",
-    "heroTitle": "Master Japanese Kana",
-    "heroSubtitle": "Learn hiragana and katakana with interactive lessons, quizzes, and charts",
-    "getStarted": "Get Started",
-    "learnMore": "Learn More",
-    "featuresTitle": "Features",
-    "interactiveLessons": "Interactive Lessons",
-    "interactiveLessonsDesc": "Learn at your own pace with step-by-step lessons",
-    "quizSystem": "Quiz System",
-    "quizSystemDesc": "Test your knowledge with customizable quizzes",
-    "referenceCharts": "Reference Charts",
-    "referenceChartsDesc": "Quick access to complete hiragana and katakana charts",
-    "converter": "Hiragana/Katakana Converter",
-    "converterDesc": "Convert between hiragana, katakana, and romaji",
-    "progressTracking": "Progress Tracking",
-    "progressTrackingDesc": "Track your learning progress and achievements"
+    "chat": "Chat",
+    "analyzer": "Analyzer"
   },
   "LearnPage": {
     "title": "Learn Japanese Kana",
@@ -200,7 +182,15 @@
     "faq5Question": "What makes your Hiragana & Katakana Quiz different from other learning tools?",
     "faq5Answer": "Our Hiragana & Katakana Quiz stands out through its AI-powered personalization and comprehensive approach. Unlike basic flashcard apps, we offer context-aware learning that adapts to your strengths and weaknesses. Our quiz system creates custom learning paths, provides detailed analytics on your progress, and offers multiple quiz modes (recognition, recall, writing, etc.) to strengthen different aspects of your kana knowledge.",
     "faq6Question": "Can I track my progress with the Hiragana & Katakana Quiz system?",
-    "faq6Answer": "Yes, comprehensive progress tracking is a core feature of our Hiragana & Katakana Quiz platform. You'll get detailed analytics showing your mastery level for each character, accuracy rates, response times, and learning trends over time. Our dashboard visualizes your progress with intuitive charts and highlights characters that need additional practice, ensuring efficient and targeted study sessions."
+    "faq6Answer": "Yes, comprehensive progress tracking is a core feature of our Hiragana & Katakana Quiz platform. You'll get detailed analytics showing your mastery level for each character, accuracy rates, response times, and learning trends over time. Our dashboard visualizes your progress with intuitive charts and highlights characters that need additional practice, ensuring efficient and targeted study sessions.",
+    "masterBothKana": "Master Both Kana Systems",
+    "hiraganaTitle": "Hiragana",
+    "hiraganaDescription": "The fundamental Japanese phonetic script used for native words, particles, and verb conjugations.",
+    "learnHiragana": "Learn Hiragana →",
+    "katakanaTitle": "Katakana",
+    "katakanaDescription": "Used for foreign loanwords, emphasis, and technical terms in Japanese writing.",
+    "learnKatakana": "Learn Katakana →",
+    "learningGuidesTitle": "Learning Guides"
   },
   "ChatPage": {
     "title": "Japanese Learning Assistant",
@@ -241,6 +231,33 @@
     "contactTitle": "Contact Us | LearnKana",
     "contactDescription": "Get in touch with us for questions, feedback, or support about learning Japanese kana",
     "chatTitle": "Japanese Learning Assistant | LearnKana",
-    "chatDescription": "Chat with AI to learn Japanese kana and improve your skills with personalized assistance"
+    "chatDescription": "Chat with AI to learn Japanese kana and improve your skills with personalized assistance",
+    "privacyTitle": "Privacy Policy | LearnKana",
+    "privacyDescription": "LearnKana's privacy policy. Learn how we collect, use, and protect your data while using our Japanese language learning platform.",
+    "termsTitle": "Terms of Service | LearnKana",
+    "termsDescription": "Terms of Service for LearnKana - Japanese learning platform. Read our terms and conditions for using our educational services and tools.",
+    "loginTitle": "Login | LearnKana",
+    "loginDescription": "Login to your LearnKana account to access personalized Japanese learning features and track your progress.",
+    "registerTitle": "Register | LearnKana",
+    "registerDescription": "Create a free LearnKana account to start learning Japanese Hiragana and Katakana with personalized features and progress tracking.",
+    "profileTitle": "User Profile | LearnKana Dashboard",
+    "profileDescription": "View and manage your LearnKana profile, track your Japanese learning progress, and customize your learning experience.",
+    "settingsTitle": "Settings | LearnKana Preferences",
+    "settingsDescription": "Customize your LearnKana learning experience. Adjust language preferences, notification settings, and personalize your Japanese learning journey.",
+    "cookieTitle": "Cookie Policy | LearnKana Privacy",
+    "cookieDescription": "Learn how LearnKana uses cookies and similar technologies to enhance your learning experience and improve our services.",
+    "authTitle": "Authentication | LearnKana Account Access",
+    "authDescription": "Sign in to your LearnKana account to access personalized Japanese learning features, track your progress, and sync across devices.",
+    "analyzerTitle": "Japanese Text Analyzer - Furigana Generator | LearnKana",
+    "analyzerDescription": "Add furigana reading aids above kanji in any Japanese text. Free online tool to help you read and learn Japanese characters."
+  },
+  "AnalyzerPage": {
+    "title": "Japanese Text Analyzer",
+    "description": "Paste Japanese text to add furigana (hiragana readings) above kanji characters",
+    "inputLabel": "Enter Japanese Text",
+    "inputPlaceholder": "日本語のテキストをここに入力してください...",
+    "analyzeButton": "Analyze",
+    "analyzing": "Analyzing...",
+    "resultLabel": "Result with Furigana"
   }
 }

@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import ReactMarkdown, { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import React from 'react';
+import { Breadcrumbs } from '@/components/ui/breadcrumbs';
+import { RelatedArticles } from '@/components/articles/related-articles';
+import { useTranslations } from 'next-intl';
 
 interface ClientPageProps {
   article: {
@@ -14,6 +16,8 @@ interface ClientPageProps {
     tags: string[];
     content: string;
   };
+  locale: string;
+  slug: string;
 }
 
 // Custom components to downgrade heading levels by 1
@@ -27,7 +31,8 @@ const markdownComponents: Components = {
   h6: ({ children, ...props }) => <p className="font-bold" {...props}>{children}</p>,
 };
 
-export default function ClientPage({ article }: ClientPageProps) {
+export default function ClientPage({ article, locale, slug }: ClientPageProps) {
+  const t = useTranslations('Navigation');
   const router = useRouter();
 
   const handleTabChange = (tab: string) => {
@@ -45,6 +50,13 @@ export default function ClientPage({ article }: ClientPageProps) {
       currentTab="learn"
     >
       <div className="max-w-4xl mx-auto p-6">
+        <Breadcrumbs
+          items={[
+            { name: t('home') || 'Home', url: `/${locale}` },
+            { name: t('learn') || 'Learn', url: `/${locale}/learn` },
+            { name: article.title, url: `/${locale}/learn/${slug}` }
+          ]}
+        />
         <article className="prose prose-slate lg:prose-lg dark:prose-invert max-w-none
           prose-headings:font-bold 
           prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
@@ -72,6 +84,12 @@ export default function ClientPage({ article }: ClientPageProps) {
             {article.content}
           </ReactMarkdown>
         </article>
+
+        <RelatedArticles
+          currentSlug={slug}
+          currentTags={article.tags}
+          locale={locale}
+        />
       </div>
     </MainLayout>
   );

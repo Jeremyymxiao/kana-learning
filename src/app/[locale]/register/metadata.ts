@@ -1,51 +1,28 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales } from '@/lib/seo-utils';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/register`;
-  
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  const canonicalUrl = getCanonicalUrl(locale, '/register');
+
   return {
-    title: "Register | LearnKana",
-    description: "Create a free LearnKana account to start learning Japanese Hiragana and Katakana with personalized features and progress tracking.",
-    keywords: [
-      "register",
-      "sign up",
-      "create account",
-      "LearnKana registration",
-      "Japanese learning signup",
-      "free account"
-    ],
+    title: t('registerTitle'),
+    description: t('registerDescription'),
+    robots: { index: false, follow: true },
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: generateHreflangs('/register'),
     },
     openGraph: {
-      title: "Register | LearnKana",
-      description: "Create your free account and start learning Japanese today.",
+      title: t('registerTitle'),
+      description: t('registerDescription'),
       type: "website",
-      locale: "en_US",
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
+      siteName: t('siteName'),
       url: canonicalUrl
-    }
-  };
-}
-
-export function generateStructuredData({ params }: { params: { locale: string } }) {
-  const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/register`;
-  
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Register",
-    "description": "Registration page for LearnKana Japanese learning platform",
-    "url": canonicalUrl,
-    "provider": {
-      "@type": "Organization",
-      "name": "LearnKana",
-      "url": baseUrl
     }
   };
 }

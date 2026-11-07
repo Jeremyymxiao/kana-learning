@@ -1,51 +1,28 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales } from '@/lib/seo-utils';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/login`;
-  
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  const canonicalUrl = getCanonicalUrl(locale, '/login');
+
   return {
-    title: "Login | LearnKana",
-    description: "Login to your LearnKana account to access personalized Japanese learning features and track your progress.",
-    keywords: [
-      "login",
-      "sign in",
-      "LearnKana login",
-      "Japanese learning account",
-      "user login",
-      "progress tracking"
-    ],
+    title: t('loginTitle'),
+    description: t('loginDescription'),
+    robots: { index: false, follow: true },
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: generateHreflangs('/login'),
     },
     openGraph: {
-      title: "Login | LearnKana",
-      description: "Access your personalized Japanese learning experience with LearnKana.",
+      title: t('loginTitle'),
+      description: t('loginDescription'),
       type: "website",
-      locale: "en_US",
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
+      siteName: t('siteName'),
       url: canonicalUrl
-    }
-  };
-}
-
-export function generateStructuredData({ params }: { params: { locale: string } }) {
-  const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/login`;
-  
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "Login",
-    "description": "Login page for LearnKana Japanese learning platform",
-    "url": canonicalUrl,
-    "provider": {
-      "@type": "Organization",
-      "name": "LearnKana",
-      "url": baseUrl
     }
   };
 }

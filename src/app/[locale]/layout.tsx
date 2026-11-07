@@ -7,9 +7,10 @@ import '../globals.css'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
 import { Analytics } from "@vercel/analytics/react"
-import { generateMetadata, generateStructuredData } from './metadata'
+import { generateMetadata } from './metadata'
+import { ThemeProvider } from 'next-themes'
 
-const notoSansJP = Noto_Sans_JP({ 
+const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
   variable: '--font-noto-sans-jp',
@@ -19,7 +20,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export { generateMetadata, generateStructuredData }
+export { generateMetadata }
 
 export default async function LocaleLayout({
   children,
@@ -37,16 +38,9 @@ export default async function LocaleLayout({
   // Load messages for the specific locale
   const messages = await getMessages({ locale });
   
-  // Generate structured data
-  const structuredData = await generateStructuredData({ params: Promise.resolve({ locale }) });
-
   return (
-    <html lang={locale} className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
         {/* AdSense site verification */}
         <meta name="google-adsense-account" content="ca-pub-5334706525054343" />
         {/* Google AdSense */}
@@ -55,14 +49,16 @@ export default async function LocaleLayout({
         <script defer src="https://umami.jeremyym0612.work/random-string.js" data-website-id="6e68d4ad-8953-412c-8791-43d9c0021c61"></script>
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <AuthProvider>
-            <NavigationProvider>
-              {children}
-              <Analytics />
-            </NavigationProvider>
-          </AuthProvider>
-        </NextIntlClientProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <NextIntlClientProvider messages={messages} locale={locale}>
+            <AuthProvider>
+              <NavigationProvider>
+                {children}
+                <Analytics />
+              </NavigationProvider>
+            </AuthProvider>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

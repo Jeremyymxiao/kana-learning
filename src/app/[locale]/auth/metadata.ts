@@ -1,31 +1,27 @@
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales } from '@/lib/seo-utils';
 
-export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
-  const { locale } = params;
-  const baseUrl = 'https://learnkana.pro';
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/auth`;
-  
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Metadata' });
+  const canonicalUrl = getCanonicalUrl(locale, '/auth');
+
   return {
-    title: "Authentication | LearnKana Account Access",
-    description: "Sign in to your LearnKana account to access personalized Japanese learning features, track your progress, and sync across devices.",
-    keywords: [
-      "login",
-      "sign in",
-      "account",
-      "authentication",
-      "user access",
-      "japanese learning account"
-    ],
+    title: t('authTitle'),
+    description: t('authDescription'),
+    robots: { index: false, follow: true },
     alternates: {
-      canonical: canonicalUrl
+      canonical: canonicalUrl,
+      languages: generateHreflangs('/auth'),
     },
     openGraph: {
-      title: "Sign In | LearnKana",
-      description: "Access your personalized Japanese learning experience with LearnKana account.",
+      title: t('authTitle'),
+      description: t('authDescription'),
       type: "website",
-      locale: locale === 'en' ? 'en_US' : `${locale}_${locale.toUpperCase()}`,
-      siteName: "LearnKana",
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
+      siteName: t('siteName'),
       url: canonicalUrl
     }
   };
