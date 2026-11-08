@@ -2,7 +2,7 @@
 
 > 提交：`b175e39`（已推到 `origin/main`）· CI：**success**（type-check + build + 32 项 smoke 全绿）
 > 本地验证：`tsc --noEmit` exit 0 · `next build` exit 0 · `smoke 32/32 PASS`
-> 生产状态：**待 promotion**（部署对象已生成且 status=success，但 `learnkana.pro` 仍指向 `8963f07`）
+> 生产状态：**已上线** — `https://learnkana.pro/api/version` → `12a20d0`（含 `b175e39` 全部 P1 代码）
 
 ## 一、交付内容
 
@@ -64,3 +64,18 @@ npx vercel login
 4. 真人音频替换 TTS。
 5. 页面级 SEO 内容重建（去关键词堆砌、FAQPage/HowTo schema、sitemap lastmod）。
 6. 性能：首页静态化 + CDN、追踪脚本再减、`/learn/[slug]` 310KB 首屏 JS。
+
+## 五、线上验收（promotion 后）
+
+```
+$ curl -s https://learnkana.pro/api/version
+{"commit":"12a20d0…","env":"production"}
+
+$ BASE_URL=https://learnkana.pro node scripts/smoke.mjs
+RESULT: PASS — 32/32 checks passed
+```
+
+P1 关键标记（生产实测）：
+- 首页 CTA `?start=hiragana` ✅
+- de/fr/pt/es 消息载荷含 `switchToHiragana` 等新键 ✅（`Frage {current} von {total}` ICU 已下发）
+- 五十音图：每表 5 个 `th scope="col"` 段头 + 11 个 `th scope="row"` 行头（含 ん 行）✅
