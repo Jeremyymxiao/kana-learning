@@ -158,7 +158,7 @@ export default function ChartPageContent() {
                     Q: How many characters are in the complete hiragana and katakana charts?
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    A: Each chart contains 46 basic characters, 25 voiced sounds (dakuten), 5 semi-voiced sounds (handakuten), 
+                    A: Each chart contains 46 basic characters, 20 voiced sounds (dakuten), 5 semi-voiced sounds (handakuten), 
                     and 33 combination sounds, totaling over 100 unique characters per script system.
                   </p>
                 </div>

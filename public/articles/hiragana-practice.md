@@ -1,5 +1,7 @@
 # Hiragana Practice Exercises
 
+> **Romaji note:** long vowels are marked with a macron — おう and おお are written **ō**, うう is **ū**, and ええ is **ē** (えい stays "ei", as in せんせい *sensei*). So おかあさん is *okāsan* and がっこう is *gakkō*.
+
 Hiragana is the first writing system most Japanese learners tackle, and for good reason — it covers every sound in Japanese and is used constantly in native text. This article gives you hands-on exercises to build real reading, writing, and recognition skills. Work through each section at your own pace, and return to any section when you need review.
 
 If you want a visual reference while working through these exercises, keep the [hiragana chart](/hiragana-katakana-chart) open in another tab.
@@ -36,13 +38,13 @@ Read each row from left to right, then cover the romaji column and try again. Wh
 | のみもの | nomimono | drink |
 | ともだち | tomodachi | friend |
 | でんしゃ | densha | train |
-| がっこう | gakkou | school |
-| おかあさん | okaasan | mother |
-| おとうさん | otousan | father |
-| いもうと | imouto | younger sister |
-| おにいさん | oniisan | older brother |
+| がっこう | gakkō | school |
+| おかあさん | okāsan | mother |
+| おとうさん | otōsan | father |
+| いもうと | imōto | younger sister |
+| おにいさん | onīsan | older brother |
 
-**Reading tip:** When you see a small っ (tsu), it doubles the consonant that follows it. So がっこう is ga-k-kou, not ga-tsu-kou.
+**Reading tip:** When you see a small っ (a small つ, called sokuon), it doubles the consonant that follows it. So がっこう is ga-k-kō, not ga-tsu-kō.
 
 ---
 
@@ -241,7 +243,7 @@ Part 3: 11. dog, 12. cat, 13. fish, 14. sky, 15. flower
 Part 4: 16. ほ, 17. ぬ, 18. る, 19. さ, 20. れ
 
 **Scoring:**
-- 18–20 correct: Strong foundation — move on to dakuon (voiced sounds) and youon (compound sounds)
+- 18–20 correct: Strong foundation — move on to dakuon (voiced sounds) and yōon (compound sounds)
 - 14–17 correct: Good progress — review the sections where you made errors
 - Below 14: Return to Sections 1–3 and spend more time on the confusion pairs before retaking
 
@@ -293,7 +295,7 @@ Once you can read and write all 46 basic hiragana characters without hesitation,
 
 - **Dakuon:** Voiced versions of characters using the ゛mark, like が (ga), ざ (za), だ (da), ば (ba)
 - **Handakuon:** The ゜mark used only with the h-row to create p-sounds: ぱ (pa), ぴ (pi), ぷ (pu), ぺ (pe), ぽ (po)
-- **Youon:** Compound sounds formed by combining characters with small や、ゆ、よ — for example きゃ (kya), にゅ (nyu), びょ (byo)
+- **Yōon:** Compound sounds formed by combining characters with small や、ゆ、よ — for example きゃ (kya), にゅ (nyu), びょ (byo)
 - **Katakana:** The second phonetic alphabet, which mirrors hiragana sounds but is used for foreign loanwords and emphasis
 
 Use the [interactive hiragana and katakana chart](/hiragana-katakana-chart) to see all characters organized by row, and test your recognition with the [hiragana quiz](/hiragana-katakana-quiz) when you are ready for timed practice.

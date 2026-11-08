@@ -230,7 +230,7 @@ export default function PageContent() {
                     <BookOpen className="w-12 h-12 mb-4 text-[#2B7FFF]" />
                     <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('hiraganaGuide')}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">{t('hiraganaGuideDesc')}</p>
-                    <span className="text-[#2B7FFF] font-semibold">Learn More →</span>
+                    <span className="text-[#2B7FFF] font-semibold">{t('learnMore')} →</span>
                   </div>
                 </Link>
                 <Link href={`/learn`} className="group">
@@ -238,7 +238,7 @@ export default function PageContent() {
                     <BookOpen className="w-12 h-12 mb-4 text-[#FFD600]" />
                     <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('katakanaGuide')}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">{t('katakanaGuideDesc')}</p>
-                    <span className="text-[#FFD600] font-semibold">Learn More →</span>
+                    <span className="text-[#FFD600] font-semibold">{t('learnMore')} →</span>
                   </div>
                 </Link>
                 <Link href={`/hiragana-katakana-quiz`} className="group">
@@ -246,7 +246,7 @@ export default function PageContent() {
                     <BookOpen className="w-12 h-12 mb-4 text-[#00D6A4]" />
                     <h3 className="text-xl font-bold mb-2 text-[#1A1B2F] dark:text-white">{t('combinedGuide')}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">{t('combinedGuideDesc')}</p>
-                    <span className="text-[#00D6A4] font-semibold">Learn More →</span>
+                    <span className="text-[#00D6A4] font-semibold">{t('learnMore')} →</span>
                   </div>
                 </Link>
               </div>

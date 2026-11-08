@@ -33,7 +33,20 @@ const markdownComponents: Components = {
 
 export default function ClientPage({ article, locale, slug }: ClientPageProps) {
   const t = useTranslations('Navigation');
+  const tm = useTranslations('Metadata');
   const router = useRouter();
+
+  // Article bodies are English on every locale. Non-English routes therefore
+  // render English text inside a localised shell: tell the reader, and mark the
+  // body with lang="en" so assistive tech and search engines read it as English.
+  const bodyIsEnglish = locale !== 'en';
+
+  // localePrefix is "as-needed": English lives at the root, so `/${locale}`
+  // would produce /en/learn/... — a duplicate (non-canonical) URL that is not
+  // in the sitemap. Breadcrumb schema inherits these values verbatim.
+  const homeUrl = locale === 'en' ? '/' : `/${locale}`;
+  const learnUrl = locale === 'en' ? '/learn' : `/${locale}/learn`;
+  const articleUrl = locale === 'en' ? `/learn/${slug}` : `/${locale}/learn/${slug}`;
 
   const handleTabChange = (tab: string) => {
     if (tab === 'test') {
@@ -52,12 +65,22 @@ export default function ClientPage({ article, locale, slug }: ClientPageProps) {
       <div className="max-w-4xl mx-auto p-6">
         <Breadcrumbs
           items={[
-            { name: t('home') || 'Home', url: `/${locale}` },
-            { name: t('learn') || 'Learn', url: `/${locale}/learn` },
-            { name: article.title, url: `/${locale}/learn/${slug}` }
+            { name: t('home') || 'Home', url: homeUrl },
+            { name: t('learn') || 'Learn', url: learnUrl },
+            { name: article.title, url: articleUrl }
           ]}
         />
-        <article className="prose prose-slate lg:prose-lg dark:prose-invert max-w-none
+        {bodyIsEnglish && (
+          <p
+            role="note"
+            className="mb-6 rounded-lg border border-amber-300/70 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-500/40 dark:bg-amber-500/10 dark:text-amber-200"
+          >
+            {tm('articleEnglishNotice')}
+          </p>
+        )}
+        <article
+          lang={bodyIsEnglish ? 'en' : undefined}
+          className="prose prose-slate lg:prose-lg dark:prose-invert max-w-none
           prose-headings:font-bold 
           prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
           prose-p:leading-relaxed

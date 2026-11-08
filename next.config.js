@@ -128,6 +128,36 @@ const nextConfig = {
       },
     ];
   },
+  async headers() {
+    return [
+      // Hashed build assets never change under the same URL.
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      // API responses must never be cached by the CDN or the browser.
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'no-store, max-age=0, must-revalidate' },
+        ],
+      },
+      // Everything else (HTML documents, public files, sitemap/robots):
+      // let the CDN cache and serve stale-while-revalidate so repeat visits
+      // hit the edge instead of re-rendering the function.
+      {
+        source: '/:path((?!_next|api).*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, s-maxage=86400, stale-while-revalidate=86400',
+          },
+        ],
+      },
+    ];
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.md$/,

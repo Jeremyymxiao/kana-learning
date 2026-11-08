@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { generateHreflangs, getCanonicalUrl, getOgLocale, getAlternateOgLocales, BASE_URL } from '@/lib/seo-utils';
+import { routing } from '../../../i18n.config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -70,25 +71,38 @@ export async function generateStructuredData({ params }: { params: Promise<{ loc
   const { locale } = await params;
   const canonicalUrl = getCanonicalUrl(locale, '');
   const t = await getTranslations({ locale, namespace: 'HomePage' });
+  const tn = await getTranslations({ locale, namespace: 'Navigation' });
 
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebSite",
+        "@type": "Organization",
+        "@id": `${BASE_URL}/#organization`,
         "name": "LearnKana",
-        "description": "Free AI-Powered Hiragana & Katakana Quiz Tool",
-        "url": canonicalUrl,
-        "publisher": {
-          "@type": "Organization",
-          "name": "LearnKana",
-          "url": BASE_URL
-        },
-        "inLanguage": locale,
-        "availableLanguage": ["en", "de", "fr", "pt", "es"]
+        "url": BASE_URL,
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${BASE_URL}/android-chrome-512x512.png`,
+          "width": 512,
+          "height": 512
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${BASE_URL}/#website`,
+        "name": "LearnKana",
+        "description": t('description'),
+        "url": BASE_URL,
+        "publisher": { "@id": `${BASE_URL}/#organization` },
+        // Single-locale values were wrong here: the site ships five locales.
+        "inLanguage": [...routing.locales],
+        "availableLanguage": [...routing.locales]
+        // No SearchAction: it pointed at /search, which does not exist (404).
       },
       {
         "@type": "FAQPage",
+        "@id": `${canonicalUrl}#faq`,
         "mainEntity": [
           {
             "@type": "Question",
@@ -137,6 +151,18 @@ export async function generateStructuredData({ params }: { params: Promise<{ loc
               "@type": "Answer",
               "text": t('faq6Answer')
             }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": tn('home'),
+            "item": canonicalUrl
           }
         ]
       }

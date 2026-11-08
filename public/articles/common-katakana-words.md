@@ -1,5 +1,7 @@
 # Essential Katakana Words for Beginners
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 Katakana is the script Japanese uses most often to write foreign loanwords, and those loanwords make up a surprisingly large slice of everyday vocabulary. As an English speaker, you have a built-in advantage: a huge number of katakana words are borrowed directly from English, which means the characters you are learning to read unlock words you already know. This article organizes essential katakana vocabulary by difficulty — starting with short, simple words and working up to longer ones — so you can build confidence step by step.
 
 Before reading the word lists below, make sure you are comfortable with the basic katakana characters. The [Hiragana & Katakana Chart](/hiragana-katakana-chart) is a useful reference to keep open as you go through this article.
@@ -31,8 +33,8 @@ These short words are the ideal starting point. With only two or three character
 | ネコ | neko | cat (can also be written in hiragana) |
 | ガム | gamu | chewing gum |
 | ジム | jimu | gym |
-| ケーキ | keeki | cake |
-| ジュース | juusu | juice |
+| ケーキ | kēki | cake |
+| ジュース | jūsu | juice |
 | アイス | aisu | ice / ice cream |
 | ソファ | sofa | sofa |
 
@@ -48,26 +50,26 @@ Once you can read short words confidently, four- and five-character words are th
 |---|---|---|
 | テレビ | terebi | television |
 | ホテル | hoteru | hotel |
-| タクシー | takushii | taxi |
-| コーヒー | koohii | coffee |
-| パーティー | paatii | party |
-| アパート | apaato | apartment (smaller unit) |
-| デパート | depaato | department store |
-| スポーツ | supootsu | sports |
+| タクシー | takushī | taxi |
+| コーヒー | kōhī | coffee |
+| パーティー | pātī | party |
+| アパート | apāto | apartment (smaller unit) |
+| デパート | depāto | department store |
+| スポーツ | supōtsu | sports |
 | アルバム | arubamu | album |
 | カメラ | kamera | camera |
 | レモン | remon | lemon |
 | トマト | tomato | tomato |
 | ピアノ | piano | piano |
-| ギター | gitaa | guitar |
-| ノート | nooto | notebook |
-| ビール | biiru | beer |
+| ギター | gitā | guitar |
+| ノート | nōto | notebook |
+| ビール | bīru | beer |
 | ワイン | wain | wine |
 | ランチ | ranchi | lunch |
 | ドレス | doresu | dress |
-| ズボン | zubon | trousers (from French *jupon*) |
+| ズボン | zubon | trousers (usually derived from Portuguese *jubão*; some sources cite French *jupon*) |
 
-Notice that some of these words come from languages other than English. ズボン comes from French, and you will encounter loanwords from Portuguese, German, and Dutch as well. The spelling follows the sound of the original word adapted to Japanese phonology, which is why トマト is "tomato" and テレビ is "terebi" — Japanese syllables each require a vowel, so consonant clusters get broken up with added vowels.
+Notice that some of these words come from languages other than English. ズボン is usually traced to Portuguese *jubão* (some sources cite French *jupon*), and you will encounter loanwords from Portuguese, German, and Dutch as well. The spelling follows the sound of the original word adapted to Japanese phonology, which is why トマト is "tomato" and テレビ is "terebi" — Japanese syllables each require a vowel, so consonant clusters get broken up with added vowels.
 
 ---
 
@@ -77,23 +79,23 @@ Longer katakana words are often compound or technical terms. The key strategy he
 
 | Katakana | Romaji | Meaning |
 |---|---|---|
-| コンピューター | konpyuutaa | computer |
+| コンピューター | konpyūtā | computer |
 | レストラン | resutoran | restaurant |
-| スーパーマーケット | suupaamaaketto | supermarket |
-| インターネット | intaanetto | internet |
+| スーパーマーケット | sūpāmāketto | supermarket |
+| インターネット | intānetto | internet |
 | テレフォン | terefon | telephone (formal/older usage) |
-| アイスクリーム | aisukuriimu | ice cream |
-| チョコレート | chokoreeto | chocolate |
-| スマートフォン | sumaatofon | smartphone |
+| アイスクリーム | aisukurīmu | ice cream |
+| チョコレート | chokorēto | chocolate |
+| スマートフォン | sumātofon | smartphone |
 | エアコン | eakon | air conditioner (short for エアコンディショナー) |
-| エレベーター | erebeetaa | elevator |
-| エスカレーター | esukareetaa | escalator |
-| アルコール | arukooru | alcohol |
-| ミュージック | myuujikku | music |
+| エレベーター | erebētā | elevator |
+| エスカレーター | esukarētā | escalator |
+| アルコール | arukōru | alcohol |
+| ミュージック | myūjikku | music |
 | ボランティア | borantia | volunteer |
-| アドベンチャー | adobenchaa | adventure |
+| アドベンチャー | adobenchā | adventure |
 
-When you encounter a long katakana word you do not recognize, try reading it in two-character chunks first. コンピューター breaks down as コン・ピュー・ター, which sounds like "kon-pyuu-taa" — close enough to "computer" that the word clicks into place. This decoding skill is one of the most valuable things you can develop with katakana.
+When you encounter a long katakana word you do not recognize, try reading it in two-character chunks first. コンピューター breaks down as コン・ピュー・ター, which sounds like "kon-pyū-tā" — close enough to "computer" that the word clicks into place. This decoding skill is one of the most valuable things you can develop with katakana.
 
 ---
 
@@ -110,11 +112,11 @@ One of the best things about katakana is that a large portion of common Japanese
 | ラジオ | rajio | radio |
 | ドア | doa | door |
 | ベッド | beddo | bed |
-| テーブル | teeburu | table |
+| テーブル | tēburu | table |
 | チェア | chea | chair |
-| カーテン | kaaten | curtain |
+| カーテン | kāten | curtain |
 | タオル | taoru | towel |
-| シャワー | shawaa | shower |
+| シャワー | shawā | shower |
 | トイレ | toire | toilet |
 | ガラス | garasu | glass (the material) |
 | ランプ | ranpu | lamp |
@@ -130,12 +132,12 @@ Not every katakana word means what it looks like. Some words have shifted in mea
 | Katakana | Romaji | What You Might Guess | What It Actually Means |
 |---|---|---|---|
 | マンション | manshon | mansion | apartment (a mid- to high-rise condo) |
-| スマート | sumaato | smart (intelligent) | slim / slender |
-| ナイーブ | naiibu | naive | sensitive / easily hurt |
+| スマート | sumāto | smart (intelligent) | slim / slender |
+| ナイーブ | naību | naive | sensitive / easily hurt |
 | テンション | tenshon | tension | excitement / high energy mood |
 | フライ | furai | fly | deep-fried dish (from "fry") |
 | ライブ | raibu | live (adjective) | live concert / live performance |
-| サービス | saabisu | service | free of charge / complimentary |
+| サービス | sābisu | service | free of charge / complimentary |
 | クレーム | kuremu | claim | complaint |
 | コンセント | konsento | consent | electrical outlet |
 | ハンドル | handoru | handle | steering wheel |
@@ -153,7 +155,7 @@ Seeing individual words in context helps them stick. The sentences below use voc
 **At a café:**
 
 > コーヒーをください。
-> *(Koohii wo kudasai.)*
+> *(Kōhī wo kudasai.)*
 > *(Coffee, please.)*
 
 **At a hotel:**
@@ -171,17 +173,17 @@ Seeing individual words in context helps them stick. The sentences below use voc
 **Everyday life:**
 
 > エレベーターはあそこです。
-> *(Erebeetaa wa asoko desu.)*
+> *(Erebētā wa asoko desu.)*
 > *(The elevator is over there.)*
 
 > インターネットでチェックしてください。
-> *(Intaanetto de chekku shite kudasai.)*
+> *(Intānetto de chekku shite kudasai.)*
 > *(Please check it on the internet.)*
 
 **Shopping:**
 
 > このバッグはサービスですか？
-> *(Kono baggu wa saabisu desu ka?)*
+> *(Kono baggu wa sābisu desu ka?)*
 > *(Is this bag complimentary?)*
 
 These short sentences show how katakana words slot naturally into ordinary Japanese grammar. The katakana portions are easy to identify visually because their sharp, angular shapes stand out clearly against hiragana and kanji.

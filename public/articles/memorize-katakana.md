@@ -1,5 +1,7 @@
 # How to Memorize Katakana Effectively
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 Katakana is the second of the three Japanese writing systems you need to learn, and it presents a distinct set of challenges compared to hiragana. While both syllabaries encode the same 46 core sounds, katakana has sharper, more angular strokes that many learners find harder to distinguish at first glance. The good news: katakana comes with a built-in shortcut that hiragana does not — loanwords. A large portion of modern Japanese vocabulary is borrowed from English and other Western languages, and all of it is written in katakana. That context makes katakana uniquely learnable once you know how to use it.
 
 This guide covers the most reliable techniques: visual mnemonics for the tricky characters, the loanword method, strategies for separating confusable pairs, spaced repetition, writing practice, and a realistic daily schedule.
@@ -34,7 +36,7 @@ Here are specific mnemonics for ten commonly confused or forgotten characters:
 
 **コ (ko)** — Two right angles that form a squared-off **C** shape. Think of it as a **corner** of a room — ko sounds like the start of "corner."
 
-**ス (su)** — A vertical stroke that curves at the bottom with a small hook, resembling a **spoon** (pronounced "su-poon" in Japanese: スプーン). The hook at the base looks like the bowl of the spoon.
+**ス (su)** — A vertical stroke that curves at the bottom with a small hook, resembling a **spoon** (pronounced supūn in Japanese: スプーン). The hook at the base looks like the bowl of the spoon.
 
 **ナ (na)** — A cross shape with the horizontal bar higher than center, like a **knife** stuck into a cutting board from above.
 
@@ -59,13 +61,13 @@ Start with these high-frequency examples to build your decoding instinct:
 | Katakana | Romaji | English origin |
 |----------|--------|----------------|
 | テレビ | terebi | television |
-| コーヒー | koohii | coffee |
-| アイスクリーム | aisukuriimu | ice cream |
-| スマートフォン | sumaatofon | smartphone |
+| コーヒー | kōhī | coffee |
+| アイスクリーム | aisukurīmu | ice cream |
+| スマートフォン | sumātofon | smartphone |
 | レストラン | resutoran | restaurant |
 | パソコン | pasokon | personal computer |
-| チョコレート | chokoreeto | chocolate |
-| ビール | biiru | beer |
+| チョコレート | chokorēto | chocolate |
+| ビール | bīru | beer |
 | ホテル | hoteru | hotel |
 | バス | basu | bus |
 

@@ -1,5 +1,7 @@
 # How to Write Katakana: Complete Guide
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 Katakana (片仮名) is one of the three writing systems used in modern Japanese. While it shares the same phonetic sounds as Hiragana, its characters have a distinctly angular and geometric appearance. Learning to write Katakana correctly — with proper stroke order and technique — is an essential milestone for any Japanese learner. This complete guide walks you through every character group, common pitfalls, and practical strategies for building confident handwriting.
 
 You can view all Katakana characters at a glance on the [Hiragana and Katakana Chart](/hiragana-katakana-chart), and test your recognition skills with the [Hiragana and Katakana Quiz](/hiragana-katakana-quiz).
@@ -10,7 +12,7 @@ You can view all Katakana characters at a glance on the [Hiragana and Katakana C
 
 Katakana is used primarily for:
 
-- **Loanwords** from foreign languages, such as コーヒー (*koohii*, coffee) and テレビ (*terebi*, television)
+- **Loanwords** from foreign languages, such as コーヒー (*kōhī*, coffee) and テレビ (*terebi*, television)
 - **Foreign names**, including place names and personal names
 - **Onomatopoeia** and sound effects in manga and literature
 - **Technical and scientific terms**, such as plant and animal names
@@ -262,7 +264,7 @@ Katakana's angular shapes mean that some characters are remarkably simple to dra
 
 ### Use Grid Paper
 
-Practice on graph paper or genkouyoushi (原稿用紙, Japanese manuscript paper) with equal-sized cells. Each Katakana character should occupy one cell. Grid paper trains your eye to maintain consistent proportions — a common challenge when learning a new script.
+Practice on graph paper or genkōyōshi (原稿用紙, Japanese manuscript paper) with equal-sized cells. Each Katakana character should occupy one cell. Grid paper trains your eye to maintain consistent proportions — a common challenge when learning a new script.
 
 ### Write in Rows
 

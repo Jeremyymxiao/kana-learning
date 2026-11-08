@@ -117,8 +117,7 @@ export const gojuonData: GojuonData = {
         {
           hiragana: 'っ',
           katakana: 'ッ',
-          romaji: 'tsu',
-          displayRomaji: '—',
+          romaji: '—',
           isStandalone: false,
         },
       ]

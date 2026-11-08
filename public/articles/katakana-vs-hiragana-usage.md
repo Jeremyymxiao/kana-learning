@@ -1,5 +1,7 @@
 # When to Use Katakana vs Hiragana
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 Japanese has two phonetic syllabaries — hiragana and katakana — that represent the same set of sounds but serve entirely different functions. Learners often memorize both scripts and then hit a wall: given a word, which script do you actually write it in? The answer depends on the word's origin, its grammatical role, the register of the text, and sometimes the author's stylistic intent.
 
 This guide approaches the question from a katakana-first perspective, because katakana's rules are more explicit and discrete. Once you understand where katakana is required or preferred, hiragana fills most of what remains.
@@ -8,7 +10,7 @@ This guide approaches the question from a katakana-first perspective, because ka
 
 ## Overview of the Two Scripts
 
-Katakana (カタカナ) and hiragana (ひらがな) each consist of 46 base characters, plus diacritics (dakuten ゛and handakuten ゜) and combination characters (youon). Both scripts encode the same phonetic inventory of Japanese.
+Katakana (カタカナ) and hiragana (ひらがな) each consist of 46 base characters, plus diacritics (dakuten ゛and handakuten ゜) and combination characters (yōon). Both scripts encode the same phonetic inventory of Japanese.
 
 The scripts differ visually: katakana characters are angular and sharp (ア、カ、テ), while hiragana characters are rounded and cursive (あ、か、て). This visual difference is not arbitrary — it maps onto a functional difference in usage that is systematic enough to follow rules, but flexible enough to leave gray areas.
 
@@ -94,7 +96,7 @@ Historically, telegrams in Japan were transmitted in katakana because it was che
 
 Words with deep Japanese origins — the vocabulary that predates the large-scale borrowing of Chinese and later Western words — are written in hiragana when no kanji form is used or known.
 
-- ありがとう (arigatou, thank you)
+- ありがとう (arigatō, thank you)
 - たくさん (takusan, many / a lot)
 - ところ (tokoro, place)
 - やはり (yahari, as expected / indeed)

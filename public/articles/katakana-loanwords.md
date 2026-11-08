@@ -1,5 +1,7 @@
 # Japanese Loanwords in Katakana
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 One of the first things you notice when studying Japanese is the abundance of words borrowed from other languages — especially English. These borrowed words, written in katakana, appear everywhere: on menus, signs, packaging, and in everyday conversation. Once you recognise the patterns behind how foreign words are adapted, reading katakana becomes far easier and more intuitive.
 
 This article covers the full picture of Japanese loanwords: where they came from, how they were adapted phonetically, common examples from several languages, and a few tricky cases that catch learners off guard.
@@ -104,7 +106,7 @@ The table below lists over twenty common English loanwords along with their kata
 | supermarket | スーパー | sūpā | Heavily truncated |
 | apartment | アパート | apāto | Truncated; not the same meaning |
 | elevator | エレベーター | erebētā | V → B; L → R |
-| chocolate | チョコレート | chokoreēto | |
+| chocolate | チョコレート | chokorēto | |
 | ticket | チケット | chiketto | Final T doubled |
 | service | サービス | sābisu | V → B |
 | energy | エネルギー | enerugī | From German Energie via science |
@@ -134,7 +136,7 @@ While English dominates modern gairaigo, several other languages have left clear
 | tabaco | タバコ | tabako | tobacco |
 | capa | カッパ | kappa | raincoat / river imp (homophone) |
 | botão | ボタン | botan | button |
-| jarra | ジャーロ | — | jar (less common today) |
+| sabão | シャボン | shabon | soap |
 
 パン (pan, bread) is so deeply embedded in Japanese that many speakers do not recognise it as a loanword at all. It appears in compound words like 食パン (shokupan, sandwich bread) and パン屋 (panya, bakery).
 
@@ -155,7 +157,7 @@ While English dominates modern gairaigo, several other languages have left clear
 | French | Katakana | Romaji | Meaning |
 |---|---|---|---|
 | croissant | クロワッサン | kurowassan | croissant |
-| café au lait | カフェオレ | kafē ore | café au lait |
+| café au lait | カフェオレ | kafe ore | café au lait |
 | atelier | アトリエ | atorie | artist's studio |
 | bouquet | ブーケ | būke | flower bouquet |
 | debut | デビュー | debyū | debut |
@@ -182,8 +184,8 @@ French loanwords tend to cluster around fashion, cuisine, and the arts — domai
 
 | Wasei-eigo | Katakana | Romaji | What Japanese speakers mean | Actual English equivalent |
 |---|---|---|---|---|
-| salary man | サラリーマン | sarariiman | a white-collar office worker | office worker, salaryman |
-| consent | コンセント | konsento | electrical outlet / socket | outlet, socket |
+| salary man | サラリーマン | sararīman | a white-collar office worker | office worker, salaryman |
+| concentric (plug) | コンセント | konsento | electrical outlet / socket | outlet, socket |
 | claim | クレーム | kurēmu | to complain to a company | complaint |
 | cunning | カンニング | kanningu | cheating on an exam | cheating |
 | mansion | マンション | manshon | a concrete apartment building | apartment, condo |
@@ -193,7 +195,7 @@ French loanwords tend to cluster around fashion, cuisine, and the arts — domai
 | viking | バイキング | baikingu | an all-you-can-eat buffet | buffet |
 | paper driver | ペーパードライバー | pēpā doraibā | a person with a licence who never drives | — |
 
-These words cause genuine confusion for both Japanese speakers visiting English-speaking countries and for English speakers learning Japanese. コンセント (konsento) is one of the most commonly cited traps — a learner who asks for a "consent" in an English-speaking country will not find an electrical outlet.
+These words cause genuine confusion for both Japanese speakers visiting English-speaking countries and for English speakers learning Japanese. コンセント (konsento) is one of the most commonly cited traps. It is usually explained as a shortening of English "concentric plug" (the two round pins of an old-style socket were concentric), though some dictionaries list the etymology as uncertain. Either way, asking for a "consent" in an English-speaking country will not find you an electrical outlet.
 
 ---
 
@@ -210,7 +212,7 @@ Beyond wasei-eigo, several loanwords have shifted in meaning or are pronounced s
 | サービス | sābisu | service | Something given for free, a freebie |
 | ペット | petto | pet | Companion animal only (not a pet name / favourite) |
 | カーブ | kābu | curb | A curve in the road (not the edge of a pavement) |
-| シーズン | shīzun | season | Also used to mean seasoning / spice |
+| シーズン | shīzun | season | Only "season" / "season (of a show)"; a seasoning is シーズニング or 調味料 |
 
 The shift in **テンション** is particularly important for learners. Saying someone has "high tension" (テンションが高い) in Japanese is a compliment meaning they are lively and excited — the opposite of the English association with stress or anxiety.
 

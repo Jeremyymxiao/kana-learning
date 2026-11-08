@@ -1,5 +1,7 @@
 # Common Katakana Words Guide
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 Katakana is used in Japanese primarily to write foreign loanwords — a category that covers an enormous slice of everyday vocabulary. Thousands of words from English, French, German, Portuguese, and other languages have been borrowed into Japanese and adapted to fit its sound system. Written in katakana, these words appear on menus, product labels, signs, screens, and in conversation constantly. Learning to read them gives you immediate access to a large and practical vocabulary without needing to learn new meanings from scratch — you often already know what the words mean.
 
 This guide covers common katakana loanwords organized by topic. Each word is shown with its katakana spelling, romaji pronunciation, English meaning, and the language it was borrowed from.
@@ -125,7 +127,7 @@ The fashion industry in Japan uses katakana vocabulary extensively. Brand names,
 | ジーンズ | jīnzu | jeans | English |
 | ジャケット | jaketto | jacket | English |
 | コート | kōto | coat | English |
-| ズボン | zubon | trousers / pants | French |
+| ズボン | zubon | trousers / pants | Portuguese / French |
 | スカート | sukāto | skirt | English |
 | ブーツ | būtsu | boots | English |
 | スニーカー | sunīkā | sneakers | English |
@@ -142,7 +144,7 @@ The fashion industry in Japan uses katakana vocabulary extensively. Brand names,
 | サイズ | saizu | size | English |
 | ファッション | fasshon | fashion | English / French |
 
-ズボン (*zubon*) is borrowed from French *jupon*, meaning underskirt or petticoat, though in Japanese it refers to trousers. The current pronunciation and meaning diverge from the original French, which illustrates how loanwords can shift significantly over time.
+ズボン (*zubon*) is usually derived from Portuguese *jubão*; some sources instead cite French *jupon*, meaning underskirt or petticoat. In Japanese it refers to trousers, and the current pronunciation and meaning diverge from the original, which illustrates how loanwords can shift significantly over time.
 
 ---
 

@@ -1,5 +1,7 @@
 # When to Use Hiragana vs Katakana: A Comprehensive Guide
 
+> **Romaji note:** long vowels are marked with a macron — おう and おお are written **ō**, うう is **ū**, and ええ is **ē** (えい stays "ei", as in せんせい *sensei*). So おかあさん is *okāsan* and がっこう is *gakkō*.
+
 Understanding when to use Hiragana (ひらがな) versus Katakana (カタカナ) is crucial for writing Japanese correctly. This guide will help you master the distinctions and appropriate usage of these two writing systems.
 
 ## Quick Overview
@@ -74,13 +76,15 @@ Understanding when to use Hiragana (ひらがな) versus Katakana (カタカナ)
 
 ### Mixed Usage
 
-Some words can be written in both scripts, often with subtle differences in nuance:
+Some words can be written in either script, with the choice carrying a nuance of style rather than a change of meaning:
 
 ```
-Hiragana          Katakana          Context
-あめ (ame)     vs アメ (ame)      rain vs candy
-かばん (kaban) vs カバン (kaban)   bag (traditional vs modern)
+Hiragana           Katakana           Note
+かばん (kaban)  vs カバン (kaban)    same word; katakana often used on signs and packaging
+たまご (tamago) vs タマゴ (tamago)   same word; katakana for emphasis or a shop display
 ```
+
+Be careful not to invent a script-based distinction for homophones. 雨 (rain) and 飴 (candy) are both written あめ in hiragana — the script does not tell them apart. They are distinguished by the kanji in formal writing and, in speech, by pitch accent: 雨 is *ame* with a fall on the first mora (atamadaka), 飴 is *ame* with a flat, high pitch (heiban). アメ with a falling pitch usually means "America" (an abbreviation), not candy.
 
 ### Emphasis and Effect
 

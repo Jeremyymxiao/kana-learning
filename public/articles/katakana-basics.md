@@ -1,5 +1,7 @@
 # Katakana Basics Guide
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 Katakana is one of the three writing systems used in Japanese, and it plays a distinct and indispensable role in modern written Japanese. This guide covers what katakana is, where it came from, when Japanese writers use it, and how to start reading and writing its characters.
 
 ## What is Katakana?
@@ -222,7 +224,7 @@ The chōonpu always follows the direction of the text. In horizontal text it is 
 
 ### The Small ッ (Sokuon)
 
-The small katakana ッ (*sokuon*) indicates a double consonant — a brief pause or stop before the following consonant. It corresponds to doubled consonants in romaji transcription.
+The small katakana ッ (*sokuon*) is not pronounced at all. It takes up one beat and doubles the consonant that follows, and it is written as a doubled consonant in romaji.
 
 Examples:
 
@@ -233,7 +235,7 @@ Examples:
 | サッカー | sakkā | soccer |
 | ネット | netto | net / internet |
 
-In speech, the small ッ creates a slight hold or glottal stop before the next consonant. It takes up one beat in the rhythm of the word.
+In speech, the small ッ creates a slight hold before the next consonant: it takes up one beat in the rhythm of the word. (A true glottal stop — a catch in the throat — is a different phenomenon and is not what ッ marks.)
 
 The hiragana equivalent っ works the same way in native Japanese words. The katakana ッ serves the same function specifically in katakana words and loanwords.
 

@@ -14,7 +14,10 @@ import '../globals.css'
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  // Two weights only: 400 (body) + 700 (headings). 500 was unused in practice
+  // and cost ~1/3 of the @font-face rules emitted for this CJK family.
+  weight: ['400', '700'],
+  display: 'swap',
   variable: '--font-noto-sans-jp',
 })
 

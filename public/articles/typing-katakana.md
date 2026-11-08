@@ -1,6 +1,8 @@
 # How to Type Katakana on Different Devices
 
-Katakana is the go-to script for foreign loanwords, technical terms, onomatopoeia, and emphasis in Japanese. Whether you want to type コーヒー (koohii, coffee), スマートフォン (sumaatofon, smartphone), or ティーム (timu, team), knowing how to input katakana quickly makes a real difference. This guide focuses on katakana-specific input techniques — including the conversion shortcuts most learners never discover.
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
+Katakana is the go-to script for foreign loanwords, technical terms, onomatopoeia, and emphasis in Japanese. Whether you want to type コーヒー (kōhī, coffee), スマートフォン (sumātofon, smartphone), or ティーム (tīmu, team), knowing how to input katakana quickly makes a real difference. This guide focuses on katakana-specific input techniques — including the conversion shortcuts most learners never discover.
 
 ## Setting Up Japanese Input
 
@@ -27,12 +29,14 @@ The single most important key for katakana on Windows is **F7**. After typing a 
 
 **Step-by-step:**
 1. Switch the IME to Japanese mode (click the taskbar icon showing `A` and switch to `あ`, or press `Alt + ~`)
-2. Type romaji — for example: `koohii`
-3. The IME shows underlined hiragana: こうひい (before you press Space)
+2. Type romaji — for example: `ko-hi-`
+3. The IME shows underlined hiragana: こーひー (before you press Space)
 4. Press **F7** instead of Space
 5. The text converts to katakana: コーヒー
 
 No manual Space bar cycling through conversion candidates required. F7 jumps straight to katakana.
+
+**Important:** F7 only converts the reading you typed — it does not add long vowels. If you type `koohii`, the IME shows こおひい and F7 produces コオヒイ. To get コーヒー, the ー must be part of the reading, which is why you type the hyphen key (`ko-hi-`).
 
 ### Windows Conversion Shortcut Keys
 
@@ -149,9 +153,9 @@ For repeated katakana input in Gboard, long-press the suggestion bar entry or lo
 
 Katakana has several characters that require specific romaji combinations or dedicated key sequences. These come up constantly when typing foreign loanwords.
 
-### The Long Vowel Mark ー (Choonpu)
+### The Long Vowel Mark ー (Chōonpu)
 
-The long vowel mark ー extends a vowel sound and appears in almost every loanword. For example: コーヒー (koohii, coffee), ケーキ (keeki, cake), スーパー (suupaa, supermarket).
+The long vowel mark ー extends a vowel sound and appears in almost every loanword. For example: コーヒー (kōhī, coffee), ケーキ (kēki, cake), スーパー (sūpā, supermarket).
 
 | Input method | What to type |
 |--------------|--------------|
@@ -162,8 +166,8 @@ The long vowel mark ー extends a vowel sound and appears in almost every loanwo
 The hyphen key is mapped to ー in all major IMEs. You do not type a doubled vowel to get ー in katakana — you type a hyphen.
 
 **Compare hiragana vs katakana long vowels:**
-- Hiragana: おかあさん (okaasan) — the long vowel is written as an extra vowel character
-- Katakana: コーヒー (koohii) — the long vowel is always written as ー
+- Hiragana: おかあさん (okāsan) — the long vowel is written as an extra vowel character
+- Katakana: コーヒー (kōhī) — the long vowel is always written as ー
 
 ### Small ッ (Small Tsu — Double Consonant)
 
@@ -184,19 +188,19 @@ Katakana has extended combinations to represent sounds that do not exist in nati
 
 | Katakana | Romaji | Example word |
 |----------|--------|--------------|
-| ティ | `ti` or `thi` | ティーム (timu, team) |
+| ティ | `ti` or `thi` | ティーム (tīmu, team) |
 | ディ | `di` or `dhi` | ディスコ (disuko, disco) |
 | ファ | `fa` | ファイル (fairu, file) |
 | フィ | `fi` | フィルム (firumu, film) |
 | フェ | `fe` | フェア (fea, fair) |
-| フォ | `fo` | フォーム (foumu, form) |
+| フォ | `fo` | フォーム (fōmu, form) |
 | ウィ | `wi` | ウィルス (wirusu, virus) |
 | ウェ | `we` | ウェブ (webu, web) |
 | ヴァ | `va` | ヴァイオリン (vaiorin, violin) |
 | チェ | `che` | チェック (chekku, check) |
 | ジェ | `je` | ジェット (jetto, jet) |
-| トゥ | `twu` or `tu` | トゥルー (turuu, true) |
-| ドゥ | `dwu` or `du` | ドゥーム (duumu, doom) |
+| トゥ | `twu` or `tu` | トゥルー (turū, true) |
+| ドゥ | `dwu` or `du` | ドゥーム (dūmu, doom) |
 
 **Note on ティ vs チ:** These are different sounds. チ (chi) is the traditional Japanese sound. ティ (ti) represents the English "ti" sound as in "team" or "tip," and is used in modern loanwords to preserve the original pronunciation.
 
@@ -226,7 +230,7 @@ Most of the time you will not need to type these individually — the full combi
 
 **Tip 5: Half-width katakana (F8) is almost never what you want.** Half-width katakana (ｺｰﾋｰ) is a legacy character set used in old systems. For normal use, always use full-width katakana (コーヒー) from F7 or Control+K.
 
-**Tip 6: Use the candidate window for ambiguous sounds.** For words like ジュース (juusu, juice), type `juusu` and press Space to see all candidates. The katakana version will usually appear alongside kanji options.
+**Tip 6: Use the candidate window for ambiguous sounds.** For words like ジュース (jūsu, juice), type `juusu` and press Space to see all candidates. The katakana version will usually appear alongside kanji options.
 
 ## Practice Exercises
 
@@ -238,11 +242,11 @@ Type these everyday katakana words. Use the hyphen key for ー.
 
 | Target | Romaji to type |
 |--------|---------------|
-| コーヒー (koohii, coffee) | `ko-hi-` or `koohii` + F7 |
+| コーヒー (kōhī, coffee) | `ko-hi-` or `koohii` + F7 |
 | テレビ (terebi, television) | `terebi` + F7 |
 | パソコン (pasokon, personal computer) | `pasokon` + F7 |
-| スマートフォン (sumaatofon, smartphone) | `suma-tofon` + F7 |
-| アイスクリーム (aisukuriimu, ice cream) | `aisukuri-mu` + F7 |
+| スマートフォン (sumātofon, smartphone) | `suma-tofon` + F7 |
+| アイスクリーム (aisukurīmu, ice cream) | `aisukuri-mu` + F7 |
 | ハンバーガー (hanba-ga-, hamburger) | `hanba-ga-` + F7 |
 
 ### Exercise 2: Special Combinations
@@ -251,7 +255,7 @@ Practice the extended katakana sounds.
 
 | Target | Romaji to type |
 |--------|---------------|
-| ティーム (tiimu, team) | `ti-mu` + F7 |
+| ティーム (tīmu, team) | `ti-mu` + F7 |
 | ファイル (fairu, file) | `fairu` + F7 |
 | チェック (chekku, check) | `chekku` + F7 |
 | ウェブ (webu, web) | `webu` + F7 |

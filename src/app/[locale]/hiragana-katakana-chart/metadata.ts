@@ -88,7 +88,7 @@ export function generateStructuredData({ params }: { params: { locale: string } 
             "name": "How many characters are in the complete hiragana and katakana charts?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Each chart contains 46 basic characters, 25 voiced sounds (dakuten), 5 semi-voiced sounds (handakuten), and 33 combination sounds, totaling over 100 unique characters per script system."
+              "text": "Each chart contains 46 basic characters, 20 voiced sounds (dakuten), 5 semi-voiced sounds (handakuten), and 33 combination sounds, totaling over 100 unique characters per script system."
             }
           },
           {

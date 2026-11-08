@@ -19,8 +19,8 @@ export interface Article {
     {
       id: '2',
       slug: 'how-to-write-hiragana',
-      title: 'How to Write Hiragana: Complete Guide',
-      description: 'Master the correct stroke order and writing techniques for Hiragana characters',
+      title: 'How to Write Hiragana: Stroke Order Basics',
+      description: 'Learn the stroke-order rules and seven model characters (あいうえお か さ) for writing Hiragana by hand',
       tags: ['hiragana', 'writing', 'stroke-order'],
       publishedAt: '2024-03-21'
     },

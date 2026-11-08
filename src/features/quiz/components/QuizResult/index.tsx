@@ -9,7 +9,17 @@ import { SignupCTA } from '@/components/auth/SignupCTA';
 import { trackQuizComplete } from '@/lib/tracking';
 import { getQuizKana } from '@/data/gojuon';
 import { getMastery, getProgressSummary, loadProgress, type ProgressMap } from '@/lib/progress';
-import ReactMarkdown from 'react-markdown';
+import dynamic from 'next/dynamic';
+
+/**
+ * Lazy-load the markdown renderer: `react-markdown` + its remark stack is only
+ * needed after the user asks for an AI analysis, so keep it out of the quiz
+ * first-load JS. Triggered on demand, rendered client-side only.
+ */
+const AiAnalysis = dynamic(() => import('./AiAnalysis'), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface QuizResultProps {
   score: number;
@@ -240,16 +250,7 @@ export function QuizResult({ score, wrongAnswers, onRetry, onSwitchKana, kanaTyp
               </div>
             )}
 
-            {analysis && (
-              <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <h4 className="text-lg font-semibold mb-4">{t('aiAnalysis')}</h4>
-                <div className="prose prose-blue dark:prose-invert max-w-none">
-                  <ReactMarkdown>
-                    {analysis}
-                  </ReactMarkdown>
-                </div>
-              </div>
-            )}
+            {analysis && <AiAnalysis analysis={analysis} title={t('aiAnalysis')} />}
           </div>
         </div>
       )}

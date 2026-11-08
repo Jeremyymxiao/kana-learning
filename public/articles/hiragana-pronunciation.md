@@ -1,5 +1,7 @@
 # Mastering Hiragana Pronunciation: Complete Sound & Accent Guide
 
+> **Romaji note:** long vowels are marked with a macron — おう and おお are written **ō**, うう is **ū**, and ええ is **ē** (えい stays "ei", as in せんせい *sensei*). So おかあさん is *okāsan* and がっこう is *gakkō*.
+
 Perfect your Japanese pronunciation by mastering Hiragana sounds. This comprehensive guide covers everything from basic phonetics to advanced pitch accent patterns, helping you speak Japanese naturally and confidently.
 
 ## Understanding the Japanese Sound System
@@ -54,15 +56,15 @@ Japanese has five fundamental vowel sounds that form the basis of all Hiragana c
 
 ### K-Row (か行)
 
-- **か (ka)**: Like "ka" in "car" - か (kana), かく (write)
+- **か (ka)**: "k" + the pure "a" of "father" (not the "a" of "car") - か (kana), かく (write)
 - **き (ki)**: Like "key" - き (tree), きく (hear)
-- **く (ku)**: Like "coo" in "cool" - く (come), くに (country)
+- **く (ku)**: Like "coo" in "cool", with relaxed lips - く (come), くに (country)
 - **け (ke)**: Like "ke" in "kettle" - け (hair), けす (erase)
-- **こ (ko)**: Like "co" in "cold" - こ (this), ここ (here)
+- **こ (ko)**: "k" + the pure "o" of Spanish "no" (no glide, unlike "cold") - こ (this), ここ (here)
 
 ### S-Row (さ行)
 
-- **さ (sa)**: Like "sa" in "saw" - さけ (sake), さくら (cherry blossom)
+- **さ (sa)**: "s" + the pure "a" of "father" (not the "a" of "saw") - さけ (sake), さくら (cherry blossom)
 - **し (shi)**: Like "she" (NOT "si") - しお (salt), しか (deer)
 - **す (su)**: Like "sue" - すし (sushi), すき (like)
 - **せ (se)**: Like "se" in "set" - せん (thousand), せんせい (teacher)
@@ -70,15 +72,15 @@ Japanese has five fundamental vowel sounds that form the basis of all Hiragana c
 
 ### T-Row (た行)
 
-- **た (ta)**: Like "ta" in "taco" - たべる (eat), たかい (expensive/high)
-- **ち (chi)**: Like "chee" in "cheese" (NOT "ti") - ちいさい (small)
+- **た (ta)**: "t" + the pure "a" of "father" (not the "a" of "taco") - たべる (eat), たかい (expensive/high)
+- **ち (chi)**: Like "chee" in "cheese" but shorter (NOT "ti") - ちいさい (small)
 - **つ (tsu)**: Like "ts" in "cats" + "oo" - つき (moon), つくる (make)
 - **て (te)**: Like "te" in "tell" - て (hand), てがみ (letter)
 - **と (to)**: Like "to" in "toe" - とり (bird), ともだち (friend)
 
 ### N-Row (な行)
 
-- **な (na)**: Like "na" in "nasty" - なつ (summer), なに (what)
+- **な (na)**: "n" + the pure "a" of "father" (not the "a" of "nasty") - なつ (summer), なに (what)
 - **に (ni)**: Like "nee" - にく (meat), にほん (Japan)
 - **ぬ (nu)**: Like "new" - ぬの (cloth), いぬ (dog)
 - **ね (ne)**: Like "ne" in "net" - ねこ (cat), ねる (sleep)
@@ -150,19 +152,21 @@ Add a small circle (゜) to the H-row:
 
 ### Long Vowels (長音)
 
-Double vowels extend the sound for two beats:
+A long vowel is held for two beats — the length is meaning-changing (おばさん "aunt" vs おばあさん "grandmother"), so count beats out loud. In this article's romanization a long vowel is marked with a macron (ō, ū, ē): おう and おお are written **ō**, うう is **ū**, and ええ is **ē**. The sequence えい is normally written "ei" (せんせい → sensei), because it is pronounced as a long "ee" only in casual speech.
 
-- おかあさん (okaasan) - mother [extend the "a" sound]
-- おにいさん (oniisan) - older brother [extend the "i" sound]
-- くうこう (kuukoo) - airport [extend both "u" and "o"]
+- おかあさん (okāsan) - mother [hold the "a" for two beats]
+- おにいさん (onīsan) - older brother [hold the "i" for two beats]
+- くうこう (kūkō) - airport [both vowels are long: kū-kō]
 
-### Small Tsu (っ) - Glottal Stop
+### Small Tsu (っ) — Sokuon (促音): a Beat, Not a Sound
 
-The small っ creates a pause or doubles the consonant:
+The small っ is **not** pronounced "tsu". It is a sokuon: it takes up one mora (one beat) and doubles the consonant that follows. In romanization the doubling is written with the same consonant twice, never with "tsu":
 
-- がっこう (gakkou) - school [pause before "ko"]
+- がっこう (gakkō) - school [one silent beat, then a long "k"]
 - きって (kitte) - stamp [double the "t"]
-- ずっと (zutto) - continuously [pause before "to"]
+- ずっと (zutto) - continuously [double the "z"]
+
+（A glottal stop — a catch in the throat — can appear at the end of an utterance in emphatic speech, but that is not what っ marks.)
 
 ### Yōon (拗音) - Palatalized Sounds
 
@@ -174,26 +178,28 @@ Combine consonants with や, ゆ, よ in small form:
 
 Examples:
 - しゃしん (shashin) - photograph
-- ぎゅうにゅう (gyuunyuu) - milk
-- りょこう (ryokou) - travel
+- ぎゅうにゅう (gyūnyū) - milk
+- りょこう (ryokō) - travel
 
 ## Pitch Accent Patterns
 
-Unlike English stress accent, Japanese uses pitch accent. The pitch rises or falls on certain syllables:
+Unlike English stress accent, Japanese uses pitch accent: the **height** of a mora, not its loudness, distinguishes words. Pitch accent varies by region and even between speakers, so treat the examples below as Tokyo-standard patterns and always learn a new word together with its audio.
 
 ### Basic Patterns
 
-1. **Heiban (平板)**: Flat - pitch rises on second mora and stays high
-   - Example: やま (mountain), はし (bridge/edge)
+1. **Heiban (平板)**: flat — pitch rises on the second mora and stays high (the following particle stays high too)
+   - Examples: やま (mountain), さくら (cherry blossom), あめ (candy)
 
-2. **Atamadaka (頭高)**: Head-high - pitch falls after first mora
-   - Example: いぬ (dog), さくら (cherry blossom)
+2. **Atamadaka (頭高)**: head-high — pitch starts high on the first mora and falls immediately
+   - Examples: はし (chopsticks), あめ (rain), ねこ (cat)
 
-3. **Nakadaka (中高)**: Middle-high - pitch falls somewhere in middle
-   - Example: あたま (head), こころ (heart)
+3. **Nakadaka (中高)**: middle-high — pitch rises, then falls inside the word
+   - Examples: こころ (heart), たまご (egg)
 
-4. **Odaka (尾高)**: Tail-high - pitch falls after last mora (before particle)
-   - Example: あめ (rain), はな (flower)
+4. **Odaka (尾高)**: tail-high — pitch stays high to the last mora and falls on the particle that follows
+   - Examples: いぬ (dog), はし (bridge), はな (flower)
+
+Note how the same kana can carry different accents: はし can be 箸 (chopsticks, atamadaka) or 橋 (bridge, odaka), and あめ can be 雨 (rain, atamadaka) or 飴 (candy, heiban). That is why accent is learned word by word, with audio.
 
 ## Common Pronunciation Mistakes
 
@@ -208,8 +214,8 @@ Unlike English stress accent, Japanese uses pitch accent. The pitch rises or fal
    - ✅ Use light tongue flap
 
 3. **Consonant Clusters**
-   - ❌ Adding vowels between consonants (e.g., "strike" → "sutoraiku")
-   - ✅ Follow Japanese syllable structure
+   - ❌ Squeezing an English cluster into one syllable ("strike" pronounced "str-aik")
+   - ✅ Give every mora its own beat: su-to-ra-i-ku — this is the correct Japanese form, not a mistake; the error is compressing it back into English
 
 4. **Stress Accent**
    - ❌ Stressing syllables like English
@@ -309,13 +315,13 @@ Unlike English stress accent, Japanese uses pitch accent. The pitch rises or fal
 
 1. **Vowel Devoicing**
    - In casual speech, short "i" and "u" often become whispered
-   - Example: です (desu) → "des" [whispered u]
+   - Example: です (desu) → "des" [the u is whispered and almost silent]
    - すし (sushi) → "s'shi" [whispered first u]
 
 2. **Connected Speech**
    - Words flow together naturally
    - Particles connect smoothly to previous words
-   - Practice: わたしは → "watashiwa" (smooth connection)
+   - Practice: わたしは → "watashi wa" (the particle は is pronounced wa and links smoothly to the next word)
 
 3. **Casual Reductions**
    - ている → てる (te-iru → teru)

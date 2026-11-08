@@ -1,5 +1,7 @@
 # Mastering Katakana Pronunciation
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 Katakana shares the same base sounds as Hiragana, but its primary job is different: it transcribes foreign loanwords, scientific terms, onomatopoeia, and emphasis words. That role comes with its own pronunciation challenges — long vowels marked by a dash, double consonants that stop speech cold, and dozens of extended sound combinations invented to approximate sounds Japanese phonology never had. This guide works through all of them with concrete examples.
 
 ## Katakana Pronunciation Basics
@@ -11,13 +13,13 @@ Two concepts define katakana pronunciation that do not arise as often in native 
 - **Loanword phoneme approximation** — Japanese has a fixed set of phonemes. English words with sounds outside that set must be mapped to the nearest available Japanese sound.
 - **Mora timing** — Japanese is mora-timed, not stress-timed. Every mora (sound unit) takes roughly equal time. English speakers instinctively compress unstressed syllables; in katakana words, every character gets equal weight.
 
-A practical example: the English word "coffee" has two syllables and is spoken as COF-fee with stress on the first. The katakana コーヒー (koohii) has four morae — ko, o, hi, i — each receiving equal time, with the long vowels held for two beats each. It sounds nothing like English "coffee" when produced correctly in Japanese.
+A practical example: the English word "coffee" has two syllables and is spoken as COF-fee with stress on the first. The katakana コーヒー (kōhī) has four morae — ko, o, hi, i — each receiving equal time, with the long vowels held for two beats each. It sounds nothing like English "coffee" when produced correctly in Japanese.
 
 See the full character set on the [Hiragana & Katakana Chart](/hiragana-katakana-chart) to review base sounds before diving into the special combinations below.
 
 ## Long Vowels with ー (Chōon)
 
-The katakana long vowel mark ー (chōon fu, 長音符) is unique to katakana. It simply means "extend the previous vowel for one additional mora." It has no equivalent single character in hiragana, which uses doubled vowel letters instead.
+The katakana long vowel mark ー (chōon fu, 長音符) is unique to katakana. It simply means "extend the previous vowel for one additional mora." It has no equivalent single character in hiragana, which adds an extra vowel kana instead (おう, うう).
 
 ### How ー Works
 
@@ -25,20 +27,20 @@ Whatever vowel sound precedes ー, hold it for twice its normal duration.
 
 | Katakana Word | Romaji | Meaning | Vowel Extended |
 |---|---|---|---|
-| コーヒー | koohii | coffee | o, i |
-| スーパー | suupaa | supermarket | u, a |
-| ケーキ | keeki | cake | e |
-| ノート | nooto | notebook | o |
-| ビール | biiru | beer | i |
-| プール | puuru | pool | u |
+| コーヒー | kōhī | coffee | o, i |
+| スーパー | sūpā | supermarket | u, a |
+| ケーキ | kēki | cake | e |
+| ノート | nōto | notebook | o |
+| ビール | bīru | beer | i |
+| プール | pūru | pool | u |
 | ドア | doa | door | (no ー — short vowels) |
 
 ### Why Length Matters
 
 Vowel length is phonemically distinctive in Japanese. Mispronouncing length can cause confusion:
 
-- ビル (biru) — building vs. ビール (biiru) — beer
-- オバサン (obasan) — aunt vs. オバーサン (obaasan) — old woman (derogatory)
+- ビル (biru) — building vs. ビール (bīru) — beer
+- オバサン (obasan) — aunt vs. オバーサン (obāsan) — old woman (derogatory)
 
 When reading katakana aloud, treat ー as a full syllable beat, not an accent marker.
 
@@ -72,10 +74,10 @@ Standard Japanese has チ (chi) for the ti-row and ジ (ji) in the di-row. To ap
 |---|---|---|---|
 | ティ | ti (as in "team") | ティッシュ (tisshu) | tissue |
 | ディ | di (as in "disco") | ディスク (disuku) | disc |
-| テュ | tyu | テュートリアル (tyuutoriaru) | tutorial |
+| テュ | tyu | テュートリアル (tyūtoriaru) | tutorial |
 | デュ | dyu | デュエット (dyuetto) | duet |
 
-Without these combinations, ティーム would become チーム (chiimu), which is the older transcription of "team" still widely used. Both forms exist in Japanese, and チーム remains more common.
+Without these combinations, ティーム would become チーム (chīmu), which is the older transcription of "team" still widely used. Both forms exist in Japanese, and チーム remains more common.
 
 ### ファ / フィ / フェ / フォ — "F" Sounds
 
@@ -85,9 +87,9 @@ Japanese has no native "f" consonant except in フ (fu), which is produced with 
 |---|---|---|---|
 | ファ | fa | ファン (fan) | fan |
 | フィ | fi | フィルム (firumu) | film |
-| フェ | fe | フェリー (ferii) | ferry |
-| フォ | fo | フォーク (fooku) | fork |
-| フュ | fyu | フュージョン (fyuujon) | fusion |
+| フェ | fe | フェリー (ferī) | ferry |
+| フォ | fo | フォーク (fōku) | fork |
+| フュ | fyu | フュージョン (fyūjon) | fusion |
 
 The Japanese フ is not identical to English "f" — it is softer. But in loanwords, speakers typically produce it close enough to the English target to be understood.
 
@@ -99,9 +101,9 @@ Japanese has no native "v." The character ヴ represents an attempt at the Engli
 |---|---|---|---|
 | ヴァ | va | ヴァイオリン (vaiorin) | violin |
 | ヴィ | vi | ヴィラ (vira) | villa |
-| ヴ | vu | ヴードゥー (vuuduu) | voodoo |
-| ヴェ | ve | ヴェール (veeru) | veil |
-| ヴォ | vo | ヴォーカル (vookaru) | vocal |
+| ヴ | vu | ヴードゥー (vūdū) | voodoo |
+| ヴェ | ve | ヴェール (vēru) | veil |
+| ヴォ | vo | ヴォーカル (vōkaru) | vocal |
 
 In practice, ヴ is relatively rare and formal. Most borrowed words replace "v" with バ (ba), ビ (bi), ブ (bu), ベ (be), ボ (bo) instead. バイオリン (baiorin) is far more common than ヴァイオリン. The ヴ spelling signals a deliberate attempt to distinguish "v" from "b" in writing.
 
@@ -111,9 +113,9 @@ Traditional katakana has ワ (wa) but lacks wi, we, wo sounds used in English lo
 
 | Combination | Pronunciation | Example | Meaning |
 |---|---|---|---|
-| ウィ | wi | ウィスキー (wisukii) | whisky |
+| ウィ | wi | ウィスキー (wisukī) | whisky |
 | ウェ | we | ウェブ (webu) | web |
-| ウォ | wo | ウォーター (wootaa) | water |
+| ウォ | wo | ウォーター (wōtā) | water |
 
 ### シェ / ジェ / チェ — "She," "Je," "Che"
 
@@ -127,8 +129,8 @@ Traditional katakana has ワ (wa) but lacks wi, we, wo sounds used in English lo
 
 | Combination | Pronunciation | Example | Meaning |
 |---|---|---|---|
-| トゥ | tu | トゥルー (turuu) | true |
-| ドゥ | du | ドゥーワップ (duuwappu) | doo-wop |
+| トゥ | tu | トゥルー (turū) | true |
+| ドゥ | du | ドゥーワップ (dūwappu) | doo-wop |
 
 These are rarer; many words simply use ト (to) and ド (do) instead.
 
@@ -172,7 +174,7 @@ English "l" and "r" both become ラリルレロ (ra/ri/ru/re/ro) in katakana:
 | lemon | レモン | remon |
 | rice | ライス | raisu |
 | level | レベル | reberu |
-| roller | ローラー | rooraa |
+| roller | ローラー | rōrā |
 
 The Japanese ら-row sound is neither English "l" nor "r" — it is a brief tongue flap similar to the "tt" in American English "butter." Do not substitute a full English "r" or "l."
 
@@ -182,9 +184,9 @@ English "th" (voiced or unvoiced) does not exist in Japanese and is approximated
 
 | English | Katakana | Romaji |
 |---|---|---|
-| theme | テーマ | teema |
-| thriller | スリラー | suriraa |
-| three | スリー | surii |
+| theme | テーマ | tēma |
+| thriller | スリラー | surirā |
+| three | スリー | surī |
 
 ## Practice Words by Sound Category
 
@@ -192,30 +194,30 @@ English "th" (voiced or unvoiced) does not exist in Japanese and is approximated
 
 Work through these, holding each ー for a full beat:
 
-- アイスクリーム (aisukuriimu) — ice cream
-- エレベーター (erebeetaa) — elevator
-- コンピューター (konpyuutaa) — computer
-- スマートフォン (sumaatofon) — smartphone
-- インターネット (intaanetto) — internet
+- アイスクリーム (aisukurīmu) — ice cream
+- エレベーター (erebētā) — elevator
+- コンピューター (konpyūtā) — computer
+- スマートフォン (sumātofon) — smartphone
+- インターネット (intānetto) — internet
 
 ### ッ Double Consonant Practice
 
 Feel the full stop before releasing:
 
 - アップル (appuru) — apple
-- ブロッコリー (burokkorii) — broccoli
-- チョコレート (chokoreeto) — chocolate
+- ブロッコリー (burokkorī) — broccoli
+- チョコレート (chokorēto) — chocolate
 - ジャケット (jaketto) — jacket
-- マッサージ (massaaji) — massage
+- マッサージ (massāji) — massage
 
 ### Extended Sound Combinations Practice
 
-- ウィンドウ (windou) — window
-- フィットネス (fittoNesu) — fitness
-- ティーポット (tiipotto) — teapot
+- ウィンドウ (windō) — window
+- フィットネス (fittonesu) — fitness
+- ティーポット (tīpotto) — teapot
 - ファッション (fasshon) — fashion
 - シェイク (sheiku) — shake
-- チェリー (cherii) — cherry
+- チェリー (cherī) — cherry
 
 ## Pronunciation Tips for English Speakers
 
@@ -225,7 +227,7 @@ English compresses unstressed syllables. Japanese does not. Read katakana charac
 
 ### 2. ー Is Not a Stress Marker
 
-The ー dash does not signal that you stress the preceding syllable — it only doubles its length. ノート (nooto) has equal stress on both morae; the first just lasts twice as long.
+The ー dash does not signal that you stress the preceding syllable — it only doubles its length. ノート (nōto) has equal stress on both morae; the first just lasts twice as long.
 
 ### 3. Vocalize ッ as Silence
 
@@ -239,9 +241,9 @@ When you see コーヒー, read it as ko-o-hi-i, not as "coffee." The Japanese w
 
 Length distinctions are easy to miss:
 
-- オト (oto) — sound vs. オート (ooto) — auto
-- コド (kodo) — (not a word) vs. コード (koodo) — code
-- スキ (suki) — like vs. スーキー (suukii) — (not standard, but illustrative)
+- オト (oto) — sound vs. オート (ōto) — auto
+- コド (kodo) — (not a word) vs. コード (kōdo) — code
+- スキ (suki) — like vs. スーキー (sūkī) — (not standard, but illustrative)
 
 Record yourself saying pairs and play them back to check whether the long vowel is clearly twice the short vowel's duration.
 

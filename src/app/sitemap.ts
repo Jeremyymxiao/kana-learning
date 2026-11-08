@@ -1,87 +1,89 @@
 import { MetadataRoute } from 'next'
 import { articles } from '@/data/articles'
+import { BASE_URL, getArticleCanonicalUrl } from '@/lib/seo-utils'
 
 const supportedLocales = ['en', 'de', 'fr', 'pt', 'es'] as const
-const baseUrl = 'https://learnkana.pro'
+const baseUrl = BASE_URL
+
+/**
+ * Evaluated when the sitemap route is generated. The previous version hardcoded
+ * 2025-01/2025-02 as `lastModified` on every UI route, so the sitemap kept
+ * claiming the site had not changed in over a year. UI routes change with every
+ * deploy, so the build timestamp is the honest value.
+ */
+const BUILD_DATE = new Date()
+
+/** English has no locale prefix (`as-needed`); every other locale is prefixed. */
+const urlFor = (locale: string, path: string): string => {
+  if (locale === 'en') {
+    return path ? `${baseUrl}${path}` : baseUrl
+  }
+  return `${baseUrl}/${locale}${path}`
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const sitemapEntries: MetadataRoute.Sitemap = []
+  const entries: MetadataRoute.Sitemap = []
 
-  // Main routes with locale variants
+  // UI routes: one URL per locale, each carrying the full hreflang cluster.
   const routes = [
-    { path: '', priority: 1, changeFrequency: 'daily' as const, lastModified: '2025-01-15' },
-    { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const, lastModified: '2025-01-10' },
-    { path: '/hiragana-katakana-quiz', priority: 0.9, changeFrequency: 'weekly' as const, lastModified: '2025-02-01' },
-    { path: '/hiragana-katakana-chart', priority: 0.8, changeFrequency: 'monthly' as const, lastModified: '2025-01-10' },
-    { path: '/hiragana-katakana-converter', priority: 0.8, changeFrequency: 'monthly' as const, lastModified: '2025-01-10' },
-    { path: '/learn', priority: 0.9, changeFrequency: 'weekly' as const, lastModified: '2025-01-15' },
-    { path: '/contact-us', priority: 0.5, changeFrequency: 'monthly' as const, lastModified: '2025-01-01' },
-    { path: '/privacy-policy', priority: 0.3, changeFrequency: 'monthly' as const, lastModified: '2025-01-01' },
-    { path: '/terms-of-service', priority: 0.3, changeFrequency: 'monthly' as const, lastModified: '2025-01-01' },
-    { path: '/cookie-policy', priority: 0.3, changeFrequency: 'monthly' as const, lastModified: '2025-01-01' },
-    { path: '/chat', priority: 0.7, changeFrequency: 'weekly' as const, lastModified: '2025-01-15' },
+    { path: '', priority: 1, changeFrequency: 'daily' as const },
+    { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/hiragana-katakana-quiz', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/hiragana-katakana-chart', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/hiragana-katakana-converter', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/learn', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/contact-us', priority: 0.5, changeFrequency: 'monthly' as const },
+    { path: '/privacy-policy', priority: 0.3, changeFrequency: 'monthly' as const },
+    { path: '/terms-of-service', priority: 0.3, changeFrequency: 'monthly' as const },
+    { path: '/cookie-policy', priority: 0.3, changeFrequency: 'monthly' as const },
+    { path: '/chat', priority: 0.7, changeFrequency: 'weekly' as const },
   ]
 
-  // Add main routes with all locale variants
-  routes.forEach(route => {
-    supportedLocales.forEach(locale => {
-      const url = locale === 'en'
-        ? `${baseUrl}${route.path || ''}`.replace(/^\/$/, '') || baseUrl
-        : `${baseUrl}/${locale}${route.path || ''}`.replace(/\/$/, '')
+  routes.forEach((route) => {
+    const hreflangs: Record<string, string> = {}
+    supportedLocales.forEach((locale) => {
+      hreflangs[locale] = urlFor(locale, route.path)
+    })
+    hreflangs['x-default'] = urlFor('en', route.path)
 
-      const hreflangs: Record<string, string> = {
-        'en': `${baseUrl}${route.path || ''}`.replace(/^\/$/, '') || baseUrl,
-        'de': `${baseUrl}/de${route.path || ''}`.replace(/\/$/, ''),
-        'fr': `${baseUrl}/fr${route.path || ''}`.replace(/\/$/, ''),
-        'pt': `${baseUrl}/pt${route.path || ''}`.replace(/\/$/, ''),
-        'es': `${baseUrl}/es${route.path || ''}`.replace(/\/$/, ''),
-        'x-default': `${baseUrl}${route.path || ''}`.replace(/^\/$/, '') || baseUrl,
-      }
-
-      sitemapEntries.push({
-        url,
-        lastModified: new Date(route.lastModified),
+    supportedLocales.forEach((locale) => {
+      entries.push({
+        url: urlFor(locale, route.path),
+        lastModified: BUILD_DATE,
         changeFrequency: route.changeFrequency,
         priority: route.priority,
         alternates: {
-          languages: hreflangs
-        }
+          languages: hreflangs,
+        },
       })
     })
   })
 
-  // Add article URLs with locale variants
-  articles.forEach(article => {
-    supportedLocales.forEach(locale => {
-      const url = locale === 'en'
-        ? `${baseUrl}/learn/${article.slug}`
-        : `${baseUrl}/${locale}/learn/${article.slug}`
-
-      const hreflangs: Record<string, string> = {
-        'en': `${baseUrl}/learn/${article.slug}`,
-        'de': `${baseUrl}/de/learn/${article.slug}`,
-        'fr': `${baseUrl}/fr/learn/${article.slug}`,
-        'pt': `${baseUrl}/pt/learn/${article.slug}`,
-        'es': `${baseUrl}/es/learn/${article.slug}`,
-        'x-default': `${baseUrl}/learn/${article.slug}`,
-      }
-
-      sitemapEntries.push({
-        url,
-        lastModified: new Date(article.publishedAt),
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-        alternates: {
-          languages: hreflangs
-        }
-      })
+  /**
+   * Articles are English-only: `public/articles/{slug}.md` has no localised
+   * variants, so `/de|fr|pt|es/learn/{slug}` renders the English body under a
+   * localised shell and points its canonical at the English URL. Those routes
+   * must not appear here — a sitemap should only list canonical URLs. One entry
+   * per article (20), not one per article × locale (100).
+   */
+  articles.forEach((article) => {
+    const url = getArticleCanonicalUrl(article.slug)
+    entries.push({
+      url,
+      lastModified: new Date(article.publishedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+      alternates: {
+        languages: {
+          'en': url,
+          'x-default': url,
+        },
+      },
     })
   })
 
-  // Remove duplicate URLs and ensure unique entries
-  const uniqueEntries = sitemapEntries.filter((entry, index, self) =>
-    index === self.findIndex(e => e.url === entry.url)
+  // Guard against accidental duplicates (e.g. a future route with an empty path).
+  return entries.filter(
+    (entry, index, self) => index === self.findIndex((e) => e.url === entry.url)
   )
-
-  return uniqueEntries
 }

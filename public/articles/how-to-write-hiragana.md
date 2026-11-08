@@ -1,6 +1,6 @@
-# How to Write Hiragana: Complete Stroke Order Guide
+# How to Write Hiragana: Stroke Order Basics (7 Characters)
 
-Learning to write Hiragana correctly is essential for Japanese language mastery. This comprehensive guide will teach you the proper stroke order, writing techniques, and tips for perfecting your Hiragana handwriting.
+Learning to write Hiragana correctly is essential for Japanese language mastery. This guide teaches the stroke-order principles that apply to every Hiragana character, then walks through **seven model characters — あ い う え お か さ** — stroke by stroke. The remaining characters follow exactly the same rules; use the [Hiragana & Katakana Chart](/hiragana-katakana-chart) alongside this guide for the rest of the set.
 
 ## Understanding Stroke Order Fundamentals
 
@@ -41,39 +41,39 @@ Before diving into specific characters, familiarize yourself with these basic st
 ### Vowels (あいうえお)
 ```
 あ: 3 strokes
-1. Left curve
-2. Center horizontal
-3. Right curve
+1. Horizontal stroke, left to right
+2. Vertical stroke down through the first, ending in a small leftward loop
+3. Curved stroke on the right, sweeping down and around
 
 い: 2 strokes
-1. Short diagonal
-2. Long curved sweep
+1. Short stroke slanting down to the left
+2. Longer stroke starting slightly above, curving down and to the right
 
 う: 2 strokes
-1. Curved horizontal
-2. Vertical with hook
+1. Short dot at the top, angled down to the left
+2. Curved stroke sweeping down, then right, ending in a small hook
 
 え: 2 strokes
-1. Upper horizontal
-2. Vertical sweep with curve
+1. Short dot at the top, angled down to the left
+2. Zigzag stroke: across, down-left, then a longer sweep out to the right
 
 お: 3 strokes
-1. Upper curve
-2. Central cross
-3. Bottom curve
+1. Horizontal stroke, left to right
+2. Vertical stroke down through the first, ending in a leftward loop
+3. Short dot on the right, below the loop
 ```
 
-### Basic Consonants (かさたなは)
+### Basic Consonants (か, さ as models)
 ```
 か: 3 strokes
-1. Left vertical
-2. Top right diagonal
-3. Bottom curve
+1. Horizontal stroke ending in a sharp leftward hook
+2. Vertical stroke down through the first, with a small hook at the bottom
+3. Diagonal stroke on the right, from top right down to the left
 
 さ: 3 strokes
-1. Horizontal sweep
-2. Short vertical
-3. Bottom curve
+1. Horizontal stroke ending in a short leftward hook
+2. Vertical stroke down through the first
+3. Curved stroke sweeping down and to the left
 ```
 
 ## Common Writing Mistakes

@@ -24,6 +24,19 @@ export function generateHreflangs(pagePath: string): Record<string, string> {
 }
 
 /**
+ * Article bodies (`public/articles/{slug}.md`) exist in English only. The
+ * de/fr/pt/es routes render that same English body inside a localised shell, so
+ * they MUST canonicalise to the English URL instead of self-canonicalising.
+ * Kept here so metadata, structured data and the sitemap cannot drift apart.
+ */
+export const ARTICLE_CONTENT_LOCALE = 'en';
+
+/** Canonical URL of an article — always the English, unprefixed route. */
+export function getArticleCanonicalUrl(slug: string): string {
+  return `${BASE_URL}/learn/${slug}`;
+}
+
+/**
  * Get the canonical URL for a page given locale and path.
  */
 export function getCanonicalUrl(locale: string, pagePath: string): string {

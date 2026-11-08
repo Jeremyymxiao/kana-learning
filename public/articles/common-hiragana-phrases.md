@@ -1,5 +1,7 @@
 # Essential Hiragana Phrases for Beginners
 
+> **Romaji note:** long vowels are marked with a macron — おう and おお are written **ō**, うう is **ū**, and ええ is **ē** (えい stays "ei", as in せんせい *sensei*). So おかあさん is *okāsan* and がっこう is *gakkō*.
+
 Learning hiragana is one of the first milestones in your Japanese journey, but knowing the characters is only the beginning. The real payoff comes when you can read and use actual Japanese phrases written in hiragana. This article walks you through the most practical everyday phrases, all written in hiragana so you can practice reading them while also picking up real conversational vocabulary.
 
 Before diving in, if you need a refresher on individual characters, check out the [Hiragana & Katakana Chart](/hiragana-katakana-chart) to review any characters you are uncertain about.
@@ -12,14 +14,14 @@ Greetings are the gateway to any conversation. Japanese has time-specific greeti
 
 | Hiragana | Romaji | Meaning |
 |---|---|---|
-| おはようございます | ohayou gozaimasu | Good morning (formal) |
-| おはよう | ohayou | Good morning (casual) |
+| おはようございます | ohayō gozaimasu | Good morning (formal) |
+| おはよう | ohayō | Good morning (casual) |
 | こんにちは | konnichiwa | Hello / Good afternoon |
 | こんばんは | konbanwa | Good evening |
 | おやすみなさい | oyasumi nasai | Good night (formal) |
 | おやすみ | oyasumi | Good night (casual) |
-| さようなら | sayounara | Goodbye (formal, final) |
-| じゃあね | jaa ne | See you / Bye (casual) |
+| さようなら | sayōnara | Goodbye (formal, final) |
+| じゃあね | jā ne | See you / Bye (casual) |
 | またね | mata ne | See you later |
 | またあした | mata ashita | See you tomorrow |
 
@@ -35,17 +37,17 @@ These are the phrases that come up constantly in daily life. Native speakers use
 |---|---|---|
 | はい | hai | Yes |
 | いいえ | iie | No |
-| ありがとうございます | arigatou gozaimasu | Thank you (formal) |
-| ありがとう | arigatou | Thank you (casual) |
-| どういたしまして | dou itashimashite | You're welcome |
+| ありがとうございます | arigatō gozaimasu | Thank you (formal) |
+| ありがとう | arigatō | Thank you (casual) |
+| どういたしまして | dō itashimashite | You're welcome |
 | すみません | sumimasen | Excuse me / I'm sorry |
 | ごめんなさい | gomen nasai | I'm sorry (apology) |
 | ごめん | gomen | Sorry (casual) |
-| だいじょうぶです | daijoubu desu | It's okay / I'm fine |
-| だいじょうぶ | daijoubu | It's okay (casual) |
+| だいじょうぶです | daijōbu desu | It's okay / I'm fine |
+| だいじょうぶ | daijōbu | It's okay (casual) |
 | わかりました | wakarimashita | I understood |
 | わかりません | wakarimasen | I don't understand |
-| もういちどおねがいします | mou ichido onegaishimasu | Please say that again |
+| もういちどおねがいします | mō ichido onegaishimasu | Please say that again |
 
 The distinction between すみません and ごめんなさい is worth noting. すみません is used to get someone's attention, to apologize for minor inconveniences, or to express gratitude when you feel you are imposing on someone. ごめんなさい is a direct, sincere apology for something you did wrong.
 
@@ -58,13 +60,13 @@ These phrases appear in situations you encounter every single day: meals, moving
 | Hiragana | Romaji | Meaning |
 |---|---|---|
 | いただきます | itadakimasu | Let's eat (said before meals) |
-| ごちそうさまでした | gochisousama deshita | Thank you for the meal (said after eating) |
+| ごちそうさまでした | gochisōsama deshita | Thank you for the meal (said after eating) |
 | ただいま | tadaima | I'm home |
 | おかえり | okaeri | Welcome back |
 | いってきます | ittekimasu | I'm leaving (said when going out) |
 | いってらっしゃい | itterasshai | Take care / Have a good day |
 | おねがいします | onegaishimasu | Please (requesting something) |
-| どうぞ | douzo | Please (offering something) / Go ahead |
+| どうぞ | dōzo | Please (offering something) / Go ahead |
 | はじめまして | hajimemashite | Nice to meet you |
 | よろしくおねがいします | yoroshiku onegaishimasu | Nice to meet you / Please treat me well |
 
@@ -89,9 +91,9 @@ Japanese has multiple levels of politeness built into the language itself. As a 
 | にほんごがすこしはなせます | nihongo ga sukoshi hanasemasu | I can speak a little Japanese |
 | ゆっくりはなしてください | yukkuri hanashite kudasai | Please speak slowly |
 | かいてください | kaite kudasai | Please write it down |
-| もすこしまってください | mou sukoshi matte kudasai | Please wait a little longer |
+| もうすこしまってください | mō sukoshi matte kudasai | Please wait a little longer |
 
-The pattern ～をください is one of the most immediately useful constructions you will learn. Slot any noun before をください and you have a polite request: みずをください (mizu wo kudasai) means "please give me water," and メニューをください (menyuu wo kudasai) means "please give me the menu."
+The pattern ～をください is one of the most immediately useful constructions you will learn. Slot any noun before をください and you have a polite request: みずをください (mizu wo kudasai) means "please give me water," and メニューをください (menyū wo kudasai) means "please give me the menu."
 
 ---
 
@@ -105,8 +107,8 @@ Questions form the backbone of getting information, and a handful of key questio
 | どこ | doko | Where |
 | だれ | dare | Who |
 | いつ | itsu | When |
-| なぜ / どうして | naze / doushite | Why |
-| どう | dou | How |
+| なぜ / どうして | naze / dōshite | Why |
+| どう | dō | How |
 | どれ | dore | Which one |
 | いくら | ikura | How much (price) |
 | いくつ | ikutsu | How many |
@@ -122,15 +124,15 @@ These question words attach naturally to the polite sentence-ending pattern ～�
 
 ## Putting It Together: Short Conversations
 
-Reading individual phrases in a table is useful, but seeing them in context helps solidify how they work together. Here are two short sample exchanges written entirely in hiragana.
+Reading individual phrases in a table is useful, but seeing them in context helps solidify how they work together. Here are two short sample exchanges written in hiragana — only the speaker labels (A and B) are in Latin letters.
 
 **Meeting someone new:**
 
-> あ：はじめまして。たなかです。よろしくおねがいします。
+> A：はじめまして。たなかです。よろしくおねがいします。
 > *(A: Hajimemashite. Tanaka desu. Yoroshiku onegaishimasu.)*
 > *(A: Nice to meet you. I'm Tanaka. I look forward to knowing you.)*
 
-> び：はじめまして。すみます。よろしくおねがいします。
+> B：はじめまして。しみずです。よろしくおねがいします。
 > *(B: Hajimemashite. Shimizu desu. Yoroshiku onegaishimasu.)*
 > *(B: Nice to meet you. I'm Shimizu. Likewise.)*
 
@@ -141,7 +143,7 @@ Reading individual phrases in a table is useful, but seeing them in context help
 > *(Customer: Excuse me. Water, please.)*
 
 > てんいん：はい、どうぞ。
-> *(Ten'in: Hai, douzo.)*
+> *(Ten'in: Hai, dōzo.)*
 > *(Staff: Yes, here you go.)*
 
 ---

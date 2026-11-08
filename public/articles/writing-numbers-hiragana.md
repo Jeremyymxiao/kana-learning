@@ -1,5 +1,7 @@
 # How to Write Numbers in Hiragana: Complete Guide
 
+> **Romaji note:** long vowels are marked with a macron — おう and おお are written **ō**, うう is **ū**, and ええ is **ē** (えい stays "ei", as in せんせい *sensei*). So おかあさん is *okāsan* and がっこう is *gakkō*.
+
 Writing numbers in Japanese can be done using Hiragana, and it's an essential skill for Japanese language learners. This comprehensive guide will teach you everything you need to know about writing and reading numbers using Hiragana.
 
 ## Basic Number System
@@ -14,8 +16,8 @@ Writing numbers in Japanese can be done using Hiragana, and it's an essential sk
 6 - ろく (roku)
 7 - なな/しち (nana/shichi)
 8 - はち (hachi)
-9 - きゅう/く (kyuu/ku)
-10 - じゅう (juu)
+9 - きゅう/く (kyū/ku)
+10 - じゅう (jū)
 ```
 
 ### Reading Rules
@@ -43,21 +45,21 @@ Writing numbers in Japanese can be done using Hiragana, and it's an essential sk
 7つ - ななつ (nanatsu)
 8つ - やっつ (yattsu)
 9つ - ここのつ (kokonotsu)
-10 - とお (too)
+10 - とお (tō)
 ```
 
 ## Larger Numbers
 
 ### Tens (20-90)
 ```
-20 - にじゅう (nijuu)
-30 - さんじゅう (sanjuu)
-40 - よんじゅう (yonjuu)
-50 - ごじゅう (gojuu)
-60 - ろくじゅう (rokujuu)
-70 - ななじゅう (nanajuu)
-80 - はちじゅう (hachijuu)
-90 - きゅうじゅう (kyuujuu)
+20 - にじゅう (nijū)
+30 - さんじゅう (sanjū)
+40 - よんじゅう (yonjū)
+50 - ごじゅう (gojū)
+60 - ろくじゅう (rokujū)
+70 - ななじゅう (nanajū)
+80 - はちじゅう (hachijū)
+90 - きゅうじゅう (kyūjū)
 ```
 
 ### Hundreds (100-900)
@@ -70,15 +72,19 @@ Writing numbers in Japanese can be done using Hiragana, and it's an essential sk
 600 - ろっぴゃく (roppyaku)
 700 - ななひゃく (nanahyaku)
 800 - はっぴゃく (happyaku)
-900 - きゅうひゃく (kyuuhyaku)
+900 - きゅうひゃく (kyūhyaku)
 ```
 
 ## Special Number Combinations
 
 ### Sound Changes
-- じゅう + はち → じゅうはち (18)
-- に + ひゃく → にひゃく (200)
-- ろく + ひゃく → ろっぴゃく (600)
+
+Only a few combinations change sound; most are simply joined:
+
+- さん + ひゃく → さんびゃく (300) — *h* becomes *b*
+- ろく + ひゃく → ろっぴゃく (600) — a small っ appears and *h* becomes *p*
+- はち + ひゃく → はっぴゃく (800) — a small っ appears and *h* becomes *p*
+- じゅう + はち → じゅうはち (18) — no sound change, just two words joined
 
 ### Common Patterns
 1. Days of the month
@@ -92,15 +98,17 @@ Writing numbers in Japanese can be done using Hiragana, and it's an essential sk
 ```
 1時 - いちじ (ichiji) - 1 o'clock
 2日 - ふつか (futsuka) - 2nd day
-3月 - さんがつ (sangatu) - March
+3月 - さんがつ (sangatsu) - March
 ```
 
 ### Money and Prices
 ```
-100円 - ひゃくえん (hyaku en)
-1000円 - せんえん (sen en)
-10000円 - いちまんえん (ichiman en)
+100円 - ひゃくえん (hyakuen)
+1000円 - せんえん (sen'en)
+10000円 - いちまんえん (ichiman'en)
 ```
+
+> Note the apostrophe in *sen'en* and *ichiman'en*: ん followed by a vowel is written with an apostrophe in Hepburn so that it is not misread as ね or な. This is the same rule used when typing.
 
 ## Common Mistakes to Avoid
 

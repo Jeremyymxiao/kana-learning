@@ -1,5 +1,7 @@
 # Katakana Practice Exercises
 
+> **Romaji note:** the katakana long-vowel mark ー is shown as a macron on the preceding vowel — コーヒー *kōhī*, ケーキ *kēki*, スーパー *sūpā*.
+
 Katakana is the writing system Japanese uses for foreign loanwords, foreign names, onomatopoeia, and technical terms. Once you know it, you can instantly read thousands of borrowed English, French, and Portuguese words in Japanese text. This article gives you concrete exercises — reading drills, writing practice, recognition work on confusable pairs, and a 20-question quiz — so you build genuine skill rather than vague familiarity.
 
 Keep the [katakana chart](/hiragana-katakana-chart) open in a second tab as a reference while you work through the sections.
@@ -39,7 +41,7 @@ Read down the katakana column three times. On the third pass, cover both answer 
 | コンピュータ | konpyūta | computer |
 | スーパーマーケット | sūpāmāketto | supermarket |
 | エレベーター | erebētā | elevator |
-| チョコレート | chokoreeto | chocolate |
+| チョコレート | chokorēto | chocolate |
 | アパートメント | apātomento | apartment |
 | インターネット | intānetto | internet |
 | スマートフォン | sumātofon | smartphone |
@@ -317,7 +319,7 @@ Part 3: 11. television, 12. coffee, 13. banana, 14. hotel, 15. game
 Part 4: 16. シ, 17. ン, 18. ク, 19. ウ, 20. ソ
 
 **Score interpretation:**
-- 18–20 correct: Strong foundation — expand to dakuon katakana (ガ、ザ、ダ、バ) and youon (キャ、チュ、ショ)
+- 18–20 correct: Strong foundation — expand to dakuon katakana (ガ、ザ、ダ、バ) and yōon (キャ、チュ、ショ)
 - 14–17 correct: Good progress — identify which sections produced errors and revisit them
 - Below 14: Return to Sections 1 and 3; spend extra time on the シ/ツ and ソ/ン pairs before retaking
 
@@ -382,7 +384,7 @@ Once you can read the 46 basic katakana characters reliably, the natural extensi
 
 - **Dakuon:** Voiced variants using the ゛mark — ガ (ga), ジ (ji), ズ (zu), バ (ba), etc.
 - **Handakuon:** The ゜mark for p-sounds — パ (pa), ピ (pi), プ (pu), ペ (pe), ポ (po)
-- **Youon:** Compound sounds — キャ (kya), チュ (chu), ショ (sho), ファ (fa), ウィ (wi)
+- **Yōon:** Compound sounds — キャ (kya), チュ (chu), ショ (sho), ファ (fa), ウィ (wi)
 - **Special extensions:** Katakana uses combinations like ティ (ti), ファ (fa), ウェ (we) for sounds that do not exist in native Japanese — these appear in loanwords from English and other languages
 
-Use the [katakana chart](/hiragana-katakana-chart) to study the full character set including dakuon and youon. When you are ready to test yourself under timed conditions, the [interactive quiz](/hiragana-katakana-quiz) covers all character types and lets you focus on katakana specifically.
+Use the [katakana chart](/hiragana-katakana-chart) to study the full character set including dakuon and yōon. When you are ready to test yourself under timed conditions, the [interactive quiz](/hiragana-katakana-quiz) covers all character types and lets you focus on katakana specifically.

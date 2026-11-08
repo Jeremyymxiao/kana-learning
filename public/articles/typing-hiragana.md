@@ -61,11 +61,15 @@ An Input Method Editor (IME) allows you to type Japanese characters using a stan
 5. Press **Enter** to confirm
 
 **Mode switching:**
-- **Alt + `** (backtick): Toggle Hiragana/Direct input
-- **Ctrl + Caps Lock**: Same as above
-- **F7**: Convert to Katakana
-- **F6**: Convert to Hiragana
-- **F10**: Convert to half-width romaji
+- **Ctrl + Caps Lock**: switch to Hiragana input
+- **Alt + Caps Lock**: switch to Katakana input
+- **Shift + Caps Lock**: switch to full-width alphanumeric input
+- **Caps Lock**: switch to half-width alphanumeric (direct) input
+- **F6**: convert the current word to Hiragana
+- **F7**: convert the current word to Katakana
+- **F8**: convert the current word to half-width Katakana
+- **F9**: convert the current word to full-width alphanumeric
+- **F10**: convert the current word to half-width alphanumeric
 
 ### Advanced Windows Settings
 
@@ -113,11 +117,14 @@ An Input Method Editor (IME) allows you to type Japanese characters using a stan
 4. Press **Space** for Kanji: 有難う
 5. Press **Return/Enter** to confirm
 
-**Mode conversion:**
-- **Control + Shift + ;**: Toggle Hiragana/Romaji
-- **Control + K**: Katakana
-- **Control + L**: Full-width ASCII
-- **Control + J**: Half-width ASCII
+**Converting the word you just typed (macOS):**
+- **Control + J**: convert to Hiragana
+- **Control + K**: convert to full-width Katakana
+- **Control + L**: convert to full-width alphanumeric
+- **Control + ;**: convert to half-width Katakana
+- **Control + :**: convert to half-width alphanumeric
+
+**Switching the input mode (macOS):** Control + Shift + J for Hiragana, Control + Shift + K for Katakana, Control + Shift + L for full-width alphanumeric; or choose the mode from the input menu in the menu bar. Shortcuts can be reviewed and changed in System Settings → Keyboard → Shortcuts → Input Sources.
 
 ### macOS Tips
 
@@ -265,7 +272,7 @@ When you can't install software:
 
 | Romaji | Hiragana | Example |
 |--------|----------|---------|
-| a i u e o | あいうえお | arigato → ありがと |
+| a i u e o | あいうえお | arigatou → ありがとう |
 | ka ki ku ke ko | かきくけこ | kana → かな |
 | sa shi su se so | さしすせそ | sushi → すし |
 | ta chi tsu te to | たちつてと | tatami → たたみ |

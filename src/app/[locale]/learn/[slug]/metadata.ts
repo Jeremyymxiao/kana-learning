@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { getArticleBySlug } from '@/data/articles';
+import { ARTICLE_CONTENT_LOCALE, getArticleCanonicalUrl } from '@/lib/seo-utils';
 import { routing } from '../../../../../i18n.config';
 
 const baseUrl = 'https://learnkana.pro';
@@ -30,24 +31,24 @@ const articleTranslations: Record<string, Record<string, { title: string; descri
   },
   'how-to-write-hiragana': {
     en: {
-      title: 'How to Write Hiragana: Complete Stroke Order & Writing Guide',
-      description: 'Learn proper Hiragana stroke order and writing techniques. Master correct character formation with detailed instructions for all 46 basic characters.'
+      title: 'Hiragana Stroke Order Basics (7 Characters)',
+      description: 'Learn the stroke order of 7 representative Hiragana characters, plus the rules (stroke direction, curves, balance) that apply to the remaining ones.'
     },
     de: {
-      title: 'Hiragana schreiben: Vollständige Strichreihenfolge & Schreibanleitung',
-      description: 'Lernen Sie die richtige Hiragana-Strichreihenfolge und Schreibtechniken. Meistern Sie die korrekte Zeichenbildung mit detaillierten Anweisungen.'
+      title: 'Hiragana-Strichreihenfolge: Grundlagen (7 Zeichen)',
+      description: 'Lernen Sie die Strichreihenfolge von 7 repräsentativen Hiragana-Zeichen und die Regeln, die für die übrigen gelten.'
     },
     fr: {
-      title: 'Comment écrire les Hiragana : Guide complet de l\'ordre des traits',
-      description: 'Apprenez l\'ordre correct des traits des Hiragana et les techniques d\'écriture. Maîtrisez la formation correcte des caractères avec des instructions détaillées.'
+      title: 'Ordre des traits des Hiragana : les bases (7 caractères)',
+      description: 'Apprenez l\'ordre des traits de 7 caractères Hiragana représentatifs et les règles valables pour les autres.'
     },
     pt: {
-      title: 'Como Escrever Hiragana: Guia Completo de Ordem dos Traços',
-      description: 'Aprenda a ordem correta dos traços do Hiragana e técnicas de escrita. Domine a formação correta dos caracteres com instruções detalhadas.'
+      title: 'Ordem dos Traços do Hiragana: Noções Básicas (7 Caracteres)',
+      description: 'Aprenda a ordem dos traços de 7 caracteres Hiragana representativos e as regras que se aplicam aos demais.'
     },
     es: {
-      title: 'Cómo Escribir Hiragana: Guía Completa del Orden de Trazos',
-      description: 'Aprende el orden correcto de trazos del Hiragana y técnicas de escritura. Domina la formación correcta de caracteres con instrucciones detalladas.'
+      title: 'Orden de Trazos del Hiragana: Fundamentos (7 Caracteres)',
+      description: 'Aprende el orden de trazos de 7 caracteres Hiragana representativos y las reglas que se aplican al resto.'
     }
   },
   'hiragana-vs-katakana': {
@@ -225,6 +226,226 @@ const articleTranslations: Record<string, Record<string, { title: string; descri
       title: 'Ejercicios de Práctica Hiragana: Aprendizaje Interactivo y Ejercicios de Escritura',
       description: 'Fortalece tus habilidades en Hiragana con ejercicios prácticos completos. Ejercicios interactivos, práctica de escritura y actividades de comprensión.'
     }
+  },
+  'katakana-basics': {
+    en: {
+      title: 'Katakana Basics: Complete Introduction to the Japanese Script',
+      description: 'Learn Katakana from zero: the 46 basic characters, dakuon and yōon, when the script is used, and how it differs from Hiragana.'
+    },
+    de: {
+      title: 'Katakana-Grundlagen: Einführung in die japanische Schrift',
+      description: 'Lernen Sie Katakana von Grund auf: die 46 Grundzeichen, Dakuon und Yōon, wann die Schrift verwendet wird und worin sie sich von Hiragana unterscheidet.'
+    },
+    fr: {
+      title: 'Bases du Katakana : introduction complète à l\'écriture japonaise',
+      description: 'Apprenez le katakana depuis zéro : les 46 caractères de base, les dakuon et yōon, quand cette écriture est utilisée et ce qui la distingue du hiragana.'
+    },
+    pt: {
+      title: 'Fundamentos do Katakana: Introdução Completa à Escrita Japonesa',
+      description: 'Aprenda katakana do zero: os 46 caracteres básicos, dakuon e yōon, quando a escrita é usada e o que a diferencia do hiragana.'
+    },
+    es: {
+      title: 'Fundamentos del Katakana: Guía Completa de Escritura',
+      description: 'Aprende katakana desde cero: los 46 caracteres básicos, dakuon y yōon, cuándo se usa esta escritura y en qué se diferencia del hiragana.'
+    }
+  },
+  'how-to-write-katakana': {
+    en: {
+      title: 'How to Write Katakana: Stroke Order and Writing Tips',
+      description: 'Stroke order and writing technique for every Katakana character, plus the mistakes that make Japanese handwriting look wrong.'
+    },
+    de: {
+      title: 'Katakana schreiben: Strichfolge und Schreibtipps',
+      description: 'Strichfolge und Schreibtechnik für jedes Katakana-Zeichen, dazu die Fehler, die japanische Handschrift falsch wirken lassen.'
+    },
+    fr: {
+      title: 'Comment écrire le katakana : ordre des traits et conseils',
+      description: 'Ordre des traits et technique d\'écriture pour chaque caractère katakana, avec les erreurs qui rendent l\'écriture manuscrite japonaise incorrecte.'
+    },
+    pt: {
+      title: 'Como Escrever Katakana: Ordem dos Traços e Dicas',
+      description: 'Ordem dos traços e técnica de escrita para cada caractere katakana, além dos erros que deixam a caligrafia japonesa errada.'
+    },
+    es: {
+      title: 'Cómo Escribir Katakana: Orden de Trazos y Consejos',
+      description: 'Orden de trazos y técnica de escritura para cada carácter katakana, además de los errores que hacen que la caligrafía japonesa se vea mal.'
+    }
+  },
+  'katakana-words-guide': {
+    en: {
+      title: 'Common Katakana Words: A Vocabulary Guide',
+      description: 'Essential Katakana vocabulary by category — food, technology, travel and daily life — with readings and meanings.'
+    },
+    de: {
+      title: 'Häufige Katakana-Wörter: Ein Vokabularleitfaden',
+      description: 'Wichtiges Katakana-Vokabular nach Kategorien — Essen, Technik, Reisen und Alltag — mit Lesung und Bedeutung.'
+    },
+    fr: {
+      title: 'Mots courants en katakana : guide de vocabulaire',
+      description: 'Vocabulaire katakana essentiel par catégorie — cuisine, technologie, voyage et vie quotidienne — avec lectures et significations.'
+    },
+    pt: {
+      title: 'Palavras Comuns em Katakana: Guia de Vocabulário',
+      description: 'Vocabulário essencial em katakana por categoria — comida, tecnologia, viagem e dia a dia — com leituras e significados.'
+    },
+    es: {
+      title: 'Palabras Comunes en Katakana: Guía de Vocabulario',
+      description: 'Vocabulario esencial en katakana por categoría — comida, tecnología, viajes y vida diaria — con lecturas y significados.'
+    }
+  },
+  'memorize-katakana': {
+    en: {
+      title: 'How to Memorize Katakana: Techniques That Work',
+      description: 'Practical ways to memorize Katakana: shape mnemonics, loanword anchors, and a two-week practice plan that sticks.'
+    },
+    de: {
+      title: 'Katakana auswendig lernen: Techniken, die funktionieren',
+      description: 'Praktische Methoden für Katakana: Form-Merkhilfen, Lehnwort-Anker und ein zweiwöchiger Übungsplan, der hält.'
+    },
+    fr: {
+      title: 'Comment mémoriser le katakana : des techniques efficaces',
+      description: 'Des méthodes concrètes pour mémoriser le katakana : moyens mnémotechniques de forme, ancrages par mots d\'emprunt et un plan de pratique de deux semaines.'
+    },
+    pt: {
+      title: 'Como Memorizar Katakana: Técnicas que Funcionam',
+      description: 'Métodos práticos para memorizar katakana: mnemônicos de forma, âncoras em palavras estrangeiras e um plano de prática de duas semanas.'
+    },
+    es: {
+      title: 'Cómo Memorizar Katakana: Técnicas que Funcionan',
+      description: 'Métodos prácticos para memorizar katakana: mnemónicos de forma, anclajes en préstamos y un plan de práctica de dos semanas.'
+    }
+  },
+  'katakana-pronunciation': {
+    en: {
+      title: 'Katakana Pronunciation: Long Vowels and Small Kana',
+      description: 'How Katakana pronunciation really works: long vowels, double consonants, small ャュョ and the foreign sounds added for loanwords.'
+    },
+    de: {
+      title: 'Katakana-Aussprache: Langvokale und kleine Kana',
+      description: 'Wie Katakana-Aussprache wirklich funktioniert: Langvokale, Doppelkonsonanten, kleine ャュョ und die zusätzlichen Laute für Lehnwörter.'
+    },
+    fr: {
+      title: 'Prononciation du katakana : voyelles longues et petits kana',
+      description: 'Le fonctionnement réel de la prononciation du katakana : voyelles longues, consonnes doubles, petits ャュョ et sons ajoutés pour les mots d\'emprunt.'
+    },
+    pt: {
+      title: 'Pronúncia do Katakana: Vogais Longas e Kana Pequenos',
+      description: 'Como a pronúncia do katakana funciona de verdade: vogais longas, consoantes duplas, ャュョ pequenos e os sons criados para palavras estrangeiras.'
+    },
+    es: {
+      title: 'Pronunciación del Katakana: Vocales Largas y Kana Pequeños',
+      description: 'Cómo funciona realmente la pronunciación del katakana: vocales largas, consonantes dobles, ャュョ pequeños y los sonidos añadidos para préstamos.'
+    }
+  },
+  'typing-katakana': {
+    en: {
+      title: 'How to Type Katakana on Windows, Mac and Mobile',
+      description: 'Type Katakana on any device: IME setup for Windows and macOS, mobile keyboards, and the shortcuts that convert hiragana instantly.'
+    },
+    de: {
+      title: 'Katakana tippen unter Windows, macOS und mobil',
+      description: 'Katakana auf jedem Gerät tippen: IME-Einrichtung für Windows und macOS, mobile Tastaturen und die Kürzel für sofortige Umwandlung.'
+    },
+    fr: {
+      title: 'Comment taper le katakana sur Windows, macOS et mobile',
+      description: 'Taper le katakana sur n\'importe quel appareil : configuration IME sous Windows et macOS, claviers mobiles et raccourcis de conversion immédiate.'
+    },
+    pt: {
+      title: 'Como Digitar Katakana no Windows, macOS e Celular',
+      description: 'Digite katakana em qualquer dispositivo: configuração de IME no Windows e macOS, teclados móveis e atalhos de conversão imediata.'
+    },
+    es: {
+      title: 'Cómo Escribir Katakana en Windows, macOS y Móvil',
+      description: 'Escribe katakana en cualquier dispositivo: configuración de IME en Windows y macOS, teclados móviles y atajos de conversión inmediata.'
+    }
+  },
+  'katakana-practice': {
+    en: {
+      title: 'Katakana Practice: Exercises for Reading and Recognition',
+      description: 'Practice Katakana with reading, recognition and writing exercises, ordered from single characters to full loanwords.'
+    },
+    de: {
+      title: 'Katakana-Übungen: Lesen und Erkennen trainieren',
+      description: 'Üben Sie Katakana mit Lese-, Erkennungs- und Schreibübungen — von einzelnen Zeichen bis zu vollständigen Lehnwörtern.'
+    },
+    fr: {
+      title: 'Pratique du katakana : exercices de lecture et de reconnaissance',
+      description: 'Entraînez-vous au katakana avec des exercices de lecture, de reconnaissance et d\'écriture, des caractères isolés aux mots d\'emprunt complets.'
+    },
+    pt: {
+      title: 'Prática de Katakana: Exercícios de Leitura e Reconhecimento',
+      description: 'Pratique katakana com exercícios de leitura, reconhecimento e escrita, de caracteres isolados a palavras estrangeiras completas.'
+    },
+    es: {
+      title: 'Práctica de Katakana: Ejercicios de Lectura y Reconocimiento',
+      description: 'Practica katakana con ejercicios de lectura, reconocimiento y escritura, desde caracteres sueltos hasta préstamos completos.'
+    }
+  },
+  'katakana-loanwords': {
+    en: {
+      title: 'Japanese Loanwords in Katakana: How They Work',
+      description: 'How foreign words become Katakana: sound adaptation rules, common English and Portuguese loanwords, and why the result often sounds different.'
+    },
+    de: {
+      title: 'Japanische Lehnwörter in Katakana: So funktionieren sie',
+      description: 'Wie aus fremden Wörtern Katakana werden: Lautanpassung, häufige englische und portugiesische Lehnwörter und warum das Ergebnis oft anders klingt.'
+    },
+    fr: {
+      title: 'Les mots d\'emprunt japonais en katakana : comment ça marche',
+      description: 'Comment les mots étrangers deviennent du katakana : règles d\'adaptation phonétique, emprunts anglais et portugais courants, et pourquoi le résultat sonne souvent différent.'
+    },
+    pt: {
+      title: 'Palavras Estrangeiras em Katakana: Como Funcionam',
+      description: 'Como palavras estrangeiras viram katakana: regras de adaptação sonora, empréstimos comuns do inglês e do português e por que o resultado soa diferente.'
+    },
+    es: {
+      title: 'Préstamos Japoneses en Katakana: Cómo Funcionan',
+      description: 'Cómo las palabras extranjeras se convierten en katakana: reglas de adaptación sonora, préstamos habituales del inglés y del portugués y por qué suenan distinto.'
+    }
+  },
+  'katakana-vs-hiragana-usage': {
+    en: {
+      title: 'Katakana vs Hiragana: When to Use Each Script',
+      description: 'A practical guide to choosing between Katakana and Hiragana: loanwords, emphasis, onomatopoeia, names and the cases that confuse learners.'
+    },
+    de: {
+      title: 'Katakana oder Hiragana: Wann welche Schrift?',
+      description: 'Ein praktischer Leitfaden zur Wahl zwischen Katakana und Hiragana: Lehnwörter, Betonung, Lautmalerei, Namen und die Fälle, die Lernende verwirren.'
+    },
+    fr: {
+      title: 'Katakana ou hiragana : quand utiliser chaque écriture',
+      description: 'Un guide pratique pour choisir entre katakana et hiragana : mots d\'emprunt, mise en valeur, onomatopées, noms et les cas qui déroutent les apprenants.'
+    },
+    pt: {
+      title: 'Katakana ou Hiragana: Quando Usar Cada Escrita',
+      description: 'Um guia prático para escolher entre katakana e hiragana: palavras estrangeiras, ênfase, onomatopeias, nomes e os casos que confundem os estudantes.'
+    },
+    es: {
+      title: 'Katakana o Hiragana: Cuándo Usar Cada Escritura',
+      description: 'Una guía práctica para elegir entre katakana e hiragana: préstamos, énfasis, onomatopeyas, nombres y los casos que confunden a los estudiantes.'
+    }
+  },
+  'common-katakana-words': {
+    en: {
+      title: 'Essential Katakana Words for Beginners',
+      description: 'The Katakana words beginners meet first, grouped by difficulty, with readings, meanings and short practice exercises.'
+    },
+    de: {
+      title: 'Wichtige Katakana-Wörter für Anfänger',
+      description: 'Die Katakana-Wörter, die Anfänger zuerst brauchen — nach Schwierigkeit gruppiert, mit Lesung, Bedeutung und kurzen Übungen.'
+    },
+    fr: {
+      title: 'Mots katakana essentiels pour débutants',
+      description: 'Les mots en katakana que les débutants rencontrent en premier, classés par difficulté, avec lectures, significations et courts exercices.'
+    },
+    pt: {
+      title: 'Palavras Essenciais em Katakana para Iniciantes',
+      description: 'As palavras em katakana que os iniciantes encontram primeiro, agrupadas por dificuldade, com leituras, significados e exercícios curtos.'
+    },
+    es: {
+      title: 'Palabras Esenciales en Katakana para Principiantes',
+      description: 'Las palabras en katakana que los principiantes encuentran primero, agrupadas por dificultad, con lecturas, significados y ejercicios cortos.'
+    }
   }
 };
 
@@ -234,8 +455,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/learn/${slug}`;
+
+  /**
+   * Every article body lives in `public/articles/{slug}.md` and is written in
+   * English only. The de/fr/pt/es routes (`/de/learn/{slug}` …) render that same
+   * English body, so self-canonicalising them made 80 URLs compete with the
+   * English originals as duplicate content. They now point their canonical at
+   * the English URL: 20 indexable article URLs instead of 100.
+   */
+  const canonicalUrl = getArticleCanonicalUrl(slug);
 
   const article = await getArticleBySlug(slug);
   if (!article) {
@@ -251,14 +479,15 @@ export async function generateMetadata({
     description: article.description
   };
 
-  // Generate language alternates for hreflang
-  const languages: Record<string, string> = {};
-  routing.locales.forEach((loc) => {
-    const path = loc === 'en' ? '' : `/${loc}`;
-    languages[loc] = `${baseUrl}${path}/learn/${slug}`;
-  });
-  // Add x-default for international users
-  languages['x-default'] = `${baseUrl}/learn/${slug}`;
+  /**
+   * There is exactly one indexable language for an article (English), so
+   * hreflang is limited to `en` + `x-default`. Listing de/fr/pt/es here would
+   * contradict the canonical above and send Google two conflicting messages.
+   */
+  const languages: Record<string, string> = {
+    'en': canonicalUrl,
+    'x-default': canonicalUrl
+  };
 
   return {
     title: translatedMeta.title,
@@ -327,31 +556,35 @@ export async function generateStructuredData({
 }: {
   params: Promise<{ locale: string; slug: string }>
 }) {
-  const { locale, slug } = await params;
-  const localePath = locale === 'en' ? '' : `/${locale}`;
-  const canonicalUrl = `${baseUrl}${localePath}/learn/${slug}`;
+  const { slug } = await params;
+
+  // Same rule as generateMetadata: the body is English everywhere, so the
+  // structured data must describe the canonical English URL — not the
+  // localised route that only wraps the English body in localised chrome.
+  const canonicalUrl = getArticleCanonicalUrl(slug);
 
   const article = await getArticleBySlug(slug);
   if (!article) {
     return null;
   }
 
-  // Get translated metadata
-  const translatedMeta = articleTranslations[slug]?.[locale] || articleTranslations[slug]?.['en'] || {
-    title: article.title,
-    description: article.description
-  };
-
   return {
     "@context": "https://schema.org",
-    "@type": ["Article", "EducationalOccupationalCredential", "LearningResource"],
-    "headline": translatedMeta.title,
-    "description": translatedMeta.description,
-    "articleBody": translatedMeta.description,
+    "@type": ["Article", "LearningResource"],
+    // headline must match the visible <h1>, which is the English article title
+    // on every locale (the localised title is only used in <title>/meta).
+    "headline": article.title,
+    "description": article.description,
     "url": canonicalUrl,
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": canonicalUrl
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": `${baseUrl}/#website`,
+      "url": baseUrl,
+      "name": "LearnKana"
     },
     "author": {
       "@type": "Organization",
@@ -373,7 +606,7 @@ export async function generateStructuredData({
     "dateModified": article.publishedAt,
     "articleSection": "Japanese Language Education",
     "keywords": article.tags.join(', '),
-    "inLanguage": locale,
+    "inLanguage": ARTICLE_CONTENT_LOCALE,
     "isAccessibleForFree": true,
     "educationalLevel": "Beginner to Intermediate",
     "learningResourceType": ["Article", "Guide", "Tutorial"],

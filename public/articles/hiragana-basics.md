@@ -1,5 +1,7 @@
 # Hiragana Basics Guide: A Complete Introduction to Japanese Writing
 
+> **Romaji note:** long vowels are marked with a macron — おう and おお are written **ō**, うう is **ū**, and ええ is **ē** (えい stays "ei", as in せんせい *sensei*). So おかあさん is *okāsan* and がっこう is *gakkō*.
+
 Welcome to the comprehensive guide to Hiragana, the foundational writing system of the Japanese language. Whether you're a beginner starting your Japanese learning journey or looking to reinforce your understanding, this guide will walk you through everything you need to know about Hiragana.
 
 ## What is Hiragana?
