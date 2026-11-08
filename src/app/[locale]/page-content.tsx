@@ -45,7 +45,8 @@ export default function PageContent() {
             {/* CTA Button */}
             <div className="mb-8 sm:mb-12">
               <Link 
-                href={`/hiragana-katakana-quiz`}
+                href="/hiragana-katakana-quiz?start=hiragana"
+                onClick={() => trackEvent('start_quiz_click', { location: 'home_hero' })}
                 className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-[#FF7E67] to-[#FFD600] text-[#1A1B2F] rounded-2xl hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-xl group"
               >
                 {t('startQuiz')}

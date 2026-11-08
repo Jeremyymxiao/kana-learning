@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { KanaType, Question } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { getQuizKana } from '@/data/gojuon';
+import { recordKanaResult } from '@/lib/progress';
 import { trackQuizAnswer } from '@/lib/tracking';
 import { QuizResult } from '../QuizResult';
 
@@ -17,6 +19,8 @@ interface MatchingGameProps {
 interface Card {
   id: number;
   content: string;
+  /** 进度统计用的稳定 key（平假名） */
+  hiragana: string;
   type: 'kana' | 'romaji';
   isMatched: boolean;
   isWrong: boolean;
@@ -38,6 +42,7 @@ const shuffle = <T,>(array: T[]): T[] => {
 };
 
 export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGameProps) {
+  const t = useTranslations('QuizPage');
   const [cards, setCards] = useState<Card[]>([]);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [matchedPairs, setMatchedPairs] = useState(0);
@@ -56,6 +61,7 @@ export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGame
       newCards.push({
         id: index * 2,
         content: pair.kana,
+        hiragana: pair.hiragana,
         type: 'kana',
         isMatched: false,
         isWrong: false,
@@ -66,6 +72,7 @@ export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGame
       newCards.push({
         id: index * 2 + 1,
         content: pair.romaji,
+        hiragana: pair.hiragana,
         type: 'romaji',
         isMatched: false,
         isWrong: false,
@@ -111,6 +118,7 @@ export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGame
         setMatchedPairs(prev => prev + 1);
         setScore(prev => prev + POINTS_PER_PAIR);
         trackQuizAnswer(difficulty, 'matching', true);
+        recordKanaResult(firstCard.hiragana, true);
 
         if (matchedPairs + 1 === TOTAL_PAIRS) {
           setIsComplete(true);
@@ -128,6 +136,7 @@ export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGame
           return [...prev, {
             id: kanaCard.matchId,
             kana: kanaCard.content,
+            hiragana: kanaCard.hiragana,
             romaji: romajiCard.content,
             userAnswer: romajiCard.type === 'romaji' ? romajiCard.content : kanaCard.content,
             type: 'matching',
@@ -173,14 +182,14 @@ export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGame
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-2">Matching Game</h2>
-        <p className="text-sm text-gray-500 mb-4">Match each kana with its romaji</p>
+        <h2 className="text-2xl font-bold mb-2">{t('matching')}</h2>
+        <p className="text-sm text-gray-500 mb-4">{t('matchingDesc')}</p>
         <div className="flex justify-between items-center max-w-2xl mx-auto mb-4">
           <span className="text-lg">
-            Progress: {matchedPairs}/{TOTAL_PAIRS}
+            {t('progressLabel')}: {matchedPairs}/{TOTAL_PAIRS}
           </span>
           <span className="text-lg">
-            Score: {score}/{TOTAL_PAIRS * POINTS_PER_PAIR}
+            {t('scoreLabel')}: {score}/{TOTAL_PAIRS * POINTS_PER_PAIR}
           </span>
         </div>
       </div>
@@ -193,7 +202,6 @@ export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGame
             disabled={card.isMatched || selectedCards.length === 2}
             variant={selectedCards.includes(index) ? "default" : "outline"}
             lang={card.type === 'kana' ? 'ja' : undefined}
-            aria-label={`${card.type === 'kana' ? 'Kana' : 'Romaji'} card: ${card.content}`}
             className={`
               h-32 text-3xl font-medium p-4
               transition-all duration-300

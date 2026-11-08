@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useCallback, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { KanaType, DictationQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { getQuizKana, isRomajiMatch } from '@/data/gojuon';
+import { recordKanaResult } from '@/lib/progress';
 import { trackQuizAnswer } from '@/lib/tracking';
 import { QuizResult } from '../QuizResult';
 import { Progress } from '@/components/ui/progress';
@@ -28,6 +30,8 @@ const shuffle = <T,>(array: T[]): T[] => {
 };
 
 export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQuizProps) {
+  const t = useTranslations('QuizPage');
+  const tCommon = useTranslations('Common');
   const [questions, setQuestions] = useState<DictationQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -59,6 +63,7 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
         id: index,
         type: 'dictation',
         kana: kana.kana,
+        hiragana: kana.hiragana,
         romaji: kana.romaji,
         aliases: kana.aliases,
         options: shuffle([kana.kana, ...distractors]),
@@ -129,6 +134,8 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
       ? isRomajiMatch(answer, currentQuestion.romaji, currentQuestion.aliases)
       : answer === currentQuestion.kana;
 
+    recordKanaResult(currentQuestion.hiragana, correct);
+
     const answeredQuestion: DictationQuestion = {
       ...currentQuestion,
       userAnswer: answer,
@@ -183,7 +190,7 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
   }
 
   if (!currentQuestion) {
-    return <div className="text-center text-gray-500">Loading...</div>;
+    return <div className="text-center text-gray-500">{tCommon('loading')}</div>;
   }
 
   return (
@@ -193,14 +200,14 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
       </div>
 
       <div className="text-center space-y-2">
-        <h2 className="text-2xl font-bold">Dictation</h2>
+        <h2 className="text-2xl font-bold">{t('dictation')}</h2>
         <p className="text-sm text-gray-500">
-          {degraded
-            ? 'Typing mode: read the kana and type its romaji'
-            : 'Listen and choose the kana you hear'}
+          {degraded ? t('typeTheRomaji') : t('listenAndChoose')}
         </p>
         <div className="text-sm text-gray-500">
-          Question {currentIndex + 1} of {TOTAL_QUESTIONS} | Score: {score}
+          {t('questionOf', { current: currentIndex + 1, total: TOTAL_QUESTIONS })}
+          {' | '}
+          {t('scoreLabel')}: {score}
         </div>
       </div>
 
@@ -209,7 +216,7 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
           role="alert"
           className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-900/20 dark:text-amber-200"
         >
-          你的浏览器不支持语音，已切换为看字打罗马字。请看着下面的假名输入罗马字。
+          {t('ttsUnavailable')}
         </div>
       )}
 
@@ -231,10 +238,10 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
               type="text"
               value={userInput}
               onChange={(event) => setUserInput(event.target.value)}
-              placeholder="Type romaji here..."
+              placeholder={t('typeRomajiPlaceholder')}
               className="text-center"
               disabled={isAnswered}
-              aria-label="Type the romaji for the kana shown"
+              aria-label={t('typeTheRomaji')}
             />
             <div className="flex gap-3">
               <Button
@@ -242,7 +249,7 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
                 disabled={!userInput.trim() || isAnswered}
                 className="flex-1"
               >
-                Submit
+                {t('submit')}
               </Button>
             </div>
           </form>
@@ -257,11 +264,11 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
               variant="outline"
               className="w-full max-w-sm"
             >
-              {isPlaying ? 'Playing...' : 'Play sound (unlimited replays)'}
+              {isPlaying ? t('playing') : t('replaySound')}
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 gap-4" role="group" aria-label="Choose the kana you hear">
+          <div className="grid grid-cols-2 gap-4" role="group" aria-label={t('listenAndChoose')}>
             {currentQuestion.options.map((option, index) => (
               <Button
                 key={option}
@@ -303,9 +310,12 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
                 : 'border-red-300 bg-red-50 dark:border-red-800 dark:bg-red-900/20'
             }`}
           >
-            <p className="font-semibold">{isCorrect ? '✅ Correct!' : '❌ Not quite'}</p>
+            <p className="font-semibold">
+              <span aria-hidden="true">{isCorrect ? '✅ ' : '❌ '}</span>
+              {isCorrect ? t('correct') : t('incorrect')}
+            </p>
             <p className="text-sm">
-              Correct answer:{' '}
+              {t('correctAnswer')}:{' '}
               <span lang="ja" className="font-japanese text-lg font-bold">
                 {currentQuestion.kana}
               </span>
@@ -314,16 +324,15 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
             </p>
             {!isCorrect && (
               <p className="text-sm text-red-700 dark:text-red-300">
-                Your answer: <span>{selectedOption ?? userInput}</span>
+                {t('yourAnswer')}: <span>{selectedOption ?? userInput}</span>
               </p>
             )}
             <Button
               type="button"
               onClick={handleNext}
               className="mt-2"
-              aria-label="Next question"
             >
-              Next →
+              {t('next')} <span aria-hidden="true">→</span>
             </Button>
           </div>
         )}

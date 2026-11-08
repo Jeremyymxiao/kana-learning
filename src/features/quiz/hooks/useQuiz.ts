@@ -1,6 +1,12 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { getQuizKana } from '@/data/gojuon';
 import { trackQuizAnswer } from '@/lib/tracking';
+import {
+  loadProgress,
+  recordKanaResult,
+  sampleWeighted,
+  type ProgressMap,
+} from '@/lib/progress';
 import {
   KanaType,
   TestState,
@@ -11,6 +17,9 @@ import {
   MatchingQuestion,
   SpellingQuestion
 } from '../types';
+
+/** 每轮题目数量（结果页与配置页都以此为准） */
+export const TOTAL_QUESTIONS = 10;
 
 // Fisher-Yates 洗牌算法
 const shuffle = <T,>(array: T[]): T[] => {
@@ -36,9 +45,10 @@ const generateOptions = (
 };
 
 // 生成问题：取池统一走 src/data/gojuon.ts 的 getQuizKana
+// SRS 加权抽题：答错过的优先、没见过的次之、已掌握的只做少量复习（替代纯随机 slice）
 const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] => {
   const availableKana = getQuizKana(kanaType);
-  const selectedKana = shuffle(availableKana).slice(0, 10);
+  const selectedKana = sampleWeighted(availableKana, TOTAL_QUESTIONS);
 
   switch (quizType) {
     case 'choice':
@@ -51,6 +61,7 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
           kana: kana.kana,
           romaji: kana.romaji,
           aliases: kana.aliases,
+          hiragana: kana.hiragana,
           options: generateOptions(
             questionType === 'kanaToRomaji' ? kana.romaji : kana.kana,
             questionType === 'kanaToRomaji'
@@ -67,6 +78,7 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
         kana: kana.kana,
         romaji: kana.romaji,
         aliases: kana.aliases,
+        hiragana: kana.hiragana,
         options: generateOptions(
           kana.kana,
           availableKana.map(k => k.kana)
@@ -80,6 +92,7 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
         kana: kana.kana,
         romaji: kana.romaji,
         aliases: kana.aliases,
+        hiragana: kana.hiragana,
         isFlipped: false,
         isMatched: false
       }));
@@ -90,7 +103,8 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
         type: 'spelling',
         kana: kana.kana,
         romaji: kana.romaji,
-        aliases: kana.aliases
+        aliases: kana.aliases,
+        hiragana: kana.hiragana
       }));
 
     default:
@@ -119,6 +133,21 @@ export const useQuiz = () => {
     kanaType: 'hiragana'
   });
 
+  /**
+   * 本地进度（SRS）的内存副本，供 UI 刷新。
+   * 真正的持久化由 recordKanaResult() 写入 localStorage，这里只镜像返回值。
+   * 注意：初始值在客户端组件里读取（QuizPanel 走 dynamic ssr:false）。
+   */
+  const [progress, setProgress] = useState<ProgressMap>(() => loadProgress());
+
+  /** 同一道题只允许记录一次进度（防双击/连按；StrictMode 下也不会重复写入） */
+  const recordedIdsRef = useRef<Set<string | number>>(new Set<string | number>());
+
+  /** 从 localStorage 重新读取进度（回到配置页 / 结果页时用） */
+  const refreshProgress = useCallback(() => {
+    setProgress(loadProgress());
+  }, []);
+
   // 添加设置分数的方法
   const setScore = useCallback((newScore: number) => {
     setState(prev => ({
@@ -139,6 +168,7 @@ export const useQuiz = () => {
   // 开始新测试
   const startTest = useCallback((kanaType: KanaType, quizType: QuizType) => {
     const questions = generateQuestions(kanaType, quizType);
+    recordedIdsRef.current = new Set<string | number>();
 
     setState({
       isStarted: true,
@@ -173,6 +203,12 @@ export const useQuiz = () => {
       userAnswer: answer,
       isCorrect: correct,
     };
+
+    // SRS：把这一题的对错写进进度（以平假名为 key，片假名共用统计）
+    if (currentQuestion.hiragana && !recordedIdsRef.current.has(currentQuestion.id)) {
+      recordedIdsRef.current.add(currentQuestion.id);
+      setProgress(recordKanaResult(currentQuestion.hiragana, correct));
+    }
 
     trackQuizAnswer(state.kanaType, state.quizType, correct);
 
@@ -226,6 +262,8 @@ export const useQuiz = () => {
     nextQuestion,
     getCurrentQuestion,
     setScore,           // 暴露设置分数的方法
-    setCurrentQuestionIndex  // 暴露设置当前问题索引的方法
+    setCurrentQuestionIndex,  // 暴露设置当前问题索引的方法
+    progress,           // SRS 进度内存副本（recordKanaResult 的返回值）
+    refreshProgress     // 从 localStorage 重新读取进度
   };
 };

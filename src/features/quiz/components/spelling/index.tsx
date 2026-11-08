@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { KanaType, SpellingQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { getQuizKana, isRomajiMatch } from '@/data/gojuon';
+import { recordKanaResult } from '@/lib/progress';
 import { trackQuizAnswer } from '@/lib/tracking';
 import { QuizResult } from '../QuizResult';
 
@@ -27,6 +29,8 @@ const shuffle = <T,>(array: T[]): T[] => {
 };
 
 export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuizProps) {
+  const t = useTranslations('QuizPage');
+  const tCommon = useTranslations('Common');
   const [questions, setQuestions] = useState<SpellingQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -47,6 +51,7 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
         id: index,
         type: 'spelling' as const,
         kana: kana.kana,
+        hiragana: kana.hiragana,
         romaji: kana.romaji,
         aliases: kana.aliases,
       }));
@@ -103,6 +108,8 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
       currentQuestion.aliases
     );
 
+    recordKanaResult(currentQuestion.hiragana, correct);
+
     if (correct) {
       playCorrectSound();
       setScore(prev => prev + 10);
@@ -140,16 +147,21 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
   }
 
   if (!currentQuestion) {
-    return <div className="text-center text-gray-500">Loading...</div>;
+    return <div className="text-center text-gray-500">{tCommon('loading')}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-2">Spelling Quiz</h2>
+        <h2 className="text-2xl font-bold mb-2">{t('spelling')}</h2>
         <p className="text-lg font-medium">
-          <span className="text-primary">Question {currentIndex + 1}/{TOTAL_QUESTIONS}</span> |
-          <span className="ml-2">Score: <span className="text-primary">{score}</span></span>
+          <span className="text-primary">
+            {t('questionOf', { current: currentIndex + 1, total: TOTAL_QUESTIONS })}
+          </span>
+          {' | '}
+          <span className="ml-2">
+            {t('scoreLabel')}: <span className="text-primary">{score}</span>
+          </span>
         </p>
       </div>
 
@@ -165,13 +177,13 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
                 type="text"
                 value={currentAnswer}
                 onChange={(e) => setCurrentAnswer(e.target.value)}
-                placeholder="Type the romaji..."
+                placeholder={t('typeRomajiPlaceholder')}
                 className={`text-center text-xl py-6 ${
                   isCorrect === null ? '' :
                   isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'
                 }`}
                 disabled={isAnswered}
-                aria-label="Type the romaji for this kana"
+                aria-label={t('typeTheRomaji')}
               />
               {isCorrect !== null && (
                 <div className={`absolute right-0 top-0 h-full flex items-center pr-4 ${
@@ -187,7 +199,7 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
                 disabled={!currentAnswer.trim() || isAnswered}
                 className="px-8 py-2"
               >
-                Submit
+                {t('submit')}
               </Button>
               <Button
                 type="button"
@@ -195,15 +207,16 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
                 onClick={() => setShowHint(!showHint)}
                 className="px-4"
                 disabled={isAnswered}
+                aria-expanded={showHint}
               >
-                {showHint ? 'Hide Hint' : 'Show Hint'}
+                {showHint ? t('hideHint') : t('showHint')}
               </Button>
             </div>
           </form>
 
           {showHint && !isAnswered && (
             <div className="mt-4 text-sm text-gray-500 animate-fade-in">
-              Hint: First letter is &quot;{currentQuestion.romaji[0]}&quot;
+              {t('hintFirstLetter', { letter: currentQuestion.romaji[0] })}
             </div>
           )}
         </div>
@@ -218,16 +231,19 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
                   : 'border-red-300 bg-red-50 dark:border-red-800 dark:bg-red-900/20'
               }`}
             >
-              <p className="font-semibold">{isCorrect ? '✅ Correct!' : '❌ Not quite'}</p>
+              <p className="font-semibold">
+                <span aria-hidden="true">{isCorrect ? '✅ ' : '❌ '}</span>
+                {isCorrect ? t('correct') : t('incorrect')}
+              </p>
               <p className="text-sm">
-                Correct spelling:{' '}
+                {t('correctAnswer')}:{' '}
                 <span className="font-mono text-lg font-bold">{currentQuestion.romaji}</span>
                 {' '}
                 <span lang="ja" className="font-japanese text-lg">({currentQuestion.kana})</span>
               </p>
               {!isCorrect && (
                 <p className="text-sm text-red-700 dark:text-red-300">
-                  Your answer: <span className="font-mono">{currentAnswer}</span>
+                  {t('yourAnswer')}: <span className="font-mono">{currentAnswer}</span>
                 </p>
               )}
               <Button
@@ -235,9 +251,8 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
                 type="button"
                 onClick={handleNext}
                 className="mt-2"
-                aria-label="Next question"
               >
-                Next →
+                {t('next')} <span aria-hidden="true">→</span>
               </Button>
             </div>
           )}

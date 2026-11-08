@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button, ButtonProps } from '@/components/ui/button';
 import { ChoiceQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
@@ -12,6 +13,7 @@ interface QuizQuestionProps {
 }
 
 export function QuizQuestion({ question, onSubmit, onNext }: QuizQuestionProps) {
+  const t = useTranslations('QuizPage');
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -75,9 +77,6 @@ export function QuizQuestion({ question, onSubmit, onNext }: QuizQuestionProps) 
   const displayText = question.type === 'kanaToRomaji' ? question.kana : question.romaji;
   const correctAnswer = question.type === 'kanaToRomaji' ? question.romaji : question.kana;
   const kanaOnScreen = question.type === 'kanaToRomaji';
-  const prompt = question.type === 'kanaToRomaji'
-    ? 'Choose the right romaji'
-    : 'Choose the right kana';
 
   return (
     <div className="space-y-4">
@@ -88,11 +87,11 @@ export function QuizQuestion({ question, onSubmit, onNext }: QuizQuestionProps) 
         >
           {displayText}
         </div>
-        <div className="text-sm text-gray-500">{prompt}</div>
-        <div className="text-xs text-gray-400 mt-1">Tip: press 1–4 to answer, Enter for next</div>
+        <div className="text-sm text-gray-500">{t('singleChoiceDesc')}</div>
+        <div className="text-xs text-gray-400 mt-1">{t('keyboardTip')}</div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4" role="group" aria-label="Answer options">
+      <div className="grid grid-cols-2 gap-4" role="group" aria-label={t('singleChoice')}>
         {question.options.map((option, index) => {
           const isSelected = option === selectedAnswer;
           const isCorrectAnswer = option === correctAnswer;
@@ -116,7 +115,6 @@ export function QuizQuestion({ question, onSubmit, onNext }: QuizQuestionProps) 
               variant={variant}
               size="quiz"
               lang={kanaOnScreen ? undefined : 'ja'}
-              aria-label={`Option ${index + 1}: ${option}`}
             >
               <span className="flex items-center justify-center gap-2">
                 <span className="font-mono text-xs opacity-60">{index + 1}</span>
@@ -138,10 +136,11 @@ export function QuizQuestion({ question, onSubmit, onNext }: QuizQuestionProps) 
             }`}
           >
             <p className="font-semibold">
-              {isCorrect ? '✅ Correct!' : '❌ Not quite'}
+              <span aria-hidden="true">{isCorrect ? '✅ ' : '❌ '}</span>
+              {isCorrect ? t('correct') : t('incorrect')}
             </p>
             <p className="text-sm">
-              Correct answer:{' '}
+              {t('correctAnswer')}:{' '}
               <span lang="ja" className="font-japanese text-lg font-bold">
                 {question.kana}
               </span>
@@ -150,7 +149,7 @@ export function QuizQuestion({ question, onSubmit, onNext }: QuizQuestionProps) 
             </p>
             {!isCorrect && selectedAnswer && (
               <p className="text-sm text-red-700 dark:text-red-300">
-                Your answer:{' '}
+                {t('yourAnswer')}:{' '}
                 <span lang={kanaOnScreen ? undefined : 'ja'}>
                   {selectedAnswer}
                 </span>
@@ -160,9 +159,8 @@ export function QuizQuestion({ question, onSubmit, onNext }: QuizQuestionProps) 
               ref={nextButtonRef}
               onClick={onNext}
               className="mt-2"
-              aria-label="Next question"
             >
-              Next →
+              {t('next')} <span aria-hidden="true">→</span>
             </Button>
           </div>
         )}
