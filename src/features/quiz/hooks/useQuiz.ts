@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
-import { gojuonData } from '@/data/gojuon';
-import { 
-  KanaType, 
-  QuestionType, 
-  TestState, 
+import { getQuizKana } from '@/data/gojuon';
+import { trackQuizAnswer } from '@/lib/tracking';
+import {
+  KanaType,
+  TestState,
   Question,
   QuizType,
   ChoiceQuestion,
@@ -11,58 +11,6 @@ import {
   MatchingQuestion,
   SpellingQuestion
 } from '../types';
-
-// 根据假名类型获取可用的假名字符
-const getAvailableKana = (kanaType: KanaType) => {
-  const kanaChars: Array<{ hiragana: string; katakana: string; romaji: string }> = [];
-
-  // 收集清音
-  const addSeion = () => {
-    kanaChars.push(...gojuonData.seion.vowels);
-    gojuonData.seion.consonants.forEach(row => kanaChars.push(...row));
-  };
-
-  // 收集浊音和拗音
-  const addSpecial = () => {
-    gojuonData.dakuon.consonants.forEach(row => kanaChars.push(...row));
-    gojuonData.youon.combinations.forEach(row => kanaChars.push(...row));
-  };
-
-  switch (kanaType) {
-    case 'hiragana':
-    case 'katakana':
-    case 'mixed':
-      addSeion();
-      return kanaChars;
-    case 'special':
-      addSpecial();
-      return kanaChars;
-    case 'all':
-      addSeion();
-      addSpecial();
-      return kanaChars;
-    default:
-      return kanaChars;
-  }
-};
-
-// 生成随机选项
-const generateOptions = (
-  correctAnswer: string,
-  allPossibleAnswers: string[],
-  count: number = 4
-) => {
-  const options = new Set([correctAnswer]);
-  
-  while (options.size < count) {
-    const randomAnswer = allPossibleAnswers[Math.floor(Math.random() * allPossibleAnswers.length)];
-    if (randomAnswer !== correctAnswer) {
-      options.add(randomAnswer);
-    }
-  }
-  
-  return shuffle([...options]);
-};
 
 // Fisher-Yates 洗牌算法
 const shuffle = <T,>(array: T[]): T[] => {
@@ -74,35 +22,40 @@ const shuffle = <T,>(array: T[]): T[] => {
   return newArray;
 };
 
-// 根据假名类型选择显示的字符
-const pickKanaChar = (kana: { hiragana: string; katakana: string }, kanaType: KanaType): string => {
-  if (kanaType === 'katakana') return kana.katakana;
-  if (kanaType === 'mixed') return Math.random() > 0.5 ? kana.katakana : kana.hiragana;
-  return kana.hiragana;
+// 生成随机选项（去重；不足以凑满时返回已有选项，不无限循环）
+const generateOptions = (
+  correctAnswer: string,
+  allPossibleAnswers: string[],
+  count: number = 4
+) => {
+  const uniqueCandidates = [
+    ...new Set(allPossibleAnswers.filter((answer) => answer !== correctAnswer)),
+  ];
+  const distractors = shuffle(uniqueCandidates).slice(0, Math.max(0, count - 1));
+  return shuffle([correctAnswer, ...distractors]);
 };
 
-// 生成问题
+// 生成问题：取池统一走 src/data/gojuon.ts 的 getQuizKana
 const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] => {
-  const availableKana = getAvailableKana(kanaType);
-  const shuffledKana = shuffle(availableKana);
-  const selectedKana = shuffledKana.slice(0, 10);
+  const availableKana = getQuizKana(kanaType);
+  const selectedKana = shuffle(availableKana).slice(0, 10);
 
   switch (quizType) {
     case 'choice':
       return selectedKana.map((kana, index): ChoiceQuestion => {
         const questionType: 'kanaToRomaji' | 'romajiToKana' = Math.random() > 0.5 ? 'kanaToRomaji' : 'romajiToKana';
-        const kanaChar = pickKanaChar(kana, kanaType);
 
         return {
           id: index,
           type: questionType,
-          kana: kanaChar,
+          kana: kana.kana,
           romaji: kana.romaji,
+          aliases: kana.aliases,
           options: generateOptions(
-            questionType === 'kanaToRomaji' ? kana.romaji : kanaChar,
+            questionType === 'kanaToRomaji' ? kana.romaji : kana.kana,
             questionType === 'kanaToRomaji'
               ? availableKana.map(k => k.romaji)
-              : availableKana.map(k => pickKanaChar(k, kanaType))
+              : availableKana.map(k => k.kana)
           )
         };
       });
@@ -111,16 +64,22 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
       return selectedKana.map((kana, index): DictationQuestion => ({
         id: index,
         type: 'dictation',
-        kana: pickKanaChar(kana, kanaType),
-        romaji: kana.romaji
+        kana: kana.kana,
+        romaji: kana.romaji,
+        aliases: kana.aliases,
+        options: generateOptions(
+          kana.kana,
+          availableKana.map(k => k.kana)
+        )
       }));
 
     case 'matching':
       return selectedKana.map((kana, index): MatchingQuestion => ({
         id: index,
         type: 'matching',
-        kana: pickKanaChar(kana, kanaType),
+        kana: kana.kana,
         romaji: kana.romaji,
+        aliases: kana.aliases,
         isFlipped: false,
         isMatched: false
       }));
@@ -129,13 +88,22 @@ const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] =
       return selectedKana.map((kana, index): SpellingQuestion => ({
         id: index,
         type: 'spelling',
-        kana: pickKanaChar(kana, kanaType),
-        romaji: kana.romaji
+        kana: kana.kana,
+        romaji: kana.romaji,
+        aliases: kana.aliases
       }));
 
     default:
       return [];
   }
+};
+
+// 判断当前题目的答案
+const isAnswerCorrect = (question: Question, answer: string): boolean => {
+  if (question.type === 'kanaToRomaji') {
+    return answer.trim().toLowerCase() === question.romaji.toLowerCase();
+  }
+  return answer === question.kana;
 };
 
 export const useQuiz = () => {
@@ -171,7 +139,7 @@ export const useQuiz = () => {
   // 开始新测试
   const startTest = useCallback((kanaType: KanaType, quizType: QuizType) => {
     const questions = generateQuestions(kanaType, quizType);
-    
+
     setState({
       isStarted: true,
       questions,
@@ -185,41 +153,69 @@ export const useQuiz = () => {
     });
   }, []);
 
-  // 提交答案
-  const submitAnswer = useCallback((answer: string) => {
+  /**
+   * 提交答案：只记录答案与对错，不推进题目。
+   * 写入 questions / wrongAnswers 的都是带 userAnswer 的**新对象**。
+   * 用户点 Next（或按 Enter）时才调用 nextQuestion()。
+   */
+  const submitAnswer = useCallback((answer: string): boolean => {
     const currentQuestion = state.questions[state.currentQuestionIndex];
-    
-    // 根据问题类型判断正确答案
-    const isCorrect = currentQuestion.type === 'kanaToRomaji'
-      ? answer.toLowerCase() === currentQuestion.romaji.toLowerCase()
-      : answer === currentQuestion.kana; // romajiToKana 类型需要精确匹配假名
+    if (!currentQuestion) return false;
+
+    // 同一题重复提交（双击/连按）直接返回首次结果，不重复计分
+    if (currentQuestion.userAnswer !== undefined) {
+      return currentQuestion.isCorrect ?? false;
+    }
+
+    const correct = isAnswerCorrect(currentQuestion, answer);
+    const answeredQuestion: Question = {
+      ...currentQuestion,
+      userAnswer: answer,
+      isCorrect: correct,
+    };
+
+    trackQuizAnswer(state.kanaType, state.quizType, correct);
 
     setState(prev => {
+      const question = prev.questions[prev.currentQuestionIndex];
+      if (!question || question.userAnswer !== undefined) return prev;
+
       const newQuestions = [...prev.questions];
       newQuestions[prev.currentQuestionIndex] = {
-        ...currentQuestion,
-        userAnswer: answer
+        ...question,
+        userAnswer: answer,
+        isCorrect: correct,
       };
-
-      const newWrongAnswers = isCorrect 
-        ? prev.wrongAnswers 
-        : [...prev.wrongAnswers, currentQuestion];
 
       return {
         ...prev,
         questions: newQuestions,
-        score: isCorrect ? prev.score + 10 : prev.score,
-        currentQuestionIndex: prev.currentQuestionIndex + 1,
-        wrongAnswers: newWrongAnswers,
-        isComplete: prev.currentQuestionIndex + 1 >= prev.questions.length
+        score: correct ? prev.score + 10 : prev.score,
+        wrongAnswers: correct ? prev.wrongAnswers : [...prev.wrongAnswers, answeredQuestion],
       };
     });
 
-    return isCorrect;
-  }, [state.currentQuestionIndex, state.questions]);
+    return correct;
+  }, [state.currentQuestionIndex, state.questions, state.kanaType, state.quizType]);
+
+  // 进入下一题（未作答时不允许跳过）
+  const nextQuestion = useCallback(() => {
+    setState(prev => {
+      const currentQuestion = prev.questions[prev.currentQuestionIndex];
+      if (!currentQuestion) return prev;
+      if (currentQuestion.userAnswer === undefined) return prev;
+
+      const nextIndex = prev.currentQuestionIndex + 1;
+      return {
+        ...prev,
+        currentQuestionIndex: nextIndex,
+        isComplete: nextIndex >= prev.questions.length,
+      };
+    });
+  }, []);
 
   // 获取当前问题
-  const getCurrentQuestion = useCallback(() => {
+  const getCurrentQuestion = useCallback((): Question | undefined => {
     return state.questions[state.currentQuestionIndex];
   }, [state.currentQuestionIndex, state.questions]);
 
@@ -227,6 +223,7 @@ export const useQuiz = () => {
     ...state,
     startTest,
     submitAnswer,
+    nextQuestion,
     getCurrentQuestion,
     setScore,           // 暴露设置分数的方法
     setCurrentQuestionIndex  // 暴露设置当前问题索引的方法

@@ -15,7 +15,11 @@ export interface BaseQuestion {
   id: string | number;
   kana: string;
   romaji: string;
+  /** 其他可接受的拼写（如 ぢ 的 di） */
+  aliases?: string[];
   userAnswer?: string;
+  /** 判分结果，供结果页复用，避免重复比较 */
+  isCorrect?: boolean;
 }
 
 // 选择题问题接口
@@ -27,6 +31,7 @@ export interface ChoiceQuestion extends BaseQuestion {
 // 听写题问题接口
 export interface DictationQuestion extends BaseQuestion {
   type: 'dictation';
+  options: string[];
 }
 
 // 匹配题问题接口

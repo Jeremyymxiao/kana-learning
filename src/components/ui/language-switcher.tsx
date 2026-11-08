@@ -50,7 +50,7 @@ export function LanguageSwitcher() {
 
   return (
     <Select
-      defaultValue={locale}
+      value={locale}
       onValueChange={onSelectChange}
       disabled={isPending}
     >

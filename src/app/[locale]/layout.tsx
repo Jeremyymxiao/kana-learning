@@ -1,14 +1,16 @@
+import type { Metadata } from 'next'
 import { Noto_Sans_JP } from 'next/font/google'
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { routing } from '../../../i18n.config';
-import { notFound } from 'next/navigation';
-import '../globals.css'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { ThemeProvider } from 'next-themes'
+import { routing } from '../../../i18n.config'
+import { BASE_URL } from '@/lib/seo-utils'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { NavigationProvider } from '@/features/kana/components/navigation-provider'
-import { Analytics } from "@vercel/analytics/react"
-import { generateMetadata } from './metadata'
-import { ThemeProvider } from 'next-themes'
+import AnalyticsScripts from '@/components/analytics/AnalyticsScripts'
+import CookieConsent from '@/components/consent/CookieConsent'
+import '../globals.css'
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -16,49 +18,74 @@ const notoSansJP = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
 })
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+/**
+ * Root document metadata — the ONLY document root for the whole app.
+ *
+ * HARD RULE: never declare `canonical`, `alternates`, `title` or `description`
+ * here. Next.js inherits layout metadata into every child page, so anything
+ * declared here would leak onto every route (this is exactly the P0 bug where
+ * every sub-page canonical pointed at the homepage). Page-level
+ * `generateMetadata` owns those fields.
+ */
+export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png' }],
+    other: [
+      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
 }
 
-export { generateMetadata }
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = await params;
+  const { locale } = await params
+
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
-    notFound();
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
+    notFound()
   }
 
   // Load messages for the specific locale
-  const messages = await getMessages({ locale });
-  
+  const messages = await getMessages({ locale })
+
   return (
     <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* AdSense site verification */}
+        {/* AdSense site verification (meta only — no ad scripts: the site has 0 ad slots) */}
         <meta name="google-adsense-account" content="ca-pub-5334706525054343" />
-        {/* Google AdSense */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5334706525054343" crossOrigin="anonymous"></script>
-        {/* Umami Analytics */}
-        <script defer src="https://umami.jeremyym0612.work/random-string.js" data-website-id="6e68d4ad-8953-412c-8791-43d9c0021c61"></script>
       </head>
       <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <NextIntlClientProvider messages={messages} locale={locale}>
             <AuthProvider>
-              <NavigationProvider>
-                {children}
-                <Analytics />
-              </NavigationProvider>
+              <NavigationProvider>{children}</NavigationProvider>
             </AuthProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
+        {/* Analytics (Vercel Analytics + Umami always; GA4/Clarity only after consent) */}
+        <AnalyticsScripts />
+        {/* Cookie consent banner */}
+        <CookieConsent />
       </body>
     </html>
   )

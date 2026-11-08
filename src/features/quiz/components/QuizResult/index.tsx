@@ -1,20 +1,33 @@
+"use client";
+
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Question, KanaType, QuizType } from '../../types';
-import { useState } from 'react';
+import { SignupCTA } from '@/components/auth/SignupCTA';
+import { trackQuizComplete } from '@/lib/tracking';
 import ReactMarkdown from 'react-markdown';
 
 interface QuizResultProps {
   score: number;
   wrongAnswers: Question[];
   onRetry: () => void;
+  onSwitchKana?: () => void;
   kanaType: KanaType;
   quizType: QuizType;
 }
 
-export function QuizResult({ score, wrongAnswers, onRetry, kanaType, quizType }: QuizResultProps) {
+export function QuizResult({ score, wrongAnswers, onRetry, onSwitchKana, kanaType, quizType }: QuizResultProps) {
   const [analysis, setAnalysis] = useState<string>('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string>('');
+  const trackedRef = useRef(false);
+
+  // 四种题型统一在结果页上报完成（只报一次）
+  useEffect(() => {
+    if (trackedRef.current) return;
+    trackedRef.current = true;
+    trackQuizComplete(kanaType, quizType, score);
+  }, [kanaType, quizType, score]);
 
   const handleAnalyze = async () => {
     setIsAnalyzing(true);
@@ -99,6 +112,26 @@ export function QuizResult({ score, wrongAnswers, onRetry, kanaType, quizType }:
     }
   };
 
+  /**
+   * 按题型决定「哪个是正确答案」：
+   * - romajiToKana：正确答案是假名
+   * - 其余（kanaToRomaji / dictation / spelling / matching）：正确答案是 romaji
+   */
+  const getAnswerPair = (question: Question) => {
+    const kanaFirst = question.type === 'romajiToKana';
+    return {
+      primary: kanaFirst ? question.kana : question.romaji,
+      primaryIsKana: kanaFirst,
+      secondary: kanaFirst ? question.romaji : question.kana,
+    };
+  };
+
+  // 听写题选项是假名、降级后输入是 romaji，按内容判断是否需要 lang="ja"
+  const containsKana = (value?: string) => !!value && /[\u3040-\u30ff]/.test(value);
+
+  const switchKanaTarget: KanaType = kanaType === 'katakana' ? 'hiragana' : 'katakana';
+  const switchKanaLabel = `Switch to ${switchKanaTarget === 'katakana' ? 'Katakana' : 'Hiragana'}`;
+
   return (
     <div className="space-y-6">
       <div className="text-center space-y-2">
@@ -115,29 +148,53 @@ export function QuizResult({ score, wrongAnswers, onRetry, kanaType, quizType }:
         <div className="space-y-4">
           <h3 className="text-xl font-semibold">Review Wrong Answers</h3>
           <div className="space-y-2">
-            {wrongAnswers.map((q, index) => (
-              <div 
-                key={q.id} 
-                className="p-4 bg-gray-100 rounded-lg dark:bg-gray-800"
-              >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <span className="text-sm text-gray-500">Question {index + 1}</span>
-                    <p className="text-lg font-medium mt-1">{q.kana}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-green-600 dark:text-green-400">
-                      Correct Answer: {q.romaji}
+            {wrongAnswers.map((q, index) => {
+              const answer = getAnswerPair(q);
+              const yourAnswerIsKana = q.type === 'romajiToKana' || containsKana(q.userAnswer);
+              return (
+                <div
+                  key={`${q.id}-${index}`}
+                  className="p-4 bg-gray-100 rounded-lg dark:bg-gray-800"
+                >
+                  <div className="flex justify-between items-start gap-3">
+                    <div>
+                      <span className="text-sm text-gray-500">Question {index + 1}</span>
+                      <p className="text-lg font-medium mt-1">
+                        <span lang="ja" className="font-japanese">{q.kana}</span>
+                        <span className="text-sm text-gray-500"> ({q.romaji})</span>
+                      </p>
                     </div>
-                    {q.userAnswer && (
-                      <div className="text-red-600 dark:text-red-400">
-                        Your Answer: {q.userAnswer}
+                    <div className="text-right">
+                      <div className="text-green-600 dark:text-green-400">
+                        Correct Answer:{' '}
+                        <span
+                          lang={answer.primaryIsKana ? 'ja' : undefined}
+                          className={answer.primaryIsKana ? 'font-japanese text-lg font-bold' : 'font-mono font-bold'}
+                        >
+                          {answer.primary}
+                        </span>
+                        <span className="ml-1 text-xs text-gray-500">
+                          ({answer.primaryIsKana ? (
+                            <span className="font-mono">{answer.secondary}</span>
+                          ) : (
+                            <span lang="ja" className="font-japanese">{answer.secondary}</span>
+                          )})
+                        </span>
                       </div>
-                    )}
+                      <div className="text-red-600 dark:text-red-400">
+                        Your Answer:{' '}
+                        <span
+                          lang={yourAnswerIsKana ? 'ja' : undefined}
+                          className={yourAnswerIsKana ? 'font-japanese font-bold' : 'font-mono font-bold'}
+                        >
+                          {q.userAnswer ?? '—'}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="space-y-4">
@@ -170,12 +227,21 @@ export function QuizResult({ score, wrongAnswers, onRetry, kanaType, quizType }:
         </div>
       )}
 
-      <Button 
-        className="w-full bg-primary hover:bg-primary/90" 
-        onClick={onRetry}
-      >
-        Try Again
-      </Button>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Button
+          className="w-full bg-primary hover:bg-primary/90"
+          onClick={onRetry}
+        >
+          Try Again
+        </Button>
+        {onSwitchKana && (
+          <Button variant="outline" className="w-full" onClick={onSwitchKana}>
+            {switchKanaLabel}
+          </Button>
+        )}
+      </div>
+
+      <SignupCTA context="quiz_result" />
     </div>
   );
-} 
+}

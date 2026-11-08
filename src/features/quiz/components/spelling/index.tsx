@@ -1,255 +1,248 @@
 "use client";
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { KanaType, SpellingQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
-import { gojuonData } from '@/data/gojuon';
+import { getQuizKana, isRomajiMatch } from '@/data/gojuon';
+import { trackQuizAnswer } from '@/lib/tracking';
 import { QuizResult } from '../QuizResult';
 
 interface SpellingQuizProps {
   difficulty: KanaType;
-  onComplete: () => void;
+  onRetry: () => void;
+  onSwitchKana: () => void;
 }
 
-export function SpellingQuiz({ difficulty, onComplete }: SpellingQuizProps) {
+const TOTAL_QUESTIONS = 10;
+
+const shuffle = <T,>(array: T[]): T[] => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
+
+export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuizProps) {
   const [questions, setQuestions] = useState<SpellingQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [currentAnswer, setCurrentAnswer] = useState('');
   const [showHint, setShowHint] = useState(false);
+  const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [wrongAnswers, setWrongAnswers] = useState<SpellingQuestion[]>([]);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    initializeQuiz();
-  }, [difficulty]);
+  // 出题：统一取池（排除 っ/ッ、ぢ/づ）
+  const initializeQuiz = useCallback(() => {
+    const pool = getQuizKana(difficulty);
+    const newQuestions: SpellingQuestion[] = shuffle(pool)
+      .slice(0, TOTAL_QUESTIONS)
+      .map((kana, index) => ({
+        id: index,
+        type: 'spelling' as const,
+        kana: kana.kana,
+        romaji: kana.romaji,
+        aliases: kana.aliases,
+      }));
 
-  const initializeQuiz = () => {
-    const newQuestions = generateQuestions();
     setQuestions(newQuestions);
     setCurrentIndex(0);
     setScore(0);
     setIsComplete(false);
     setCurrentAnswer('');
     setShowHint(false);
+    setIsAnswered(false);
+    setIsCorrect(null);
+    setWrongAnswers([]);
+  }, [difficulty]);
+
+  useEffect(() => {
+    initializeQuiz();
+  }, [initializeQuiz]);
+
+  const currentQuestion = questions[currentIndex];
+
+  useEffect(() => {
+    if (isAnswered) nextButtonRef.current?.focus();
+  }, [isAnswered]);
+
+  const handleNext = () => {
+    if (!isAnswered) return;
+    if (currentIndex >= questions.length - 1) {
+      setIsComplete(true);
+      return;
+    }
+    setCurrentIndex(index => index + 1);
+    setCurrentAnswer('');
+    setShowHint(false);
+    setIsAnswered(false);
     setIsCorrect(null);
   };
 
-  const generateQuestions = (): SpellingQuestion[] => {
-    const availableKana = getAvailableKana();
-    const shuffled = shuffleArray(availableKana);
-    return shuffled.slice(0, 10).map((kana, index) => ({
-      id: index,
-      type: 'spelling' as const,
-      kana,
-      romaji: getRomaji(kana),
-      userAnswer: undefined,
-    }));
-  };
+  const handleSubmit = (event?: React.FormEvent) => {
+    event?.preventDefault();
 
-  const getAvailableKana = () => {
-    const pairs: string[] = [];
-
-    const pickKana = (k: { hiragana: string; katakana: string }): string => {
-      if (difficulty === 'katakana') return k.katakana;
-      if (difficulty === 'mixed') return Math.random() > 0.5 ? k.katakana : k.hiragana;
-      return k.hiragana;
-    };
-
-    const addSeion = () => {
-      gojuonData.seion.vowels.forEach(k => pairs.push(pickKana(k)));
-      gojuonData.seion.consonants.forEach(row =>
-        row.forEach(k => pairs.push(pickKana(k)))
-      );
-    };
-
-    const addSpecial = () => {
-      gojuonData.dakuon.consonants.forEach(row =>
-        row.forEach(k => pairs.push(pickKana(k)))
-      );
-      gojuonData.youon.combinations.forEach(row =>
-        row.forEach(k => pairs.push(pickKana(k)))
-      );
-    };
-
-    switch (difficulty) {
-      case 'hiragana':
-      case 'katakana':
-      case 'mixed':
-        addSeion();
-        break;
-      case 'special':
-        addSpecial();
-        break;
-      case 'all':
-        addSeion();
-        addSpecial();
-        break;
+    // 已作答：Enter 直接进入下一题
+    if (isAnswered) {
+      handleNext();
+      return;
     }
 
-    return pairs;
-  };
+    if (!currentQuestion || !currentAnswer.trim()) return;
 
-  const getRomaji = (kana: string): string => {
-    const findInData = (data: typeof gojuonData.seion.vowels[0][]) => 
-      data.find(k => k.hiragana === kana || k.katakana === kana)?.romaji || '';
+    // 放宽判定：忽略大小写/空白，接受 aliases 与长音变体
+    const correct = isRomajiMatch(
+      currentAnswer,
+      currentQuestion.romaji,
+      currentQuestion.aliases
+    );
 
-    // Search in seion
-    const seionVowel = findInData(gojuonData.seion.vowels);
-    if (seionVowel) return seionVowel;
-
-    const seionConsonant = gojuonData.seion.consonants.flatMap(row => row).find(k => 
-      k.hiragana === kana || k.katakana === kana
-    )?.romaji;
-    if (seionConsonant) return seionConsonant;
-
-    // Search in dakuon
-    const dakuon = gojuonData.dakuon.consonants.flatMap(row => row).find(k => 
-      k.hiragana === kana || k.katakana === kana
-    )?.romaji;
-    if (dakuon) return dakuon;
-
-    // Search in youon
-    const youon = gojuonData.youon.combinations.flatMap(row => row).find(k => 
-      k.hiragana === kana || k.katakana === kana
-    )?.romaji;
-    if (youon) return youon;
-
-    return '';
-  };
-
-  const shuffleArray = <T,>(array: T[]): T[] => {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-    return newArray;
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!currentAnswer.trim()) return;
-
-    const currentQuestion = questions[currentIndex];
-    const isAnswerCorrect = currentAnswer.toLowerCase() === currentQuestion.romaji.toLowerCase();
-
-    // Play sound feedback
-    if (isAnswerCorrect) {
+    if (correct) {
       playCorrectSound();
+      setScore(prev => prev + 10);
     } else {
       playWrongSound();
+      setWrongAnswers(prev => [...prev, { ...currentQuestion, userAnswer: currentAnswer, isCorrect: false }]);
     }
 
-    // Update question with user's answer
-    const newQuestions = [...questions];
-    newQuestions[currentIndex] = {
-      ...currentQuestion,
-      userAnswer: currentAnswer
-    };
+    setQuestions(prev => {
+      const next = [...prev];
+      next[currentIndex] = {
+        ...currentQuestion,
+        userAnswer: currentAnswer,
+        isCorrect: correct,
+      };
+      return next;
+    });
 
-    setQuestions(newQuestions);
-    setIsCorrect(isAnswerCorrect);
-
-    // Update score and show result
-    if (isAnswerCorrect) {
-      setScore(score + 10);
-    }
-
-    // Wait a moment to show the result before moving to next question
-    setTimeout(() => {
-      if (currentIndex === questions.length - 1) {
-        setIsComplete(true);
-      } else {
-        setCurrentIndex(currentIndex + 1);
-        setCurrentAnswer('');
-        setIsCorrect(null);
-        setShowHint(false);
-      }
-    }, 1500);
+    trackQuizAnswer(difficulty, 'spelling', correct);
+    setIsCorrect(correct);
+    setIsAnswered(true);
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      handleSubmit(event as unknown as React.FormEvent);
-    }
-  };
+  if (isComplete) {
+    return (
+      <QuizResult
+        score={score}
+        wrongAnswers={wrongAnswers}
+        onRetry={onRetry}
+        onSwitchKana={onSwitchKana}
+        kanaType={difficulty}
+        quizType="spelling"
+      />
+    );
+  }
+
+  if (!currentQuestion) {
+    return <div className="text-center text-gray-500">Loading...</div>;
+  }
 
   return (
     <div className="space-y-6">
-      {isComplete ? (
-        <QuizResult
-          score={score}
-          wrongAnswers={questions.filter(q => q.userAnswer?.toLowerCase() !== q.romaji.toLowerCase())}
-          onRetry={onComplete}
-          kanaType={difficulty}
-          quizType="spelling"
-        />
-      ) : (
-        <>
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-2">Spelling Quiz</h2>
-            <p className="text-lg font-medium">
-              <span className="text-primary">Question {currentIndex + 1}/10</span> | 
-              <span className="ml-2">Score: <span className="text-primary">{score}</span></span>
-            </p>
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-2">Spelling Quiz</h2>
+        <p className="text-lg font-medium">
+          <span className="text-primary">Question {currentIndex + 1}/{TOTAL_QUESTIONS}</span> |
+          <span className="ml-2">Score: <span className="text-primary">{score}</span></span>
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        <div className="text-center">
+          <div lang="ja" className="text-6xl font-bold mb-4 font-japanese">
+            {currentQuestion.kana}
           </div>
 
-          <div className="space-y-6">
-            <div className="text-center">
-              <div className="text-6xl font-bold mb-4">{questions[currentIndex]?.kana}</div>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="relative">
-                  <Input
-                    type="text"
-                    value={currentAnswer}
-                    onChange={(e) => setCurrentAnswer(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Type the romaji..."
-                    className={`text-center text-xl py-6 ${
-                      isCorrect === null ? '' :
-                      isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'
-                    }`}
-                    disabled={isCorrect !== null}
-                  />
-                  {isCorrect !== null && (
-                    <div className={`absolute right-0 top-0 h-full flex items-center pr-4 ${
-                      isCorrect ? 'text-green-600' : 'text-red-600'
-                    }`}>
-                      {isCorrect ? '✓' : '✗'}
-                    </div>
-                  )}
-                </div>
-                <div className="flex justify-center gap-4">
-                  <Button
-                    type="submit"
-                    disabled={!currentAnswer.trim() || isCorrect !== null}
-                    className="px-8 py-2"
-                  >
-                    Submit
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setShowHint(!showHint)}
-                    className="px-4"
-                  >
-                    {showHint ? 'Hide Hint' : 'Show Hint'}
-                  </Button>
-                </div>
-              </form>
-              {showHint && (
-                <div className="mt-4 text-sm text-gray-500 animate-fade-in">
-                  Hint: First letter is &quot;{questions[currentIndex]?.romaji[0]}&quot;
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="relative">
+              <Input
+                type="text"
+                value={currentAnswer}
+                onChange={(e) => setCurrentAnswer(e.target.value)}
+                placeholder="Type the romaji..."
+                className={`text-center text-xl py-6 ${
+                  isCorrect === null ? '' :
+                  isCorrect ? 'border-green-500 bg-green-50' : 'border-red-500 bg-red-50'
+                }`}
+                disabled={isAnswered}
+                aria-label="Type the romaji for this kana"
+              />
+              {isCorrect !== null && (
+                <div className={`absolute right-0 top-0 h-full flex items-center pr-4 ${
+                  isCorrect ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  {isCorrect ? '✓' : '✗'}
                 </div>
               )}
             </div>
-          </div>
-        </>
-      )}
+            <div className="flex justify-center gap-4">
+              <Button
+                type="submit"
+                disabled={!currentAnswer.trim() || isAnswered}
+                className="px-8 py-2"
+              >
+                Submit
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowHint(!showHint)}
+                className="px-4"
+                disabled={isAnswered}
+              >
+                {showHint ? 'Hide Hint' : 'Show Hint'}
+              </Button>
+            </div>
+          </form>
+
+          {showHint && !isAnswered && (
+            <div className="mt-4 text-sm text-gray-500 animate-fade-in">
+              Hint: First letter is &quot;{currentQuestion.romaji[0]}&quot;
+            </div>
+          )}
+        </div>
+
+        {/* 反馈闸门：答完停住，等用户点 Next / 按 Enter */}
+        <div aria-live="polite" role="status" className="min-h-[96px]">
+          {isAnswered && (
+            <div
+              className={`rounded-lg border p-4 text-center space-y-1 ${
+                isCorrect
+                  ? 'border-green-300 bg-green-50 dark:border-green-800 dark:bg-green-900/20'
+                  : 'border-red-300 bg-red-50 dark:border-red-800 dark:bg-red-900/20'
+              }`}
+            >
+              <p className="font-semibold">{isCorrect ? '✅ Correct!' : '❌ Not quite'}</p>
+              <p className="text-sm">
+                Correct spelling:{' '}
+                <span className="font-mono text-lg font-bold">{currentQuestion.romaji}</span>
+                {' '}
+                <span lang="ja" className="font-japanese text-lg">({currentQuestion.kana})</span>
+              </p>
+              {!isCorrect && (
+                <p className="text-sm text-red-700 dark:text-red-300">
+                  Your answer: <span className="font-mono">{currentAnswer}</span>
+                </p>
+              )}
+              <Button
+                ref={nextButtonRef}
+                type="button"
+                onClick={handleNext}
+                className="mt-2"
+                aria-label="Next question"
+              >
+                Next →
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

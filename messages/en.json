@@ -190,7 +190,8 @@
     "katakanaTitle": "Katakana",
     "katakanaDescription": "Used for foreign loanwords, emphasis, and technical terms in Japanese writing.",
     "learnKatakana": "Learn Katakana →",
-    "learningGuidesTitle": "Learning Guides"
+    "learningGuidesTitle": "Learning Guides",
+    "alreadyLearning": "Already learning?"
   },
   "ChatPage": {
     "title": "Japanese Learning Assistant",

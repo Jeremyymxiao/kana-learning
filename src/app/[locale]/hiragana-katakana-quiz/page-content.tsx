@@ -68,7 +68,7 @@ export default function QuizPageContent() {
                       </div>
                       <h1
                         id="quiz-heading"
-                        className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#60A5FA] to-[#34D399] text-transparent bg-clip-text"
+                        className="text-4xl font-bold mb-4 text-blue-700 dark:text-blue-300"
                       >
                         {t('title')}
                       </h1>

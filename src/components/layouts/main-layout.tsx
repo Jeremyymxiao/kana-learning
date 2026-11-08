@@ -6,7 +6,9 @@ import Footer from './footer';
 import { useAuth } from '@/providers/AuthProvider';
 import { useNavigation } from '@/features/kana/components/navigation-provider';
 import { Button } from '@/components/ui/button';
-import { useRouter, usePathname } from '../../../i18n.config';
+import { useRouter, usePathname, Link } from '../../../i18n.config';
+import { useTranslations } from 'next-intl';
+import { trackEvent } from '@/lib/tracking';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -38,6 +40,7 @@ const AuthButtons: React.FC<{ user: AuthUser | null; loading: boolean; signOut: 
   signOut
 }) => {
   const router = useRouter();
+  const t = useTranslations('Navigation');
 
   if (loading) {
     return (
@@ -77,12 +80,25 @@ const AuthButtons: React.FC<{ user: AuthUser | null; loading: boolean; signOut: 
     );
   }
 
+  // 未登录：注册是主行动，登录次之——两者都必须能在首屏点得到。
   return (
-    <Button
-      onClick={() => router.push('/auth?mode=login')}
-    >
-      Login
-    </Button>
+    <div className="flex items-center gap-2">
+      <Button
+        variant="ghost"
+        size="sm"
+        asChild
+        onClick={() => trackEvent('login_click', { location: 'nav' })}
+      >
+        <Link href="/login">{t('login')}</Link>
+      </Button>
+      <Button
+        size="sm"
+        asChild
+        onClick={() => trackEvent('signup_click', { location: 'nav' })}
+      >
+        <Link href="/register">{t('register')}</Link>
+      </Button>
+    </div>
   );
 };
 

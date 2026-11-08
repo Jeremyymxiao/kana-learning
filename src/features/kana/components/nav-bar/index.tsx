@@ -68,6 +68,26 @@ export function NavBar({ authButtons }: NavBarProps) {
   const t = useTranslations('Navigation');
   const locale = useLocale();
 
+  // 兜底：即使外部没有传入 authButtons，桌面与移动端也必须能到达登录/注册。
+  const authSlot = authButtons ?? (
+    <div className="flex items-center gap-2">
+      <Link
+        href="/login"
+        onClick={() => setIsMenuOpen(false)}
+        className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-[#2B7FFF] dark:hover:text-[#2B7FFF]"
+      >
+        {t('login')}
+      </Link>
+      <Link
+        href="/register"
+        onClick={() => setIsMenuOpen(false)}
+        className="rounded-xl bg-[#2B7FFF] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1f6ae0] transition-colors"
+      >
+        {t('register')}
+      </Link>
+    </div>
+  );
+
   const navItems: NavItem[] = [
     { name: t('home'), icon: <Book className="w-7 h-4" />, key: 'home' },
     { name: t('chat'), icon: <MessageSquare className="w-7 h-4" />, key: 'chat' },
@@ -116,13 +136,24 @@ export function NavBar({ authButtons }: NavBarProps) {
                 <span className="text-sm font-medium">{item.name}</span>
               </button>
             ))}
-            {authButtons && <div className="ml-4">{authButtons}</div>}
+            {authSlot && <div className="ml-4">{authSlot}</div>}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex md:hidden ml-auto">
+          {/* Mobile menu button —— 注册入口在移动端也要直接可见 */}
+          <div className="flex md:hidden ml-auto items-center gap-2">
+            {!authButtons && (
+              <Link
+                href="/register"
+                className="rounded-xl bg-[#2B7FFF] px-3 py-1.5 text-sm font-semibold text-white"
+              >
+                {t('register')}
+              </Link>
+            )}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-nav"
               className="p-2 rounded-xl bg-gray-100/50 dark:bg-white/5 text-gray-600 dark:text-gray-400"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -132,7 +163,7 @@ export function NavBar({ authButtons }: NavBarProps) {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 inset-x-0 bg-white/80 dark:bg-[#1A1B2F]/80 backdrop-blur-xl border-b border-gray-200/20 dark:border-white/10">
+          <div id="mobile-nav" className="md:hidden absolute top-16 inset-x-0 bg-white/80 dark:bg-[#1A1B2F]/80 backdrop-blur-xl border-b border-gray-200/20 dark:border-white/10">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
                 <Link
@@ -151,7 +182,7 @@ export function NavBar({ authButtons }: NavBarProps) {
                   <span className="text-sm font-medium">{item.name}</span>
                 </Link>
               ))}
-              {authButtons && <div className="px-4 py-3">{authButtons}</div>}
+              {authSlot && <div className="px-4 py-3">{authSlot}</div>}
             </div>
           </div>
         )}

@@ -1,15 +1,17 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { KanaType, Question } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
-import { gojuonData } from '@/data/gojuon';
+import { getQuizKana } from '@/data/gojuon';
+import { trackQuizAnswer } from '@/lib/tracking';
 import { QuizResult } from '../QuizResult';
 
 interface MatchingGameProps {
   difficulty: KanaType;
-  onComplete: () => void;
+  onRetry: () => void;
+  onSwitchKana: () => void;
 }
 
 interface Card {
@@ -22,64 +24,20 @@ interface Card {
   matchContent: string;
 }
 
-interface KanaPair {
-  kana: string;
-  romaji: string;
-}
+const TOTAL_PAIRS = 10;
+const POINTS_PER_PAIR = 10;
 
-// 获取可用的假名对
-const getAvailableKana = (difficulty: KanaType): KanaPair[] => {
-  const pairs: KanaPair[] = [];
-  
-  const pickKana = (k: { hiragana: string; katakana: string }): string => {
-    if (difficulty === 'katakana') return k.katakana;
-    if (difficulty === 'mixed') return Math.random() > 0.5 ? k.katakana : k.hiragana;
-    return k.hiragana;
-  };
-
-  const addSeion = () => {
-    gojuonData.seion.vowels.forEach(k => {
-      pairs.push({ kana: pickKana(k), romaji: k.romaji });
-    });
-    gojuonData.seion.consonants.forEach(row => {
-      row.forEach(k => {
-        pairs.push({ kana: pickKana(k), romaji: k.romaji });
-      });
-    });
-  };
-
-  const addSpecial = () => {
-    gojuonData.dakuon.consonants.forEach(row => {
-      row.forEach(k => {
-        pairs.push({ kana: pickKana(k), romaji: k.romaji });
-      });
-    });
-    gojuonData.youon.combinations.forEach(row => {
-      row.forEach(k => {
-        pairs.push({ kana: pickKana(k), romaji: k.romaji });
-      });
-    });
-  };
-
-  switch (difficulty) {
-    case 'hiragana':
-    case 'katakana':
-    case 'mixed':
-      addSeion();
-      break;
-    case 'special':
-      addSpecial();
-      break;
-    case 'all':
-      addSeion();
-      addSpecial();
-      break;
+// Fisher-Yates 洗牌
+const shuffle = <T,>(array: T[]): T[] => {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
-
-  return pairs;
+  return newArray;
 };
 
-export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
+export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGameProps) {
   const [cards, setCards] = useState<Card[]>([]);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [matchedPairs, setMatchedPairs] = useState(0);
@@ -87,49 +45,50 @@ export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
   const [wrongAnswers, setWrongAnswers] = useState<Question[]>([]);
   const [isComplete, setIsComplete] = useState(false);
 
-  // 初始化游戏
-  useEffect(() => {
-    const initializeGame = () => {
-      const availablePairs = getAvailableKana(difficulty);
-      const shuffledPairs = [...availablePairs].sort(() => Math.random() - 0.5).slice(0, 10);
-      
-      const cards: Card[] = [];
-      shuffledPairs.forEach((pair, index) => {
-        // 添加假名卡片
-        cards.push({
-          id: index * 2,
-          content: pair.kana,
-          type: 'kana',
-          isMatched: false,
-          isWrong: false,
-          matchId: index,
-          matchContent: pair.romaji
-        });
-        // 添加罗马字卡片
-        cards.push({
-          id: index * 2 + 1,
-          content: pair.romaji,
-          type: 'romaji',
-          isMatched: false,
-          isWrong: false,
-          matchId: index,
-          matchContent: pair.kana
-        });
+  // 初始化游戏：出题走统一取池（排除 っ/ッ、ぢ/づ）
+  const initializeGame = useCallback(() => {
+    const availablePairs = getQuizKana(difficulty);
+    const pickedPairs = shuffle(availablePairs).slice(0, TOTAL_PAIRS);
+
+    const newCards: Card[] = [];
+    pickedPairs.forEach((pair, index) => {
+      // 假名卡片
+      newCards.push({
+        id: index * 2,
+        content: pair.kana,
+        type: 'kana',
+        isMatched: false,
+        isWrong: false,
+        matchId: index,
+        matchContent: pair.romaji,
       });
+      // 罗马字卡片
+      newCards.push({
+        id: index * 2 + 1,
+        content: pair.romaji,
+        type: 'romaji',
+        isMatched: false,
+        isWrong: false,
+        matchId: index,
+        matchContent: pair.kana,
+      });
+    });
 
-      // 随机排序卡片
-      setCards(cards.sort(() => Math.random() - 0.5));
-      setSelectedCards([]);
-      setScore(100);
-      setMatchedPairs(0);
-    };
-
-    initializeGame();
+    setCards(shuffle(newCards));
+    setSelectedCards([]);
+    setScore(0);
+    setMatchedPairs(0);
+    setWrongAnswers([]);
+    setIsComplete(false);
   }, [difficulty]);
+
+  useEffect(() => {
+    initializeGame();
+  }, [initializeGame]);
 
   // 处理卡片点击
   const handleCardClick = (index: number) => {
-    if (cards[index].isMatched || selectedCards.length === 2) return;
+    if (!cards[index] || cards[index].isMatched || selectedCards.length === 2) return;
 
     const newSelectedCards = [...selectedCards, index];
     setSelectedCards(newSelectedCards);
@@ -146,41 +105,49 @@ export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
         // Matched
         playCorrectSound();
         const newCards = [...cards];
-        newCards[firstIndex].isMatched = true;
-        newCards[secondIndex].isMatched = true;
+        newCards[firstIndex] = { ...newCards[firstIndex], isMatched: true };
+        newCards[secondIndex] = { ...newCards[secondIndex], isMatched: true };
         setCards(newCards);
         setMatchedPairs(prev => prev + 1);
-        setScore(prev => prev + 10);
+        setScore(prev => prev + POINTS_PER_PAIR);
+        trackQuizAnswer(difficulty, 'matching', true);
 
-        if (matchedPairs + 1 === 10) {
+        if (matchedPairs + 1 === TOTAL_PAIRS) {
           setIsComplete(true);
         }
       } else {
         // Not matched
         playWrongSound();
+        trackQuizAnswer(difficulty, 'matching', false);
         const kanaCard = firstCard.type === 'kana' ? firstCard : secondCard;
         const romajiCard = firstCard.type === 'romaji' ? firstCard : secondCard;
-        
-        setWrongAnswers(prev => [...prev, {
-          id: kanaCard.matchId,
-          kana: kanaCard.content,
-          romaji: kanaCard.matchContent,
-          userAnswer: romajiCard.content,
-          type: 'matching',
-          isFlipped: false,
-          isMatched: false
-        }]);
+
+        // 同一对只记一次，避免重复错误淹没结果页
+        setWrongAnswers(prev => {
+          if (prev.some(item => item.id === kanaCard.matchId)) return prev;
+          return [...prev, {
+            id: kanaCard.matchId,
+            kana: kanaCard.content,
+            romaji: romajiCard.content,
+            userAnswer: romajiCard.type === 'romaji' ? romajiCard.content : kanaCard.content,
+            type: 'matching',
+            isFlipped: false,
+            isMatched: false,
+          }];
+        });
 
         const newCards = [...cards];
-        newCards[firstIndex].isWrong = true;
-        newCards[secondIndex].isWrong = true;
+        newCards[firstIndex] = { ...newCards[firstIndex], isWrong: true };
+        newCards[secondIndex] = { ...newCards[secondIndex], isWrong: true };
         setCards(newCards);
 
         setTimeout(() => {
-          const resetCards = [...newCards];
-          resetCards[firstIndex].isWrong = false;
-          resetCards[secondIndex].isWrong = false;
-          setCards(resetCards);
+          setCards(prev => {
+            const resetCards = [...prev];
+            resetCards[firstIndex] = { ...resetCards[firstIndex], isWrong: false };
+            resetCards[secondIndex] = { ...resetCards[secondIndex], isWrong: false };
+            return resetCards;
+          });
         }, 1000);
       }
 
@@ -195,7 +162,8 @@ export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
       <QuizResult
         score={score}
         wrongAnswers={wrongAnswers}
-        onRetry={onComplete}
+        onRetry={onRetry}
+        onSwitchKana={onSwitchKana}
         kanaType={difficulty}
         quizType="matching"
       />
@@ -206,12 +174,13 @@ export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-2">Matching Game</h2>
+        <p className="text-sm text-gray-500 mb-4">Match each kana with its romaji</p>
         <div className="flex justify-between items-center max-w-2xl mx-auto mb-4">
           <span className="text-lg">
-            Progress: {matchedPairs}/10
+            Progress: {matchedPairs}/{TOTAL_PAIRS}
           </span>
           <span className="text-lg">
-            Score: {score}
+            Score: {score}/{TOTAL_PAIRS * POINTS_PER_PAIR}
           </span>
         </div>
       </div>
@@ -223,6 +192,8 @@ export function MatchingGame({ difficulty, onComplete }: MatchingGameProps) {
             onClick={() => handleCardClick(index)}
             disabled={card.isMatched || selectedCards.length === 2}
             variant={selectedCards.includes(index) ? "default" : "outline"}
+            lang={card.type === 'kana' ? 'ja' : undefined}
+            aria-label={`${card.type === 'kana' ? 'Kana' : 'Romaji'} card: ${card.content}`}
             className={`
               h-32 text-3xl font-medium p-4
               transition-all duration-300

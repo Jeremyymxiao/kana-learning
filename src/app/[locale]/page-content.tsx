@@ -5,9 +5,11 @@ import { MessageSquare, Table, PenTool, ArrowRight, Repeat, BookOpen } from 'luc
 import { Link } from '../../../i18n.config';
 import { articles } from '@/data/articles';
 import { useTranslations } from 'next-intl';
+import { trackEvent } from '@/lib/tracking';
 
 export default function PageContent() {
   const t = useTranslations('HomePage');
+  const tn = useTranslations('Navigation');
   
   return (
     <MainLayout>
@@ -50,6 +52,26 @@ export default function PageContent() {
                 <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-3 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
+
+            {/* 回访用户 / 已有进度的用户入口：首屏就能注册或登录 */}
+            <p className="mb-8 sm:mb-12 text-sm sm:text-base text-white/70">
+              {t('alreadyLearning')}{' '}
+              <Link
+                href="/login"
+                onClick={() => trackEvent('login_click', { location: 'home_hero' })}
+                className="font-semibold text-white underline underline-offset-4 hover:text-[#FFD600]"
+              >
+                {tn('login')}
+              </Link>
+              {' · '}
+              <Link
+                href="/register"
+                onClick={() => trackEvent('signup_click', { location: 'home_hero' })}
+                className="font-semibold text-white underline underline-offset-4 hover:text-[#FFD600]"
+              >
+                {tn('register')}
+              </Link>
+            </p>
 
             {/* 功能预览列表 */}
             <div className="flex flex-row flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-10 md:gap-16 text-center">

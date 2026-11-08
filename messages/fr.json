@@ -70,7 +70,8 @@
     "katakanaTitle": "Katakana",
     "katakanaDescription": "Utilisé pour les mots étrangers, l'emphase et les termes techniques dans l'écriture japonaise.",
     "learnKatakana": "Apprendre le Katakana →",
-    "learningGuidesTitle": "Guides d'apprentissage"
+    "learningGuidesTitle": "Guides d'apprentissage",
+    "alreadyLearning": "Déjà en train d’apprendre ?"
   },
   "LearnPage": {
     "title": "Apprendre les Kana Japonais",
