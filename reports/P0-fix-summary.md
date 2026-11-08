@@ -115,3 +115,16 @@ BASE_URL=https://learnkana.pro node scripts/smoke.mjs
 5. `sitemap.ts` 的 lastmod 仍写死 2025 年；`/en` 是 307 而非 301。
 6. CSP 仍被注释；无 error.tsx / not-found.tsx；无 E2E 测试。
 7. 促销文案（FAQ 里的 SRS/自适应/笔顺动画）仍未与实现对齐 —— 在补齐功能前建议先改写文案。
+
+## 六、上线结果（2026-11-08 22:20 SGT）
+
+- 生产 commit：`8963f07`（`GET /api/version` → `{"commit":"8963f07…","env":"production","builtAt":"2026-11-08T14:11:32Z"}`）
+- 线上冒烟：`BASE_URL=https://learnkana.pro node scripts/smoke.mjs` → **32/32 PASS**
+- 线上附加核验：
+  - 每页 `<html>` 计数 = 1；`/de` 首元素 `<html lang="de">`
+  - canonical 全部自指；hreflang 含 x-default
+  - `adsbygoogle=0`、`gtag=0`（同意前不加载）、`umami` 常驻
+  - `/en` → 307 `/`；`robots.txt` 无 `*.xml`
+  - 首页有 `/register` + `/login`；页脚无站外链接；quiz 页 h1 存在、渐变低对比度标题已移除
+  - Cookie Policy 2424 词、Privacy Policy 1887 词
+- 备注：DNS 面板提示 `A @ → 216.150.1.1`（Vercel 新 IP 段），旧 `76.76.21.21` 仍可用，非阻塞；建议择期更新以免未来失效。
