@@ -59,3 +59,14 @@ promotion 后我会验证：`/api/version` = `faa3659`、sitemap 75 条、`/de/l
 4. **7 单元课程路径**（清音分单元 → 浊音 → 拗音 → 特殊拍 → 片假名 → 外来音 → 综合）。
 5. `/learn` 列表页 `ItemList` schema、`/en` 301 归一、CSP、E2E 测试。
 6. 字体降到 2 字重后 `font-medium` 无 500 字面（视觉略细），需真机确认是否接受（回退代价 +94 KB）。
+
+## 六、线上验收（2026-11-09）
+
+- 生产 `/api/version` → **`6cd995c`**（env=production）；自动部署已生效（用户开启 Settings → Environments → Production → Auto-assign Custom Production Domains 后，main 推送约 1 分钟自动上线）
+- `BASE_URL=https://learnkana.pro node scripts/smoke.mjs` → **32/32 PASS**
+- sitemap **75** 条 ✅；`/de/learn/hiragana-basics` canonical → `https://learnkana.pro/learn/hiragana-basics` ✅；首页 FAQPage ✅；`<html>` 每页 1 个 ✅
+- 缓存实测：
+  - `/_next/static/*` → `cache-control: public,max-age=31536000,immutable`，`x-vercel-cache: HIT` ✅
+  - HTML（`/`、`/de`）仍是 `private, no-cache, no-store` + `MISS` ⚠️ —— 已排除 cookie 因素（`localeCookie:false` 后无 Set-Cookie），原因是 next-intl middleware 的 rewrite 让 Vercel 按动态路由处理（`x-matched-path: /[locale]`）
+  - TTFB 实测：`/` 0.84s、`/quiz` 0.45s、`/de` 0.51s（区域 `iad1`，跨区延迟）
+- 后续优化（Phase 3）：① 把默认语言 rewrite 从 middleware 移到 `next.config` beforeFiles，让 `/` 直接命中预渲染文档；② 或给页面设 `preferredRegion`（如 `sin1`）降低亚洲 TTFB；③ `/learn` 列表页 ItemList schema
