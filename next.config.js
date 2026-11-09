@@ -144,18 +144,11 @@ const nextConfig = {
           { key: 'Cache-Control', value: 'no-store, max-age=0, must-revalidate' },
         ],
       },
-      // Everything else (HTML documents, public files, sitemap/robots):
-      // let the CDN cache and serve stale-while-revalidate so repeat visits
-      // hit the edge instead of re-rendering the function.
-      {
-        source: '/:path((?!_next|api).*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=0, s-maxage=86400, stale-while-revalidate=86400',
-          },
-        ],
-      },
+      // NOTE: 不要再给 HTML 加全局 Cache-Control 规则。
+      // - `source` 用 path-to-regexp，不支持 `(?!)` 负向前瞻，写了会静默失效；
+      // - 预渲染页面由 Vercel 自动以 `x-vercel-cache: PRERENDER/HIT` 提供；
+      // - 页面之所以曾变成 no-store，是中间件写了 NEXT_LOCALE cookie，
+      //   已在 i18n.config.ts 用 `localeCookie: false` 关闭。
     ];
   },
   webpack: (config) => {
