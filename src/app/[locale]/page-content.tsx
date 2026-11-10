@@ -4,6 +4,7 @@ import MainLayout from '@/components/layouts/main-layout';
 import { Link } from '../../../i18n.config';
 import { articles } from '@/data/articles';
 import { curriculum } from '@/data/curriculum';
+import { findKana } from '@/data/gojuon';
 import { useTranslations } from 'next-intl';
 import { trackEvent } from '@/lib/tracking';
 import { ArrowUpRight } from 'lucide-react';
@@ -54,7 +55,7 @@ export default function PageContent() {
   const latestArticles = articles.slice(0, 4);
 
   return (
-    <MainLayout>
+    <MainLayout fullBleed>
       <div className="kl-home">
         {/* ── 01 · Station board ─────────────────────────────────────── */}
         <section className="kl-hero" aria-labelledby="kl-hero-title">
@@ -104,6 +105,7 @@ export default function PageContent() {
 
             <div className="kl-hero-kana" aria-hidden="true">
               <span className="kl-glyph" lang="ja">あ</span>
+              <span className="kl-glyph-rule" />
               <span className="kl-glyph-caption">a</span>
               <span className="kl-platform">1</span>
             </div>
@@ -166,7 +168,12 @@ export default function PageContent() {
                       <span className="kl-station-goal">{tc(`units.${unit.id}.goal`)}</span>
                     </span>
                     <span className="kl-station-count" lang="ja">
-                      {unit.kana.slice(0, 6).join('')}
+                      {(unit.id === 'u7'
+                        ? unit.kana.map((kana) => findKana(kana)?.katakana ?? kana)
+                        : unit.kana
+                      )
+                        .slice(0, 6)
+                        .join('')}
                       {unit.kana.length > 6 ? '…' : ''}
                     </span>
                     <ArrowUpRight aria-hidden="true" className="kl-station-arrow" />

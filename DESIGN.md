@@ -8,6 +8,8 @@ colors:
   route-green: "#0B7A45"
   seal-vermilion: "#C4342B"
   seal-vermilion-deep: "#A82A23"
+  dark-rule: "#24261F"
+  dark-muted-ink: "#A3A39A"
   rule: "#E2E0D6"
   night: "#14140F"
   dark-paper: "#0D0E0B"
@@ -100,11 +102,35 @@ typography:
     lineHeight: 1.7
     letterSpacing: "normal"
   h3:
+    fontFamily: "Archivo, Noto Sans JP, sans-serif"
+    fontSize: "clamp(1.15rem, 1.9vw, 1.55rem)"
+    fontWeight: 800
+    lineHeight: 1.05
+    letterSpacing: "-0.03em"
+  h2-compact:
+    fontFamily: "Archivo, Noto Sans JP, sans-serif"
+    fontSize: "clamp(1.45rem, 2.5vw, 2.1rem)"
+    fontWeight: 800
+    lineHeight: 1.02
+    letterSpacing: "-0.03em"
+  row-title:
     fontFamily: "Noto Sans JP, sans-serif"
     fontSize: "clamp(1.05rem, 1.6vw, 1.3rem)"
     fontWeight: 700
     lineHeight: 1.25
     letterSpacing: "normal"
+  nav-link:
+    fontFamily: "Archivo, Noto Sans JP, sans-serif"
+    fontSize: "0.74rem"
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: "0.08em"
+  micro-tag:
+    fontFamily: "Noto Sans JP, sans-serif"
+    fontSize: "0.6rem"
+    fontWeight: 500
+    lineHeight: 1
+    letterSpacing: "0.2em"
 rounded:
   seal: "2px"
   dot: "999px"

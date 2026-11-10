@@ -1,57 +1,64 @@
 import { Link } from '../../../i18n.config';
 
+const COLUMNS = [
+  {
+    title: 'Study',
+    links: [
+      { href: '/course', label: 'Course' },
+      { href: '/hiragana-katakana-quiz', label: 'Kana quiz' },
+      { href: '/hiragana-katakana-chart', label: 'Kana chart' },
+      { href: '/hiragana-katakana-converter', label: 'Kana converter' },
+      { href: '/japanese-text-analyzer', label: 'Text analyzer' },
+      { href: '/learn', label: 'Learning guides' },
+      { href: '/chat', label: 'AI chat' },
+    ],
+  },
+  {
+    title: 'Site',
+    links: [
+      { href: '/about', label: 'About' },
+      { href: '/contact-us', label: 'Contact' },
+      { href: '/terms-of-service', label: 'Terms of Service' },
+      { href: '/privacy-policy', label: 'Privacy Policy' },
+      { href: '/cookie-policy', label: 'Cookie Policy' },
+    ],
+  },
+] as const;
+
 export default function Footer() {
-    return (
-      <footer className="bg-gray-900 text-white pt-12 pb-8">
-        <div className="container mx-auto px-4">
-          {/* Footer Grid —— 只保留站内导航与法务入口，不再放置站外工具目录链接 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8">
-            {/* Company Info */}
-            <div className="md:col-span-6 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
-              <h3 className="text-xl font-bold mb-4">LearnKana</h3>
-              <p className="text-gray-400 mb-4">
-                Making Japanese learning accessible and enjoyable for everyone.
-              </p>
-            </div>
-
-            {/* Quick Links */}
-            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2">
-                <li><Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/about" className="text-gray-400 hover:text-white transition-colors">About</Link></li>
-                <li><Link href="/hiragana-katakana-chart" className="text-gray-400 hover:text-white transition-colors">Kana Chart</Link></li>
-                <li><Link href="/hiragana-katakana-quiz" className="text-gray-400 hover:text-white transition-colors">Kana Quiz</Link></li>
-                <li><Link href="/hiragana-katakana-converter" className="text-gray-400 hover:text-white transition-colors">Kana Converter</Link></li>
-                <li><Link href="/learn" className="text-gray-400 hover:text-white transition-colors">Learning Guides</Link></li>
-                <li><Link href="/chat" className="text-gray-400 hover:text-white transition-colors">AI Chat</Link></li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div className="md:col-span-3 max-w-sm mx-auto md:mx-0 w-full text-center md:text-left">
-              <h3 className="text-lg font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2">
-                <li><Link href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/cookie-policy" className="text-gray-400 hover:text-white transition-colors">Cookie Policy</Link></li>
-                <li><Link href="/contact-us" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
-              </ul>
-            </div>
+  return (
+    <footer className="kl-footer">
+      <div className="kl-wrap">
+        <div className="kl-footer-grid">
+          <div className="kl-footer-brand">
+            <span className="kl-footer-wordmark">
+              LearnKana
+              <span lang="ja">かな</span>
+            </span>
+            <p>Making Japanese learning accessible and enjoyable for everyone.</p>
           </div>
 
-          {/* Divider */}
-          <div className="border-t border-gray-800 mt-12 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-sm">
-                &copy; {new Date().getFullYear()} LearnKana. All rights reserved.
-              </p>
-              <p className="text-gray-500 text-sm mt-4 md:mt-0">
-                Made with ❤️ for Japanese learners worldwide
-              </p>
-            </div>
-          </div>
+          {COLUMNS.map((column) => (
+            <nav key={column.title} aria-label={column.title} className="kl-footer-column">
+              <h2>{column.title}</h2>
+              <ul>
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href as never}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
-      </footer>
-    );
-  }
+
+        <div className="kl-footer-base">
+          <span>© {new Date().getFullYear()} LearnKana</span>
+          <span lang="ja" aria-hidden="true">
+            仮名線
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
+}

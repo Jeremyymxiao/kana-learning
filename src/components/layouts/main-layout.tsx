@@ -23,6 +23,8 @@ import { ThemeToggle } from '@/components/ui/theme-toggle';
 interface MainLayoutProps {
   children: ReactNode;
   currentTab?: string;
+  /** 首页等需要全宽视觉世界的页面：跳过容器的 padding 与最大宽度 */
+  fullBleed?: boolean;
 }
 
 const ROUTE_TO_TAB: Record<string, string> = {
@@ -104,6 +106,7 @@ const AuthButtons: React.FC<{ user: AuthUser | null; loading: boolean; signOut: 
 
 export default function MainLayout({
   children,
+  fullBleed = false,
 }: MainLayoutProps) {
   const { user, loading, signOut } = useAuth();
   const pathname = usePathname();
@@ -126,7 +129,13 @@ export default function MainLayout({
           </div>
         }
       />
-      <main className="flex-grow container mx-auto px-4 py-8 mt-16">
+      <main
+        className={
+          fullBleed
+            ? 'flex-grow pt-16'
+            : 'flex-grow container mx-auto px-4 py-8 mt-16'
+        }
+      >
         {children}
       </main>
       <Footer />
