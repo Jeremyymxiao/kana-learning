@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { KanaType, DictationQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { getQuizKana, isRomajiMatch } from '@/data/gojuon';
+import { useKanaRows } from '../../hooks/useKanaRows';
 import { recordKanaResult } from '@/lib/progress';
 import { trackQuizAnswer } from '@/lib/tracking';
 import { QuizResult } from '../QuizResult';
@@ -30,6 +31,7 @@ const shuffle = <T,>(array: T[]): T[] => {
 };
 
 export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQuizProps) {
+  const rows = useKanaRows();
   const t = useTranslations('QuizPage');
   const tCommon = useTranslations('Common');
   const [questions, setQuestions] = useState<DictationQuestion[]>([]);
@@ -47,7 +49,7 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
 
   // 出题：统一取池（排除 っ/ッ 与 ぢ/づ）
   const buildQuestions = useCallback((): DictationQuestion[] => {
-    const pool = getQuizKana(difficulty);
+    const pool = getQuizKana(difficulty, rows);
     const picked = shuffle(pool).slice(0, TOTAL_QUESTIONS);
 
     return picked.map((kana, index) => {
@@ -69,7 +71,7 @@ export function DictationQuiz({ difficulty, onRetry, onSwitchKana }: DictationQu
         options: shuffle([kana.kana, ...distractors]),
       };
     });
-  }, [difficulty]);
+  }, [difficulty, rows]);
 
   useEffect(() => {
     setQuestions(buildQuestions());

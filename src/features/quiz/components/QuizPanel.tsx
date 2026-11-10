@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useQuiz, TOTAL_QUESTIONS } from '../hooks/useQuiz';
+import { useKanaRows } from '../hooks/useKanaRows';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { KanaType, QuizType, ChoiceQuestion } from '../types';
@@ -55,6 +56,8 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
   const t = useTranslations('QuizPage');
   const searchParams = useSearchParams();
   const startParam = searchParams.get('start');
+  const typeParam = searchParams.get('type');
+  const rows = useKanaRows();
 
   const [selectedDifficulty, setSelectedDifficulty] = useState<KanaType>('hiragana');
   const [activeKanaType, setActiveKanaType] = useState<KanaType>('hiragana');
@@ -85,11 +88,11 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
 
   // 开始测试：配置页按钮与一键开练共用同一条路径
   const launchQuiz = useCallback(
-    (kanaType: KanaType, quizType: QuizType) => {
+    (kanaType: KanaType, quizType: QuizType, rowFilter?: string[]) => {
       setSelectedDifficulty(kanaType);
       setActiveKanaType(kanaType);
       setTestType(quizType);
-      startTest(kanaType, quizType);
+      startTest(kanaType, quizType, rowFilter);
       trackQuizStart(kanaType, quizType);
       setShowConfig(false);
       onConfigChange(false);
@@ -99,17 +102,21 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
   );
 
   // 一键开练：?start=hiragana / katakana / mixed / special / all（可带题型后缀）
+  // 课程单元链接用 `?start=special&rows=...&type=matching`，`type` 优先于 `start` 的后缀。
   useEffect(() => {
     if (autoStartedRef.current) return;
     const start = parseStartParam(startParam);
     if (!start) return;
+    const typeOverride = START_QUIZ_TYPES.includes(typeParam as QuizType)
+      ? (typeParam as QuizType)
+      : null;
     autoStartedRef.current = true;
-    launchQuiz(start.kanaType, start.quizType);
-  }, [launchQuiz, startParam]);
+    launchQuiz(start.kanaType, typeOverride ?? start.quizType, rows);
+  }, [launchQuiz, startParam, rows, typeParam]);
 
   // 开始测试
   const handleStart = () => {
-    launchQuiz(selectedDifficulty, testType);
+    launchQuiz(selectedDifficulty, testType, rows);
   };
 
   // 中途返回配置页
@@ -121,7 +128,7 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
   // 再来一轮（同题型、同假名类型）
   const handleRetry = () => {
     if (testType === 'choice') {
-      startTest(activeKanaType, 'choice');
+      startTest(activeKanaType, 'choice', rows);
     }
     setRunKey(key => key + 1);
   };
@@ -131,7 +138,7 @@ export function QuizPanel({ onConfigChange }: QuizPanelProps) {
     const nextKanaType: KanaType = activeKanaType === 'katakana' ? 'hiragana' : 'katakana';
     setActiveKanaType(nextKanaType);
     if (testType === 'choice') {
-      startTest(nextKanaType, 'choice');
+      startTest(nextKanaType, 'choice', rows);
     }
     setRunKey(key => key + 1);
   };

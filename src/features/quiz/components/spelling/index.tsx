@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { KanaType, SpellingQuestion } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { getQuizKana, isRomajiMatch } from '@/data/gojuon';
+import { useKanaRows } from '../../hooks/useKanaRows';
 import { recordKanaResult } from '@/lib/progress';
 import { trackQuizAnswer } from '@/lib/tracking';
 import { QuizResult } from '../QuizResult';
@@ -29,6 +30,7 @@ const shuffle = <T,>(array: T[]): T[] => {
 };
 
 export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuizProps) {
+  const rows = useKanaRows();
   const t = useTranslations('QuizPage');
   const tCommon = useTranslations('Common');
   const [questions, setQuestions] = useState<SpellingQuestion[]>([]);
@@ -44,7 +46,7 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
 
   // 出题：统一取池（排除 っ/ッ、ぢ/づ）
   const initializeQuiz = useCallback(() => {
-    const pool = getQuizKana(difficulty);
+    const pool = getQuizKana(difficulty, rows);
     const newQuestions: SpellingQuestion[] = shuffle(pool)
       .slice(0, TOTAL_QUESTIONS)
       .map((kana, index) => ({
@@ -65,7 +67,7 @@ export function SpellingQuiz({ difficulty, onRetry, onSwitchKana }: SpellingQuiz
     setIsAnswered(false);
     setIsCorrect(null);
     setWrongAnswers([]);
-  }, [difficulty]);
+  }, [difficulty, rows]);
 
   useEffect(() => {
     initializeQuiz();

@@ -275,14 +275,84 @@ export const pickKanaChar = (kana: KanaChar, group: KanaGroup): string => {
   return kana.hiragana;
 };
 
+/** 五十音「行」id —— 课程单元按行推进时用（如只练 あ・か・さ 行） */
+/** 清音 11 行 + 浊音/半浊音 5 行 + 拗音 11 行（课程单元按这些 id 出题） */
+export type KanaRow =
+  | 'a' | 'ka' | 'sa' | 'ta' | 'na' | 'ha' | 'ma' | 'ya' | 'ra' | 'wa' | 'n'
+  | 'ga' | 'za' | 'da' | 'ba' | 'pa'
+  | 'kya' | 'sha' | 'cha' | 'nya' | 'hya' | 'mya' | 'rya' | 'gya' | 'ja' | 'bya' | 'pya';
+
+export const KANA_ROWS: readonly KanaRow[] = [
+  'a', 'ka', 'sa', 'ta', 'na', 'ha', 'ma', 'ya', 'ra', 'wa', 'n',
+  'ga', 'za', 'da', 'ba', 'pa',
+  'kya', 'sha', 'cha', 'nya', 'hya', 'mya', 'rya', 'gya', 'ja', 'bya', 'pya',
+];
+
+/**
+ * 由 romaji 反推所属行。只覆盖清音（课程前三个单元），
+ * 浊音/拗音等返回 null —— 这些单元按 `special` / `all` 整池出题。
+ */
+const ROW_PATTERNS: ReadonlyArray<readonly [RegExp, KanaRow]> = [
+  [/^[aiueo]$/, 'a'],
+  [/^n$/, 'n'],
+  // 拗音（3 字母）必须先于清音/浊音匹配，否则 kya 会被 /^k/ 抢走
+  [/^ky[auo]$/, 'kya'],
+  [/^sh[auo]$/, 'sha'],
+  [/^ch[auo]$/, 'cha'],
+  [/^ny[auo]$/, 'nya'],
+  [/^hy[auo]$/, 'hya'],
+  [/^my[auo]$/, 'mya'],
+  [/^ry[auo]$/, 'rya'],
+  [/^gy[auo]$/, 'gya'],
+  [/^j[auo]$/, 'ja'],
+  [/^by[auo]$/, 'bya'],
+  [/^py[auo]$/, 'pya'],
+  // 清音
+  [/^k/, 'ka'],
+  [/^(sh|s)/, 'sa'],
+  [/^(ch|ts|t)/, 'ta'],
+  [/^n/, 'na'],
+  [/^(f|h)/, 'ha'],
+  [/^m/, 'ma'],
+  [/^y/, 'ya'],
+  [/^r/, 'ra'],
+  [/^w/, 'wa'],
+  // 浊音 / 半浊音
+  [/^g/, 'ga'],
+  [/^(z|j)/, 'za'],
+  [/^d/, 'da'],
+  [/^b/, 'ba'],
+  [/^p/, 'pa'],
+];
+
+export const getKanaRow = (kana: { romaji: string }): KanaRow | null => {
+  const romaji = kana.romaji.toLowerCase().replace(/[^a-z]/g, '');
+  if (!romaji) return null;
+  for (const [pattern, row] of ROW_PATTERNS) {
+    if (pattern.test(romaji)) return row;
+  }
+  return null;
+};
+
+/** 解析 `?rows=a,ka,sa` 这类参数；非法值忽略，空结果返回 undefined */
+export const parseKanaRows = (value: string | null | undefined): KanaRow[] | undefined => {
+  if (!value) return undefined;
+  const rows = value
+    .split(',')
+    .map((item) => item.trim().toLowerCase())
+    .filter((item): item is KanaRow => (KANA_ROWS as readonly string[]).includes(item));
+  return rows.length > 0 ? [...new Set(rows)] : undefined;
+};
+
 /**
  * 四种题型统一的取池函数。
  * - hiragana / katakana / mixed：清音
  * - special：浊音 + 拗音
  * - all：全部
+ * - 可选 `rows`：只取指定「行」（课程单元 1–3 用）
  * 任何情况下都不含 っ/ッ（非独立音节）与 ぢ/づ（与 じ/ず 同音）。
  */
-export const getQuizKana = (group: KanaGroup): QuizKana[] => {
+export const getQuizKana = (group: KanaGroup, rows?: readonly string[]): QuizKana[] => {
   const source =
     group === 'special'
       ? [...DAKUON, ...YOUON]
@@ -290,8 +360,18 @@ export const getQuizKana = (group: KanaGroup): QuizKana[] => {
         ? [...SEION, ...DAKUON, ...YOUON]
         : SEION;
 
+  const validRows = rows?.filter((row): row is KanaRow =>
+    (KANA_ROWS as readonly string[]).includes(row)
+  );
+  const rowFilter = validRows && validRows.length > 0 ? new Set(validRows) : null;
+
   return source
     .filter((kana) => kana.isStandalone !== false && !kana.quizExcluded)
+    .filter((kana) => {
+      if (!rowFilter) return true;
+      const row = getKanaRow(kana);
+      return row !== null && rowFilter.has(row);
+    })
     .map((kana) => ({
       kana: pickKanaChar(kana, group),
       romaji: kana.romaji,

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { KanaType, Question } from '../../types';
 import { playCorrectSound, playWrongSound } from '@/lib/audio-utils';
 import { getQuizKana } from '@/data/gojuon';
+import { useKanaRows } from '../../hooks/useKanaRows';
 import { recordKanaResult } from '@/lib/progress';
 import { trackQuizAnswer } from '@/lib/tracking';
 import { QuizResult } from '../QuizResult';
@@ -42,6 +43,7 @@ const shuffle = <T,>(array: T[]): T[] => {
 };
 
 export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGameProps) {
+  const rows = useKanaRows();
   const t = useTranslations('QuizPage');
   const [cards, setCards] = useState<Card[]>([]);
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
@@ -52,7 +54,7 @@ export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGame
 
   // 初始化游戏：出题走统一取池（排除 っ/ッ、ぢ/づ）
   const initializeGame = useCallback(() => {
-    const availablePairs = getQuizKana(difficulty);
+    const availablePairs = getQuizKana(difficulty, rows);
     const pickedPairs = shuffle(availablePairs).slice(0, TOTAL_PAIRS);
 
     const newCards: Card[] = [];
@@ -87,7 +89,7 @@ export function MatchingGame({ difficulty, onRetry, onSwitchKana }: MatchingGame
     setMatchedPairs(0);
     setWrongAnswers([]);
     setIsComplete(false);
-  }, [difficulty]);
+  }, [difficulty, rows]);
 
   useEffect(() => {
     initializeGame();

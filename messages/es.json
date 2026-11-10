@@ -12,7 +12,8 @@
     "profile": "Perfil",
     "settings": "Configuración",
     "chat": "Chat",
-    "analyzer": "Analizador"
+    "analyzer": "Analizador",
+    "course": "Curso"
   },
   "HomePage": {
     "title": "Aprender Kana Japonés - Hiragana y Katakana",
@@ -303,5 +304,154 @@
     "analyzeButton": "Analizar",
     "analyzing": "Analizando...",
     "resultLabel": "Resultado con Furigana"
+  },
+  "Course": {
+    "title": "Tu curso de kana en 7 unidades",
+    "subtitle": "Empieza con una fila de kana cada vez y avanza hacia dakuten, yōon, sonidos especiales y katakana.",
+    "progressLabel": "Progreso del curso",
+    "masteredCount": "{count} de {total} kana dominados",
+    "unitProgress": "{count} de {total} en esta unidad",
+    "startUnit": "Empezar unidad {number}",
+    "continueUnit": "Continuar unidad {number}",
+    "reviewUnit": "Repasar unidad {number}",
+    "lessonsLabel": "Lecciones",
+    "finalTest": "Examen final",
+    "finalTestDesc": "10 preguntas variadas sobre todo lo que has aprendido.",
+    "startFinalTest": "Empezar examen final",
+    "articleLibrary": "Ver todos los artículos",
+    "lockedHint": "Termina las unidades anteriores para aprovechar al máximo esta.",
+    "lessonTypes": {
+      "chart": "Tabla",
+      "quiz": "Práctica",
+      "article": "Lectura"
+    },
+    "units": {
+      "u1": {
+        "title": "Seion ① — filas あ・か・さ",
+        "goal": "Lee y escribe あいうえお, かきくけこ y さしすせそ, una fila por vez."
+      },
+      "u2": {
+        "title": "Seion ② — filas た・な・は",
+        "goal": "Añade たちつてと, なにぬねの y はひふへほ a tu lectura."
+      },
+      "u3": {
+        "title": "Seion ③ — filas ま・や・ら・わ y ん",
+        "goal": "Completa los seion con まみむめも, やゆよ, らりるれろ, わを y ん."
+      },
+      "u4": {
+        "title": "Dakuten y handakuten",
+        "goal": "Distingue か de が, は de ば／ぱ, y lee los 25 kana sonoros."
+      },
+      "u5": {
+        "title": "Yōon — ゃ・ゅ・ょ pequeños",
+        "goal": "Combina una consonante con ゃ, ゅ o ょ: きゃ, しゅ, ちょ y demás."
+      },
+      "u6": {
+        "title": "Sonidos especiales — っ, ー, ん",
+        "goal": "Sokuon (っ pequeño), vocales largas y la ん moraica en palabras reales."
+      },
+      "u7": {
+        "title": "Katakana y préstamos",
+        "goal": "Lee préstamos como コーヒー y ファン, y combinaciones como ティ y ウィ."
+      }
+    },
+    "lessons": {
+      "u1-chart": {
+        "title": "Tabla: あ・か・さ",
+        "desc": "Abre la tabla, mira los kana con su romaji y toca un carácter para escucharlo."
+      },
+      "u1-quiz-choice": {
+        "title": "Elegir el romaji",
+        "desc": "Elige el romaji correcto para cada kana."
+      },
+      "u1-quiz-matching": {
+        "title": "Relacionar kana y romaji",
+        "desc": "Une cada kana con su romaji."
+      },
+      "u2-chart": {
+        "title": "Tabla: た・な・は",
+        "desc": "Abre la tabla, mira los kana con su romaji y toca un carácter para escucharlo."
+      },
+      "u2-quiz-choice": {
+        "title": "Elegir el romaji",
+        "desc": "Elige el romaji correcto para cada kana."
+      },
+      "u2-quiz-dictation": {
+        "title": "Escuchar y elegir",
+        "desc": "Escucha un kana y elígelo entre cuatro opciones."
+      },
+      "u3-chart": {
+        "title": "Tabla: ま・や・ら・わ・ん",
+        "desc": "Abre la tabla, mira los kana con su romaji y toca un carácter para escucharlo."
+      },
+      "u3-quiz-choice": {
+        "title": "Elegir el romaji",
+        "desc": "Elige el romaji correcto para cada kana."
+      },
+      "u3-quiz-spelling": {
+        "title": "Escribir el romaji",
+        "desc": "Escribe de memoria el romaji de cada kana."
+      },
+      "u4-chart": {
+        "title": "Tabla: が・ざ・だ・ば・ぱ",
+        "desc": "Abre la tabla, mira los kana con su romaji y toca un carácter para escucharlo."
+      },
+      "u4-quiz-choice": {
+        "title": "Elegir el romaji",
+        "desc": "Elige el romaji correcto para cada kana."
+      },
+      "u4-quiz-matching": {
+        "title": "Relacionar kana y romaji",
+        "desc": "Une cada kana con su romaji."
+      },
+      "u5-chart": {
+        "title": "Tabla: きゃ・しゃ・ちゃ…",
+        "desc": "Abre la tabla, mira los kana con su romaji y toca un carácter para escucharlo."
+      },
+      "u5-quiz-choice": {
+        "title": "Elegir el romaji",
+        "desc": "Elige el romaji correcto para cada kana."
+      },
+      "u5-quiz-dictation": {
+        "title": "Escuchar y elegir",
+        "desc": "Escucha un kana y elígelo entre cuatro opciones."
+      },
+      "u6-chart": {
+        "title": "Tabla: っ・ん",
+        "desc": "Abre la tabla, mira los kana con su romaji y toca un carácter para escucharlo."
+      },
+      "u6-quiz-choice": {
+        "title": "Elegir el romaji",
+        "desc": "Elige el romaji correcto para cada kana."
+      },
+      "u6-quiz-spelling": {
+        "title": "Escribir el romaji",
+        "desc": "Escribe de memoria el romaji de cada kana."
+      },
+      "u6-article-sokuon": {
+        "title": "Lectura: っ pequeño y vocales largas",
+        "desc": "Una guía breve sobre sokuon, vocales largas y ん en palabras reales."
+      },
+      "u7-chart": {
+        "title": "Tabla: ア・カ・サ…",
+        "desc": "Abre la tabla, mira los kana con su romaji y toca un carácter para escucharlo."
+      },
+      "u7-quiz-choice": {
+        "title": "Elegir el romaji",
+        "desc": "Elige el romaji correcto para cada kana."
+      },
+      "u7-quiz-dictation": {
+        "title": "Escuchar y elegir",
+        "desc": "Escucha un kana y elígelo entre cuatro opciones."
+      },
+      "u7-article-loanwords": {
+        "title": "Lectura: préstamos y sonidos extranjeros",
+        "desc": "Cómo funcionan コーヒー, ファン, ティ y ウィ en el japonés actual."
+      },
+      "final-quiz": {
+        "title": "Examen final",
+        "desc": "10 preguntas variadas sobre todo lo que has aprendido."
+      }
+    }
   }
 }

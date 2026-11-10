@@ -12,7 +12,8 @@
     "profile": "Profil",
     "settings": "Paramètres",
     "chat": "Chat",
-    "analyzer": "Analyseur"
+    "analyzer": "Analyseur",
+    "course": "Cours"
   },
   "HomePage": {
     "title": "Apprendre les Kana Japonais - Hiragana & Katakana",
@@ -303,5 +304,154 @@
     "analyzeButton": "Analyser",
     "analyzing": "Analyse en cours...",
     "resultLabel": "Résultat avec Furigana"
+  },
+  "Course": {
+    "title": "Votre parcours kana en 7 unités",
+    "subtitle": "Commencez par une rangée de kana à la fois, puis progressez vers les dakuten, les yōon, les sons spéciaux et les katakana.",
+    "progressLabel": "Progression du parcours",
+    "masteredCount": "{count} kana maîtrisés sur {total}",
+    "unitProgress": "{count} sur {total} dans cette unité",
+    "startUnit": "Commencer l'unité {number}",
+    "continueUnit": "Reprendre l'unité {number}",
+    "reviewUnit": "Revoir l'unité {number}",
+    "lessonsLabel": "Leçons",
+    "finalTest": "Test final",
+    "finalTestDesc": "10 questions variées sur tout ce que vous avez appris.",
+    "startFinalTest": "Commencer le test final",
+    "articleLibrary": "Voir tous les articles",
+    "lockedHint": "Terminez les unités précédentes pour profiter pleinement de celle-ci.",
+    "lessonTypes": {
+      "chart": "Tableau",
+      "quiz": "Exercice",
+      "article": "Lecture"
+    },
+    "units": {
+      "u1": {
+        "title": "Seion ① — rangées あ・か・さ",
+        "goal": "Lisez et écrivez あいうえお, かきくけこ et さしすせそ, une rangée à la fois."
+      },
+      "u2": {
+        "title": "Seion ② — rangées た・な・は",
+        "goal": "Ajoutez たちつてと, なにぬねの et はひふへほ à votre lecture."
+      },
+      "u3": {
+        "title": "Seion ③ — rangées ま・や・ら・わ et ん",
+        "goal": "Terminez les seion avec まみむめも, やゆよ, らりるれろ, わを et ん."
+      },
+      "u4": {
+        "title": "Dakuten et handakuten",
+        "goal": "Distinguez か de が, は de ば／ぱ, et lisez les 25 kana voisés."
+      },
+      "u5": {
+        "title": "Yōon — petit ゃ・ゅ・ょ",
+        "goal": "Combinez une consonne avec ゃ, ゅ ou ょ : きゃ, しゅ, ちょ, etc."
+      },
+      "u6": {
+        "title": "Sons spéciaux — っ, ー, ん",
+        "goal": "Le sokuon (petit っ), les voyelles longues et le ん moraïque dans de vrais mots."
+      },
+      "u7": {
+        "title": "Katakana et emprunts",
+        "goal": "Lisez des emprunts comme コーヒー et ファン, ainsi que des combinaisons comme ティ et ウィ."
+      }
+    },
+    "lessons": {
+      "u1-chart": {
+        "title": "Tableau : あ・か・さ",
+        "desc": "Ouvrez le tableau, voyez les kana avec leur romaji et cliquez sur un caractère pour l’entendre."
+      },
+      "u1-quiz-choice": {
+        "title": "Choisir le romaji",
+        "desc": "Choisissez le bon romaji pour chaque kana."
+      },
+      "u1-quiz-matching": {
+        "title": "Associer kana et romaji",
+        "desc": "Reliez chaque kana à son romaji."
+      },
+      "u2-chart": {
+        "title": "Tableau : た・な・は",
+        "desc": "Ouvrez le tableau, voyez les kana avec leur romaji et cliquez sur un caractère pour l’entendre."
+      },
+      "u2-quiz-choice": {
+        "title": "Choisir le romaji",
+        "desc": "Choisissez le bon romaji pour chaque kana."
+      },
+      "u2-quiz-dictation": {
+        "title": "Écouter et choisir",
+        "desc": "Écoutez un kana et choisissez-le parmi quatre propositions."
+      },
+      "u3-chart": {
+        "title": "Tableau : ま・や・ら・わ・ん",
+        "desc": "Ouvrez le tableau, voyez les kana avec leur romaji et cliquez sur un caractère pour l’entendre."
+      },
+      "u3-quiz-choice": {
+        "title": "Choisir le romaji",
+        "desc": "Choisissez le bon romaji pour chaque kana."
+      },
+      "u3-quiz-spelling": {
+        "title": "Écrire le romaji",
+        "desc": "Écrivez de mémoire le romaji de chaque kana."
+      },
+      "u4-chart": {
+        "title": "Tableau : が・ざ・だ・ば・ぱ",
+        "desc": "Ouvrez le tableau, voyez les kana avec leur romaji et cliquez sur un caractère pour l’entendre."
+      },
+      "u4-quiz-choice": {
+        "title": "Choisir le romaji",
+        "desc": "Choisissez le bon romaji pour chaque kana."
+      },
+      "u4-quiz-matching": {
+        "title": "Associer kana et romaji",
+        "desc": "Reliez chaque kana à son romaji."
+      },
+      "u5-chart": {
+        "title": "Tableau : きゃ・しゃ・ちゃ…",
+        "desc": "Ouvrez le tableau, voyez les kana avec leur romaji et cliquez sur un caractère pour l’entendre."
+      },
+      "u5-quiz-choice": {
+        "title": "Choisir le romaji",
+        "desc": "Choisissez le bon romaji pour chaque kana."
+      },
+      "u5-quiz-dictation": {
+        "title": "Écouter et choisir",
+        "desc": "Écoutez un kana et choisissez-le parmi quatre propositions."
+      },
+      "u6-chart": {
+        "title": "Tableau : っ・ん",
+        "desc": "Ouvrez le tableau, voyez les kana avec leur romaji et cliquez sur un caractère pour l’entendre."
+      },
+      "u6-quiz-choice": {
+        "title": "Choisir le romaji",
+        "desc": "Choisissez le bon romaji pour chaque kana."
+      },
+      "u6-quiz-spelling": {
+        "title": "Écrire le romaji",
+        "desc": "Écrivez de mémoire le romaji de chaque kana."
+      },
+      "u6-article-sokuon": {
+        "title": "Lecture : petit っ et voyelles longues",
+        "desc": "Un guide court sur le sokuon, les voyelles longues et ん dans de vrais mots."
+      },
+      "u7-chart": {
+        "title": "Tableau : ア・カ・サ…",
+        "desc": "Ouvrez le tableau, voyez les kana avec leur romaji et cliquez sur un caractère pour l’entendre."
+      },
+      "u7-quiz-choice": {
+        "title": "Choisir le romaji",
+        "desc": "Choisissez le bon romaji pour chaque kana."
+      },
+      "u7-quiz-dictation": {
+        "title": "Écouter et choisir",
+        "desc": "Écoutez un kana et choisissez-le parmi quatre propositions."
+      },
+      "u7-article-loanwords": {
+        "title": "Lecture : emprunts et sons étrangers",
+        "desc": "Comment fonctionnent コーヒー, ファン, ティ et ウィ en japonais moderne."
+      },
+      "final-quiz": {
+        "title": "Test final",
+        "desc": "10 questions variées sur tout ce que vous avez appris."
+      }
+    }
   }
 }

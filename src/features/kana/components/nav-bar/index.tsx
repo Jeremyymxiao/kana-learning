@@ -17,6 +17,7 @@ const ROUTE_TO_TAB: Record<string, string> = {
   '/hiragana-katakana-chart': 'chart',
   '/hiragana-katakana-converter': 'converter',
   '/learn': 'learn',
+  '/course': 'learn',
   '/japanese-text-analyzer': 'analyzer'
 };
 
@@ -27,7 +28,7 @@ const TAB_TO_ROUTE: Record<string, string> = {
   'chart': '/hiragana-katakana-chart',
   'converter': '/hiragana-katakana-converter',
   'analyzer': '/japanese-text-analyzer',
-  'learn': '/learn'
+  'learn': '/course'
 };
 
 interface NavItem {

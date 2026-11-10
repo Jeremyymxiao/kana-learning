@@ -46,8 +46,12 @@ const generateOptions = (
 
 // 生成问题：取池统一走 src/data/gojuon.ts 的 getQuizKana
 // SRS 加权抽题：答错过的优先、没见过的次之、已掌握的只做少量复习（替代纯随机 slice）
-const generateQuestions = (kanaType: KanaType, quizType: QuizType): Question[] => {
-  const availableKana = getQuizKana(kanaType);
+const generateQuestions = (
+  kanaType: KanaType,
+  quizType: QuizType,
+  rows?: string[]
+): Question[] => {
+  const availableKana = getQuizKana(kanaType, rows);
   const selectedKana = sampleWeighted(availableKana, TOTAL_QUESTIONS);
 
   switch (quizType) {
@@ -166,8 +170,8 @@ export const useQuiz = () => {
   }, []);
 
   // 开始新测试
-  const startTest = useCallback((kanaType: KanaType, quizType: QuizType) => {
-    const questions = generateQuestions(kanaType, quizType);
+  const startTest = useCallback((kanaType: KanaType, quizType: QuizType, rows?: string[]) => {
+    const questions = generateQuestions(kanaType, quizType, rows);
     recordedIdsRef.current = new Set<string | number>();
 
     setState({
@@ -179,7 +183,8 @@ export const useQuiz = () => {
       wrongAnswers: [],
       isComplete: false,
       quizType,
-      kanaType
+      kanaType,
+      rows
     });
   }, []);
 

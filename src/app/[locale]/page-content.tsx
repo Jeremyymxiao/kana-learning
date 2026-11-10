@@ -1,7 +1,7 @@
 'use client';
 
 import MainLayout from '@/components/layouts/main-layout';
-import { MessageSquare, Table, PenTool, ArrowRight, Repeat, BookOpen } from 'lucide-react';
+import { MessageSquare, Table, PenTool, ArrowRight, Repeat, BookOpen, GraduationCap } from 'lucide-react';
 import { Link } from '../../../i18n.config';
 import { articles } from '@/data/articles';
 import { useTranslations } from 'next-intl';
@@ -10,6 +10,7 @@ import { trackEvent } from '@/lib/tracking';
 export default function PageContent() {
   const t = useTranslations('HomePage');
   const tn = useTranslations('Navigation');
+  const tc = useTranslations('Course');
   
   return (
     <MainLayout>
@@ -210,6 +211,38 @@ export default function PageContent() {
                   </p>
                   <Link href={`/hiragana-katakana-chart`} className="text-[#2B7FFF] font-semibold hover:underline">
                     {t('learnKatakana')}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 7-Unit Course Entry */}
+        <section aria-labelledby="course-entry-heading" className="py-16 bg-white dark:bg-[#1A1B2F]">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="rounded-3xl bg-gradient-to-r from-[#2B7FFF] to-[#00D6A4] p-1">
+                <div className="flex flex-col gap-6 rounded-[22px] bg-white dark:bg-[#1A1B2F] p-8 md:flex-row md:items-center md:p-10">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#2B7FFF]/10 text-[#2B7FFF]">
+                    <GraduationCap className="h-7 w-7" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h2
+                      id="course-entry-heading"
+                      className="text-2xl md:text-3xl font-bold text-[#1A1B2F] dark:text-white"
+                    >
+                      {tc('title')}
+                    </h2>
+                    <p className="mt-2 text-gray-600 dark:text-gray-300">{tc('subtitle')}</p>
+                  </div>
+                  <Link
+                    href="/course"
+                    onClick={() => trackEvent('course_click', { location: 'home' })}
+                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-[#2B7FFF] px-6 py-3 text-base font-bold text-white transition-colors hover:bg-[#1f6ae0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B7FFF] focus-visible:ring-offset-2"
+                  >
+                    {t('learnMore')}
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
                   </Link>
                 </div>
               </div>

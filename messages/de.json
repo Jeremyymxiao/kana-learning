@@ -12,7 +12,8 @@
     "profile": "Profil",
     "settings": "Einstellungen",
     "chat": "Chat",
-    "analyzer": "Analysator"
+    "analyzer": "Analysator",
+    "course": "Kurs"
   },
   "HomePage": {
     "title": "Japanische Kana lernen - Hiragana & Katakana",
@@ -303,5 +304,154 @@
     "analyzeButton": "Analysieren",
     "analyzing": "Analysiere...",
     "resultLabel": "Ergebnis mit Furigana"
+  },
+  "Course": {
+    "title": "Dein 7-teiliger Kana-Kurs",
+    "subtitle": "Lerne zuerst eine Kana-Reihe nach der anderen und arbeite dich dann zu Dakuten, Yōon, Sonderlauten und Katakana vor.",
+    "progressLabel": "Kursfortschritt",
+    "masteredCount": "{count} von {total} Kana beherrscht",
+    "unitProgress": "{count} von {total} in dieser Einheit",
+    "startUnit": "Einheit {number} starten",
+    "continueUnit": "Einheit {number} fortsetzen",
+    "reviewUnit": "Einheit {number} wiederholen",
+    "lessonsLabel": "Lektionen",
+    "finalTest": "Abschlusstest",
+    "finalTestDesc": "10 gemischte Fragen zu allem, was du gelernt hast.",
+    "startFinalTest": "Abschlusstest starten",
+    "articleLibrary": "Alle Artikel ansehen",
+    "lockedHint": "Schließe die früheren Einheiten ab, um aus dieser Einheit am meisten herauszuholen.",
+    "lessonTypes": {
+      "chart": "Tabelle",
+      "quiz": "Übung",
+      "article": "Lesetext"
+    },
+    "units": {
+      "u1": {
+        "title": "Seion ① — Reihen あ・か・さ",
+        "goal": "Lies und schreibe あいうえお, かきくけこ und さしすせそ, Reihe für Reihe."
+      },
+      "u2": {
+        "title": "Seion ② — Reihen た・な・は",
+        "goal": "Ergänze たちつてと, なにぬねの und はひふへほ in deiner Lesung."
+      },
+      "u3": {
+        "title": "Seion ③ — Reihen ま・や・ら・わ und ん",
+        "goal": "Vervollständige die Seion mit まみむめも, やゆよ, らりるれろ, わを und ん."
+      },
+      "u4": {
+        "title": "Dakuten und Handakuten",
+        "goal": "Höre den Unterschied zwischen か und が, は und ば／ぱ, und lies alle 25 stimmhaften Kana."
+      },
+      "u5": {
+        "title": "Yōon — kleines ゃ・ゅ・ょ",
+        "goal": "Verbinde einen Konsonanten mit ゃ, ゅ oder ょ: きゃ, しゅ, ちょ und so weiter."
+      },
+      "u6": {
+        "title": "Sonderlaute — っ, ー, ん",
+        "goal": "Sokuon (kleines っ), Langvokale und das silbische ん in echten Wörtern."
+      },
+      "u7": {
+        "title": "Katakana und Lehnwörter",
+        "goal": "Lies Lehnwörter wie コーヒー und ファン sowie Kombinationen wie ティ und ウィ."
+      }
+    },
+    "lessons": {
+      "u1-chart": {
+        "title": "Tabelle: あ・か・さ",
+        "desc": "Öffne die Tabelle, sieh die Kana mit Romaji und tippe ein Zeichen an, um es zu hören."
+      },
+      "u1-quiz-choice": {
+        "title": "Romaji auswählen",
+        "desc": "Wähle für jedes Kana das richtige Romaji."
+      },
+      "u1-quiz-matching": {
+        "title": "Kana und Romaji zuordnen",
+        "desc": "Verbinde jedes Kana mit seinem Romaji."
+      },
+      "u2-chart": {
+        "title": "Tabelle: た・な・は",
+        "desc": "Öffne die Tabelle, sieh die Kana mit Romaji und tippe ein Zeichen an, um es zu hören."
+      },
+      "u2-quiz-choice": {
+        "title": "Romaji auswählen",
+        "desc": "Wähle für jedes Kana das richtige Romaji."
+      },
+      "u2-quiz-dictation": {
+        "title": "Hören und auswählen",
+        "desc": "Höre ein Kana und wähle es aus vier Optionen."
+      },
+      "u3-chart": {
+        "title": "Tabelle: ま・や・ら・わ・ん",
+        "desc": "Öffne die Tabelle, sieh die Kana mit Romaji und tippe ein Zeichen an, um es zu hören."
+      },
+      "u3-quiz-choice": {
+        "title": "Romaji auswählen",
+        "desc": "Wähle für jedes Kana das richtige Romaji."
+      },
+      "u3-quiz-spelling": {
+        "title": "Romaji schreiben",
+        "desc": "Schreibe das Romaji für jedes Kana aus dem Gedächtnis."
+      },
+      "u4-chart": {
+        "title": "Tabelle: が・ざ・だ・ば・ぱ",
+        "desc": "Öffne die Tabelle, sieh die Kana mit Romaji und tippe ein Zeichen an, um es zu hören."
+      },
+      "u4-quiz-choice": {
+        "title": "Romaji auswählen",
+        "desc": "Wähle für jedes Kana das richtige Romaji."
+      },
+      "u4-quiz-matching": {
+        "title": "Kana und Romaji zuordnen",
+        "desc": "Verbinde jedes Kana mit seinem Romaji."
+      },
+      "u5-chart": {
+        "title": "Tabelle: きゃ・しゃ・ちゃ…",
+        "desc": "Öffne die Tabelle, sieh die Kana mit Romaji und tippe ein Zeichen an, um es zu hören."
+      },
+      "u5-quiz-choice": {
+        "title": "Romaji auswählen",
+        "desc": "Wähle für jedes Kana das richtige Romaji."
+      },
+      "u5-quiz-dictation": {
+        "title": "Hören und auswählen",
+        "desc": "Höre ein Kana und wähle es aus vier Optionen."
+      },
+      "u6-chart": {
+        "title": "Tabelle: っ・ん",
+        "desc": "Öffne die Tabelle, sieh die Kana mit Romaji und tippe ein Zeichen an, um es zu hören."
+      },
+      "u6-quiz-choice": {
+        "title": "Romaji auswählen",
+        "desc": "Wähle für jedes Kana das richtige Romaji."
+      },
+      "u6-quiz-spelling": {
+        "title": "Romaji schreiben",
+        "desc": "Schreibe das Romaji für jedes Kana aus dem Gedächtnis."
+      },
+      "u6-article-sokuon": {
+        "title": "Lesetext: kleines っ und Langvokale",
+        "desc": "Ein kurzer Leitfaden zu Sokuon, Langvokalen und ん in echten Wörtern."
+      },
+      "u7-chart": {
+        "title": "Tabelle: ア・カ・サ…",
+        "desc": "Öffne die Tabelle, sieh die Kana mit Romaji und tippe ein Zeichen an, um es zu hören."
+      },
+      "u7-quiz-choice": {
+        "title": "Romaji auswählen",
+        "desc": "Wähle für jedes Kana das richtige Romaji."
+      },
+      "u7-quiz-dictation": {
+        "title": "Hören und auswählen",
+        "desc": "Höre ein Kana und wähle es aus vier Optionen."
+      },
+      "u7-article-loanwords": {
+        "title": "Lesetext: Lehnwörter und Fremdlaute",
+        "desc": "Wie コーヒー, ファン, ティ und ウィ im heutigen Japanisch funktionieren."
+      },
+      "final-quiz": {
+        "title": "Abschlusstest",
+        "desc": "10 gemischte Fragen zu allem, was du gelernt hast."
+      }
+    }
   }
 }

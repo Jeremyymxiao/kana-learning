@@ -76,4 +76,6 @@ export interface TestState {
   isComplete: boolean;
   quizType: QuizType;
   kanaType: KanaType;
+  /** 课程单元按行出题时传入（a,ka,sa…）；空 = 整池 */
+  rows?: string[];
 }
