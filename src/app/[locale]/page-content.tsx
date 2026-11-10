@@ -16,11 +16,31 @@ const FIRST_ROW = [
   { kana: 'お', romaji: 'o' },
 ];
 
-const TOOLS = [
-  { key: 'chart', href: '/hiragana-katakana-chart' },
-  { key: 'converter', href: '/hiragana-katakana-converter' },
-  { key: 'analyzer', href: '/japanese-text-analyzer' },
-  { key: 'chat', href: '/chat' },
+const FEATURES = [
+  {
+    id: 'ai-tutor',
+    titleKey: 'aiTutor',
+    descKey: 'aiTutorDesc',
+    href: '/chat',
+  },
+  {
+    id: 'charts',
+    titleKey: 'kanaCharts',
+    descKey: 'kanaChartsDesc',
+    href: '/hiragana-katakana-chart',
+  },
+  {
+    id: 'practice',
+    titleKey: 'kanaPractice',
+    descKey: 'kanaPracticeDesc',
+    href: '/hiragana-katakana-quiz',
+  },
+  {
+    id: 'converter',
+    titleKey: 'textConverter',
+    descKey: 'textConverterDesc',
+    href: '/hiragana-katakana-converter',
+  },
 ] as const;
 
 export default function PageContent() {
@@ -46,7 +66,7 @@ export default function PageContent() {
               <h1 id="kl-hero-title" className="kl-display kl-hero-title">
                 {t('heroTitle')}
               </h1>
-              <p className="kl-hero-sub">{t('heroDescription')}</p>
+              <p className="kl-hero-sub">{t('heroSubtitle')}</p>
 
               <div className="kl-hero-actions">
                 <Link
@@ -61,6 +81,17 @@ export default function PageContent() {
                   {t('viewRoute')}
                 </Link>
               </div>
+
+              <p className="kl-signin">
+                {t('alreadyLearning')}{' '}
+                <Link href="/login" className="kl-signin-link">
+                  {tn('login')}
+                </Link>
+                {' · '}
+                <Link href="/register" className="kl-signin-link">
+                  {tn('register')}
+                </Link>
+              </p>
 
               <p className="kl-facts">
                 {t('routeNote', {
@@ -78,6 +109,35 @@ export default function PageContent() {
             </div>
           </div>
           <div className="kl-hero-rule" />
+        </section>
+
+        {/* ── Kana systems ───────────────────────────────────────────── */}
+        <section className="kl-section kl-systems" aria-labelledby="kl-systems-title">
+          <div className="kl-wrap">
+            <header className="kl-section-head">
+              <h2 id="kl-systems-title" className="kl-display kl-h2">
+                {t('masterBothKana')}
+              </h2>
+            </header>
+            <div className="kl-systems-grid">
+              <div className="kl-system">
+                <span className="kl-system-glyph" lang="ja" aria-hidden="true">あ</span>
+                <h3 className="kl-display kl-h3">{t('hiraganaTitle')}</h3>
+                <p className="kl-lede">{t('hiraganaDescription')}</p>
+                <Link href="/hiragana-katakana-chart" className="kl-textlink">
+                  {t('learnHiragana')}
+                </Link>
+              </div>
+              <div className="kl-system">
+                <span className="kl-system-glyph" lang="ja" aria-hidden="true">ア</span>
+                <h3 className="kl-display kl-h3">{t('katakanaTitle')}</h3>
+                <p className="kl-lede">{t('katakanaDescription')}</p>
+                <Link href="/hiragana-katakana-chart" className="kl-textlink">
+                  {t('learnKatakana')}
+                </Link>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* ── 02 · The route ─────────────────────────────────────────── */}
@@ -156,19 +216,22 @@ export default function PageContent() {
           </div>
         </section>
 
-        {/* ── 04 · Desk / tools ──────────────────────────────────────── */}
+        {/* ── Desk / what you get ────────────────────────────────────── */}
         <section className="kl-section kl-tools" aria-labelledby="kl-tools-title">
           <div className="kl-wrap kl-tools-grid">
             <header className="kl-section-head kl-section-head-tight">
               <h2 id="kl-tools-title" className="kl-display kl-h2">
-                {t('toolsTitle')}
+                {t('featuresTitle')}
               </h2>
             </header>
             <ul className="kl-index">
-              {TOOLS.map((tool) => (
-                <li key={tool.key}>
-                  <Link href={tool.href} className="kl-index-link">
-                    <span className="kl-index-name">{tn(tool.key)}</span>
+              {FEATURES.map((feature) => (
+                <li key={feature.id}>
+                  <Link href={feature.href} className="kl-index-link kl-index-link-rich">
+                    <span className="kl-index-body">
+                      <span className="kl-index-name">{t(feature.titleKey)}</span>
+                      <span className="kl-index-desc">{t(feature.descKey)}</span>
+                    </span>
                     <ArrowUpRight aria-hidden="true" className="kl-index-arrow" />
                   </Link>
                 </li>
@@ -208,7 +271,7 @@ export default function PageContent() {
             </header>
             <div className="kl-faq-grid">
               {[1, 2, 3, 4, 5, 6].map((n) => (
-                <details key={n} className="kl-faq-item">
+                <details key={n} className="kl-faq-item" open={n <= 2}>
                   <summary>
                     <span className="kl-faq-q">{t(`faq${n}Question`)}</span>
                   </summary>
@@ -227,6 +290,7 @@ export default function PageContent() {
                 {t('closeTitle')}
               </h2>
               <p className="kl-lede">{t('closeBody')}</p>
+              <p className="kl-close-note">{t('heroDescription')}</p>
               <Link
                 href="/hiragana-katakana-quiz?start=hiragana&rows=a&type=choice"
                 className="kl-seal"

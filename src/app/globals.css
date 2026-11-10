@@ -659,6 +659,111 @@
   -webkit-text-stroke: 1px color-mix(in srgb, #0d0e0b 55%, transparent);
 }
 
+/* ── Sign-in line ──────────────────────────────────────────────── */
+
+.kl-signin {
+  margin: -18px 0 clamp(24px, 3.4vw, 40px);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.kl-signin-link {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.kl-signin-link:hover {
+  color: var(--line);
+  border-color: var(--line);
+}
+
+/* ── Kana systems ──────────────────────────────────────────────── */
+
+.kl-systems-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.kl-system {
+  position: relative;
+  padding-top: clamp(18px, 2.4vw, 28px);
+  border-top: 1px solid var(--rule);
+}
+
+.kl-system-glyph {
+  display: block;
+  font-family: var(--font-noto-sans-jp), var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(3.6rem, 8vw, 6rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  margin-bottom: clamp(14px, 2vw, 22px);
+  position: relative;
+}
+
+.kl-system-glyph::after {
+  content: '';
+  position: absolute;
+  left: 0.04em;
+  bottom: 0.02em;
+  width: 1.05em;
+  height: 0.045em;
+  background: var(--line);
+}
+
+.kl-h3 {
+  font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+  line-height: 1.05;
+  margin: 0 0 10px;
+}
+
+.kl-system .kl-lede {
+  font-size: 0.95rem;
+  margin-bottom: clamp(14px, 2vw, 20px);
+}
+
+/* ── Rich index rows ───────────────────────────────────────────── */
+
+.kl-index-link-rich {
+  align-items: flex-start;
+}
+
+.kl-index-body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 54ch;
+}
+
+.kl-index-desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ── Closing band ──────────────────────────────────────────────── */
+
+.kl-close-note {
+  max-width: 52ch;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin: 0 0 24px;
+  color: color-mix(in srgb, var(--paper) 62%, transparent);
+}
+
+.dark .kl-close-note {
+  color: color-mix(in srgb, #0d0e0b 62%, transparent);
+}
+
+/* ── FAQ open state ────────────────────────────────────────────── */
+
+.kl-faq-item[open] {
+  padding-bottom: clamp(18px, 2.4vw, 26px);
+}
+
 /* ── Motion ────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -737,7 +842,8 @@
 
 @media (max-width: 900px) {
   .kl-hero-grid,
-  .kl-tools-grid {
+  .kl-tools-grid,
+  .kl-systems-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
