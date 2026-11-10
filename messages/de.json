@@ -72,7 +72,17 @@
     "katakanaDescription": "Wird für Fremdwörter, Betonungen und technische Begriffe in der japanischen Schrift verwendet.",
     "learnKatakana": "Katakana lernen →",
     "learningGuidesTitle": "Lernanleitungen",
-    "alreadyLearning": "Schon am Lernen?"
+    "alreadyLearning": "Schon am Lernen?",
+    "routeTitle": "Die Strecke",
+    "routeSubtitle": "Sieben Stationen – vom ersten あ bis zu Katakana. Jede Station ist eine Kana-Reihe und eine kurze Übung.",
+    "routeNote": "{stations} Stationen · {lessons} Lektionen · {kana} Kana im Pool",
+    "startStation": "An Station 01 starten",
+    "viewRoute": "Strecke ansehen",
+    "practiceTitle": "Eine Reihe nach der anderen",
+    "practiceLede": "Fünf Kana, fünf Laute. Antworten, hören, weiter – die erste Reihe dauert etwa drei Minuten.",
+    "toolsTitle": "Der Rest des Schreibtischs",
+    "closeTitle": "Mit あ anfangen",
+    "closeBody": "Kein Konto. Kein Download. Zehn Fragen – und du kennst mehr Kana als vor fünf Minuten."
   },
   "LearnPage": {
     "title": "Japanische Kana lernen",

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Noto_Sans_JP } from 'next/font/google'
+import { Archivo, Noto_Sans_JP } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -19,6 +19,14 @@ const notoSansJP = Noto_Sans_JP({
   weight: ['400', '700'],
   display: 'swap',
   variable: '--font-noto-sans-jp',
+})
+
+// 首页「Kana Line」世界的拉丁展示字体（仅 latin 子集，体积很小）
+const archivo = Archivo({
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+  display: 'swap',
+  variable: '--font-archivo',
 })
 
 /**
@@ -72,7 +80,7 @@ export default async function LocaleLayout({
         {/* AdSense site verification (meta only — no ad scripts: the site has 0 ad slots) */}
         <meta name="google-adsense-account" content="ca-pub-5334706525054343" />
       </head>
-      <body className={`${notoSansJP.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
+      <body className={`${notoSansJP.variable} ${archivo.variable} font-sans min-h-screen antialiased bg-gradient-to-br from-background to-secondary/20`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -1,0 +1,56 @@
+{
+  "name": "LearnKana",
+  "version": 1,
+  "surface": "homepage",
+  "world": "transit signage typographic",
+  "tokens": {
+    "colors": {
+      "paper": "#FFFFFF",
+      "ink": "#14140F",
+      "muted": "#5B5B53",
+      "route": "#0B7A45",
+      "seal": "#C4342B",
+      "rule": "#E2E0D6",
+      "night": "#14140F",
+      "dark": {
+        "paper": "#0D0E0B",
+        "ink": "#F1F0E7",
+        "route": "#46B87E",
+        "seal": "#E0574C",
+        "rule": "#24261F"
+      }
+    },
+    "type": {
+      "display": "Archivo 800 / uppercase / -0.03em",
+      "heading": "Archivo 800",
+      "body": "Noto Sans JP 400",
+      "kana": "Noto Sans JP 700",
+      "numbers": "Archivo 700 tabular"
+    },
+    "space": {
+      "section": "clamp(56px, 8vw, 108px)",
+      "wrap": "max 1180px, inline clamp(20px, 5vw, 48px)"
+    },
+    "shape": {
+      "sealRadius": "2px",
+      "nodes": "circle",
+      "cards": "none"
+    }
+  },
+  "motion": {
+    "heroTitle": "kl-rise 700ms cubic-bezier(.16,1,.3,1)",
+    "kana": "kl-ink clip-path 900ms",
+    "baseline": "kl-fill scaleX 900ms",
+    "stationDots": "kl-dot 420ms with 60ms stagger",
+    "reducedMotion": "all entrance animation disabled"
+  },
+  "focus": {
+    "ring": "2px solid #C4342B, offset 4px"
+  },
+  "rules": [
+    "one primary action per viewport (seal vermilion)",
+    "no gradients, glass, card shadows, kickers",
+    "stations and counts come from curriculum data",
+    "kana always lang=ja and set in Noto Sans JP"
+  ]
+}

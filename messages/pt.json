@@ -72,7 +72,17 @@
     "katakanaDescription": "Usado para palavras estrangeiras, ênfase e termos técnicos na escrita japonesa.",
     "learnKatakana": "Aprenda Katakana →",
     "learningGuidesTitle": "Guias de Aprendizagem",
-    "alreadyLearning": "Já está aprendendo?"
+    "alreadyLearning": "Já está aprendendo?",
+    "routeTitle": "A linha",
+    "routeSubtitle": "Sete estações, do primeiro あ ao katakana. Cada estação é uma linha de kana e um treino curto.",
+    "routeNote": "{stations} estações · {lessons} lições · {kana} kana na base",
+    "startStation": "Começar na estação 01",
+    "viewRoute": "Ver a linha",
+    "practiceTitle": "Uma linha de cada vez",
+    "practiceLede": "Cinco kana, cinco sons. Responder, ouvir, avançar — a primeira linha leva cerca de três minutos.",
+    "toolsTitle": "O resto da mesa",
+    "closeTitle": "Comece com あ",
+    "closeBody": "Sem conta. Sem download. Dez perguntas e você já conhece mais kana do que há cinco minutos."
   },
   "LearnPage": {
     "title": "Aprender Kana Japonês",

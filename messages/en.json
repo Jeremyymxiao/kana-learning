@@ -234,7 +234,17 @@
     "katakanaDescription": "Used for foreign loanwords, emphasis, and technical terms in Japanese writing.",
     "learnKatakana": "Learn Katakana →",
     "learningGuidesTitle": "Learning Guides",
-    "alreadyLearning": "Already learning?"
+    "alreadyLearning": "Already learning?",
+    "routeTitle": "The route",
+    "routeSubtitle": "Seven stations, from the first あ to katakana. Each station is one row of kana and one short practice.",
+    "routeNote": "{stations} stations · {lessons} lessons · {kana} kana in the pool",
+    "startStation": "Start at station 01",
+    "viewRoute": "See the route",
+    "practiceTitle": "One row at a time",
+    "practiceLede": "Five kana, five sounds. Answer, hear it, move on — the whole first row takes about three minutes.",
+    "toolsTitle": "The rest of the desk",
+    "closeTitle": "Start with あ",
+    "closeBody": "No account. No download. Ten questions and you already know more kana than you did five minutes ago."
   },
   "ChatPage": {
     "title": "Japanese Learning Assistant",

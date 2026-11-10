@@ -72,7 +72,17 @@
     "katakanaDescription": "Utilisé pour les mots étrangers, l'emphase et les termes techniques dans l'écriture japonaise.",
     "learnKatakana": "Apprendre le Katakana →",
     "learningGuidesTitle": "Guides d'apprentissage",
-    "alreadyLearning": "Déjà en train d’apprendre ?"
+    "alreadyLearning": "Déjà en train d’apprendre ?",
+    "routeTitle": "La ligne",
+    "routeSubtitle": "Sept stations, du premier あ au katakana. Chaque station est une rangée de kana et un court exercice.",
+    "routeNote": "{stations} stations · {lessons} leçons · {kana} kana dans la banque",
+    "startStation": "Commencer à la station 01",
+    "viewRoute": "Voir la ligne",
+    "practiceTitle": "Une rangée à la fois",
+    "practiceLede": "Cinq kana, cinq sons. Répondre, écouter, avancer — la première rangée prend environ trois minutes.",
+    "toolsTitle": "Le reste du bureau",
+    "closeTitle": "Commencer par あ",
+    "closeBody": "Sans compte. Sans téléchargement. Dix questions et vous connaissez plus de kana qu’il y a cinq minutes."
   },
   "LearnPage": {
     "title": "Apprendre les Kana Japonais",
