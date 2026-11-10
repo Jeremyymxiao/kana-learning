@@ -82,7 +82,21 @@
     "practiceLede": "Faça o quiz de kana uma linha de cada vez: cinco kana, cinco sons, feedback imediato.",
     "toolsTitle": "O resto da mesa",
     "closeTitle": "Aprender kana com あ",
-    "closeBody": "Sem conta, sem download. Dez perguntas do quiz de hiragana e katakana e já sabe mais kana do que há cinco minutos."
+    "closeBody": "Sem conta, sem download. Dez perguntas do quiz de hiragana e katakana e já sabe mais kana do que há cinco minutos.",
+    "howTitle": "Como funciona o quiz de kana",
+    "howLede": "Três passos, sem configuração. O quiz lembra o que você errou e volta a perguntar.",
+    "how1Title": "Escolha uma linha",
+    "how1Desc": "Comece por あ・か・さ ou vá direto à linha que está estudando. Cada unidade corresponde a uma linha da tabela gojūon.",
+    "how2Title": "Responda e ouça",
+    "how2Desc": "Cada pergunta mostra na hora o kana e o romaji corretos, com o som: um erro vira lição, não beco sem saída.",
+    "how3Title": "Volte aos kana fracos",
+    "how3Desc": "O quiz dá mais peso aos caracteres que você errou e guarda seu progresso no navegador — sem conta.",
+    "guidesLede": "Leituras mais longas para o que exige mais que um quiz: ordem dos traços, uso, pronúncia e rotinas de treino.",
+    "featuresLede": "Quatro formas de praticar, todas gratuitas e sem conta.",
+    "faq7Question": "Preciso de conta para aprender kana?",
+    "faq7Answer": "Não. O curso inteiro e o quiz de hiragana e katakana funcionam sem conta, e o progresso fica no navegador. A conta só ajuda se você quiser levar o progresso entre aparelhos.",
+    "faq8Question": "Quanto tempo leva para aprender hiragana e katakana?",
+    "faq8Answer": "A maioria dos iniciantes leva de três a seis semanas com sessões curtas diárias para ler as duas escritas com fluência. Escrever de memória leva mais tempo; o quiz de kana treina primeiro o reconhecimento, que é o que a leitura exige."
   },
   "LearnPage": {
     "title": "Aprender Kana Japonês",

@@ -244,7 +244,21 @@
     "practiceLede": "Take the kana quiz one row at a time: five kana, five sounds, instant feedback.",
     "toolsTitle": "The rest of the desk",
     "closeTitle": "Learn kana with あ",
-    "closeBody": "No account, no download. Ten questions of the hiragana and katakana quiz and you already know more kana than five minutes ago."
+    "closeBody": "No account, no download. Ten questions of the hiragana and katakana quiz and you already know more kana than five minutes ago.",
+    "howTitle": "How the kana quiz works",
+    "howLede": "Three steps, no setup. The quiz remembers what you get wrong and asks it again.",
+    "how1Title": "Pick a row",
+    "how1Desc": "Start with あ・か・さ, or jump to the row you are studying. Every unit maps to one row of the gojūon table.",
+    "how2Title": "Answer and hear it",
+    "how2Desc": "Each question shows the correct kana and romaji immediately, with the sound, so a wrong answer is a lesson rather than a dead end.",
+    "how3Title": "Return to weak kana",
+    "how3Desc": "The quiz weights characters you answered incorrectly and keeps a mastery record in your browser — no account needed.",
+    "guidesLede": "Longer reads for the parts that need more than a quiz: stroke order, usage, pronunciation and practice routines.",
+    "featuresLede": "Four ways to practise, all free and all without an account.",
+    "faq7Question": "Do I need to create an account to learn kana?",
+    "faq7Answer": "No. The whole course and the hiragana and katakana quiz work without an account, and progress is stored in your browser. An account only matters if you want to carry progress between devices.",
+    "faq8Question": "How long does it take to learn hiragana and katakana?",
+    "faq8Answer": "Most beginners need three to six weeks of short daily sessions to read both scripts comfortably. Writing them from memory takes longer; the kana quiz trains recognition first, which is what reading requires."
   },
   "ChatPage": {
     "title": "Japanese Learning Assistant",

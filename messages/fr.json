@@ -82,7 +82,21 @@
     "practiceLede": "Faites le quiz kana une ligne à la fois : cinq kana, cinq sons, correction immédiate.",
     "toolsTitle": "Le reste du bureau",
     "closeTitle": "Apprendre le kana avec あ",
-    "closeBody": "Sans compte, sans téléchargement. Dix questions du quiz hiragana et katakana et vous connaissez plus de kana qu’il y a cinq minutes."
+    "closeBody": "Sans compte, sans téléchargement. Dix questions du quiz hiragana et katakana et vous connaissez plus de kana qu’il y a cinq minutes.",
+    "howTitle": "Comment fonctionne le quiz kana",
+    "howLede": "Trois étapes, aucun réglage. Le quiz retient vos erreurs et les repose plus tard.",
+    "how1Title": "Choisir une rangée",
+    "how1Desc": "Commencez par あ・か・さ ou passez à la rangée que vous étudiez. Chaque unité correspond à une rangée du tableau gojūon.",
+    "how2Title": "Répondre et écouter",
+    "how2Desc": "Chaque question affiche aussitôt le bon kana et son rōmaji, avec le son : une erreur devient une leçon, pas une impasse.",
+    "how3Title": "Revenir aux kana faibles",
+    "how3Desc": "Le quiz donne plus de poids aux caractères ratés et garde une trace de votre maîtrise dans le navigateur, sans compte.",
+    "guidesLede": "Des lectures plus longues pour ce qui demande plus qu’un quiz : ordre des traits, usage, prononciation et routines d’entraînement.",
+    "featuresLede": "Quatre façons de pratiquer, toutes gratuites et sans compte.",
+    "faq7Question": "Faut-il un compte pour apprendre le kana ?",
+    "faq7Answer": "Non. Le parcours complet et le quiz hiragana et katakana fonctionnent sans compte, et la progression reste dans votre navigateur. Un compte ne sert que pour retrouver sa progression sur un autre appareil.",
+    "faq8Question": "Combien de temps faut-il pour apprendre les hiragana et les katakana ?",
+    "faq8Answer": "La plupart des débutants ont besoin de trois à six semaines de courtes séances quotidiennes pour lire couramment les deux écritures. L’écriture de mémoire prend plus longtemps ; le quiz kana entraîne d’abord la reconnaissance, ce que demande la lecture."
   },
   "LearnPage": {
     "title": "Apprendre les Kana Japonais",

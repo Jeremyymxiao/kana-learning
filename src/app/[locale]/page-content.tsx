@@ -223,44 +223,66 @@ export default function PageContent() {
           </div>
         </section>
 
-        {/* ── Desk / what you get ────────────────────────────────────── */}
-        <section className="kl-section kl-tools" aria-labelledby="kl-tools-title">
-          <div className="kl-wrap kl-tools-grid">
-            <header className="kl-section-head kl-section-head-tight">
-              <h2 id="kl-tools-title" className="kl-display kl-h2">
-                {t('featuresTitle')}
+        {/* ── How it works ──────────────────────────────────────────── */}
+        <section className="kl-section kl-how" aria-labelledby="kl-how-title">
+          <div className="kl-wrap">
+            <header className="kl-section-head">
+              <h2 id="kl-how-title" className="kl-display kl-h2">
+                {t('howTitle')}
               </h2>
+              <p className="kl-lede">{t('howLede')}</p>
             </header>
-            <ul className="kl-index">
-              {FEATURES.map((feature) => (
-                <li key={feature.id}>
-                  <Link href={feature.href} className="kl-index-link kl-index-link-rich">
-                    <span className="kl-index-body">
-                      <span className="kl-index-name">{t(feature.titleKey)}</span>
-                      <span className="kl-index-desc">{t(feature.descKey)}</span>
-                    </span>
-                    <ArrowUpRight aria-hidden="true" className="kl-index-arrow" />
-                  </Link>
+            <ol className="kl-how-grid">
+              {[1, 2, 3].map((step) => (
+                <li key={step} className="kl-how-step">
+                  <span className="kl-how-no" aria-hidden="true">
+                    {String(step).padStart(2, '0')}
+                  </span>
+                  <h3 className="kl-display kl-h3">{t(`how${step}Title`)}</h3>
+                  <p>{t(`how${step}Desc`)}</p>
                 </li>
               ))}
-            </ul>
+            </ol>
+          </div>
+        </section>
+
+        {/* ── Desk / what you get ────────────────────────────────────── */}
+        <section className="kl-section kl-features" aria-labelledby="kl-features-title">
+          <div className="kl-wrap">
+            <header className="kl-section-head">
+              <h2 id="kl-features-title" className="kl-display kl-h2">
+                {t('featuresTitle')}
+              </h2>
+              <p className="kl-lede">{t('featuresLede')}</p>
+            </header>
+            <div className="kl-feature-grid">
+              {FEATURES.map((feature) => (
+                <Link key={feature.id} href={feature.href} className="kl-feature">
+                  <span className="kl-feature-title">{t(feature.titleKey)}</span>
+                  <span className="kl-feature-desc">{t(feature.descKey)}</span>
+                  <ArrowUpRight aria-hidden="true" className="kl-feature-arrow" />
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* ── 05 · Reading ───────────────────────────────────────────── */}
         <section className="kl-section kl-reading" aria-labelledby="kl-reading-title">
-          <div className="kl-wrap kl-tools-grid">
-            <header className="kl-section-head kl-section-head-tight">
+          <div className="kl-wrap">
+            <header className="kl-section-head">
               <h2 id="kl-reading-title" className="kl-display kl-h2">
                 {t('learningGuidesTitle')}
               </h2>
+              <p className="kl-lede">{t('guidesLede')}</p>
             </header>
-            <ul className="kl-index">
+            <ul className="kl-guide-list">
               {latestArticles.map((article) => (
                 <li key={article.id}>
-                  <Link href={`/learn/${article.slug}`} className="kl-index-link">
-                    <span className="kl-index-name">{article.title}</span>
-                    <ArrowUpRight aria-hidden="true" className="kl-index-arrow" />
+                  <Link href={`/learn/${article.slug}`} className="kl-guide">
+                    <span className="kl-guide-title">{article.title}</span>
+                    <span className="kl-guide-desc">{article.description}</span>
+                    <ArrowUpRight aria-hidden="true" className="kl-guide-arrow" />
                   </Link>
                 </li>
               ))}
@@ -277,8 +299,8 @@ export default function PageContent() {
               </h2>
             </header>
             <div className="kl-faq-grid">
-              {[1, 2, 3, 4, 5, 6].map((n) => (
-                <details key={n} className="kl-faq-item" open={n <= 2}>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+                <details key={n} className="kl-faq-item" open={n <= 3}>
                   <summary>
                     <span className="kl-faq-q">{t(`faq${n}Question`)}</span>
                   </summary>

@@ -82,7 +82,21 @@
     "practiceLede": "Haz el quiz de kana una fila a la vez: cinco kana, cinco sonidos, corrección inmediata.",
     "toolsTitle": "El resto del escritorio",
     "closeTitle": "Aprender kana con あ",
-    "closeBody": "Sin cuenta, sin descargas. Diez preguntas del quiz de hiragana y katakana y ya sabes más kana que hace cinco minutos."
+    "closeBody": "Sin cuenta, sin descargas. Diez preguntas del quiz de hiragana y katakana y ya sabes más kana que hace cinco minutos.",
+    "howTitle": "Cómo funciona el quiz de kana",
+    "howLede": "Tres pasos, sin configuración. El quiz recuerda lo que fallas y vuelve a preguntarlo.",
+    "how1Title": "Elige una fila",
+    "how1Desc": "Empieza por あ・か・さ o salta a la fila que estés estudiando. Cada unidad corresponde a una fila de la tabla gojūon.",
+    "how2Title": "Responde y escucha",
+    "how2Desc": "Cada pregunta muestra al instante el kana y el romaji correctos, con el sonido: un error se convierte en lección, no en un callejón.",
+    "how3Title": "Vuelve a los kana débiles",
+    "how3Desc": "El quiz da más peso a los caracteres fallados y guarda tu progreso en el navegador, sin cuenta.",
+    "guidesLede": "Lecturas más largas para lo que requiere más que un quiz: orden de trazos, uso, pronunciación y rutinas de práctica.",
+    "featuresLede": "Cuatro formas de practicar, todas gratis y sin cuenta.",
+    "faq7Question": "¿Necesito una cuenta para aprender kana?",
+    "faq7Answer": "No. El curso completo y el quiz de hiragana y katakana funcionan sin cuenta, y el progreso se guarda en tu navegador. La cuenta solo ayuda si quieres llevar el progreso entre dispositivos.",
+    "faq8Question": "¿Cuánto se tarda en aprender hiragana y katakana?",
+    "faq8Answer": "La mayoría de principiantes necesita de tres a seis semanas con sesiones cortas diarias para leer ambas escrituras con soltura. Escribirlas de memoria lleva más tiempo; el quiz de kana entrena primero el reconocimiento, que es lo que exige la lectura."
   },
   "LearnPage": {
     "title": "Aprender Kana Japonés",

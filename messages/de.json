@@ -82,7 +82,21 @@
     "practiceLede": "Nimm am Kana-Quiz Zeile für Zeile teil: fünf Kana, fünf Laute, sofortiges Feedback.",
     "toolsTitle": "Der Rest des Schreibtischs",
     "closeTitle": "Kana lernen mit あ",
-    "closeBody": "Kein Konto, kein Download. Zehn Fragen im Hiragana-und-Katakana-Quiz – und du kennst mehr Kana als vor fünf Minuten."
+    "closeBody": "Kein Konto, kein Download. Zehn Fragen im Hiragana-und-Katakana-Quiz – und du kennst mehr Kana als vor fünf Minuten.",
+    "howTitle": "So funktioniert das Kana-Quiz",
+    "howLede": "Drei Schritte, keine Einrichtung. Das Quiz merkt sich, was du falsch machst, und fragt es erneut.",
+    "how1Title": "Eine Reihe wählen",
+    "how1Desc": "Starte mit あ・か・さ oder springe zu der Reihe, die du gerade lernst. Jede Einheit entspricht einer Reihe der Gojūon-Tabelle.",
+    "how2Title": "Antworten und hören",
+    "how2Desc": "Jede Frage zeigt sofort das richtige Kana und Romaji, dazu den Klang – eine falsche Antwort ist eine Lektion, keine Sackgasse.",
+    "how3Title": "Zu schwachen Kana zurückkehren",
+    "how3Desc": "Das Quiz gewichtet Zeichen, die du falsch beantwortet hast, und speichert deinen Lernstand im Browser – ohne Konto.",
+    "guidesLede": "Längere Texte für alles, was mehr als ein Quiz braucht: Strichreihenfolge, Verwendung, Aussprache und Übungsroutinen.",
+    "featuresLede": "Vier Übungswege, alle kostenlos und alle ohne Konto.",
+    "faq7Question": "Brauche ich ein Konto, um Kana zu lernen?",
+    "faq7Answer": "Nein. Der ganze Kurs und das Hiragana-und-Katakana-Quiz funktionieren ohne Konto, der Fortschritt liegt im Browser. Ein Konto lohnt sich nur, wenn du den Fortschritt zwischen Geräten mitnehmen willst.",
+    "faq8Question": "Wie lange dauert es, Hiragana und Katakana zu lernen?",
+    "faq8Answer": "Die meisten Anfänger brauchen drei bis sechs Wochen mit kurzen täglichen Einheiten, um beide Schriften flüssig zu lesen. Schreiben aus dem Gedächtnis dauert länger; das Kana-Quiz trainiert zuerst das Erkennen, worauf es beim Lesen ankommt."
   },
   "LearnPage": {
     "title": "Japanische Kana lernen",
