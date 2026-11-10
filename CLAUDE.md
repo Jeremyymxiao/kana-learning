@@ -159,3 +159,13 @@ No `.env.example` file exists.
 1. Create Markdown file in `public/articles/[slug].md`
 2. Add metadata entry to `src/data/articles.ts`
 3. Article will be accessible via `/[locale]/learn/[slug]`
+
+## Deployment Policy (HARD RULE)
+
+**Never deploy without explicit user approval.**
+
+- Do not run `git push` to `main` (it auto-deploys to production via Vercel).
+- Do not run `vercel --prod`, `vercel promote`, or click-trigger any production deployment.
+- Do not ask for approval implicitly by assuming a previous grant covers a new change; approval is per release, not standing.
+- Local commits are fine for checkpointing. Stop at commit, report what is ready, and wait for an explicit "deploy / 上线 / 发布" instruction before pushing.
+- Read-only production checks (`curl` against learnkana.pro, `gh api` reads) are allowed and encouraged for verification.
