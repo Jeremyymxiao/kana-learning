@@ -185,7 +185,7 @@
 }
 
 .kl-hero-title {
-  font-size: clamp(2.6rem, 6.6vw, 5.4rem);
+  font-size: clamp(2.4rem, 5.4vw, 4.7rem);
   line-height: 0.9;
   margin: 0 0 clamp(18px, 2.4vw, 28px);
 }

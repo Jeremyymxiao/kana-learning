@@ -35,7 +35,7 @@ export default function Footer() {
               LearnKana
               <span lang="ja">かな</span>
             </span>
-            <p>Making Japanese learning accessible and enjoyable for everyone.</p>
+            <p>Learn kana with free hiragana and katakana lessons, a kana quiz, charts and an AI tutor.</p>
           </div>
 
           {COLUMNS.map((column) => (

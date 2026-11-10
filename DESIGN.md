@@ -19,7 +19,7 @@ colors:
 typography:
   display:
     fontFamily: "Archivo, Noto Sans JP, sans-serif"
-    fontSize: "clamp(2.6rem, 6.6vw, 5.4rem)"
+    fontSize: "clamp(2.4rem, 5.4vw, 4.7rem)"
     fontWeight: 800
     lineHeight: 0.9
     letterSpacing: "-0.03em"
